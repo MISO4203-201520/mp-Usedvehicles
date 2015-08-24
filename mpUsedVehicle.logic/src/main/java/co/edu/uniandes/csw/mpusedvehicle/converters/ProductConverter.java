@@ -28,6 +28,7 @@ public abstract class ProductConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setPrice(entity.getPrice());
+            dto.setVehicle(VehicleConverter.refEntity2DTO(entity.getVehicle()));
 
             return dto;
         } else {
