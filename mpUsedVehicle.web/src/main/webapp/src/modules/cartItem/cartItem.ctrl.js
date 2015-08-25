@@ -4,10 +4,10 @@
     mod.controller('cartItemCtrl', ['CrudCreator', '$scope', 'cartItemService', 'cartItemModel', '$location', 'authService', function (CrudCreator, $scope, svc, model, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'My Shopping Cart');
             var self = this;
-            
+
             var oldFetch = this.fetchRecords;
-            this.fetchRecords = function(){
-                return oldFetch.call(this).then(function(data){
+            this.fetchRecords = function () {
+                return oldFetch.call(this).then(function (data) {
                     self.calcTotal();
                     return data;
                 });
@@ -17,20 +17,20 @@
             $scope.lastQuantity = 0;
             $scope.total = 0;
 
-            this.recordActions = [{
-                    name: 'Delete',
+            this.recordActions = {
+                delete: {
                     displayName: ' ',
                     icon: 'trash',
                     class: 'primary',
                     fn: function (record) {
-                        svc.deleteRecord(record).then(function(){
+                        svc.deleteRecord(record).then(function () {
                             self.fetchRecords();
                         });
                     },
                     show: function () {
                         return true;
                     }
-                }];
+                }};
 
             this.calcTotal = function () {
                 $scope.total = 0;
@@ -56,7 +56,7 @@
             $scope.checkout = function () {
                 self.showWarning("Not implemented yet");
             };
-            $scope.subtotal = function(record){
+            $scope.subtotal = function (record) {
                 return record.product.price * record.quantity;
             };
         }]);
