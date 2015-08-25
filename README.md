@@ -8,6 +8,11 @@
   - [Entidad Provider](#entidad-provider)
   - [Entidad Vehicle](#entidad-vehicle)
 
+#Integrantes
+
+Diego Agudelo 200510619
+Harold Murcia 200723863
+
 #API Rest
 ##Introducción
 La comunicación entre cliente y servidor se realiza intercambiando objetos JSON. Para cada entidad se hace un mapeo a JSON, donde cada uno de sus atributos se transforma en una propiedad de un objeto JSON. Todos los servicios se generan en la URL /mpUsedVehicle.web/webresources/. Por defecto, todas las entidades tienen un atributo `id`, con el cual se identifica cada registro:
