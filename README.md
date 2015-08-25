@@ -10,8 +10,8 @@
 
 #Integrantes
 
-Diego Agudelo 200510619
-Harold Murcia 200723863
+- Diego Agudelo 200510619
+- Harold Murcia 200723863
 
 #API Rest
 ##Introducción
