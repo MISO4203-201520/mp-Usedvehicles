@@ -17,6 +17,28 @@
                     displayName: 'Add to Cart',
                     icon: 'shopping-cart',
                     class: 'primary',
+                    dataToggle: '',
+                    dataTarget: '',
+                    fn: function (record) {
+                        if (authSvc.getCurrentUser()) {
+                            return cartItemSvc.addItem({
+                                product: record,
+                                name: record.vehicle.name,
+                                quantity: 1});
+                        } else {
+                            $location.path('/login');
+                        }
+                    },
+                    show: function () {
+                        return true;
+                    }
+                },{
+                    name: 'askAQuestion',
+                    displayName: 'Ask a Question',
+                    icon: 'question-sign',
+                    class: 'primary',
+                    dataToggle:'modal',
+                    dataTarget:'#myModalNorm',
                     fn: function (record) {
                         if (authSvc.getCurrentUser()) {
                             return cartItemSvc.addItem({
