@@ -8,10 +8,8 @@
   - [Entidad Provider](#entidad-provider)
   - [Entidad Vehicle](#entidad-vehicle)
 
-#Integrantes
-
-- Diego Agudelo 200510619
-- Harold Murcia 200723863
+#Wiki
+http://miso4203-201520.github.io/wiki-HotWheels/
 
 #API Rest
 ##Introducción
