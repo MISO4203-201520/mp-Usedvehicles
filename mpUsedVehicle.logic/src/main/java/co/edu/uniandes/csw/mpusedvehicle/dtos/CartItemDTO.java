@@ -11,6 +11,7 @@ public class CartItemDTO {
     private Long id;
     private String name;
     private Integer quantity;
+    private Integer installments;
     private ClientDTO client;
     private ProductDTO product;
     /**
@@ -81,6 +82,20 @@ public class CartItemDTO {
      */
     public void setProduct(ProductDTO product) {
         this.product = product;
+    }
+
+    /**
+     * @generated
+     */
+    public Integer getInstallments() {
+        return installments;
+    }
+
+    /**
+     * @generated
+     */
+    public void setInstallments(Integer installments) {
+        this.installments = installments;
     }
 
 }

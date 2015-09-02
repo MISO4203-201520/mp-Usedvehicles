@@ -27,7 +27,8 @@ public abstract class CartItemConverter {
             CartItemDTO dto = new CartItemDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setQuantity(entity.getQuantity());
+            dto.setQuantity(entity.getInstallments());
+            dto.setInstallments(entity.getQuantity());
 
             return dto;
         } else {
@@ -60,6 +61,7 @@ public abstract class CartItemConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setQuantity(entity.getQuantity());
+            dto.setInstallments(entity.getInstallments());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
 
@@ -78,6 +80,7 @@ public abstract class CartItemConverter {
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setQuantity(dto.getQuantity());
+            entity.setInstallments(dto.getInstallments());
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
             entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
 
