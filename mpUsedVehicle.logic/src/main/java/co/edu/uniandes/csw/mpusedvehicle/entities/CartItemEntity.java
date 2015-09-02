@@ -19,6 +19,8 @@ public class CartItemEntity implements Serializable {
     private String name;
 
     private Integer quantity;
+    
+    private Integer installments;
 
     @ManyToOne
     private ClientEntity client;
@@ -92,6 +94,20 @@ public class CartItemEntity implements Serializable {
      */
     public void setProduct(ProductEntity product) {
         this.product = product;
+    }
+    
+    /**
+     * @generated
+     */
+    public Integer getInstallments() {
+        return installments;
+    }
+
+    /**
+     * @generated
+     */
+    public void setInstallments(Integer installments) {
+        this.installments = installments;
     }
 
 }
