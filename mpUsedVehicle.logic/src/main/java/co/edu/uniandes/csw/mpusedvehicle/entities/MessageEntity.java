@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.mpusedvehicle.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,6 +35,10 @@ public class MessageEntity implements Serializable {
     private Integer idTypeMessage;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+    
+    private Integer idProduct;
+    
+    private String question;
 
     public MessageEntity() {
     }
@@ -89,6 +92,22 @@ public class MessageEntity implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Integer getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(Integer idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     @Override

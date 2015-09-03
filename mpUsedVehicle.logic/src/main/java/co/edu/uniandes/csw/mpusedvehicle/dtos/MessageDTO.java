@@ -14,6 +14,8 @@ public class MessageDTO {
     private Integer idUserTarget;
     private Integer idTypeMessage;
     private Date date;
+    private Integer idProduct;
+    private String question;
 
     public Long getId() {
         return id;
@@ -54,6 +56,24 @@ public class MessageDTO {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public Integer getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(Integer idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+    
+    
 
     
 

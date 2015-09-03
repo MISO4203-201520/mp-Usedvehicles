@@ -29,7 +29,9 @@ public abstract class MessageConverter {
             dto.setIdUserTarget(entity.getIdUserTarget());
             dto.setIdTypeMessage(entity.getIdTypeMessage());
             dto.setDate(entity.getDate());
-        
+            dto.setQuestion(entity.getQuestion());
+            dto.setIdProduct(entity.getIdProduct());
+            
             return dto;
         } else {
             return null;
@@ -63,6 +65,8 @@ public abstract class MessageConverter {
             dto.setIdUserTarget(entity.getIdUserTarget());
             dto.setIdTypeMessage(entity.getIdTypeMessage());
             dto.setDate(entity.getDate());
+            dto.setQuestion(entity.getQuestion());
+            dto.setIdProduct(entity.getIdProduct());
 
             return dto;
         } else {
@@ -76,11 +80,13 @@ public abstract class MessageConverter {
     private static MessageEntity basicDTO2Entity(MessageDTO dto) {
         if (dto != null) {
             MessageEntity entity = new MessageEntity();
-            dto.setId(entity.getId());
-            dto.setIdUserSource(entity.getIdUserSource());
-            dto.setIdUserTarget(entity.getIdUserTarget());
-            dto.setIdTypeMessage(entity.getIdTypeMessage());
-            dto.setDate(entity.getDate());
+            entity.setId(dto.getId());
+            entity.setIdUserSource(dto.getIdUserSource());
+            entity.setIdUserTarget(dto.getIdUserTarget());
+            entity.setIdTypeMessage(dto.getIdTypeMessage());
+            entity.setDate(dto.getDate());
+            entity.setQuestion(dto.getQuestion());
+            entity.setIdProduct(dto.getIdProduct());
 
             return entity;
         } else {
