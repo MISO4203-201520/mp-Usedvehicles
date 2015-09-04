@@ -69,6 +69,8 @@
                 messageSvc.askQuestion(newQuestion);
                 //Hide modal
                 $('#myModalNorm').modal('hide');
+                //clean question
+                this.question='';
             };
         }]);
 })(window.angular);

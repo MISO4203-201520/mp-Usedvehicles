@@ -25,7 +25,7 @@ public class MailManager {
     static String adminEmail="hl.murcia222@uniandes.edu.co";
     
 
-    public static void generateAndSendEmail(String message) {
+    public static void generateAndSendEmail(String message, String emailRecipient, String subject) {
 
         try {
             
@@ -43,8 +43,8 @@ public class MailManager {
             System.out.println("\n\n 2nd ===> get Mail Session..");
             getMailSession = Session.getDefaultInstance(mailServerProperties, null);
             generateMailMessage = new MimeMessage(getMailSession);
-            generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(adminEmail));
-            generateMailMessage.setSubject("test");
+            generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailRecipient));
+            generateMailMessage.setSubject(subject);
             String emailBody = message;
             generateMailMessage.setContent(emailBody, "text/html");
             System.out.println("Mail Session has been created successfully..");
