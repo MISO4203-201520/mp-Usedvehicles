@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
@@ -23,20 +24,27 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Message.findAll", query = "SELECT m FROM MessageEntity m")})
 public class MessageEntity implements Serializable {
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(generator = "Message")
     private Long id;
+    
+    @ManyToOne
+    private ClientEntity client;
+    
+    @ManyToOne
+    private ProviderEntity provider;
 
-    private Integer idUserSource;
-
-    private Integer idUserTarget;
-
+    //1 - user question to provider
     private Integer idTypeMessage;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     
-    private Integer idProduct;
+    @ManyToOne
+    private ProductEntity product;
     
     private String question;
 
@@ -47,12 +55,13 @@ public class MessageEntity implements Serializable {
         this.id = id;
     }
 
-    public MessageEntity(Long id, Integer idUserTarget, Integer idTypeMessage, Date date) {
-        this.id = id;
-        this.idUserTarget = idUserTarget;
-        this.idTypeMessage = idTypeMessage;
-        this.date = date;
-    }
+//    public MessageEntity(Long id, ClientEntity client, ProviderEntity provider, Integer idTypeMessage, Date date) {
+//        this.id = id;
+//        this.client = client;
+//        this.provider = provider;
+//        this.idTypeMessage = idTypeMessage;
+//        this.date = date;
+//    }
 
     public Long getId() {
         return id;
@@ -62,20 +71,20 @@ public class MessageEntity implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdUserSource() {
-        return idUserSource;
+    public ClientEntity getClient() {
+        return client;
     }
 
-    public void setIdUserSource(Integer idUserSource) {
-        this.idUserSource = idUserSource;
+    public void setClient(ClientEntity client) {
+        this.client = client;
     }
 
-    public Integer getIdUserTarget() {
-        return idUserTarget;
+    public ProviderEntity getProvider() {
+        return provider;
     }
 
-    public void setIdUserTarget(Integer idUserTarget) {
-        this.idUserTarget = idUserTarget;
+    public void setProvider(ProviderEntity provider) {
+        this.provider = provider;
     }
 
     public Integer getIdTypeMessage() {
@@ -94,12 +103,12 @@ public class MessageEntity implements Serializable {
         this.date = date;
     }
 
-    public Integer getIdProduct() {
-        return idProduct;
+    public ProductEntity getProduct() {
+        return product;
     }
 
-    public void setIdProduct(Integer idProduct) {
-        this.idProduct = idProduct;
+    public void setProduct(ProductEntity product) {
+        this.product = product;
     }
 
     public String getQuestion() {

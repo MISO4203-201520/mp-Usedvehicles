@@ -10,11 +10,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class MessageDTO {
 
     private Long id;
-    private Integer idUserSource;
-    private Integer idUserTarget;
+    private ClientDTO client;
+    private ProviderDTO provider;
     private Integer idTypeMessage;
     private Date date;
-    private Integer idProduct;
+    private ProductDTO product;
     private String question;
 
     public Long getId() {
@@ -25,20 +25,20 @@ public class MessageDTO {
         this.id = id;
     }
 
-    public Integer getIdUserSource() {
-        return idUserSource;
+    public ClientDTO getClient() {
+        return client;
     }
 
-    public void setIdUserSource(Integer idUserSource) {
-        this.idUserSource = idUserSource;
+    public void setClient(ClientDTO client) {
+        this.client = client;
     }
 
-    public Integer getIdUserTarget() {
-        return idUserTarget;
+    public ProviderDTO getProvider() {
+        return provider;
     }
 
-    public void setIdUserTarget(Integer idUserTarget) {
-        this.idUserTarget = idUserTarget;
+    public void setProvider(ProviderDTO provider) {
+        this.provider = provider;
     }
 
     public Integer getIdTypeMessage() {
@@ -57,12 +57,12 @@ public class MessageDTO {
         this.date = date;
     }
 
-    public Integer getIdProduct() {
-        return idProduct;
+    public ProductDTO getProduct() {
+        return product;
     }
 
-    public void setIdProduct(Integer idProduct) {
-        this.idProduct = idProduct;
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
 
     public String getQuestion() {

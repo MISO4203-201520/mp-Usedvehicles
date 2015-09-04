@@ -52,37 +52,22 @@
                     show: function () {
                         return true;
                     }
-                }/*,{
-                    name: 'send',
-                    displayName: 'Send',
-                    icon: 'message-plus',
-                    class: 'primary',
-                    dataToggle:'modal',
-                    dataTarget:'#myModalNorm',
-                    fn: function (record) {
-                        if (authSvc.getCurrentUser()) {
-                            $scope.tmpRecord=record;
-                        } else {
-                            $location.path('/login');
-                        }
-                    },
-                    show: function () {
-                        return false;
-                    }
-                }*/];
+                }];
 
 //            this.loadRefOptions();
             this.fetchRecords();
             
             this.sendQuestion = function(){
                 console.log("askAQuestion");
+                //Tmp question
                 newQuestion={
                     question: this.question,
-                    idProduct: $scope.tmpRecord.id,
-                    idUserTarget :$scope.tmpRecord.provider.id
+                    product:$scope.tmpRecord,
+                    provider:$scope.tmpRecord.provider,
+                    client:authSvc.getCurrentUser()
                 };
                 messageSvc.askQuestion(newQuestion);
-                 //dataToggle="modal" dataTarget="#myModalNorm" ng-show="false"
+                //Hide modal
                 $('#myModalNorm').modal('hide');
             };
         }]);
