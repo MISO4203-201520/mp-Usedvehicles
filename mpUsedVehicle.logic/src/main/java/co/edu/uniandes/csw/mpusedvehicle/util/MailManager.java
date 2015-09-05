@@ -11,6 +11,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import java.io.FileInputStream;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -59,7 +60,7 @@ public class MailManager {
             transport.close();
             
         } catch (Exception e) {
-            Logger.getGlobal().severe(e.getMessage());
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
     }
     
@@ -75,7 +76,7 @@ public class MailManager {
         }
         catch( Exception e )
         {
-                Logger.getGlobal().severe(e.getMessage());
+                Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
 
     }

@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.mpusedvehicle.persistence;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProviderEntity;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import java.util.logging.Logger;
@@ -26,7 +27,7 @@ public class ProviderPersistence extends CrudPersistence<ProviderEntity> {
             params.put("user_id", userId);
             return this.executeSingleNamedQuery("Provider.getByUserId", params);
         } catch (NoResultException e) {
-            Logger.getGlobal().severe(e.getMessage());
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
             return null;
         }
     }
