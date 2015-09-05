@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mpusedvehicle.util;
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -22,7 +23,6 @@ public class MailManager {
     static Properties mailServerProperties;
     static Session getMailSession;
     static MimeMessage generateMailMessage;
-    static String adminEmail="hl.murcia222@uniandes.edu.co";
     
 
     public static void generateAndSendEmail(String message, String emailRecipient, String subject) {
@@ -58,7 +58,7 @@ public class MailManager {
             transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
             transport.close();
         } catch (Exception e) {
-            System.out.println("Error mail "+e.getMessage());
+            LOGGER.severe(e.getMessage());
         }
     }
     
@@ -70,11 +70,11 @@ public class MailManager {
         {
                 FileInputStream input = new FileInputStream( "src/main/resources/admin_email.properties" );
                 datos.load( input );
-                adminEmail=datos.getProperty("admin.email");
+                //adminEmail=datos.getProperty("admin.email");
         }
         catch( Exception e )
         {
-                e.printStackTrace();
+                LOGGER.severe(e.getMessage());
         }
 
     }
