@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mpusedvehicle.util;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -12,6 +11,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import java.io.FileInputStream;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,8 +57,9 @@ public class MailManager {
             transport.connect("smtp.gmail.com", "noreply.dummy10@gmail.com", "atalanta85");
             transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
             transport.close();
+            
         } catch (Exception e) {
-            LOGGER.severe(e.getMessage());
+            Logger.getGlobal().severe(e.getMessage());
         }
     }
     
@@ -74,7 +75,7 @@ public class MailManager {
         }
         catch( Exception e )
         {
-                LOGGER.severe(e.getMessage());
+                Logger.getGlobal().severe(e.getMessage());
         }
 
     }

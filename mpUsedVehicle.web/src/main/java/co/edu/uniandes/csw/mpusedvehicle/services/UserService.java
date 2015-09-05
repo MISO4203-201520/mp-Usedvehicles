@@ -18,8 +18,8 @@ import com.stormpath.sdk.group.Group;
 import com.stormpath.sdk.group.GroupList;
 import com.stormpath.sdk.resource.ResourceException;
 import com.stormpath.shiro.realm.ApplicationRealm;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.Map;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -73,7 +73,7 @@ public class UserService {
                 }
             }
         } catch (AuthenticationException e) {
-            LOGGER.severe(e.getMessage());
+            Logger.getGlobal().severe(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -89,7 +89,7 @@ public class UserService {
             currentUser.logout();
             return Response.ok().build();
         } catch (Exception e) {
-            LOGGER.severe(e.getMessage());
+            Logger.getGlobal().severe(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
@@ -106,7 +106,7 @@ public class UserService {
             user.setUserName(userAttributes.get("username"));
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
-            LOGGER.severe(e.getMessage());
+            Logger.getGlobal().severe(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -138,7 +138,7 @@ public class UserService {
             }
             return Response.ok().build();
         } catch (ResourceException e) {
-            LOGGER.severe(e.getMessage());
+            Logger.getGlobal().severe(e.getMessage());
             return Response.status(e.getStatus())
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
