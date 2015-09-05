@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('productModule');
 
-    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc) {
+    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', 'messageService','$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc,$location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
 
             this.searchByName = function (vehicleName) {
@@ -11,6 +11,9 @@
                 }
                 $location.url('/catalog' + search);
             };
+            
+            this.question='';
+            $scope.tmpRecord;
 
             this.recordActions = [{
                     name: 'addToCart',
@@ -41,10 +44,7 @@
                     dataTarget:'#myModalNorm',
                     fn: function (record) {
                         if (authSvc.getCurrentUser()) {
-                            return cartItemSvc.addItem({
-                                product: record,
-                                name: record.vehicle.name,
-                                quantity: 1});
+                            $scope.tmpRecord=record;
                         } else {
                             $location.path('/login');
                         }
@@ -56,5 +56,21 @@
 
 //            this.loadRefOptions();
             this.fetchRecords();
+            
+            this.sendQuestion = function(){
+                console.log("askAQuestion");
+                //Tmp question
+                newQuestion={
+                    question: this.question,
+                    product:$scope.tmpRecord,
+                    provider:$scope.tmpRecord.provider,
+                    client:authSvc.getCurrentUser()
+                };
+                messageSvc.askQuestion(newQuestion);
+                //Hide modal
+                $('#myModalNorm').modal('hide');
+                //clean question
+                this.question='';
+            };
         }]);
 })(window.angular);

@@ -25,11 +25,13 @@ public abstract class MessageConverter {
         if (entity != null) {
             MessageDTO dto = new MessageDTO();
             dto.setId(entity.getId());
-            dto.setIdUserSource(entity.getIdUserSource());
-            dto.setIdUserTarget(entity.getIdUserTarget());
+            dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
+            dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setIdTypeMessage(entity.getIdTypeMessage());
             dto.setDate(entity.getDate());
-        
+            dto.setQuestion(entity.getQuestion());
+            dto.setProduct(ProductConverter.fullEntity2DTO(entity.getProduct()));
+            
             return dto;
         } else {
             return null;
@@ -59,10 +61,12 @@ public abstract class MessageConverter {
         if (entity != null) {
             MessageDTO dto = new MessageDTO();
             dto.setId(entity.getId());
-            dto.setIdUserSource(entity.getIdUserSource());
-            dto.setIdUserTarget(entity.getIdUserTarget());
+            dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
+            dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setIdTypeMessage(entity.getIdTypeMessage());
             dto.setDate(entity.getDate());
+            dto.setQuestion(entity.getQuestion());
+            dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
 
             return dto;
         } else {
@@ -76,11 +80,13 @@ public abstract class MessageConverter {
     private static MessageEntity basicDTO2Entity(MessageDTO dto) {
         if (dto != null) {
             MessageEntity entity = new MessageEntity();
-            dto.setId(entity.getId());
-            dto.setIdUserSource(entity.getIdUserSource());
-            dto.setIdUserTarget(entity.getIdUserTarget());
-            dto.setIdTypeMessage(entity.getIdTypeMessage());
-            dto.setDate(entity.getDate());
+            entity.setId(dto.getId());
+            entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
+            entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
+            entity.setIdTypeMessage(dto.getIdTypeMessage());
+            entity.setDate(dto.getDate());
+            entity.setQuestion(dto.getQuestion());
+            entity.setProduct(ProductConverter.fullDTO2Entity(dto.getProduct()));
 
             return entity;
         } else {

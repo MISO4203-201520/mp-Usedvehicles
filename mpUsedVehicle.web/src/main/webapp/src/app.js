@@ -8,6 +8,7 @@
         'productModule',
         'providerModule',
         'vehicleModule',
+        'messageModule',
         'ngRoute',
         'ngCrud',
         'xeditable'

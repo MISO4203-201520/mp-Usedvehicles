@@ -1,11 +1,11 @@
 (function(ng){
-    var mod = ng.module('productModule');
+    var mod = ng.module('messageModule');
     
-    mod.service('productService', ['CrudCreator','productContext', function(CrudCreator, context){
+    mod.service('messageService', ['CrudCreator','messageContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
     }]);
 
-    mod.service('productService', ['CrudCreator','productContext', function(CrudCreator, context){
+    mod.service('messageService', ['CrudCreator','messageContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
             this.askQuestion = function(question){
                 this.saveRecord(question);

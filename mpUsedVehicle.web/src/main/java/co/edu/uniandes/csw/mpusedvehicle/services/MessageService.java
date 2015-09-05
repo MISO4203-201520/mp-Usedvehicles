@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.mpusedvehicle.services;
 import co.edu.uniandes.csw.mpusedvehicle.api.IMessageLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.MessageDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
+import java.sql.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,8 @@ public class MessageService {
     @POST
     @StatusCreated
     public MessageDTO createMessage(MessageDTO dto) {
+        dto.setDate(new java.util.Date());
+        dto.setIdTypeMessage(1);
         return messageLogic.createMessage(dto);
     }
 

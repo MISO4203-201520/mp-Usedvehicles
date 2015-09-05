@@ -5,6 +5,7 @@ import co.edu.uniandes.csw.mpusedvehicle.converters.MessageConverter;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.MessageDTO;
 import co.edu.uniandes.csw.mpusedvehicle.entities.MessageEntity;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.MessagePersistence;
+import co.edu.uniandes.csw.mpusedvehicle.util.MailManager;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -44,6 +45,13 @@ public class MessageLogic implements IMessageLogic {
     public MessageDTO createMessage(MessageDTO dto) {
         MessageEntity entity = MessageConverter.fullDTO2Entity(dto);
         persistence.create(entity);
+        //Send email
+        String emailBody="<h2>Hola "+dto.getProvider().getName() +",</h2><br>"+
+        "You have a new question about your "+entity.getProduct().getName()+" product<br>"+
+        "Question: "+entity.getQuestion()+"<br>"+
+        "Client: "+dto.getClient().getName();
+        
+        MailManager.generateAndSendEmail(emailBody, dto.getProvider().getEmail(), "You have a new question");
         return MessageConverter.fullEntity2DTO(entity);
     }
 
