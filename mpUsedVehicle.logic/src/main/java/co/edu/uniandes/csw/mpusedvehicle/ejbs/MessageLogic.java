@@ -46,11 +46,12 @@ public class MessageLogic implements IMessageLogic {
         MessageEntity entity = MessageConverter.fullDTO2Entity(dto);
         persistence.create(entity);
         //Send email
-        String emailBody="<h1>Question: "+entity.getQuestion()+"<br>"+
-        "Product: "+entity.getProduct().getName()+"<br>"+
-        "Client: "+dto.getClient().getName()+"</h1>";
+        String emailBody="<h2>Hola "+dto.getProvider().getName() +",</h2><br>"+
+        "You have a new question about your "+entity.getProduct().getName()+" product<br>"+
+        "Question: "+entity.getQuestion()+"<br>"+
+        "Client: "+dto.getClient().getName();
         
-        MailManager.generateAndSendEmail(emailBody, dto.getProvider().getEmail(), "You have one question");
+        MailManager.generateAndSendEmail(emailBody, dto.getProvider().getEmail(), "You have a new question");
         return MessageConverter.fullEntity2DTO(entity);
     }
 
