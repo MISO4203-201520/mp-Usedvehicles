@@ -103,7 +103,6 @@ public class CartItemLogicTest {
         for (int i = 0; i < 3; i++) {
             CartItemEntity entity = new CartItemEntity();
         	entity.setName(generateRandom(String.class));
-        	entity.setQuantity(generateRandom(Integer.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -125,7 +124,6 @@ public class CartItemLogicTest {
         CartItemEntity entity = em.find(CartItemEntity.class, result.getId());
 
         Assert.assertEquals(dto.getName(), entity.getName());
-        Assert.assertEquals(dto.getQuantity(), entity.getQuantity());
     }
 
     /**
@@ -155,7 +153,6 @@ public class CartItemLogicTest {
         CartItemDTO dto = cartItemLogic.getCartItem(entity.getId());
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getName(), dto.getName());
-        Assert.assertEquals(entity.getQuantity(), dto.getQuantity());
     }
 
     /**
@@ -187,7 +184,6 @@ public class CartItemLogicTest {
         CartItemEntity resp = em.find(CartItemEntity.class, entity.getId());
 
         Assert.assertEquals(dto.getName(), resp.getName());
-        Assert.assertEquals(dto.getQuantity(), resp.getQuantity());
     }
 
     /**

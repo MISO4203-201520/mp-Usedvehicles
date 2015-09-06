@@ -25,32 +25,32 @@ import org.apache.shiro.SecurityUtils;
 /**
  * @generated
  */
-@Path("/cartItems")
+@Path("/orders")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class CartItemService {
+public class OrderService {
 
     @Inject private ICartItemLogic cartItemLogic;
     @Context private HttpServletResponse response;
     @Inject private IClientLogic clientLogic;
     @Inject private IOrderLogic orderLogic;
+    
     private ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
     /**
      * @generated
      */
     @POST
     @StatusCreated
-    public CartItemDTO createCartItem(CartItemDTO dto) {
-        CartItemDTO item = cartItemLogic.createCartItemByClient(dto, client.getId());
-        return item;
+    public OrderDTO createOrder(OrderDTO order) {
+        return orderLogic.submitOrder(order);
     }
 
     /**
      * @generated
      */
     @GET
-    public List<CartItemDTO> getCartItems() {       
-       return clientLogic.getClient(client.getId()).getShoppingCart();
+    public List<OrderDTO> getOrders() {       
+       return orderLogic.getOrders();
     }
 
     /**
@@ -67,9 +67,8 @@ public class CartItemService {
      */
     @PUT
     @Path("{id: \\d+}")
-    public CartItemDTO updateCartItem(@PathParam("id") Long id, CartItemDTO dto) {
-        dto.setId(id);
-        return cartItemLogic.updateCartItemByClient(client.getId(), dto);
+    public OrderDTO updateOrder(@PathParam("id") Long id, OrderDTO dto) {
+        return orderLogic.updateOrder(id, dto);
     }
 
     /**

@@ -61,6 +61,7 @@ public abstract class ProductConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setPrice(entity.getPrice());
+            dto.setAvailability(entity.getAvailability());
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setVehicle(VehicleConverter.refEntity2DTO(entity.getVehicle()));
 
@@ -79,6 +80,7 @@ public abstract class ProductConverter {
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setPrice(dto.getPrice());
+            entity.setAvailability(dto.getAvailability());
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
             entity.setVehicle(VehicleConverter.refDTO2Entity(dto.getVehicle()));
 
