@@ -8,6 +8,7 @@
         'productModule',
         'providerModule',
         'vehicleModule',
+        'userModule',
         'ngRoute',
         'ngCrud',
         'xeditable'
@@ -36,6 +37,10 @@
                 }).when('/shoppingCart', {
                     templateUrl: 'src/modules/cartItem/templates/ShoppingCart.html',
                     controller: 'cartItemCtrl',
+                    controllerAs: 'ctrl'
+                }).when('/users', {
+                    templateUrl: 'src/modules/admin/templates/users.tpl.html',
+                    controller: 'userCtrl',
                     controllerAs: 'ctrl'
                 })
                 .otherwise('/catalog');

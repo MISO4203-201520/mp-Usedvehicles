@@ -18,6 +18,8 @@ import com.stormpath.sdk.group.Group;
 import com.stormpath.sdk.group.GroupList;
 import com.stormpath.sdk.resource.ResourceException;
 import com.stormpath.shiro.realm.ApplicationRealm;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -47,6 +49,32 @@ public class UserService {
 
     @Inject
     private IProviderLogic providerLogic;
+    
+    @GET
+    public List<UserDTO> getUsers() {
+        System.out.println("calling users");
+        List<UserDTO> allUsers = new ArrayList<UserDTO>();
+        
+        System.out.println("before clients");
+        for (ClientDTO client : clientLogic.getClients(null, null)) {
+            UserDTO clientDTO = new UserDTO();
+            clientDTO.setName(client.getName());
+            clientDTO.setRememberMe(false);
+            allUsers.add(clientDTO);
+            System.out.println(client.getName());
+        }
+        
+        System.out.println("before providers");
+        for (ProviderDTO provider : providerLogic.getProviders(null, null)) {
+            UserDTO providerDTO = new UserDTO();
+            providerDTO.setName(provider.getName());
+            providerDTO.setRememberMe(true);
+            allUsers.add(providerDTO);
+            System.out.println(provider.getName());
+        }
+        
+        return allUsers;
+    }
 
     @Path("/login")
     @POST
