@@ -35,7 +35,7 @@ public class OrderPersistence extends CrudPersistence<OrderEntity>{
             q.setFirstResult((page - 1) * maxRecords);
             q.setMaxResults(maxRecords);
         }
-        return CartItemConverter.listEntity2DTO(q.setParameter("status", status).getResultList());
+        return OrderConverter.listEntity2DTO(q.setParameter("status", status.name()).getResultList());
     }
     
     public int updateOrderStatus(Long id, OrderEntity entity) {

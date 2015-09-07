@@ -51,7 +51,7 @@ public class CartItemService {
      */
     @GET
     public List<CartItemDTO> getCartItems() { 
-       return cartItemLogic.getCartItemsByClientAndStatus(null,null,client.getId(),OrderStatus.NEW.name());
+       return cartItemLogic.getCartItemsByClient(null,null,client.getId());
     }
 
     /**

@@ -12,7 +12,7 @@
                     <th ng-if="ctrl.recordActions">Actions</th>
                 </tr>
             </thead>
-            <tbody ng-hide="records">
+            <tbody >
                 <tr ng-repeat="record in records">
                     <td><div>{{record.product.vehicle.name}}</div></td>
                     <td><div>{{record.product.price | currency}}</div></td>
@@ -26,7 +26,7 @@
                     <td><div></div></td>
                 </tr>
             </tbody>
-            <tbody ng-show="records">
+            <tbody ng-show="records.length == 0">
                 
                 <tr>
                     <td colspan="4"><div> Tu carrito est&aacute; vac&iacute;o </div></td>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="col-md-11" align="right">
-        <button  ng-disabled="records" class="btn btn-primary btn-lg" ng-click="checkout()" popover="Thanks" popover-trigger="mouseenter" popover-placement="bottom"> 
+        <button  ng-disabled="records.length == 0" class="btn btn-primary btn-lg" ng-click="checkout()" popover="Thanks" popover-trigger="mouseenter" popover-placement="bottom"> 
             <span class="glyphicon glyphicon-check" aria-hidden="true" ></span> Checkout </button>
     </div>
 

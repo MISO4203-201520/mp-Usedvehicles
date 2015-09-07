@@ -6,6 +6,7 @@ import co.edu.uniandes.csw.mpusedvehicle.api.IOrderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
+import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -50,7 +51,7 @@ public class OrderService {
      */
     @GET
     public List<OrderDTO> getOrders() {       
-       return orderLogic.getOrders();
+       return orderLogic.getOrdersByStatus(OrderStatus.NEW);
     }
 
     /**

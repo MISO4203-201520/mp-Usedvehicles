@@ -45,7 +45,7 @@ public class OrderLogic implements IOrderLogic {
     }
 
     public List<OrderDTO> getOrdersByStatus(OrderStatus status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return persistence.getOrdersByStatus(null, null, status);
     }
 
 }

@@ -69,8 +69,8 @@ public class CartItemLogic implements ICartItemLogic {
         return CartItemConverter.listEntity2DTO(persistence.findByName(name));
     }
     
-    public List<CartItemDTO> getCartItemsByClientAndStatus(Integer page, Integer maxRecords, Long idClient, String orderStatus) {
-        return persistence.getCartItemsByClientAndStatus(page, maxRecords, idClient, orderStatus);
+    public List<CartItemDTO> getCartItemsByClient(Integer page, Integer maxRecords, Long idClient) {
+        return persistence.getCartItemsByClient(page, maxRecords, idClient);
     }
 
     public CartItemDTO createCartItemByClient(CartItemDTO dto, Long idClient) {
