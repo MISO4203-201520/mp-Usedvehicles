@@ -29,7 +29,7 @@ public class OrderDTO {
     
     private BigDecimal amountWithTaxes;
 
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
     
     private String orderStatus;
     
@@ -79,11 +79,11 @@ public class OrderDTO {
         this.amountWithTaxes = amountWithTaxes;
     }
 
-    public PaymentMethod getPaymentMethod() {
+    public String getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
+    public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
    

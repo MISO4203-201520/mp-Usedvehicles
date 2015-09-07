@@ -67,7 +67,13 @@
             };
             
             $scope.pay = function () {
+                $scope.records[0].amount = $scope.subtotal;
+                $scope.records[0].taxAmount = $scope.taxes;
+                $scope.records[0].amountWithTaxes = $scope.total;
+                $scope.records[0].orderStatus = 'AUTHORIZED';
+                $scope.records[0].paymentMethod = ($scope.credit)?'CREDIT_CARD':'DEBIT_CARD';
                 svc.saveOrder($scope.records[0]);
+                $location.path('/');
             };
             
         }]);

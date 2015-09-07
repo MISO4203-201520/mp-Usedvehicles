@@ -19,7 +19,6 @@
             };
             
             this.saveOrder = function(record){
-                record.orderStatus = 'ERROR';
                 self.saveRecord(record);
             };
     }]);

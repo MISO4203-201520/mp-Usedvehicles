@@ -40,7 +40,7 @@ public class OrderLogic implements IOrderLogic {
 
     public OrderDTO updateOrder(Long id, OrderDTO order) {
         OrderEntity entity = OrderConverter.refDTO2Entity(order);        
-        persistence.updateOrderStatus(id, entity);
+        persistence.updateOrderInfo(id, entity);
         return OrderConverter.refEntity2DTO(entity);
     }
 

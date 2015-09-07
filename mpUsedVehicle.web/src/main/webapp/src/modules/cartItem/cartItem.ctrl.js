@@ -54,7 +54,7 @@
                 }
             };//Realiza la validacion de la nueva cantidad asignada.
             $scope.checkout = function () {
-                self.showWarning("Not implemented yet");
+                $location.path('/checkout')
             };
             $scope.taxes = function (record) {
                 return record.product.price * 0.16;
