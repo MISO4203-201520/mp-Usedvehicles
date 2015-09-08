@@ -18,8 +18,14 @@
                 });
             };
             
+            this.createNewOrder = function(){
+                var order = {
+                    'orderStatus':'NEW'
+                };
+                return self.saveRecord(order);
+            };
             this.saveOrder = function(record){
-                self.saveRecord(record);
+                return self.saveRecord(record);
             };
     }]);
 })(window.angular);

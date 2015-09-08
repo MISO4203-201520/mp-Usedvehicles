@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('cartItemModule');
 
-    mod.controller('cartItemCtrl', ['CrudCreator', '$scope', 'cartItemService', 'cartItemModel', '$location', 'authService', function (CrudCreator, $scope, svc, model, $location, authSvc) {
+    mod.controller('cartItemCtrl', ['CrudCreator', '$scope', 'cartItemService', 'checkoutService', 'cartItemModel', '$location', 'authService', function (CrudCreator, $scope, svc, chkSvc, model, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'My Shopping Cart');
             var self = this;
 
@@ -54,8 +54,19 @@
                 }
             };//Realiza la validacion de la nueva cantidad asignada.
             $scope.checkout = function () {
-                svc.saveOrder();
-                $location.path('/checkout');
+                var order = {};
+                
+                chkSvc.createNewOrder().then(function(data){
+                    order = data;
+                    for(var i= 0; i< $scope.records.length ;i++){
+                        $scope.records[i].order = order;
+                        svc.editItem($scope.records[i]);
+                    }
+                    $location.path('/checkout');
+                });
+                
+                
+                
             };
             $scope.taxes = function (record) {
                 return record.product.price * 0.16;
