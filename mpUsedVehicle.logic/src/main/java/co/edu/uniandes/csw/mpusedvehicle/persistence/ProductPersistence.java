@@ -45,7 +45,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
     public ProductEntity getCheaperProductByVehicle(String nameVehicle) {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
-            params.put("nameVehicle", "%" + nameVehicle.toUpperCase() + "%");
+            params.put("nameVehicle","%" + nameVehicle.toUpperCase() + "%");
             List<ProductEntity> list = new ArrayList<ProductEntity>();
             list = executeListNamedQuery("Product.getCheaperProductByVehicle", params);
             return list.get(0);
