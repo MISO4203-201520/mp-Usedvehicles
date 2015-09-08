@@ -9,6 +9,8 @@
         'providerModule',
         'vehicleModule',
         'commentModule',
+        'messageModule',
+        'checkoutModule',
         'ngRoute',
         'ngCrud',
         'xeditable'
@@ -47,6 +49,10 @@
                 }).when('/shoppingCart', {
                     templateUrl: 'src/modules/cartItem/templates/ShoppingCart.html',
                     controller: 'cartItemCtrl',
+                    controllerAs: 'ctrl'
+                }).when('/checkout', {
+                    templateUrl: 'src/modules/checkout/templates/Checkout.html',
+                    controller: 'checkoutCtrl',
                     controllerAs: 'ctrl'
                 })
                 .otherwise('/catalog');

@@ -29,7 +29,6 @@ public abstract class CommentConverter {
             dto.setDescription(entity.getDescription());
             dto.setDate(entity.getDate());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
-            dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
 
             return dto;
         } else {

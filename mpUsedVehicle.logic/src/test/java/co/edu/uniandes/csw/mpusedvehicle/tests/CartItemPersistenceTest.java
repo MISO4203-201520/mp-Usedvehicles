@@ -95,7 +95,6 @@ public class CartItemPersistenceTest {
         for (int i = 0; i < 3; i++) {
             CartItemEntity entity = new CartItemEntity();
             entity.setName(generateRandom(String.class));
-            entity.setQuantity(generateRandom(Integer.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -108,7 +107,6 @@ public class CartItemPersistenceTest {
     public void createCartItemTest() {
         CartItemEntity newEntity = new CartItemEntity();
         newEntity.setName(generateRandom(String.class));
-        newEntity.setQuantity(generateRandom(Integer.class));
 
         CartItemEntity result = cartItemPersistence.create(newEntity);
 
@@ -117,7 +115,6 @@ public class CartItemPersistenceTest {
         CartItemEntity entity = em.find(CartItemEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertEquals(newEntity.getQuantity(), entity.getQuantity());
     }
 
     /**
@@ -147,7 +144,6 @@ public class CartItemPersistenceTest {
         CartItemEntity newEntity = cartItemPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
-        Assert.assertEquals(entity.getQuantity(), newEntity.getQuantity());
     }
 
     /**
@@ -172,14 +168,12 @@ public class CartItemPersistenceTest {
 
         newEntity.setId(entity.getId());
         newEntity.setName(generateRandom(String.class));
-        newEntity.setQuantity(generateRandom(Integer.class));
 
         cartItemPersistence.update(newEntity);
 
         CartItemEntity resp = em.find(CartItemEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
-        Assert.assertEquals(newEntity.getQuantity(), resp.getQuantity());
     }
 
     /**

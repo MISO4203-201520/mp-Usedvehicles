@@ -12,6 +12,7 @@ public class ProductDTO {
     private Long id;
     private String name;
     private Integer price;
+    private Boolean availability;
     private ProviderDTO provider;
     private VehicleDTO vehicle;
     private List<CommentDTO> comments;
@@ -84,7 +85,15 @@ public class ProductDTO {
     public void setVehicle(VehicleDTO vehicle) {
         this.vehicle = vehicle;
     }
+    
+    public Boolean getAvailability() {
+        return availability;
+    }
 
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
+    }
+    
     public List<CommentDTO> getComments() {
         return comments;
     }

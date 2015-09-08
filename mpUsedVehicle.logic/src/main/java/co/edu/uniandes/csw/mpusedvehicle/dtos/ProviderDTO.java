@@ -13,6 +13,7 @@ public class ProviderDTO {
     private String name;
     private String userId;
     private List<ProductDTO> products;
+    private String email;
     /**
      * @generated
      */
@@ -69,4 +70,12 @@ public class ProviderDTO {
         this.products = products;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 }
