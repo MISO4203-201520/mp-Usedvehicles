@@ -29,6 +29,8 @@ public class ProviderEntity implements Serializable {
 
     @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductEntity> products;
+    
+    private String email;
     /**
      * @generated
      */
@@ -85,4 +87,12 @@ public class ProviderEntity implements Serializable {
         this.products = products;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 }

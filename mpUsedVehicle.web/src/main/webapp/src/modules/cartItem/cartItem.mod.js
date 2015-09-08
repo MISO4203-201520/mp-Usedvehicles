@@ -21,12 +21,5 @@
                 service: 'productService',
                 options: [],
                 required: true
-            }, {
-                name: 'installments',
-                displayName: 'Installments',
-                type: 'Reference',
-                service: 'Integer',
-                options: [],
-                required: true
             }]});
 })(window.angular);

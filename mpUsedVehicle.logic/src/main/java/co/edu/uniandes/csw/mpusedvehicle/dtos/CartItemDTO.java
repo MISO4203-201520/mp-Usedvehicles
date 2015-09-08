@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.dtos;
 
+import co.edu.uniandes.csw.mpusedvehicle.entities.OrderEntity;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -14,6 +15,7 @@ public class CartItemDTO {
     private Integer installments;
     private ClientDTO client;
     private ProductDTO product;
+    private OrderDTO order;
     /**
      * @generated
      */
@@ -96,6 +98,14 @@ public class CartItemDTO {
      */
     public void setInstallments(Integer installments) {
         this.installments = installments;
+    }
+    
+    public OrderDTO getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderDTO order) {
+        this.order = order;
     }
 
 }

@@ -7,29 +7,29 @@
             <thead>
                 <tr>                   
                     <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Installments</th>
                     <th>Price</th>
                     <th>SubTotal</th>
                     <th ng-if="ctrl.recordActions">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
                 <tr ng-repeat="record in records">
                     <td><div>{{record.product.vehicle.name}}</div></td>
-                    <td><div> <a editable-text="record.quantity" onbeforesave="verify(record.quantity)" onaftersave="postVerify(record)">{{ record.quantity }}</a></div></td>        
-                    <td><div> <a editable-text="record.installments" onbeforesave="verify(record.installments)" onaftersave="postVerify(record)">{{ record.installments }}</a></div></td>        
                     <td><div>{{record.product.price | currency}}</div></td>
-                    <td><div>{{subtotal(record)| currency}}</div></td>
+                    <td><div>{{taxes(record)| currency}}</div></td>
                     <td><button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
                 </tr>
                 <tr>
-                    <td><div></div></td>
-                    <td><div></div></td> 
                     <td><div></div></td> 
                     <td><div><strong>TOTAL:</strong></div> </td>
                     <td><div><strong>{{total| currency}}</strong></div></td>  
                     <td><div></div></td>
+                </tr>
+            </tbody>
+            <tbody ng-show="records.length == 0">
+                
+                <tr>
+                    <td colspan="4"><div> Tu carrito est&aacute; vac&iacute;o </div></td>
                 </tr>
             </tbody>
         </table>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="col-md-11" align="right">
-        <button  class="btn btn-primary btn-lg" ng-click="checkout()" popover="Thanks" popover-trigger="mouseenter" popover-placement="bottom"> 
+        <button  ng-disabled="records.length == 0" class="btn btn-primary btn-lg" ng-click="checkout()" popover="Thanks" popover-trigger="mouseenter" popover-placement="bottom"> 
             <span class="glyphicon glyphicon-check" aria-hidden="true" ></span> Checkout </button>
     </div>
 

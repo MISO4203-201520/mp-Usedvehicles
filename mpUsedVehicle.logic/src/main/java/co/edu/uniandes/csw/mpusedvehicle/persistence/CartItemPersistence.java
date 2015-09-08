@@ -22,7 +22,7 @@ public class CartItemPersistence extends CrudPersistence<CartItemEntity> {
     }
     
     public List<CartItemDTO> getCartItemsByClient(Integer page, Integer maxRecords, Long idClient) {
-        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.client.id = :idC");
+        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.client.id = :idC and u.order IS NULL");
         if (page != null && maxRecords != null) {
             q.setFirstResult((page - 1) * maxRecords);
             q.setMaxResults(maxRecords);

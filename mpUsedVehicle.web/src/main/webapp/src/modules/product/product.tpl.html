@@ -40,15 +40,55 @@
                 </div>
                 <div class="caption" >
                     <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
-                    <p><strong>Price:</strong> {{record.price| currency}}</p>
+                    <p><strong>Price:</strong> {{record.price | currency}}</p>
                     <p><strong>Provider:</strong> {{record.provider.name}}</p>
                 </div>
                 <p class="text-center">
-                    <button ng-repeat="action in ctrl.recordActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                    <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 
+                            class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" data-toggle="{{action.dataToggle}}" 
+                            data-target="{{action.dataTarget}}" ng-click="action.fn(record)">
+                        <span class="glyphicon glyphicon-{{action.icon}}"></span> 
+                        {{action.displayName}}
+                    </button>
                 </p>
+            </div>
+
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+         aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" 
+                           data-dismiss="modal">
+                               <span aria-hidden="true">&times;</span>
+                               <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Ask a question to the provider
+                        </h4>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form role="form">
+                          <div class="form-group">
+                            <label for="questionInput">Question</label>
+                            <textarea id="questionInput"  placeholder="Write your question" class="form-control" style="resize: none;" ng-model="ctrl.question"> </textarea>
+                          </div>
+                            <button type="button" class="btn btn-primary" ng-click="ctrl.sendQuestion()">
+                                <span class="glyphicon glyphicon-message-plus"></span>
+                                Send
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <div class="text-center">
         <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
                     ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
