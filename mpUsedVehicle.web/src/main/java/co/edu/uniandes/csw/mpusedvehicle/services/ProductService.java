@@ -6,6 +6,8 @@ import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -106,7 +108,7 @@ public class ProductService {
         try {
             product = productLogic.getCheaperProductByProvider(nameProvider);
         } catch (Exception e) {
-            System.out.println("Provider not Found");
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
         return product;
     }
@@ -118,7 +120,7 @@ public class ProductService {
         try {
             product = productLogic.getCheaperProductByVehicle(nameVehicle);
         } catch (Exception e) {
-            System.out.println("Vehicle not Found");
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
         return product;
     }
