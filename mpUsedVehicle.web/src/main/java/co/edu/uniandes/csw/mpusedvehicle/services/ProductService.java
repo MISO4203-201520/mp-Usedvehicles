@@ -6,6 +6,8 @@ import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -97,5 +99,29 @@ public class ProductService {
     @Path("{id: \\d+}")
     public void deleteProduct(@PathParam("id") Long id) {
         productLogic.deleteProduct(id);
+    }
+
+    @GET
+    @Path("/cheapest/{name}")
+    public ProductDTO getCheaperProductByProvider(@PathParam("name") String nameProvider) {
+        ProductDTO product = new ProductDTO();
+        try {
+            product = productLogic.getCheaperProductByProvider(nameProvider);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return product;
+    }
+
+    @GET
+    @Path("/cheapestbyvehicle/{name}")
+    public ProductDTO getCheaperProviderbyVehicle(@PathParam("name") String nameVehicle) {
+        ProductDTO product = new ProductDTO();
+        try {
+            product = productLogic.getCheaperProductByVehicle(nameVehicle);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return product;
     }
 }
