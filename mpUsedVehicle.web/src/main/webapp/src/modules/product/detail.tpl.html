@@ -2,36 +2,47 @@
 <div ng-hide="ctrl.editMode">
     <div class="col-sm-12">
         
-        <p><strong>TEST:</strong> {{current.vehicle.name}}</p>
-        
-    <div ng-repeat="record in records">
-        <div class="well text-center" ng-show="$first">
+    <div  ng-repeat="record in records"  ng-hide="{{record.id !== selectedProduct}}">
+        <div class="well text-center">
             <div class="col-md-12">
-                <div class="img-thumbnail" id="cover" ng-if="record.product.vehicle.image">
-                    <a ng-href="{{record.product.vehicle.image}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.product.vehicle.image}}" alt="{{record.product.vehicle.image}}"></a>
+                <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
+                    <a ng-href="{{record.vehicle.image}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}"></a>
                 </div>
             </div>
-            <div class="caption" >
-                <p><strong>Vehicle:</strong> {{record.product.vehicle.name}}</p>
-                <p><strong>Price:</strong> {{record.product.price | currency}}</p>
-                <p><strong>Provider:</strong> {{record.product.provider.name}}</p>
+            <div class="caption">
+                <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
+                <p><strong>Price:</strong> {{record.price | currency}}</p>
+                <p><strong>Provider:</strong> {{record.provider.name}}</p>
             </div>
-            <p class="text-center">
-                <button ng-repeat="action in ctrl.recordActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
-            </p>
+
+                <p class="text-center">
+                    <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 
+                            class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" data-toggle="{{action.dataToggle}}" 
+                            data-target="{{action.dataTarget}}" ng-click="action.fn(record)">
+                        <span class="glyphicon glyphicon-{{action.icon}}"></span> 
+                        {{action.displayName}}
+                    </button>
+                </p>
             
                 <div>
-                    <p><strong>Commentar:</strong> <input type="text" ng-model="comment"> </p>
-                    <button ng-repeat="action in ctrl.recordActions" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                    
+<textarea id="commentInput"  placeholder="Write your comment" class="form-control" style="resize: none;" ng-model="ctrl.comment"> </textarea>
+
+                            <button type="button" class="btn btn-primary" ng-click="ctrl.sendComment()">
+                                <span class="glyphicon glyphicon-message-plus"></span>
+                                Send
+                            </button>
+
                 </div>
             
-            <p><strong>Comentarios:</strong></p>
+
             
         </div>
-
-                <div class="caption" >
-                <p><strong>{{record.client.name}}</strong> | {{record.date | date}}</p>
-                <p><strong>Comentario:</strong> {{record.description}}</p>
+            <p><strong>COMENTARIOS DEL PRODUCTO </strong></p>
+            
+            <div class="caption" ng-repeat="comment in record.comments"  ng-hide="{{record.id !== selectedProduct}}" >
+                <p><strong>{{comment.client.name}}</strong> | {{comment.date | date}}</p>
+                <p><strong>Comentario:</strong> {{comment.description}}</p>
             </div>
     </div>
 </div>

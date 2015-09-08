@@ -5,10 +5,8 @@
             CrudCreator.extendService(this, context);
             
             
-            var self = this;
-            
-            this.getCommentsByProduct = function (productId) {
-                return true;
+            this.sendComment = function(comment){
+                this.saveRecord(comment);
             };
             
     }]);

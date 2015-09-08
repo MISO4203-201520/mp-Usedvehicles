@@ -15,11 +15,5 @@
                 type: 'Reference',
                 service: 'clientService',
                 required: true
-            }, {
-                name: 'product',
-                displayName: 'Product',
-                type: 'Reference',
-                service: 'productService',
-                required: true
             }]});
 })(window.angular);

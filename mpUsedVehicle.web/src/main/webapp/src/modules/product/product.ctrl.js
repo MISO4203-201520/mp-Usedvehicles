@@ -1,9 +1,12 @@
 (function (ng) {
     var mod = ng.module('productModule');
 
-    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', 'messageService','$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc,$location, authSvc) {
+    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', 'messageService', 'commentService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc, commentSvc, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
-
+ 
+ 
+            $scope.selectedProduct=1;
+ 
             this.searchByName = function (vehicleName) {
                 var search;
                 if (vehicleName) {
@@ -13,6 +16,7 @@
             };
             
             this.question='';
+            this.comment='';
             $scope.tmpRecord;
 
             this.recordActions = [{
@@ -72,5 +76,21 @@
                 //clean question
                 this.question='';
             };
+            
+            this.sendComment = function(){
+                console.log("sendComment");
+                //Tmp question
+                newComment={
+                    description: this.comment,
+                    product:$scope.tmpRecord,
+                    date:Date.now(),
+                    client:authSvc.getCurrentUser()
+                };
+                commentSvc.sendComment(newComment);
+                //clean comment
+                this.comment='';
+            };
+            
+            
         }]);
 })(window.angular);

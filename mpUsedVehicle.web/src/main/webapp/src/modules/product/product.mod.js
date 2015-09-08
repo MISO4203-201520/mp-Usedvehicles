@@ -21,5 +21,10 @@
                 service: 'vehicleService',
                 options: [],
                 required: true
-            }]});
+            }], 
+        childs: [{
+                name: 'comments',
+                displayName: 'Comments',
+                //template: '', //override generic template
+                ctrl: 'commentCtrl'            }]});
 })(window.angular);

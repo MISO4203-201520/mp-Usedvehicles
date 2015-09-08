@@ -35,7 +35,7 @@
                 })
                 .when('/detail', {
                         templateUrl: 'src/modules/product/detail.tpl.html',
-                        controller: 'commentCtrl',
+                        controller: 'productCtrl',
                         controllerAs: 'ctrl'
                 })
                 .when('/vehicle', {
