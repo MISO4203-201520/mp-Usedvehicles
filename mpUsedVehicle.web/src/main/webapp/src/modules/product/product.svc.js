@@ -3,5 +3,11 @@
     
     mod.service('productService', ['CrudCreator','productContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
+            this.findCheaperbyProvider = function(idProvider){
+                return this.api.one('cheapest', idProvider).get();
+            };
+            this.findCheaperbyVehicle = function(nameVehicle){
+                return this.api.one('cheapestbyvehicle', nameVehicle).get();
+            };
     }]);
 })(window.angular);

@@ -98,4 +98,28 @@ public class ProductService {
     public void deleteProduct(@PathParam("id") Long id) {
         productLogic.deleteProduct(id);
     }
+
+    @GET
+    @Path("/cheapest/{name}")
+    public ProductDTO getCheaperProductByProvider(@PathParam("name") String nameProvider) {
+        ProductDTO product = new ProductDTO();
+        try {
+            product = productLogic.getCheaperProductByProvider(nameProvider);
+        } catch (Exception e) {
+            System.out.println("Provider not Found");
+        }
+        return product;
+    }
+
+    @GET
+    @Path("/cheapestbyvehicle/{name}")
+    public ProductDTO getCheaperProviderbyVehicle(@PathParam("name") String nameVehicle) {
+        ProductDTO product = new ProductDTO();
+        try {
+            product = productLogic.getCheaperProductByVehicle(nameVehicle);
+        } catch (Exception e) {
+            System.out.println("Vehicle not Found");
+        }
+        return product;
+    }
 }
