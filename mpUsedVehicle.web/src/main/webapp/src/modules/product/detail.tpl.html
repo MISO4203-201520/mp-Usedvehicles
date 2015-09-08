@@ -1,0 +1,43 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+<div ng-hide="ctrl.editMode">
+    <div class="col-sm-12">
+        
+        <p><strong>TEST:</strong> {{current.vehicle.name}}</p>
+        
+    <div ng-repeat="record in records">
+        <div class="well text-center" ng-show="$first">
+            <div class="col-md-12">
+                <div class="img-thumbnail" id="cover" ng-if="record.product.vehicle.image">
+                    <a ng-href="{{record.product.vehicle.image}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.product.vehicle.image}}" alt="{{record.product.vehicle.image}}"></a>
+                </div>
+            </div>
+            <div class="caption" >
+                <p><strong>Vehicle:</strong> {{record.product.vehicle.name}}</p>
+                <p><strong>Price:</strong> {{record.product.price | currency}}</p>
+                <p><strong>Provider:</strong> {{record.product.provider.name}}</p>
+            </div>
+            <p class="text-center">
+                <button ng-repeat="action in ctrl.recordActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+            </p>
+            
+                <div>
+                    <p><strong>Commentar:</strong> <input type="text" ng-model="comment"> </p>
+                    <button ng-repeat="action in ctrl.recordActions" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                </div>
+            
+            <p><strong>Comentarios:</strong></p>
+            
+        </div>
+
+                <div class="caption" >
+                <p><strong>{{record.client.name}}</strong> | {{record.date | date}}</p>
+                <p><strong>Comentario:</strong> {{record.description}}</p>
+            </div>
+    </div>
+</div>
+    <div class="text-center">
+        <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
+                    ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
+                    max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
+    </div>
+</div>

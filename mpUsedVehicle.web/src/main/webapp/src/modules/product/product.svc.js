@@ -2,6 +2,17 @@
     var mod = ng.module('productModule');
     
     mod.service('productService', ['CrudCreator','productContext', function(CrudCreator, context){
-            CrudCreator.extendService(this, context);
+            CrudCreator.extendService(this, context);   
+            
+            var current = {};
+            
+            this.setCurrentProduct = function (record) {
+                current = record;
+            };
+            
+            this.getCurrentProduct = function () {
+                return current;
+            };
+            
     }]);
 })(window.angular);

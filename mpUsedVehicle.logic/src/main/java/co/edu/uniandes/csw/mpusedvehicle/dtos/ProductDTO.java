@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.dtos;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -13,6 +14,7 @@ public class ProductDTO {
     private Integer price;
     private ProviderDTO provider;
     private VehicleDTO vehicle;
+    private List<CommentDTO> comments;
     /**
      * @generated
      */
@@ -81,6 +83,14 @@ public class ProductDTO {
      */
     public void setVehicle(VehicleDTO vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDTO> comments) {
+        this.comments = comments;
     }
 
 }

@@ -8,6 +8,7 @@
         'productModule',
         'providerModule',
         'vehicleModule',
+        'commentModule',
         'ngRoute',
         'ngCrud',
         'xeditable'
@@ -24,6 +25,16 @@
                     templateUrl: tplUrl,
                     controller: 'providerCtrl',
                     controllerAs: alias
+                })
+                .when('/comment', {
+                    templateUrl: tplUrl,
+                    controller: 'commentCtrl',
+                    controllerAs: alias
+                })
+                .when('/detail', {
+                        templateUrl: 'src/modules/product/detail.tpl.html',
+                        controller: 'commentCtrl',
+                        controllerAs: 'ctrl'
                 })
                 .when('/vehicle', {
                     templateUrl: tplUrl,
