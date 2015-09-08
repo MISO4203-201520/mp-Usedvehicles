@@ -24,6 +24,8 @@ public class ProductEntity implements Serializable {
     private String name;
 
     private Integer price;
+    
+    private Boolean availability;
 
     @ManyToOne
     private ProviderEntity provider;
@@ -97,6 +99,14 @@ public class ProductEntity implements Serializable {
      */
     public void setVehicle(VehicleEntity vehicle) {
         this.vehicle = vehicle;
+    }
+    
+    public Boolean getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
     }
 
 }
