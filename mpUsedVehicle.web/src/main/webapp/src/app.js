@@ -10,6 +10,7 @@
         'vehicleModule',
         'messageModule',
         'checkoutModule',
+        'userModule',
         'ngRoute',
         'ngCrud',
         'xeditable'
@@ -42,6 +43,9 @@
                 }).when('/checkout', {
                     templateUrl: 'src/modules/checkout/templates/Checkout.html',
                     controller: 'checkoutCtrl',
+                }).when('/users', {
+                    templateUrl: 'src/modules/admin/templates/users.tpl.html',
+                    controller: 'userCtrl',
                     controllerAs: 'ctrl'
                 })
                 .otherwise('/catalog');
