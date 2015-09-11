@@ -8,7 +8,7 @@
   - [Entidad Provider](#entidad-provider)
   - [Entidad Vehicle](#entidad-vehicle)
 
-#Wiki página web
+#Wiki
 http://miso4203-201520.github.io/wiki-HotWheels/
 
 #API Rest
