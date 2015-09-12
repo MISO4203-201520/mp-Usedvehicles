@@ -1,9 +1,12 @@
 package co.edu.uniandes.csw.mpusedvehicle.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  * @generated
@@ -28,6 +31,9 @@ public class VehicleEntity implements Serializable {
     private String brand;
 
     private String image;
+    
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReviewEntity> reviews;
 
     /**
      * @generated
@@ -139,6 +145,14 @@ public class VehicleEntity implements Serializable {
      */
     public void setImage(String image){
         this.image = image;
+    }
+
+    public List<ReviewEntity> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewEntity> reviews) {
+        this.reviews = reviews;
     }
 
 }

@@ -52,8 +52,33 @@
                     </button>
                 </p>
             </div>
-
         </div>
+        <!-- Modal dialog for reviews -->
+        <div class="modal fade" id="modalReviews" tabindex="-1" role="dialog" aria-labelledby="modalReviewLabel" aria-hidden="true">
+            <div ng-show="ctrl.detailsMode" ng-if="vehicleRecord">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" ng-click="ctrl.detailsMode = false" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="modalReviewLabel">
+                                Reviews for {{vehicleRecord.name}}
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group" ng-repeat="review in vehicleRecord.reviews">
+                                <li class="list-group-item">
+                                    {{review.description}} <br /> <em>{{review.source}}</em>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Modal -->
         <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
          aria-labelledby="myModalLabel" aria-hidden="true">

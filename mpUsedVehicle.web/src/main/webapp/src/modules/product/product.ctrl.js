@@ -1,7 +1,8 @@
 (function (ng) {
     var mod = ng.module('productModule');
 
-    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', 'messageService','$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc,$location, authSvc) {
+    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', 'messageService','$location', 'authService', 'vehicleService', 
+        function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc,$location, authSvc, vehicleSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
             $scope.varEnable = true;
             $scope.providerName = '';
@@ -81,6 +82,23 @@
                     },
                     show: function () {
                         return true;
+                    }
+                }, {
+                    name: 'reviews',
+                    displayName: 'Reviews',
+                    icon: 'list',
+                    class: 'info',
+                    dataToggle:'modal',
+                    dataTarget:'#modalReviews',
+                    fn: function (record) {
+                        vehicleSvc.api.get(record.vehicle.id).then(function (data) {
+                            self.detailsMode = true;
+                            $scope.vehicleRecord = data;
+                            console.log($scope.vehicleRecord.reviews);
+                        });
+                    },
+                    show: function () {
+                        return !self.detailsMode;
                     }
                 }];
 
