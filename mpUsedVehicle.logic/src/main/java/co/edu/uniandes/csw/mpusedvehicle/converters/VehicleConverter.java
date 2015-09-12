@@ -103,6 +103,7 @@ public abstract class VehicleConverter {
     public static VehicleDTO fullEntity2DTO(VehicleEntity entity) {
         if (entity != null) {
             VehicleDTO dto = basicEntity2DTO(entity);
+            dto.setReviews(ReviewConverter.listEntity2DTO(entity.getReviews()));
             return dto;
         } else {
             return null;
@@ -115,6 +116,7 @@ public abstract class VehicleConverter {
     public static VehicleEntity fullDTO2Entity(VehicleDTO dto) {
         if (dto != null) {
             VehicleEntity entity = basicDTO2Entity(dto);
+            entity.setReviews(ReviewConverter.childListDTO2Entity(dto.getReviews(), entity));
             return entity;
         } else {
             return null;
