@@ -1,7 +1,7 @@
 (function (ng) {
 
     var mainApp = ng.module('mainApp', [
-//        'ngCrudMock',
+//        'ngCrudMock',,
         'authModule',
         'cartItemModule',
         'clientModule',
