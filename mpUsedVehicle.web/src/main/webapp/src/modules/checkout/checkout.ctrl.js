@@ -62,6 +62,7 @@
                 }
             };//Realiza la validacion de la nueva cantidad asignada.
             
+            //cambia el metodo de pago
             $scope.togglePaymentMethod = function(){
                 $scope.credit = !$scope.credit;
             };
