@@ -47,6 +47,10 @@
                     templateUrl: 'src/modules/admin/templates/users.tpl.html',
                     controller: 'userCtrl',
                     controllerAs: 'ctrl'
+                }).when('/questions', {
+                    templateUrl: 'src/modules/messages/question.tpl.html',
+                    controller: 'questionCtrl',
+                    controllerAs: 'ctrl'
                 })
                 .otherwise('/catalog');
         }]);
