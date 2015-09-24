@@ -1,14 +1,16 @@
 (function (ng) {
     var mod = ng.module('productModule');
 
-    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', 'messageService','$location', 'authService', 'vehicleService', 
-        function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc,$location, authSvc, vehicleSvc) {
+    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 
+        'cartItemService', 'messageService','$location', 'authService', 'vehicleService', 
+        'userService', 
+        function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc,$location, authSvc, vehicleSvc, userSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
             //Variables
             $scope.varEnable = true;
             $scope.providerName = ''; 
             $scope.records=[];
-            $scope.text2Search="";
+            $scope.text2Search="";            
             
             //Funciones
             $scope.findItem = function () {
@@ -46,6 +48,21 @@
                 }
                 $location.url('/catalog' + search);
             };
+            
+            $("#users").hide();
+            if (authSvc.getCurrentUser()) {
+                userSvc.isAdmin().then(function (data) {
+                    
+                    if (data){
+                        $("#users").show();
+                    } else {
+                        $("#users").hide();
+                    }
+                });
+            }
+            $(".dropdown-menu > li > a").click(function () {
+                $("#users").hide();
+            });
             
             this.question='';
             $scope.tmpRecord;
