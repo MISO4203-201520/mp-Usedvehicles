@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="mainApp">
     <head>
+        <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
         <title>mpUsedVehicle</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,14 +18,14 @@
         <script src="https://code.angularjs.org/1.4.3/angular-cookies.min.js"></script>
         <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
         <script src="restangular.min.js" type="text/javascript"></script>  
-<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.min.js"></script>-->
+        <!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.min.js"></script>-->
         <script src="https://rawgit.com/recursosCSWuniandes/ng-crud/master/dist/ngcrud.min.js"></script>
         <script src="https://rawgit.com/recursosCSWuniandes/ng-crud/master/dist/ngcrud-mocks.min.js"></script>
         <script src="https://rawgit.com/recursosCSWuniandes/ng-crud-auth/master/dist/ngcrud-auth.min.js"></script>
         <script src="http://vitalets.github.io/angular-xeditable/dist/js/xeditable.min.js"></script>
 
         <script src="src/app.js"></script>
-        
+
         <script src="src/modules/admin/user.mod.js"></script>
         <script src="src/modules/admin/user.svc.js"></script>
         <script src="src/modules/admin/user.ctrl.js" type="text/javascript"></script>
@@ -32,7 +33,7 @@
         <script src="src/modules/cartItem/cartItem.mod.js"></script>
         <script src="src/modules/cartItem/cartItem.svc.js"></script>
         <script src="src/modules/cartItem/cartItem.ctrl.js" type="text/javascript"></script>
-        
+
         <script src="src/modules/client/client.mod.js"></script>
         <script src="src/modules/client/client.svc.js"></script>
         <script src="src/modules/client/client.ctrl.js"></script>
@@ -40,11 +41,11 @@
         <script src="src/modules/product/product.mod.js"></script>
         <script src="src/modules/product/product.svc.js"></script>
         <script src="src/modules/product/product.ctrl.js" type="text/javascript"></script>
-        
+
         <script src="src/modules/messages/message.mod.js"></script>
         <script src="src/modules/messages/message.svc.js"></script>
         <script src="src/modules/messages/message.ctrl.js" type="text/javascript"></script>
-        
+
         <script src="src/modules/provider/provider.mod.js"></script>
         <script src="src/modules/provider/provider.svc.js"></script>
         <script src="src/modules/provider/provider.ctrl.js"></script>
@@ -52,7 +53,7 @@
         <script src="src/modules/vehicle/vehicle.mod.js"></script>
         <script src="src/modules/vehicle/vehicle.svc.js"></script>
         <script src="src/modules/vehicle/vehicle.ctrl.js"></script>
-        
+
         <script src="src/modules/checkout/checkout.mod.js"></script>
         <script src="src/modules/checkout/checkout.svc.js"></script>
         <script src="src/modules/checkout/checkout.ctrl.js"></script>
@@ -86,8 +87,11 @@
                                 <button type="submit" class="btn btn-default">Submit</button>
                             </form>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#/shoppingCart"><span class="glyphicon glyphicon-shopping-cart" ></span> My Shopping Cart </a></li>
-                                <li><a href="#/users"><span class="glyphicon glyphicon-user" ></span> Registered users </a></li>
+                                <li id="cart"><a href="#/shoppingCart"><span class="glyphicon glyphicon-shopping-cart" ></span> My Shopping Cart </a></li>
+                                <shiro:hasRole name="administrator">
+                                <li id="users"><a href="#/users"><span class="glyphicon glyphicon-user" ></span> Registered users </a></li>
+                                </shiro:hasRole>
+
                                 <li><login-button></login-button></li>
                             </ul>
                         </div> <!-- /.navbar-collapse -->

@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.services;
 
+import co.edu.uniandes.csw.mpusedvehicle.api.IAdminLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IClientLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.AdminDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.UserDTO;
@@ -40,6 +42,7 @@ import org.apache.shiro.subject.Subject;
 /**
  *
  * @author Jhonatan
+ * @modified djimenez
  */
 @Path("/users")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -51,6 +54,9 @@ public class UserService {
 
     @Inject
     private IProviderLogic providerLogic;
+    
+    @Inject
+    private IAdminLogic adminLogic;
     
     @GET
     public List<UserDTO> getUsers() {
@@ -95,10 +101,16 @@ public class UserService {
                     currentUser.getSession().setAttribute("Provider", provider);
                     return Response.ok(provider).build();
                 } else {
-                    return Response.status(Response.Status.BAD_REQUEST)
+                    AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
+                    if (admin != null) {
+                        currentUser.getSession().setAttribute("Admin", admin);
+                        return Response.ok(admin).build();
+                    } else {
+                        return Response.status(Response.Status.BAD_REQUEST)
                             .entity(" User is not registered")
                             .type(MediaType.TEXT_PLAIN)
                             .build();
+                    }
                 }
             }
         } catch (AuthenticationException e) {

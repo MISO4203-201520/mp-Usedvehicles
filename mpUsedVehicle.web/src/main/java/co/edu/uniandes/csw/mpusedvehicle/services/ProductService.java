@@ -24,7 +24,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
 
 /**
- * @generated
+ * @generated 
  */
 @Path("/products")
 @Consumes(MediaType.APPLICATION_JSON)

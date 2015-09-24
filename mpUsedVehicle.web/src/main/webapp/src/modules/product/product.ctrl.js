@@ -4,8 +4,13 @@
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', 'messageService','$location', 'authService', 'vehicleService', 
         function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc,$location, authSvc, vehicleSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
+            //Variables
             $scope.varEnable = true;
-            $scope.providerName = '';
+            $scope.providerName = ''; 
+            $scope.records=[];
+            $scope.text2Search="";
+            
+            //Funciones
             $scope.findItem = function () {
                 console.log("$scope.records" + $scope.records.length);
                 console.log("Ingresa text2Search" + $scope.text2Search);
