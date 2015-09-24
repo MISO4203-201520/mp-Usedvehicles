@@ -54,6 +54,14 @@ public class MessageService {
         }
         return messageLogic.getMessages(page, maxRecords);
     }
+    
+    @GET
+    @Path("/questionsbyprovider/{idProvider}")
+    public List<MessageDTO> getMessagesByProvider(@PathParam("idProvider") Long idProvider) {
+        System.out.println("getMessagesByProvider");
+        return messageLogic.getMessagesByProvider(idProvider);
+    }
+   
 
     /**
      * @generated

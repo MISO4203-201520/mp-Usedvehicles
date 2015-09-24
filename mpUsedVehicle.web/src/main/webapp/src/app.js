@@ -49,7 +49,7 @@
                     controllerAs: 'ctrl'
                 }).when('/questions', {
                     templateUrl: 'src/modules/messages/question.tpl.html',
-                    controller: 'questionCtrl',
+                    controller: 'messageCtrl',
                     controllerAs: 'ctrl'
                 })
                 .otherwise('/catalog');

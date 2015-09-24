@@ -10,5 +10,8 @@
             this.askQuestion = function(question){
                 this.saveRecord(question);
             };
+            this.getQuestionsByProvider = function(idProvider){
+                return this.api.one('questionsbyprovider', idProvider).get();
+            };
      }]);
 })(window.angular);

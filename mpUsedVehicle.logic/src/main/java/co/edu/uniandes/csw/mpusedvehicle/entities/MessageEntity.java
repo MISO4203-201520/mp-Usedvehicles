@@ -22,7 +22,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Message.findAll", query = "SELECT m FROM MessageEntity m")})
+    @NamedQuery(name = "Message.findAll", query = "SELECT m FROM MessageEntity m"),
+    @NamedQuery(name = "Message.messagesByProvider", query = "SELECT m FROM MessageEntity m where m.provider.id= :idProvider")})
+    
 public class MessageEntity implements Serializable {
     
     private static final long serialVersionUID = 1L;
