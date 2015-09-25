@@ -49,6 +49,8 @@ public class MessageEntity implements Serializable {
     private ProductEntity product;
     
     private String question;
+    
+    private String answer;
 
     public MessageEntity() {
     }
@@ -56,14 +58,6 @@ public class MessageEntity implements Serializable {
     public MessageEntity(Long id) {
         this.id = id;
     }
-
-//    public MessageEntity(Long id, ClientEntity client, ProviderEntity provider, Integer idTypeMessage, Date date) {
-//        this.id = id;
-//        this.client = client;
-//        this.provider = provider;
-//        this.idTypeMessage = idTypeMessage;
-//        this.date = date;
-//    }
 
     public Long getId() {
         return id;
@@ -119,6 +113,14 @@ public class MessageEntity implements Serializable {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     @Override

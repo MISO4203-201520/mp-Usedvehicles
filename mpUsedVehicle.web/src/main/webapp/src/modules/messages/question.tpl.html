@@ -1,13 +1,23 @@
 <div id="questiondiv">
     <div class="col-sm-6" style="margin:18px auto; float: none !important;">
       <ul ng-repeat="record in records" class="list-group" style="">
-        <li class="list-group-item" style="background-color: #F7F7F7; color:black; padding:18px 18px; margin-bottom: 2px;">{{record.question}}</li>
-        <li class="list-group-item" style="background-color: #222222 !important; border: 0px !important; padding:0px !important;"> 
+        <li class="list-group-item" style="background-color: #F7F7F7; color:black; padding:18px 18px; margin-bottom: 2px; border-radius: 4px !important;">{{record.question}}</li>
+        <li ng-show="record.answer != null" class="list-group-item" style="background-color: #222222 !important; border: 0px !important; padding:0px !important;"> 
             <div>
                 <ul class="list-group" style="padding-left: 30px; border: 0px;">
-                    <li class="list-group-item" style="background-color: white; color:black; padding:18px 18px; margin-bottom: 2px;">Respuesta 1</li>
+                    <li class="list-group-item" style="background-color: white; color:black; padding:18px 18px; margin-bottom: 2px;">{{record.answer}}</li>
                 </ul>    
             </div>  
+        </li>
+        <li ng-show="record.answer == null" style="display: block;">
+            <div>
+                <div style="float:left; width: 100%">
+                    <textarea placeholder="Answer the question..." style="width: 100%; border-radius: 4px; padding: 18px 18px"/>
+                </div>
+                <button type="button" class="btn btn-primary" style="float:right; width: 100%">
+                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Answer
+                </button>
+            </div>
         </li>
       </ul>
     </div>
