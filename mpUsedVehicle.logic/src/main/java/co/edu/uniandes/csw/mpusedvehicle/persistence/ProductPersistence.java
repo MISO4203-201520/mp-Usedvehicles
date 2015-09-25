@@ -54,4 +54,53 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return null;
         }
     }
+   public ProductEntity getProductByModel(String model) {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("model","%" + model.toUpperCase() + "%");
+            List<ProductEntity> list = new ArrayList<ProductEntity>();
+            list = executeListNamedQuery("Product.getProductByModel", params);
+            return list.get(0);
+        } catch (NoResultException e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            return null;
+        }
+    }
+      public ProductEntity getProductByBrand(String brand) {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("brand","%" + brand.toUpperCase() + "%");
+            List<ProductEntity> list = new ArrayList<ProductEntity>();
+            list = executeListNamedQuery("Product.getProductByBrand", params);
+            return list.get(0);
+        } catch (NoResultException e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            return null;
+        }
+    }
+    public ProductEntity getProductByCity(String city) {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("city","%" + city.toUpperCase() + "%");
+            List<ProductEntity> list = new ArrayList<ProductEntity>();
+            list = executeListNamedQuery("Product.getProductByCity", params);
+            return list.get(0);
+        } catch (NoResultException e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            return null;
+        }
+    }
+    public ProductEntity getProductByPriceRange(Integer lower, Integer upper) {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("lower","%" + lower + "%");
+            params.put("upper","%" + upper + "%");
+            List<ProductEntity> list = new ArrayList<ProductEntity>();
+            list = executeListNamedQuery("Product.getProductByPriceRange", params);
+            return list.get(0);
+        } catch (NoResultException e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            return null;
+        }
+    }
 }

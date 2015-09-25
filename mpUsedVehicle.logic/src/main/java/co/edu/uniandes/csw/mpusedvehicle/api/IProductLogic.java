@@ -14,4 +14,8 @@ public interface IProductLogic {
     public List<ProductDTO> getByVehicleName(String name);
     public ProductDTO getCheaperProductByProvider (String nameProvider);
     public ProductDTO getCheaperProductByVehicle (String nameVehicle);
+    public ProductDTO getProductByModel (String model);
+    public ProductDTO getProductByBrand (String brand);
+    public ProductDTO getProductByCity (String city);
+    public ProductDTO getProductByPriceRange (Integer lower, Integer upper);
 }
