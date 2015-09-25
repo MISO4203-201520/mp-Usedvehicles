@@ -30,29 +30,54 @@
                     </tr>
                 </table>
             </form>                    
-        </div>    
-        <div ng-repeat="record in records">
-            <div class="col-sm-4 well text-center">
-                <div class="col-md-12">
-                    <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
-                        <a ng-href="{{record.vehicle.image}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}"></a>
-                    </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-danger">
+                <div class="panel-body">
+                    <form class="navbar-form navbar-left" role="search">
+                        <h4>Find products with special offers. Enter a <strong>keyword</strong> to find them.</h4>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="product keyword" id="query" name="query" value="">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="caption" >
-                    <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
-                    <p><strong>Price:</strong> {{record.price | currency}}</p>
-                    <p><strong>Provider:</strong> {{record.provider.name}}</p>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Aca va el contenido de wilmar.
                 </div>
-                <p class="text-center">
-                    <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 
-                            class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" data-toggle="{{action.dataToggle}}" 
-                            data-target="{{action.dataTarget}}" ng-click="action.fn(record)">
-                        <span class="glyphicon glyphicon-{{action.icon}}"></span> 
-                        {{action.displayName}}
-                    </button>
-                </p>
             </div>
         </div>
+        <div class="col-md-9">
+            <div ng-repeat="record in records">
+                <div class="col-sm-4 well text-center">
+                    <div class="col-md-12">
+                        <div class="img-thumbnail text-center" id="cover" ng-if="record.vehicle.image">
+                            <a ng-href="{{record.vehicle.image}}" target="_blank">
+                                <img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="caption" >
+                        <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
+                        <p><strong>Price:</strong> {{record.price | currency}}</p>
+                        <p><strong>Provider:</strong> {{record.provider.name}}</p>
+                    </div>
+                    <p class="text-center">
+                        <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 
+                                class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" data-toggle="{{action.dataToggle}}" 
+                                data-target="{{action.dataTarget}}" ng-click="action.fn(record)">
+                            <span class="glyphicon glyphicon-{{action.icon}}"></span> 
+                            {{action.displayName}}
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
         <!-- Modal dialog for reviews -->
         <div class="modal fade" id="modalReviews" tabindex="-1" role="dialog" aria-labelledby="modalReviewLabel" aria-hidden="true">
             <div ng-show="ctrl.detailsMode" ng-if="vehicleRecord">
