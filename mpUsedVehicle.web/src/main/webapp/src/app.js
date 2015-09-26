@@ -13,7 +13,8 @@
         'userModule',
         'ngRoute',
         'ngCrud',
-        'xeditable'
+        'xeditable',
+        'restangular'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {

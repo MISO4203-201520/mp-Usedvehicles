@@ -78,6 +78,7 @@ public class MessageService {
     @PUT
     @Path("{id: \\d+}")
     public MessageDTO updateMessage(@PathParam("id") Long id, MessageDTO dto) {
+        System.out.println("data"+id+dto.getAnswer());
         dto.setId(id);
         return messageLogic.updateMessage(dto);
     }

@@ -1,17 +1,20 @@
 <div id="questiondiv">
     <div class="col-sm-6" style="margin:18px auto; float: none !important;">
-      <ul ng-repeat="record in records" class="list-group" style="">
-        <li class="list-group-item" style="background-color: #F7F7F7; color:black; padding:18px 18px; margin-bottom: 2px; border-radius: 4px !important;">{{record.question}}</li>
-        <li ng-show="record.answer != null" class="list-group-item" style="background-color: #222222 !important; border: 0px !important; padding:0px !important;"> 
+      <ul ng-repeat="record in records" class="list-group">
+        <li class="list-group-item" style="background-color: #F7F7F7; color:black; 
+            padding:18px 18px; margin-bottom: 2px; border-radius: 4px !important;">{{record.question}}</li>
+        <li  ng-show="record.answer != null" class="list-group-item" 
+             style="background-color: #222222 !important; border: 0px !important; padding:0px !important;"> 
             <div>
                 <ul class="list-group" style="padding-left: 30px; border: 0px;">
-                    <li class="list-group-item" style="background-color: white; color:black; padding:18px 18px; margin-bottom: 2px;">{{record.answer}}</li>
+                    <li class="list-group-item" style="background-color: white; color:black; 
+                        padding:18px 18px; margin-bottom: 2px;">{{record.answer}}</li>
                 </ul>    
             </div>  
         </li>
-        <li ng-show="record.answer == null" style="display: block;">
+        <li ng-show="record.answer == null" style="display: inline-block; width: 100%">
             <div style="padding-left: 30px;">
-                <div style="float:left; width: 100%">
+                <div>
                     <textarea placeholder="Answer the question..." ng-model="ctrl.answer" style="width: 100%; border-radius: 4px; padding: 18px 18px"/>
                 </div>
                 <form role="form">
