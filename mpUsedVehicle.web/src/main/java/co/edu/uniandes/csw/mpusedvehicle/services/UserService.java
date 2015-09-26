@@ -134,6 +134,14 @@ public class UserService {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
+    
+    @Path("/isAdmin")
+    @GET
+    public Response isCurrentUserAdmin() {
+        Subject currentUser = SecurityUtils.getSubject();
+        AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
+        return Response.ok(admin).build();
+    }
 
     @Path("/currentUser")
     @GET
