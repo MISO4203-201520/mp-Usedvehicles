@@ -42,12 +42,16 @@
                     controllerAs: 'ctrl'
                 }).when('/checkout', {
                     templateUrl: 'src/modules/checkout/templates/Checkout.html',
-                    controller: 'checkoutCtrl',
+                    controller: 'checkoutCtrl'
                 }).when('/users', {
                     templateUrl: 'src/modules/admin/templates/users.tpl.html',
                     controller: 'userCtrl',
                     controllerAs: 'ctrl'
-                })
+                }).when('/product', {
+                    templateUrl: tplUrl,
+                    controller: 'productsCtrl',
+                    controllerAs: alias
+                })                
                 .otherwise('/catalog');
         }]);
     
