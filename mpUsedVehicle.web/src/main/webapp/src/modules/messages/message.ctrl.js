@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('messageModule');
 
-    mod.controller('messageCtrl', ['CrudCreator', '$scope', 'messageService', 'messageModel','$location', 'authService', function (CrudCreator, $scope, svc, model, $location, authSvc) {
+    mod.controller('messageCtrl', ['CrudCreator', '$scope', 'messageService', 'messageModel','$location', 'authService' , function (CrudCreator, $scope, svc, model, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'message');   
     
         this.answer='';
@@ -15,12 +15,9 @@
         this.answerQuestion = function(record){
             
            //Tmp answer
-            question={
-                id: record.id,
-                answer: this.answer
-            };
-            svc.answerQuestion(question);
-        
+           record.answer=this.answer;
+           //svc.answerQuestion(record);
+           svc.update({ id:record.id }, record);
             //clean question
             this.answer='';      
         };

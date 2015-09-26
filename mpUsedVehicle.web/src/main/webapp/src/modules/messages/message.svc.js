@@ -3,10 +3,6 @@
     
     mod.service('messageService', ['CrudCreator','messageContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
-    }]);
-
-    mod.service('messageService', ['CrudCreator','messageContext', function(CrudCreator, context){
-            CrudCreator.extendService(this, context);
             this.askQuestion = function(question){
                 this.saveRecord(question);
             };
@@ -15,7 +11,7 @@
             };
             this.answerQuestion = function(question){
                 console.log(question.id+ question.answer);
-                //this.put(question);
+                this.saveRecord(question);
             };
      }]);
 })(window.angular);
