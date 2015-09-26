@@ -5,6 +5,7 @@
     mod.controller('productsCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', function (CrudCreator, $scope, svc, model) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Product');
             this.fetchRecords();
+            this.loadRefOptions();
         }]);
     
     //User/Buyer Controller
