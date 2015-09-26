@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 /**
  * @generated
@@ -15,7 +16,9 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Product.getByVehicleName", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :name"),
     @NamedQuery(name = "Product.getCheaperProductByProvider", query = "select u from ProductEntity u WHERE UPPER(u.provider.name) like :nameProvider order by u.price"),
-    @NamedQuery(name = "Product.getCheaperProductByVehicle", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :nameVehicle order by u.price")
+    @NamedQuery(name = "Product.getCheaperProductByVehicle", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :nameVehicle order by u.price"),
+    @NamedQuery(name = "Product.getOfferedProductsByKeyword", 
+            query = "select p from ProductEntity p where p.name like :keyword and :fechaActual between p.offer.startDate and p.offer.endDate order by p.price")
 })
 public class ProductEntity implements Serializable {
 
@@ -33,6 +36,10 @@ public class ProductEntity implements Serializable {
     private ProviderEntity provider;
     @ManyToOne
     private VehicleEntity vehicle;
+    
+    @OneToOne
+    private OfferEntity offer;
+    
     /**
      * @generated
      */
@@ -109,6 +116,14 @@ public class ProductEntity implements Serializable {
 
     public void setAvailability(Boolean availability) {
         this.availability = availability;
+    }
+
+    public OfferEntity getOffer() {
+        return offer;
+    }
+
+    public void setOffer(OfferEntity offer) {
+        this.offer = offer;
     }
 
 }

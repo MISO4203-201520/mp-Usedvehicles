@@ -22,6 +22,19 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
     public ProductPersistence() {
         this.entityClass = ProductEntity.class;
     }
+    
+    public List<ProductEntity> getOfferedProductsByKeyword(String keyword) {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("keyword", "%" + keyword + "%");
+            
+            return executeListNamedQuery("Product.getOfferedProductsByKeyword", params);
+            
+        } catch (NoResultException e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            return null;
+        }
+    }
 
     public List<ProductEntity> getByVehicleName(String name) {
         Map<String, Object> params = new HashMap<String, Object>();

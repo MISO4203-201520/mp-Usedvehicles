@@ -1,10 +1,12 @@
 package co.edu.uniandes.csw.mpusedvehicle.services;
 
+import co.edu.uniandes.csw.mpusedvehicle.api.IOfferLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProductLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +37,9 @@ public class ProductService {
     private IProductLogic productLogic;
     @Inject
     private IProviderLogic providerLogic;
+    @Inject
+    private IOfferLogic offerLogic;
+    
     @Context
     private HttpServletResponse response;
     @QueryParam("page")
@@ -123,5 +128,19 @@ public class ProductService {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
         return product;
+    }
+    
+    @GET
+    @Path("/offers")
+    public List<ProductDTO> getOfferedProducts(@PathParam("keyword") String keyword) {
+        List<ProductDTO> offeredProducts = new ArrayList<ProductDTO>();
+        
+        try {
+            offeredProducts = productLogic.findOfferedProductsByKeyword(keyword);
+            
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return offeredProducts;
     }
 }
