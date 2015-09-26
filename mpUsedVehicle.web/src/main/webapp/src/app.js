@@ -49,7 +49,7 @@
                     controllerAs: 'ctrl'
                 }).when('/product', {
                     templateUrl: tplUrl,
-                    controller: 'productCtrl',
+                    controller: 'productsCtrl',
                     controllerAs: alias
                 })                
                 .otherwise('/catalog');

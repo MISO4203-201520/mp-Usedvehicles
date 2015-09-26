@@ -5,9 +5,9 @@
             CrudCreator.extendController(this, svc, $scope, model, 'provider', 'Provider');
             this.fetchRecords();
         }]);
-
-    mod.controller('productsCtrl', ['CrudCreator', '$scope', 'productModel', function (CrudCreator, $scope, model) {
-            CrudCreator.extendCompChildCtrl(this, $scope, model, 'products', 'provider');
-            this.loadRefOptions();
-        }]);
+//TODO Revisar este controlador
+//    mod.controller('productsCtrl', ['CrudCreator', '$scope', 'productModel', function (CrudCreator, $scope, model) {
+//            CrudCreator.extendCompChildCtrl(this, $scope, model, 'products', 'provider');
+//            this.loadRefOptions();
+//        }]);
 })(window.angular);

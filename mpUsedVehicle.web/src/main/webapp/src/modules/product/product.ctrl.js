@@ -1,6 +1,11 @@
 (function (ng) {
     var mod = ng.module('productModule');
 
+    mod.controller('productsCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', function (CrudCreator, $scope, svc, model) {
+            CrudCreator.extendController(this, svc, $scope, model, 'product', 'Product');
+            this.fetchRecords();
+        }]);
+    
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 
         'cartItemService', 'messageService','$location', 'authService', 'vehicleService', 
         'userService', 
