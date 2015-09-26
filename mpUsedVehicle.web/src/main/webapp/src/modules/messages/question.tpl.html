@@ -12,11 +12,13 @@
         <li ng-show="record.answer == null" style="display: block;">
             <div style="padding-left: 30px;">
                 <div style="float:left; width: 100%">
-                    <textarea placeholder="Answer the question..." style="width: 100%; border-radius: 4px; padding: 18px 18px"/>
+                    <textarea placeholder="Answer the question..." ng-model="ctrl.answer" style="width: 100%; border-radius: 4px; padding: 18px 18px"/>
                 </div>
-                <button type="button" class="btn btn-primary" style="float:right; width: 100%">
-                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Answer
-                </button>
+                <form role="form">
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.answerQuestion(record)" style="float:right; width: 100%">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Answer
+                    </button>
+                </form>    
             </div>
         </li>
       </ul>

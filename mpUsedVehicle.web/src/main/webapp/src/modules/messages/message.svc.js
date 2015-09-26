@@ -13,5 +13,9 @@
             this.getQuestionsByProvider = function(idProvider){
                 return this.api.one('questionsbyprovider', idProvider).get();
             };
+            this.answerQuestion = function(question){
+                console.log(question.id+ question.answer);
+                //this.put(question);
+            };
      }]);
 })(window.angular);
