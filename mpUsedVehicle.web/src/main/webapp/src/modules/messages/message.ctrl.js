@@ -12,12 +12,10 @@
             });
         };
         
-        this.answerQuestion = function(record){
-            
+        this.answerQuestion = function(record){            
            //Tmp answer
            record.answer=this.answer;
-           //svc.answerQuestion(record);
-           svc.update({ id:record.id }, record);
+           svc.answerQuestion(record);
             //clean question
             this.answer='';      
         };

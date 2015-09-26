@@ -7,10 +7,10 @@
                 this.saveRecord(question);
             };
             this.getQuestionsByProvider = function(idProvider){
-                return this.api.one('questionsbyprovider', idProvider).get();
+                var res=this.api.one('questionsbyprovider', idProvider).get();
+                return res;
             };
             this.answerQuestion = function(question){
-                console.log(question.id+ question.answer);
                 this.saveRecord(question);
             };
      }]);
