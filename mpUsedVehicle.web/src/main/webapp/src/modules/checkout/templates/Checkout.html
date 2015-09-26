@@ -97,7 +97,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6">
-                                <button type="button" class="btn btn-success" ng-click="pay()">Pay Now</button>
+                                <button type="button" class="btn btn-success" ng-click="toggleConfirmation()"> Pay Now</button>
                             </div>
                         </div>
                     </fieldset>
@@ -107,7 +107,28 @@
                 Tarjeta Débito
             </div>
         </div>
-
+        <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="false">
+            <div ng-show="confirm">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" ng-click="toggleConfirmation()" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="confirmationModalLabel">
+                                Checkout confirmation
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            Do you really want to buy this product?
+                            <button type="button" class="btn btn-default" ng-click="pay()" data-dismiss="modal" >Pay</button>                             
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
