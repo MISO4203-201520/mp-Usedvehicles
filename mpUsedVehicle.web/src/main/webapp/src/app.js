@@ -47,7 +47,11 @@
                     templateUrl: 'src/modules/admin/templates/users.tpl.html',
                     controller: 'userCtrl',
                     controllerAs: 'ctrl'
-                })
+                }).when('/product', {
+                    templateUrl: tplUrl,
+                    controller: 'productCtrl',
+                    controllerAs: alias
+                })                
                 .otherwise('/catalog');
         }]);
     
