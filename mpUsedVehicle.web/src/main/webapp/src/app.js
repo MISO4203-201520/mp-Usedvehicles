@@ -50,8 +50,7 @@
                 }).when('/product', {
                     templateUrl: tplUrl,
                     controller: 'productsCtrl',
-                    controllerAs: alias
-                })                
+                    controllerAs: alias                
                 }).when('/questions', {
                     templateUrl: 'src/modules/messages/question.tpl.html',
                     controller: 'messageCtrl',
