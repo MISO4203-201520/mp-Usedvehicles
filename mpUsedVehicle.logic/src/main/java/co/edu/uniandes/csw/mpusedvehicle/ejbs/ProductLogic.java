@@ -80,4 +80,8 @@ public class ProductLogic implements IProductLogic {
      public ProductDTO getCheaperProductByVehicle (String nameVehicle){
          return ProductConverter.fullEntity2DTO(persistence.getCheaperProductByVehicle(nameVehicle));
      }
+
+    public List<ProductDTO> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price) {
+        return ProductConverter.listEntity2DTO(persistence.getProductsByAdvancedSearch(brand, model, capacity, price));
+    }
 }
