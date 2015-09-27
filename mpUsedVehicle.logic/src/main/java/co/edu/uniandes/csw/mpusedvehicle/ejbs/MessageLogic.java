@@ -35,10 +35,17 @@ public class MessageLogic implements IMessageLogic {
         return MessageConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
     
-      public List<MessageDTO> getMessagesByProvider(Long idProvider) {
+    public List<MessageDTO> getMessagesByProvider(Long idProvider) {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("idProvider", idProvider);
         List<MessageEntity> list = persistence.executeListNamedQuery("Message.messagesByProvider", map);
+        return MessageConverter.listEntity2DTO(list);
+    }
+    
+    public List<MessageDTO> getMessagesByUser(Long idUser) {
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("idClient", idUser);
+        List<MessageEntity> list = persistence.executeListNamedQuery("Message.messagesByClient", map);
         return MessageConverter.listEntity2DTO(list);
     }
 

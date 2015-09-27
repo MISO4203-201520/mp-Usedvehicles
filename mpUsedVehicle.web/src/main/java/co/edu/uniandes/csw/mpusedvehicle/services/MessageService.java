@@ -61,6 +61,13 @@ public class MessageService {
         System.out.println("getMessagesByProvider");
         return messageLogic.getMessagesByProvider(idProvider);
     }
+    
+      @GET
+    @Path("/questionsbyuser/{idUser}")
+    public List<MessageDTO> getMessagesByUser(@PathParam("idUser") Long idUser) {
+        System.out.println("getMessagesByUser");
+        return messageLogic.getMessagesByUser(idUser);
+    }
    
 
     /**

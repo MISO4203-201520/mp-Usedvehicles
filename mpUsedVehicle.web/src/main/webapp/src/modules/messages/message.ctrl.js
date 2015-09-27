@@ -11,6 +11,11 @@
                     $scope.records = Questions;
             });
         };
+        $scope.getQuestionsByUser = function () {
+            svc.getQuestionsByUser(authSvc.getCurrentUser().id).then(function (Questions) {
+                    $scope.records = Questions;
+            });
+        };
         
         this.answerQuestion = function(record){            
            //Tmp answer
@@ -20,10 +25,19 @@
             this.answer='';      
         };
             
-        $scope.getQuestionsByProvider();
         
-        svcUser.getCurrentUser();
         
+        svcUser.api.one('currentUser').get().then(function(user) {
+            console.log(user.role);
+            $scope.role=user.role;
+            if($scope.role==="provider"){
+                console.log('getQuestionsByProvider');
+               $scope.getQuestionsByProvider(); 
+            }else{
+                console.log('getQuestionsByUser');
+                $scope.getQuestionsByUser();
+            }
+        });
 
         }]);
 })(window.angular);

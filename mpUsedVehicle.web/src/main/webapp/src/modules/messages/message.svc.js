@@ -9,6 +9,9 @@
             this.getQuestionsByProvider = function(idProvider){
                 return this.api.one('questionsbyprovider', idProvider).get();
             };
+            this.getQuestionsByUser = function(idUser){
+                return this.api.one('questionsbyuser', idUser).get();
+            };
             this.answerQuestion = function(question){
                 restangular.all('messages/'+question.id).customPUT(question);
             };
