@@ -13,7 +13,8 @@
         'userModule',
         'ngRoute',
         'ngCrud',
-        'xeditable'
+        'xeditable',
+        'restangular'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
@@ -50,8 +51,12 @@
                 }).when('/product', {
                     templateUrl: tplUrl,
                     controller: 'productsCtrl',
-                    controllerAs: alias
-                })                
+                    controllerAs: alias                
+                }).when('/questions', {
+                    templateUrl: 'src/modules/messages/question.tpl.html',
+                    controller: 'messageCtrl',
+                    controllerAs: 'ctrl'
+                })
                 .otherwise('/catalog');
         }]);
     
