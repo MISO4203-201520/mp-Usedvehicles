@@ -5,6 +5,7 @@ import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -123,5 +124,56 @@ public class ProductService {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
         return product;
+    }
+    
+    @GET
+    @Path("advancedsearch")
+    public List<ProductDTO> getProductsByAdvancedSearch(
+            @QueryParam("brand") String brand, 
+            @QueryParam("model") String model, 
+            @QueryParam("capacity") String capacity, 
+            @QueryParam("price") String price) {
+        
+        List<ProductDTO> products = new ArrayList<ProductDTO>();
+        
+        System.out.println("Entro a busqueda avanzada...");
+        System.out.println(brand);
+        System.out.println(model);
+        System.out.println(capacity);
+        System.out.println(price);
+        
+        Integer iCapacity = null;
+        try {
+            iCapacity = Integer.valueOf(capacity);
+        } catch (NumberFormatException nfe) {
+            Logger.getGlobal().log(Level.WARNING, 
+                    "Capacity cannot be parsed to an Integer value. It will be used null as a value", nfe);
+        }
+        
+        Integer iPrice = null;
+        try {
+            iPrice = Integer.valueOf(price);
+        } catch (NumberFormatException nfe) {
+            Logger.getGlobal().log(Level.WARNING, 
+                    "Price cannot be parsed to an Integer value. It will be used null as a value", nfe);
+        }
+        
+        try {
+            
+            if ((brand == null || "".equalsIgnoreCase(brand)) && 
+                    (model == null || "".equalsIgnoreCase(model)) && 
+                    (capacity == null || "".equalsIgnoreCase(capacity)) && 
+                    (price == null || "".equalsIgnoreCase(price))) {
+                products = getProducts();
+            } else {
+                products = productLogic.getProductsByAdvancedSearch(brand, model, iCapacity, iPrice);
+            }
+            
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        
+        
+        return products;
     }
 }
