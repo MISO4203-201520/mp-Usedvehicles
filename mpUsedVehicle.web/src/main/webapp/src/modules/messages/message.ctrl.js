@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('messageModule');
 
-    mod.controller('messageCtrl', ['CrudCreator', '$scope', 'messageService', 'messageModel','$location', 'authService' , function (CrudCreator, $scope, svc, model, $location, authSvc) {
+    mod.controller('messageCtrl', ['CrudCreator', '$scope', 'messageService', 'messageModel','$location', 'authService', 'userService' , function (CrudCreator, $scope, svc, model, $location, authSvc, svcUser) {
             CrudCreator.extendController(this, svc, $scope, model, 'message');   
     
         this.answer='';
@@ -21,6 +21,9 @@
         };
             
         $scope.getQuestionsByProvider();
+        
+        svcUser.getCurrentUser();
+        
 
         }]);
 })(window.angular);
