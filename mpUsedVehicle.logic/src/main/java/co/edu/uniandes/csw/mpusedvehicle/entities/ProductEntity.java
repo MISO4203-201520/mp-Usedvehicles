@@ -16,7 +16,9 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Product.getByVehicleName", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :name")
+    @NamedQuery(name = "Product.getByVehicleName", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :name"),
+    @NamedQuery(name = "Product.getCheaperProductByProvider", query = "select u from ProductEntity u WHERE UPPER(u.provider.name) like :nameProvider order by u.price"),
+    @NamedQuery(name = "Product.getCheaperProductByVehicle", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :nameVehicle order by u.price")
 })
 public class ProductEntity implements Serializable {
 
@@ -34,12 +36,9 @@ public class ProductEntity implements Serializable {
     private ProviderEntity provider;
     @ManyToOne
     private VehicleEntity vehicle;
-    
-        
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentEntity> comments;
-    
-    
+    private Integer discount;   //Nuevo Atributo REQ06
     
     /**
      * @generated
@@ -118,6 +117,14 @@ public class ProductEntity implements Serializable {
     public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
+    
+    
+    /**
+     * REQ06 Nuevo atributo
+     */
+    public Integer getDiscount() {
+        return discount;
+    }
 
     public List<CommentEntity> getComments() {
         return comments;
@@ -127,4 +134,11 @@ public class ProductEntity implements Serializable {
         this.comments = comments;
     }
 
+    /**
+     * REQ06 Nuevo atributo
+     */
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
+    
 }

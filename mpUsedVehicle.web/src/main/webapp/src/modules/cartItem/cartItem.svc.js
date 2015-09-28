@@ -16,5 +16,9 @@
                     self.saveRecord(record);
                 });
             };
+            
+            this.editItem = function(record){
+                self.saveRecord(record);
+            };
     }]);
 })(window.angular);

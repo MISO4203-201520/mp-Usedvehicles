@@ -1,19 +1,20 @@
 (function (ng) {
 
     var mainApp = ng.module('mainApp', [
-//        'ngCrudMock',
+//        'ngCrudMock',,
         'authModule',
         'cartItemModule',
         'clientModule',
         'productModule',
         'providerModule',
         'vehicleModule',
-        'commentModule',
         'messageModule',
         'checkoutModule',
+        'userModule',
         'ngRoute',
         'ngCrud',
-        'xeditable'
+        'xeditable',
+        'restangular'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
@@ -27,16 +28,6 @@
                     templateUrl: tplUrl,
                     controller: 'providerCtrl',
                     controllerAs: alias
-                })
-                .when('/comment', {
-                    templateUrl: tplUrl,
-                    controller: 'commentCtrl',
-                    controllerAs: alias
-                })
-                .when('/detail', {
-                        templateUrl: 'src/modules/product/detail.tpl.html',
-                        controller: 'productCtrl',
-                        controllerAs: 'ctrl'
                 })
                 .when('/vehicle', {
                     templateUrl: tplUrl,
@@ -52,8 +43,27 @@
                     controllerAs: 'ctrl'
                 }).when('/checkout', {
                     templateUrl: 'src/modules/checkout/templates/Checkout.html',
-                    controller: 'checkoutCtrl',
+                    controller: 'checkoutCtrl'
+                }).when('/users', {
+                    templateUrl: 'src/modules/admin/templates/users.tpl.html',
+                    controller: 'userCtrl',
                     controllerAs: 'ctrl'
+                }).when('/product', {
+                    templateUrl: tplUrl,
+                    controller: 'productsCtrl',
+                    controllerAs: alias                
+                }).when('/questions', {
+                    templateUrl: 'src/modules/messages/question.tpl.html',
+                    controller: 'messageCtrl',
+                    controllerAs: 'ctrl'
+                }).when('/comment', {
+                    templateUrl: tplUrl,
+                    controller: 'commentCtrl',
+                    controllerAs: alias
+                }).when('/detail', {
+                        templateUrl: 'src/modules/product/detail.tpl.html',
+                        controller: 'productCtrl',
+                        controllerAs: 'ctrl'
                 })
                 .otherwise('/catalog');
         }]);

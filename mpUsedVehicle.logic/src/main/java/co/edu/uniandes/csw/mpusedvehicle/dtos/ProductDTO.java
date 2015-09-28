@@ -16,6 +16,7 @@ public class ProductDTO {
     private ProviderDTO provider;
     private VehicleDTO vehicle;
     private List<CommentDTO> comments;
+    private Integer discount;   //Nuevo Atributo REQ06
     /**
      * @generated
      */
@@ -100,6 +101,20 @@ public class ProductDTO {
 
     public void setComments(List<CommentDTO> comments) {
         this.comments = comments;
+    }
+
+    /**
+     * REQ06 Nuevo atributo
+     */
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    /**
+     * REQ06 Nuevo atributo
+     */
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
 }

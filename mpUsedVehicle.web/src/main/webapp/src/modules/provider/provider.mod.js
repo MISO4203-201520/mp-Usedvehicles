@@ -19,5 +19,5 @@
                 name: 'products',
                 displayName: 'Products',
                 //template: '', //override generic template
-                ctrl: 'productsCtrl'            }        ]});
+                ctrl: 'productCtrl'            }        ]});
 })(window.angular);

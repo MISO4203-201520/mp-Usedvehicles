@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.services;
 
+import co.edu.uniandes.csw.mpusedvehicle.api.IAdminLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IClientLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.AdminDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.UserDTO;
@@ -18,6 +20,8 @@ import com.stormpath.sdk.group.Group;
 import com.stormpath.sdk.group.GroupList;
 import com.stormpath.sdk.resource.ResourceException;
 import com.stormpath.shiro.realm.ApplicationRealm;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +42,7 @@ import org.apache.shiro.subject.Subject;
 /**
  *
  * @author Jhonatan
+ * @modified djimenez
  */
 @Path("/users")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -49,6 +54,35 @@ public class UserService {
 
     @Inject
     private IProviderLogic providerLogic;
+    
+    @Inject
+    private IAdminLogic adminLogic;
+    
+    @GET
+    public List<UserDTO> getUsers() {
+        System.out.println("calling users");
+        List<UserDTO> allUsers = new ArrayList<UserDTO>();
+        
+        System.out.println("before clients");
+        for (ClientDTO client : clientLogic.getClients(null, null)) {
+            UserDTO clientDTO = new UserDTO();
+            clientDTO.setName(client.getName());
+            clientDTO.setRememberMe(false);
+            allUsers.add(clientDTO);
+            System.out.println(client.getName());
+        }
+        
+        System.out.println("before providers");
+        for (ProviderDTO provider : providerLogic.getProviders(null, null)) {
+            UserDTO providerDTO = new UserDTO();
+            providerDTO.setName(provider.getName());
+            providerDTO.setRememberMe(true);
+            allUsers.add(providerDTO);
+            System.out.println(provider.getName());
+        }
+        
+        return allUsers;
+    }
 
     @Path("/login")
     @POST
@@ -67,10 +101,16 @@ public class UserService {
                     currentUser.getSession().setAttribute("Provider", provider);
                     return Response.ok(provider).build();
                 } else {
-                    return Response.status(Response.Status.BAD_REQUEST)
+                    AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
+                    if (admin != null) {
+                        currentUser.getSession().setAttribute("Admin", admin);
+                        return Response.ok(admin).build();
+                    } else {
+                        return Response.status(Response.Status.BAD_REQUEST)
                             .entity(" User is not registered")
                             .type(MediaType.TEXT_PLAIN)
                             .build();
+                    }
                 }
             }
         } catch (AuthenticationException e) {
@@ -94,6 +134,14 @@ public class UserService {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
+    
+    @Path("/isAdmin")
+    @GET
+    public Response isCurrentUserAdmin() {
+        Subject currentUser = SecurityUtils.getSubject();
+        AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
+        return Response.ok(admin).build();
+    }
 
     @Path("/currentUser")
     @GET
@@ -105,6 +153,16 @@ public class UserService {
             user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
+            if(currentUser.hasRole("user")){
+                user.setRole("user");
+            }else if (currentUser.hasRole("provider")) {
+                user.setRole("provider");
+            }else if(currentUser.hasRole("administrator")){
+                user.setRole("administrator");
+            }else{
+                user.setRole("nada");
+            }
+            
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);

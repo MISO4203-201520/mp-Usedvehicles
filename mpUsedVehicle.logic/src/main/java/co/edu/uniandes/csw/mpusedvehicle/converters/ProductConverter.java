@@ -30,6 +30,7 @@ public abstract class ProductConverter {
             dto.setPrice(entity.getPrice());
             dto.setVehicle(VehicleConverter.refEntity2DTO(entity.getVehicle()));
             dto.setComments(CommentConverter.listEntity2DTO(entity.getComments()));
+            dto.setDiscount(entity.getDiscount());   //Nuevo Atributo REQ06
 
             return dto;
         } else {
@@ -66,6 +67,7 @@ public abstract class ProductConverter {
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setVehicle(VehicleConverter.refEntity2DTO(entity.getVehicle()));
             dto.setComments(CommentConverter.listEntity2DTO(entity.getComments()));
+            dto.setDiscount(entity.getDiscount());   //Nuevo Atributo REQ06
             return dto;
         } else {
             return null;
@@ -84,6 +86,7 @@ public abstract class ProductConverter {
             entity.setAvailability(dto.getAvailability());
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
             entity.setVehicle(VehicleConverter.refDTO2Entity(dto.getVehicle()));
+            entity.setDiscount(dto.getDiscount());   //Nuevo Atributo REQ06
 
             return entity;
         } else {

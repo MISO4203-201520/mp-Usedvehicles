@@ -12,4 +12,7 @@ public interface IProductLogic {
     public void deleteProduct(Long id);
     public List<ProductDTO> findByName(String name);
     public List<ProductDTO> getByVehicleName(String name);
+    public ProductDTO getCheaperProductByProvider (String nameProvider);
+    public ProductDTO getCheaperProductByVehicle (String nameVehicle);
+    public List<ProductDTO> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price);
 }

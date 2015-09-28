@@ -5,7 +5,10 @@ import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -22,7 +25,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
 
 /**
- * @generated
+ * @generated 
  */
 @Path("/products")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -97,5 +100,80 @@ public class ProductService {
     @Path("{id: \\d+}")
     public void deleteProduct(@PathParam("id") Long id) {
         productLogic.deleteProduct(id);
+    }
+
+    @GET
+    @Path("/cheapest/{name}")
+    public ProductDTO getCheaperProductByProvider(@PathParam("name") String nameProvider) {
+        ProductDTO product = new ProductDTO();
+        try {
+            product = productLogic.getCheaperProductByProvider(nameProvider);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return product;
+    }
+
+    @GET
+    @Path("/cheapestbyvehicle/{name}")
+    public ProductDTO getCheaperProviderbyVehicle(@PathParam("name") String nameVehicle) {
+        ProductDTO product = new ProductDTO();
+        try {
+            product = productLogic.getCheaperProductByVehicle(nameVehicle);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return product;
+    }
+    
+    @GET
+    @Path("advancedsearch")
+    public List<ProductDTO> getProductsByAdvancedSearch(
+            @QueryParam("brand") String brand, 
+            @QueryParam("model") String model, 
+            @QueryParam("capacity") String capacity, 
+            @QueryParam("price") String price) {
+        
+        List<ProductDTO> products = new ArrayList<ProductDTO>();
+        
+        System.out.println("Entro a busqueda avanzada...");
+        System.out.println(brand);
+        System.out.println(model);
+        System.out.println(capacity);
+        System.out.println(price);
+        
+        Integer iCapacity = null;
+        try {
+            iCapacity = Integer.valueOf(capacity);
+        } catch (NumberFormatException nfe) {
+            Logger.getGlobal().log(Level.WARNING, 
+                    "Capacity cannot be parsed to an Integer value. It will be used null as a value", nfe);
+        }
+        
+        Integer iPrice = null;
+        try {
+            iPrice = Integer.valueOf(price);
+        } catch (NumberFormatException nfe) {
+            Logger.getGlobal().log(Level.WARNING, 
+                    "Price cannot be parsed to an Integer value. It will be used null as a value", nfe);
+        }
+        
+        try {
+            
+            if ((brand == null || "".equalsIgnoreCase(brand)) && 
+                    (model == null || "".equalsIgnoreCase(model)) && 
+                    (capacity == null || "".equalsIgnoreCase(capacity)) && 
+                    (price == null || "".equalsIgnoreCase(price))) {
+                products = getProducts();
+            } else {
+                products = productLogic.getProductsByAdvancedSearch(brand, model, iCapacity, iPrice);
+            }
+            
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        
+        
+        return products;
     }
 }

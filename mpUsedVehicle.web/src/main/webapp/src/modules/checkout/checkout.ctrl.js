@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('checkoutModule');
 
-    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', function (CrudCreator, $scope, svc, model, $location, authSvc) {
+    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'My Shopping Cart');
             var self = this;
 
@@ -19,6 +19,7 @@
             $scope.taxes = 0;
             $scope.subtotal = 0;
             $scope.credit = true;
+            $scope.confirm = false;
 
             this.recordActions = {
                 delete: {
@@ -62,8 +63,14 @@
                 }
             };//Realiza la validacion de la nueva cantidad asignada.
             
+            //cambia el metodo de pago
             $scope.togglePaymentMethod = function(){
                 $scope.credit = !$scope.credit;
+            };
+            
+            $scope.toggleConfirmation = function(){
+                $scope.confirm = !$scope.confirm;
+                $('#confirmationModal').modal('show');
             };
             
             $scope.pay = function () {
@@ -72,8 +79,14 @@
                 $scope.records[0].amountWithTaxes = $scope.total;
                 $scope.records[0].orderStatus = 'AUTHORIZED';
                 $scope.records[0].paymentMethod = ($scope.credit)?'CREDIT_CARD':'DEBIT_CARD';
+                $scope.confirm = !$scope.confirm;
+                $('#confirmationModal').modal('hide');
                 svc.saveOrder($scope.records[0]);
-                $location.path('/');
+                $timeout(function(){
+                     $location.path('/');
+                }, 1000);
+               
+                
             };
             
         }]);

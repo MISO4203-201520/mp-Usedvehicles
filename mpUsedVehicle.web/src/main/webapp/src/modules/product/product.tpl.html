@@ -1,41 +1,141 @@
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
-<div ng-hide="ctrl.editMode">
+<div ng-hide="ctrl.editMode" id="productdiv">
     <div class="col-sm-12">
+        <div class="col-sm-4 well text-center"  style="width: 100%">
+            <form novalidate class="navbar-form navbar-left" role="search">
+                <table >
+                    <tr>
+                        <td rowspan="2">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="to search" ng-model="text2Search" required>
+                            </div>
+                            <button class="btn btn-default" ng-model="buttonSub" ng-click="listItems()" ng-show="true" ng-disabled="varEnable">Submit</button>
+                        </td>
+                        <td>
+                            <div>
+                                <label>
+                                    <input type="radio" name="searhcriteria" ng-model="searchCriteria" value="byProvider" ng-change="enableSubmit()">
+                                    Search cheaper product by provider 
+                                </label>
 
-    <div ng-repeat="record in records">
-        <div class="col-sm-4 well text-center">
-            <div class="col-md-12">
-                <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
-                    <a href="#/detail" ng-click="ctrl.selectProduct(record)"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}"></a>
-
-                </div>
-                <div class="caption" >
-                    <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
-                    <p><strong>Price:</strong> {{record.price | currency}}</p>
-                    <p><strong>Provider:</strong> {{record.provider.name}}</p>
-                </div>
-                <p class="text-center">
-                    <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 
-                            class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" data-toggle="{{action.dataToggle}}" 
-                            data-target="{{action.dataTarget}}" ng-click="action.fn(record)">
-                        <span class="glyphicon glyphicon-{{action.icon}}"></span> 
-                        {{action.displayName}}
-                    </button>
-                </p>
-            </div>
-
+                            </div>            
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>        
+                            <label>
+                                <input type="radio" name="searhcriteria" ng-model="searchCriteria" value="byVehicle" ng-change="enableSubmit()">
+                                Search cheaper provider by vehicle 
+                            </label></td>
+                    </tr>
+                </table>
+            </form>                    
         </div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Advanced search</h3>
+                </div>
+                <div class="panel-body">
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><input type="text" class="form-control" placeholder="Brand" ng-model="brand"></li>
+                    <li class="list-group-item"><input type="text" class="form-control" placeholder="Model" ng-model="model"></li>
+                    <li class="list-group-item"><input type="text" class="form-control" placeholder="Capacity" ng-model="capacity"></li>
+                    <li class="list-group-item">
+                        <div class="radio">
+                            <label><input type="radio" ng-model="price" value="1">Less than US $50</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" ng-model="price" value="2">Between US $50 and US $100</label>
+                        </div>
+                        <div class="radio disabled">
+                            <label><input type="radio" ng-model="price" value="3">Greater than US $100</label>
+                        </div>
+                        <div class="radio disabled">
+                            <label><input type="radio" ng-model="price" value="">It doesn't matter.</label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary" ng-click="getProductsByAdvancedSearch()">Go to find!</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Aca va el contenido de wilmar.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div ng-show="!records.length" class="alert alert-warning" role="alert">
+                Products not found according to your request! Try another criteria in advanced search.
+            </div>
+            <div ng-repeat="record in records">
+                <div class="col-sm-4 well text-center">
+                    <div class="col-md-12">
+                        <div class="img-thumbnail text-center" id="cover" ng-if="record.vehicle.image">
+                            <a  href="#/detail" ng-click="ctrl.selectProduct(record)">
+                                <img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
+                            </a>
+                        </div>
+                        <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
+                </div>
+                    </div>
+                    <div class="caption" >
+                        <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
+                        <p><strong>Price:</strong> {{record.price| currency}}</p>
+                        <p><strong>Provider:</strong> {{record.provider.name}}</p>
+                    </div>
+                    <p class="text-center">
+                        <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 
+                                class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" data-toggle="{{action.dataToggle}}" 
+                                data-target="{{action.dataTarget}}" ng-click="action.fn(record)">
+                            <span class="glyphicon glyphicon-{{action.icon}}"></span> 
+                            {{action.displayName}}
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal dialog for reviews -->
+        <div class="modal fade" id="modalReviews" tabindex="-1" role="dialog" aria-labelledby="modalReviewLabel" aria-hidden="true">
+            <div ng-show="ctrl.detailsMode" ng-if="vehicleRecord">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" ng-click="ctrl.detailsMode = false" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="modalReviewLabel">
+                                Reviews for {{vehicleRecord.name}}
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group" ng-repeat="review in vehicleRecord.reviews">
+                                <li class="list-group-item">
+                                    {{review.description}} <br /> <em>{{review.source}}</em>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal -->
         <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
-         aria-labelledby="myModalLabel" aria-hidden="true">
+             aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <button type="button" class="close" 
-                           data-dismiss="modal">
-                               <span aria-hidden="true">&times;</span>
-                               <span class="sr-only">Close</span>
+                                data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
                         </button>
                         <h4 class="modal-title" id="myModalLabel">
                             Ask a question to the provider
@@ -45,10 +145,10 @@
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <form role="form">
-                          <div class="form-group">
-                            <label for="questionInput">Question</label>
-                            <textarea id="questionInput"  placeholder="Write your question" class="form-control" style="resize: none;" ng-model="ctrl.question"> </textarea>
-                          </div>
+                            <div class="form-group">
+                                <label for="questionInput">Question</label>
+                                <textarea id="questionInput"  placeholder="Write your question" class="form-control" style="resize: none;" ng-model="ctrl.question"> </textarea>
+                            </div>
                             <button type="button" class="btn btn-primary" ng-click="ctrl.sendQuestion()">
                                 <span class="glyphicon glyphicon-message-plus"></span>
                                 Send
@@ -59,11 +159,11 @@
             </div>
         </div>
     </div>
-    
+
     <div class="text-center">
         <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
                     ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
                     max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
     </div>
 </div>
-    </div>
+>>>>>>> ae962ed086cdf2c234ccde314d45f69c3916fbf3

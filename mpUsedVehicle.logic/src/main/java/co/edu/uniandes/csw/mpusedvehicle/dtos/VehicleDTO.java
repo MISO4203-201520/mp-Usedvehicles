@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.dtos;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -16,6 +17,7 @@ public class VehicleDTO {
     private Integer capacity;
     private String brand;
     private String image;
+    private List<ReviewDTO> reviews;
     /**
      * @generated
      */
@@ -126,6 +128,14 @@ public class VehicleDTO {
      */
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public List<ReviewDTO> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewDTO> reviews) {
+        this.reviews = reviews;
     }
 
 }
