@@ -14,6 +14,8 @@ public class ProductDTO {
     private Boolean availability;
     private ProviderDTO provider;
     private VehicleDTO vehicle;
+    private Integer discount;   //Nuevo Atributo REQ06
+    
     /**
      * @generated
      */
@@ -91,5 +93,22 @@ public class ProductDTO {
     public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
+    
+    
+    
+    /**
+     * REQ06 Nuevo atributo
+     */
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    /**
+     * REQ06 Nuevo atributo
+     */
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
+    
     
 }

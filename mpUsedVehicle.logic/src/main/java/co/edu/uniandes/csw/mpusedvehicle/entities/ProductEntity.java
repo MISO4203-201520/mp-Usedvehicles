@@ -33,6 +33,9 @@ public class ProductEntity implements Serializable {
     private ProviderEntity provider;
     @ManyToOne
     private VehicleEntity vehicle;
+    
+    private Integer discount;   //Nuevo Atributo REQ06
+    
     /**
      * @generated
      */
@@ -110,5 +113,21 @@ public class ProductEntity implements Serializable {
     public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
+    
+    
+    /**
+     * REQ06 Nuevo atributo
+     */
+    public Integer getDiscount() {
+        return discount;
+    }
 
+    /**
+     * REQ06 Nuevo atributo
+     */
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
+    
+    
 }
