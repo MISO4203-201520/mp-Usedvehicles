@@ -6,7 +6,7 @@
         <div class="col-sm-4 well text-center">
             <div class="col-md-12">
                 <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
-                    <a href="#/detail" ng-click="setCurrentProduct(record)"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}"></a>
+                    <a href="#/detail" ng-click="ctrl.selectProduct(record)"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}"></a>
 
                 </div>
                 <div class="caption" >
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="text-center">
         <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
                     ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"

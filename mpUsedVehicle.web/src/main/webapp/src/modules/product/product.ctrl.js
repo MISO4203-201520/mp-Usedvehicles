@@ -4,8 +4,17 @@
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', 'messageService', 'commentService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc, commentSvc, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
  
- 
-            $scope.selectedProduct=1;
+
+           this.selectProduct = function (current) {
+       //        $scope.selectedProductId=current.id;
+       //        return $scope.selectedProductId;
+               svc.setSelectedProductId(current.id);
+               return svc.getSelectedProductId();
+           };
+           
+           this.getSelectedProductId = function () {
+               return svc.getSelectedProductId();
+           };
  
             this.searchByName = function (vehicleName) {
                 var search;
@@ -77,12 +86,10 @@
                 this.question='';
             };
             
-            this.sendComment = function(){
-                console.log("sendComment");
-                //Tmp question
+            this.sendComment = function(currentProduct){
                 newComment={
                     description: this.comment,
-                    product:$scope.tmpRecord,
+                    product:currentProduct,
                     date:Date.now(),
                     client:authSvc.getCurrentUser()
                 };

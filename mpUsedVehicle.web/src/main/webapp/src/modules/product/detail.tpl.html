@@ -1,51 +1,51 @@
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
 <div ng-hide="ctrl.editMode">
     <div class="col-sm-12">
-        
-    <div  ng-repeat="record in records"  ng-hide="{{record.id !== selectedProduct}}">
-        <div class="well text-center">
-            <div class="col-md-12">
-                <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
-                    <a ng-href="{{record.vehicle.image}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}"></a>
+
+        <div  ng-repeat="record in records"  ng-hide="{{record.id !== ctrl.getSelectedProductId()}}">
+            <div class="well text-center">
+                <div class="col-md-12">
+                    <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
+                        <a ng-href="{{record.vehicle.image}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}"></a>
+                    </div>
                 </div>
-            </div>
-            <div class="caption">
-                <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
-                <p><strong>Price:</strong> {{record.price | currency}}</p>
-                <p><strong>Provider:</strong> {{record.provider.name}}</p>
-            </div>
+                <div class="caption">
+                    <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
+                    <p><strong>Price:</strong> {{record.price| currency}}</p>
+                    <p><strong>Provider:</strong> {{record.provider.name}}</p>
+                </div>
 
                 <p class="text-center">
                     <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 
-                            class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" data-toggle="{{action.dataToggle}}" 
+                            class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" data-toggle="{{action.dataToggle}}" 
                             data-target="{{action.dataTarget}}" ng-click="action.fn(record)">
                         <span class="glyphicon glyphicon-{{action.icon}}"></span> 
                         {{action.displayName}}
                     </button>
                 </p>
-            
-                <div>
-                    
-<textarea id="commentInput"  placeholder="Write your comment" class="form-control" style="resize: none;" ng-model="ctrl.comment"> </textarea>
 
-                            <button type="button" class="btn btn-primary" ng-click="ctrl.sendComment()">
-                                <span class="glyphicon glyphicon-message-plus"></span>
-                                Send
-                            </button>
+                <div class="well text-center">
+
+                    <textarea id="commentInput"  placeholder="Write your comment" class="form-control" style="width: 500px ;margin: 0 auto;" ng-model="ctrl.comment"> </textarea>
+
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.sendComment(currentProduct)">
+                        <span class="glyphicon glyphicon-message-plus"></span>
+                        Send
+                    </button>
 
                 </div>
-            
 
-            
-        </div>
-            <p><strong>COMENTARIOS DEL PRODUCTO </strong></p>
-            
-            <div class="caption" ng-repeat="comment in record.comments"  ng-hide="{{record.id !== selectedProduct}}" >
-                <p><strong>{{comment.client.name}}</strong> | {{comment.date | date}}</p>
-                <p><strong>Comentario:</strong> {{comment.description}}</p>
+
+
             </div>
+            <p><strong>PRODUCT COMMENTS </strong></p>
+            <p ng-show="{{record.comments !== null}}"> This product has no comments yet. </p>
+            <div class="caption" ng-repeat="comment in record.comments">
+                <p><strong>{{comment.client.name}}</strong>  ({{comment.date| date}})</p>
+                <p><i>     {{comment.description}}</i></p>
+            </div>
+        </div>
     </div>
-</div>
     <div class="text-center">
         <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
                     ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
