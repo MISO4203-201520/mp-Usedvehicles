@@ -70,6 +70,16 @@
             $scope.enableSubmit = function(){
                 $scope.varEnable = false;
             }
+            
+           this.selectProduct = function (current) {
+               svc.setSelectedProductId(current.id);
+               return svc.getSelectedProductId();
+           };
+           
+           this.getSelectedProductId = function () {
+               return svc.getSelectedProductId();
+           };
+           
             this.searchByName = function (vehicleName) {
                 var search;
                 if (vehicleName) {
@@ -171,5 +181,20 @@
                 //clean question
                 this.question='';
             };
+            
+            // REQ02
+            this.comment='';
+            this.sendComment = function(currentProduct){
+                newComment={
+                    description: this.comment,
+                    product:currentProduct,
+                    date:new Date(),
+                    client:authSvc.getCurrentUser()
+                };
+                commentSvc.sendComment(newComment);
+                //clean comment
+                this.comment='';
+            };
+            
         }]);
 })(window.angular);

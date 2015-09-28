@@ -75,10 +75,12 @@
                 <div class="col-sm-4 well text-center">
                     <div class="col-md-12">
                         <div class="img-thumbnail text-center" id="cover" ng-if="record.vehicle.image">
-                            <a ng-href="{{record.vehicle.image}}" target="_blank">
+                            <a  href="#/detail" ng-click="ctrl.selectProduct(record)">
                                 <img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
                             </a>
                         </div>
+                        <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
+                </div>
                     </div>
                     <div class="caption" >
                         <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
@@ -164,3 +166,4 @@
                     max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
     </div>
 </div>
+>>>>>>> ae962ed086cdf2c234ccde314d45f69c3916fbf3
