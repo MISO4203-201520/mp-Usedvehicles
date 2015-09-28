@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,25 +28,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Commententity.getByProduct", query = "SELECT c FROM CommentEntity c WHERE c.id = :product_id")})
 public class CommentEntity implements Serializable {
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
+//    @Basic(optional = false)
+//    @NotNull
+//    @Column(name = "id")
+    @GeneratedValue(generator = "Comment")
     private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date")
+    
+//    @NotNull
+//    @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+    
     @Size(max = 255)
-    @Column(name = "description")
+//    @Column(name = "description")
     private String description;
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    
+//    @JoinColumn(name = "client_id", referencedColumnName = "id")
+//    @ManyToOne(optional = false)
+    @ManyToOne
     private ClientEntity client;
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    
+//    @JoinColumn(name = "product_id", referencedColumnName = "id")
+//    @ManyToOne(optional = false)
+    @ManyToOne
     private ProductEntity product;
 
     public CommentEntity() {

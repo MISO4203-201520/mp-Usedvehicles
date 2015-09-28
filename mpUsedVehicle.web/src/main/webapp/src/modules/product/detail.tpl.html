@@ -28,7 +28,7 @@
 
                     <textarea id="commentInput"  placeholder="Write your comment" class="form-control" style="width: 500px ;margin: 0 auto;" ng-model="ctrl.comment"> </textarea>
 
-                    <button type="button" class="btn btn-primary" ng-click="ctrl.sendComment(currentProduct)">
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.sendComment(record)">
                         <span class="glyphicon glyphicon-message-plus"></span>
                         Send
                     </button>
@@ -38,11 +38,11 @@
 
 
             </div>
-            <p><strong>PRODUCT COMMENTS </strong></p>
-            <p ng-show="{{record.comments !== null}}"> This product has no comments yet. </p>
+            <h4><strong>PRODUCT COMMENTS </strong></h4>
+            <p ng-show="{{record.comments[0] == null}}"> This product has no comments yet. </p>
             <div class="caption" ng-repeat="comment in record.comments">
-                <p><strong>{{comment.client.name}}</strong>  ({{comment.date| date}})</p>
-                <p><i>     {{comment.description}}</i></p>
+                <h5><strong>{{comment.client.name}}</strong>  ({{comment.date| date}})</h5>
+                <p><i> {{comment.description}}</i></p>
             </div>
         </div>
     </div>

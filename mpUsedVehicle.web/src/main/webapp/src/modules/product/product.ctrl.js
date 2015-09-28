@@ -25,7 +25,6 @@
             };
             
             this.question='';
-            this.comment='';
             $scope.tmpRecord;
 
             this.recordActions = [{
@@ -85,12 +84,16 @@
                 //clean question
                 this.question='';
             };
+
+
+            // REQ02
             
+            this.comment='';
             this.sendComment = function(currentProduct){
                 newComment={
                     description: this.comment,
                     product:currentProduct,
-                    date:Date.now(),
+                    date:new Date(),
                     client:authSvc.getCurrentUser()
                 };
                 commentSvc.sendComment(newComment);

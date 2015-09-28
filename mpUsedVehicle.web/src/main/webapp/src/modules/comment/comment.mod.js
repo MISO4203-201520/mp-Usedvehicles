@@ -9,11 +9,5 @@
                 displayName: 'description',
                 type: 'String',
                 required: true
-            }, {
-                name: 'client',
-                displayName: 'Client',
-                type: 'Reference',
-                service: 'clientService',
-                required: true
             }]});
 })(window.angular);

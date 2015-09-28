@@ -39,8 +39,6 @@ public class CommentService {
     private Integer page;
     @QueryParam("maxRecords")
     private Integer maxRecords;
-    @QueryParam("q")
-    private String vehicleName;
     private ProductDTO product = (ProductDTO) SecurityUtils.getSubject().getSession().getAttribute("Product");
 
     /**
