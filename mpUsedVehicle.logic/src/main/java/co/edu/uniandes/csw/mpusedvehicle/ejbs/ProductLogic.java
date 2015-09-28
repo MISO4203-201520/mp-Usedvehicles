@@ -80,21 +80,5 @@ public class ProductLogic implements IProductLogic {
      public ProductDTO getCheaperProductByVehicle (String nameVehicle){
          return ProductConverter.fullEntity2DTO(persistence.getCheaperProductByVehicle(nameVehicle));
      }
-     
-     public ProductDTO getProductByModel (String model){
-         return ProductConverter.fullEntity2DTO(persistence.getProductByModel(model));
-     }
-          
-     public ProductDTO getProductByBrand (String brand){
-         return ProductConverter.fullEntity2DTO(persistence.getCheaperProductByVehicle(brand));
-     }
-          
-     public ProductDTO getProductByCity (String city){
-         return ProductConverter.fullEntity2DTO(persistence.getCheaperProductByVehicle(city));
-     }
-          
-     public ProductDTO getProductByPriceRange (Integer lower, Integer upper){
-         return ProductConverter.fullEntity2DTO(persistence.getProductByPriceRange(lower, upper));
-     }   
-        
+           
 }

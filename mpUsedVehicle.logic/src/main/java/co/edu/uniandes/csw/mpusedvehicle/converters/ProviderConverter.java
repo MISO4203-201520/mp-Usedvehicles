@@ -28,6 +28,7 @@ public abstract class ProviderConverter {
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
             dto.setEmail(entity.getEmail());
+            dto.setCity(entity.getCity());
 
             return dto;
         } else {
@@ -61,6 +62,7 @@ public abstract class ProviderConverter {
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
             dto.setEmail(entity.getEmail());
+            dto.setCity(entity.getCity());
 
             return dto;
         } else {
@@ -78,6 +80,7 @@ public abstract class ProviderConverter {
             entity.setName(dto.getName());
             entity.setUserId(dto.getUserId());
             entity.setEmail(dto.getEmail());
+            entity.setCity(dto.getCity());
 
             return entity;
         } else {

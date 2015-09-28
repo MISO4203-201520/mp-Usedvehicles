@@ -36,6 +36,10 @@
                         templateUrl: 'src/modules/product/product.tpl.html',
                         controller: 'productCtrl',
                         controllerAs: 'ctrl'
+                }).when('/catalogProvider', {
+                        templateUrl: 'src/modules/provider/provider.tpl.html',
+                        controller: 'providerCtrl',
+                        controllerAs: 'ctrl'                        
                 }).when('/shoppingCart', {
                     templateUrl: 'src/modules/cartItem/templates/ShoppingCart.html',
                     controller: 'cartItemCtrl',

@@ -1,9 +1,12 @@
 package co.edu.uniandes.csw.mpusedvehicle.services;
 
 import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -78,4 +81,55 @@ public class ProviderService {
     public void deleteProvider(@PathParam("id") Long id) {
         providerLogic.deleteProvider(id);
     }
+    
+    @GET
+    @Path("/providerbymodel/{model}")
+    public ProviderDTO getProviderByModel(@PathParam("model") String model) {
+        ProviderDTO provider = new ProviderDTO();
+        try {
+            provider = providerLogic.getProviderByModel(model);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return provider;
+    }
+    
+    @GET
+    @Path("/providerbybrand/{brand}")
+    public ProviderDTO getProviderByBrand(@PathParam("brand") String brand) {
+        ProviderDTO provider = new ProviderDTO();
+        try {
+            provider = providerLogic.getProviderByBrand(brand);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return provider;
+    }
+    
+    @GET
+    @Path("/providerbycity/{city}")
+    public ProviderDTO getProviderByCity(@PathParam("city") String city) {
+        ProviderDTO provider = new ProviderDTO();
+        try {
+            provider = providerLogic.getProviderByCity(city);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return provider;
+    }
+    
+    @GET
+    @Path("/providerbypricerange/{lower: \\d+}-{upper: \\d+}")
+    public ProviderDTO getProviderByPriceRange(@PathParam("lower") Integer lower,
+                                               @PathParam("upper") Integer upper) {
+        ProviderDTO provider = new ProviderDTO();
+        try {
+            provider = providerLogic.getProviderByPriceRange(lower, upper);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return provider;
+    }
+    
+    
 }

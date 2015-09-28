@@ -1,0 +1,36 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+<div ng-hide="ctrl.editMode" id="productdiv">
+    <div class="col-sm-12">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Aca va el contenido de wilmar.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div ng-repeat="record in records">
+                <div class="col-sm-4 well text-center">
+                    <div class="caption" >
+                        <p><strong>Name: </strong> {{record.name}}</p>
+                        <p><strong>UserId:</strong> {{record.userid}}</p>
+                        <p><strong>Email:</strong> {{record.email}}</p>
+                        <p><strong>Phone:</strong> {{record.phone}}</p>
+                        <p><strong>Contact Number:</strong> {{record.contactnumber}}</p>
+                        <p><strong>City:</strong> {{record.city}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal dialog for reviews -->
+        
+        <!-- Modal -->
+    </div>
+
+    <div class="text-center">
+        <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
+                    ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
+                    max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
+    </div>
+</div>
