@@ -121,12 +121,15 @@ public class ProviderService {
     }
     
     @GET
-    @Path("/providerbypricerange/{lower: \\d+}-{upper: \\d+}")
-    public ProviderDTO getProviderByPriceRange(@PathParam("lower") Integer lower,
-                                               @PathParam("upper") Integer upper) {
+    @Path("/providerbypricerange/{lowerupper}")
+    public ProviderDTO getProviderByPriceRange(@PathParam("lowerupper") String lowerupper
+    ){
         ProviderDTO provider = new ProviderDTO();
         try {
-            provider = providerLogic.getProviderByPriceRange(lower, upper);
+            String[] parts = lowerupper.split("-");
+            String lower = parts[0]; 
+            String upper = parts[1]; 
+            provider = providerLogic.getProviderByPriceRange(Integer.valueOf(lower), Integer.valueOf(upper));
         } catch (Exception e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }

@@ -3,11 +3,17 @@
     
     mod.service('providerService', ['CrudCreator','providerContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
-            this.findProviderbyBrand = function(brand){
-                return this.api.one('providerbybrand', brand).get();
+            this.findProviderbyBrand = function(brandFilter){
+                return this.api.one('providerbybrand', brandFilter).get();
             };
-            this.findVehicleBrands = function(){
-                return this.api.all('vehiclebrands').getList();
+            this.findProviderbyModel = function(modelFilter){
+                return this.api.one('providerbymodel', modelFilter).get();
             };
+            this.findProviderbyCity = function(cityFilter){
+                return this.api.one('providerbycity', cityFilter).get();
+            };      
+            this.findProviderbyCity = function(lowerFilter, upperFilter){
+                return this.api.one('providerbypricerange', lowerFilter+"-"+upperFilter).get();
+            }; 
     }]);
 })(window.angular);
