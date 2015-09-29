@@ -61,11 +61,38 @@
                     </li>
                 </ul>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    Aca va el contenido de wilmar.
-                </div>
-            </div>
+            <div class="panel panel-primary">
+            <form novalidate class="navbar-form navbar-left" role="search">
+                <table >
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="to search" ng-model="text2Search" required>
+                            </div>
+                            <button class="btn btn-default" ng-model="buttonSub" ng-click="listItems()" ng-show="true" ng-disabled="varEnable">Submit</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <label>
+                                    <input type="radio" name="searhcriteria" ng-model="searchCriteria" value="byProvider" ng-change="enableSubmit()">
+                                    Search cheaper product by provider 
+                                </label>
+
+                            </div>            
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>        
+                            <label>
+                                <input type="radio" name="searhcriteria" ng-model="searchCriteria" value="byVehicle" ng-change="enableSubmit()">
+                                Search cheaper provider by vehicle 
+                            </label></td>
+                    </tr>
+                </table>
+            </form>                    
+        </div>
         </div>
         <div class="col-md-9">
             <div ng-show="!records.length" class="alert alert-warning" role="alert">
@@ -75,12 +102,10 @@
                 <div class="col-sm-4 well text-center">
                     <div class="col-md-12">
                         <div class="img-thumbnail text-center" id="cover" ng-if="record.vehicle.image">
-                            <a  href="#/detail" ng-click="ctrl.selectProduct(record)">
+                            <a ng-href="{{record.vehicle.image}}" target="_blank">
                                 <img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
                             </a>
                         </div>
-                        <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
-                </div>
                     </div>
                     <div class="caption" >
                         <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
@@ -166,3 +191,9 @@
                     max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
     </div>
 </div>
+                            <a  href="#/detail" ng-click="ctrl.selectProduct(record)">
+                                <img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
+                            </a>
+                        </div>
+                        <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
+                </div>
