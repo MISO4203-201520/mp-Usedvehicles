@@ -3,6 +3,15 @@
     
     mod.service('productService', ['CrudCreator','productContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
+            
+            this.getProductsByAdvancedSearch = function(brand, model, capacity, price){
+                
+                return this.api.all('advancedsearch').getList({'brand': brand, 
+                                                                'model': model, 
+                                                                'capacity': capacity, 
+                                                                'price': price});;
+            };
+            
             this.findCheaperbyProvider = function(idProvider){
                 return this.api.one('cheapest', idProvider).get();
             };

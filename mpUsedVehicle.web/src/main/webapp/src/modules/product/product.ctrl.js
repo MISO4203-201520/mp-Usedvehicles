@@ -1,18 +1,47 @@
 (function (ng) {
     var mod = ng.module('productModule');
 
+    //Provider Products Controller
+    mod.controller('productsCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', function (CrudCreator, $scope, svc, model) {
+            CrudCreator.extendController(this, svc, $scope, model, 'product', 'Product');
+            this.fetchRecords();
+            this.loadRefOptions();
+        }]);
+    
+    //User/Buyer Controller
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 
         'cartItemService', 'messageService','$location', 'authService', 'vehicleService', 
         'userService', 
-        function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc,$location, authSvc, vehicleSvc, userSvc) {
+        function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc, $location, authSvc, vehicleSvc, userSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
             //Variables
             $scope.varEnable = true;
             $scope.providerName = ''; 
             $scope.records=[];
-            $scope.text2Search="";            
+            $scope.text2Search=""; 
+            
+            // Vars for advanced search
+            $scope.brand = "";
+            $scope.model = "";
+            $scope.capacity = "";
+            $scope.price = "";
             
             //Funciones
+            $scope.getProductsByAdvancedSearch = function () {
+                console.log("Getting by advanced search...");
+                
+                svc.getProductsByAdvancedSearch(
+                        $scope.brand, $scope.model,
+                        $scope.capacity, $scope.price).then(function (products) {
+                            
+                    $scope.records = [];
+                    for (var i = 0; i < products.length; i++) {
+                        $scope.records.push(products[i]);
+                        
+                    }
+                });
+            };
+            
             $scope.findItem = function () {
                 console.log("$scope.records" + $scope.records.length);
                 console.log("Ingresa text2Search" + $scope.text2Search);

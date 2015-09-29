@@ -6,7 +6,10 @@ import co.edu.uniandes.csw.mpusedvehicle.dtos.MessageDTO;
 import co.edu.uniandes.csw.mpusedvehicle.entities.MessageEntity;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.MessagePersistence;
 import co.edu.uniandes.csw.mpusedvehicle.util.MailManager;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -30,6 +33,20 @@ public class MessageLogic implements IMessageLogic {
      */
     public List<MessageDTO> getMessages(Integer page, Integer maxRecords) {
         return MessageConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
+    }
+    
+    public List<MessageDTO> getMessagesByProvider(Long idProvider) {
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("idProvider", idProvider);
+        List<MessageEntity> list = persistence.executeListNamedQuery("Message.messagesByProvider", map);
+        return MessageConverter.listEntity2DTO(list);
+    }
+    
+    public List<MessageDTO> getMessagesByUser(Long idUser) {
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("idClient", idUser);
+        List<MessageEntity> list = persistence.executeListNamedQuery("Message.messagesByClient", map);
+        return MessageConverter.listEntity2DTO(list);
     }
 
     /**

@@ -7,5 +7,9 @@
             this.isAdmin = function() {
                 return this.api.one("../users/isAdmin").get();
             };
+            
+            this.getCurrentUser = function(){
+                return this.api.one('currentUser').get();
+            };
     }]);
 })(window.angular);

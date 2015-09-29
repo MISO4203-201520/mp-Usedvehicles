@@ -12,7 +12,7 @@
             this.findProviderbyCity = function(cityFilter){
                 return this.api.one('providerbycity', cityFilter).get();
             };      
-            this.findProviderbyCity = function(lowerFilter, upperFilter){
+            this.findProviderbyPrice = function(lowerFilter, upperFilter){
                 return this.api.one('providerbypricerange', lowerFilter+"-"+upperFilter).get();
             }; 
     }]);

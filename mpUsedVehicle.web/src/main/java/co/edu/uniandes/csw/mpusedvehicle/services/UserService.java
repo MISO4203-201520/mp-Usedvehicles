@@ -153,6 +153,16 @@ public class UserService {
             user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
+            if(currentUser.hasRole("user")){
+                user.setRole("user");
+            }else if (currentUser.hasRole("provider")) {
+                user.setRole("provider");
+            }else if(currentUser.hasRole("administrator")){
+                user.setRole("administrator");
+            }else{
+                user.setRole("nada");
+            }
+            
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);

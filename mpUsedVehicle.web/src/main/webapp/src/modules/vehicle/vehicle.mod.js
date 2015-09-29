@@ -39,5 +39,10 @@
                 displayName: 'Image',
                 type: 'String',
                 required: true
+            }, {
+                name: 'enabled',
+                displayName: 'Enabled',
+                type: 'Boolean',
+                required: false
             }]});
 })(window.angular);

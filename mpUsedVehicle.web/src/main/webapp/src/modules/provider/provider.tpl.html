@@ -2,18 +2,10 @@
 <div ng-hide="ctrl.editMode" id="productdiv">
     <div class="col-sm-12">
         <div class="col-md-3">
-            <div class="panel panel-default">
-<!--                <div ng-repeat="record in records">
-                    <p>{{record.name}}</p>
-                    <p>{{record.products}}</p>
-                    <div ng-repeat="product in record.products" >
-                        <div class="col-sm-4 well text-center">
-                            <div class="caption" >
-                                <p>Brand</p>
-                                <p>{{product.vehicle.brand}}</p>
-                            </div>
-                        </div>
-                    </div>-->
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Advanced search</h3>
+                </div>
                 <div class="panel-body">
                     <div class="form-group">
                          <input type="text" class="form-control" placeholder="Brand filter" ng-model="brandFilter" required>
@@ -39,14 +31,14 @@
                      </div>
                      <button class="btn btn-default" ng-model="buttonSub" ng-click="findProviderbyPrice()" ng-show="true" ng-disabled="varEnable">Filter</button>                                         
                 </div>
-            <!--</div>-->
+                </div>
             </div>
-        </div>
+
         <div class="col-md-9">
             <div ng-repeat="record in records">
                 <div class="col-sm-4 well text-center">
                     <div class="caption" >
-                        <p><strong>Name: </strong> {{record.name}}</p>
+                        <p><strong>Provider Name: </strong> {{record.name}}</p>
                         <p><strong>UserId:</strong> {{record.userid}}</p>
                         <p><strong>Email:</strong> {{record.email}}</p>
                         <p><strong>Phone:</strong> {{record.phone}}</p>

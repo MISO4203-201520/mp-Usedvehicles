@@ -27,7 +27,7 @@
             $scope.findProviderbyCity = function () {
                 console.log("$scope.records" + $scope.records.length);
                 console.log("Ingresa cityFilter" + $scope.cityFilter);
-               svc.findProviderbyCity($scope.brandFilter).then(function (ProviderCity) {
+               svc.findProviderbyCity($scope.cityFilter).then(function (ProviderCity) {
                         $scope.records = [];
                         $scope.records.push(ProviderCity);
                         console.log("Ingresa ProviderCity" + ProviderCity.name);
@@ -39,7 +39,7 @@
                 console.log("$scope.records" + $scope.records.length);
                 console.log("Ingresa lowerFilter" + $scope.lowerFilter);
                 console.log("Ingresa upperFilter" + $scope.upperFilter);
-               svc.findProviderbyCity($scope.lowerFilter, $scope.upperFilter).then(function (ProviderPrice) {
+               svc.findProviderbyPrice($scope.lowerFilter, $scope.upperFilter).then(function (ProviderPrice) {
                         $scope.records = [];
                         $scope.records.push(ProviderPrice);
                         console.log("Ingresa ProviderPrice" + ProviderPrice.name);
@@ -49,4 +49,5 @@
             this.fetchRecords();
         }]);
 
+    
 })(window.angular);

@@ -22,7 +22,10 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Message.findAll", query = "SELECT m FROM MessageEntity m")})
+    @NamedQuery(name = "Message.findAll", query = "SELECT m FROM MessageEntity m"),
+    @NamedQuery(name = "Message.messagesByProvider", query = "SELECT m FROM MessageEntity m where m.provider.id= :idProvider"),
+    @NamedQuery(name = "Message.messagesByClient", query = "SELECT m FROM MessageEntity m where m.client.id= :idClient")})
+    
 public class MessageEntity implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -47,6 +50,8 @@ public class MessageEntity implements Serializable {
     private ProductEntity product;
     
     private String question;
+    
+    private String answer;
 
     public MessageEntity() {
     }
@@ -54,14 +59,6 @@ public class MessageEntity implements Serializable {
     public MessageEntity(Long id) {
         this.id = id;
     }
-
-//    public MessageEntity(Long id, ClientEntity client, ProviderEntity provider, Integer idTypeMessage, Date date) {
-//        this.id = id;
-//        this.client = client;
-//        this.provider = provider;
-//        this.idTypeMessage = idTypeMessage;
-//        this.date = date;
-//    }
 
     public Long getId() {
         return id;
@@ -117,6 +114,14 @@ public class MessageEntity implements Serializable {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     @Override

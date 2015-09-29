@@ -30,6 +30,7 @@ public abstract class MessageConverter {
             dto.setIdTypeMessage(entity.getIdTypeMessage());
             dto.setDate(entity.getDate());
             dto.setQuestion(entity.getQuestion());
+            dto.setAnswer(entity.getAnswer());
             dto.setProduct(ProductConverter.fullEntity2DTO(entity.getProduct()));
             
             return dto;
@@ -66,6 +67,7 @@ public abstract class MessageConverter {
             dto.setIdTypeMessage(entity.getIdTypeMessage());
             dto.setDate(entity.getDate());
             dto.setQuestion(entity.getQuestion());
+            dto.setAnswer(entity.getAnswer());
             dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
 
             return dto;
@@ -86,6 +88,7 @@ public abstract class MessageConverter {
             entity.setIdTypeMessage(dto.getIdTypeMessage());
             entity.setDate(dto.getDate());
             entity.setQuestion(dto.getQuestion());
+            entity.setAnswer(dto.getAnswer());
             entity.setProduct(ProductConverter.fullDTO2Entity(dto.getProduct()));
 
             return entity;
