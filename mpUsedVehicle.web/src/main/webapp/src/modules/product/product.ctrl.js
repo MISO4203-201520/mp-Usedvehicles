@@ -10,9 +10,9 @@
     
     //User/Buyer Controller
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 
-        'cartItemService', 'messageService','$location', 'authService', 'vehicleService', 
+        'cartItemService', 'messageService','commentService','$location', 'authService', 'vehicleService', 
         'userService', 
-        function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc, $location, authSvc, vehicleSvc, userSvc) {
+        function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc, commentSvc, $location, authSvc, vehicleSvc, userSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
             //Variables
             $scope.varEnable = true;

@@ -11,7 +11,11 @@
                 </div>
                 <div class="caption">
                     <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
+                    <p><strong>Brand:</strong> {{record.vehicle.brand}}</p>
+                    <p><strong>Model:</strong> {{record.vehicle.model}}</p>
+                    <p><strong>Desciption:</strong> {{record.vehicle.description}}</p>
                     <p><strong>Price:</strong> {{record.price| currency}}</p>
+                    <p ng-hide="{{record.discount == null}}"><strong>Discount:</strong> {{record.discount}} %</p>
                     <p><strong>Provider:</strong> {{record.provider.name}}</p>
                 </div>
 

@@ -9,6 +9,7 @@
         'providerModule',
         'vehicleModule',
         'messageModule',
+        'commentModule',
         'checkoutModule',
         'userModule',
         'ngRoute',
