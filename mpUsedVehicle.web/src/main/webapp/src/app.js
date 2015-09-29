@@ -37,13 +37,17 @@
                         templateUrl: 'src/modules/product/product.tpl.html',
                         controller: 'productCtrl',
                         controllerAs: 'ctrl'
+                }).when('/catalogProvider', {
+                        templateUrl: 'src/modules/provider/provider.tpl.html',
+                        controller: 'providerCtrl',
+                        controllerAs: 'ctrl'                        
                 }).when('/shoppingCart', {
                     templateUrl: 'src/modules/cartItem/templates/ShoppingCart.html',
                     controller: 'cartItemCtrl',
                     controllerAs: 'ctrl'
                 }).when('/checkout', {
                     templateUrl: 'src/modules/checkout/templates/Checkout.html',
-                    controller: 'checkoutCtrl'
+                    controller: 'checkoutCtrl',
                 }).when('/users', {
                     templateUrl: 'src/modules/admin/templates/users.tpl.html',
                     controller: 'userCtrl',
@@ -51,7 +55,7 @@
                 }).when('/product', {
                     templateUrl: tplUrl,
                     controller: 'productsCtrl',
-                    controllerAs: alias                
+                    controllerAs: alias                       
                 }).when('/questions', {
                     templateUrl: 'src/modules/messages/question.tpl.html',
                     controller: 'messageCtrl',

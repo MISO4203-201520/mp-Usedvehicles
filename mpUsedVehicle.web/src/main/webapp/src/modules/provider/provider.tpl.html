@@ -1,0 +1,62 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+<div ng-hide="ctrl.editMode" id="productdiv">
+    <div class="col-sm-12">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Advanced search</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                         <input type="text" class="form-control" placeholder="Brand filter" ng-model="brandFilter" required>
+                     </div>
+                     <button class="btn btn-default" ng-model="buttonSub" ng-click="findProviderbyBrand()" ng-show="true" ng-disabled="varEnable">Filter</button>                                         
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                         <input type="text" class="form-control" placeholder="Model filter" ng-model="modelFilter" required>
+                     </div>
+                     <button class="btn btn-default" ng-model="buttonSub" ng-click="findProviderbyModel()" ng-show="true" ng-disabled="varEnable">Filter</button>                                         
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                         <input type="text" class="form-control" placeholder="City filter" ng-model="cityFilter" required>
+                     </div>
+                     <button class="btn btn-default" ng-model="buttonSub" ng-click="findProviderbyCity()" ng-show="true" ng-disabled="varEnable">Filter</button>                                         
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                         <input type="text" class="form-control" placeholder="Lower Price filter" ng-model="lowerFilter" required>
+                         <input type="text" class="form-control" placeholder="Upper Price filter" ng-model="upperFilter" required>
+                     </div>
+                     <button class="btn btn-default" ng-model="buttonSub" ng-click="findProviderbyPrice()" ng-show="true" ng-disabled="varEnable">Filter</button>                                         
+                </div>
+                </div>
+            </div>
+
+        <div class="col-md-9">
+            <div ng-repeat="record in records">
+                <div class="col-sm-4 well text-center">
+                    <div class="caption" >
+                        <p><strong>Provider Name: </strong> {{record.name}}</p>
+                        <p><strong>UserId:</strong> {{record.userid}}</p>
+                        <p><strong>Email:</strong> {{record.email}}</p>
+                        <p><strong>Phone:</strong> {{record.phone}}</p>
+                        <p><strong>Contact Number:</strong> {{record.contactnumber}}</p>
+                        <p><strong>City:</strong> {{record.city}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal dialog for reviews -->
+        
+        <!-- Modal -->
+    </div>
+
+    <div class="text-center">
+        <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
+                    ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
+                    max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
+    </div>
+</div>
