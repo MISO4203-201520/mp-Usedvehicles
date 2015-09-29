@@ -3,8 +3,16 @@
     <div class="col-sm-12">
         <div class="col-md-3">
             <div class="panel panel-default">
+                <div ng-repeat="record in records">
+                    <div ng-repeat="product in record.products" >
+                    <div class="col-sm-4 well text-center">
+                        <div class="caption" >
+                            <p>{{product.vehicle.brand}}</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel-body">
-                    Aca va el contenido de wilmar.
+                    <button class="btn btn-default" ng-model="buttonSub" ng-click="listItems()" ng-show="true">Submit</button>
                 </div>
             </div>
         </div>

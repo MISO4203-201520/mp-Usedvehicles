@@ -1,9 +1,10 @@
 package co.edu.uniandes.csw.mpusedvehicle.services;
 
 import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
-import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
+import co.edu.uniandes.csw.mpusedvehicle.api.IVehicleLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class ProviderService {
 
+    @Inject private IVehicleLogic vehicleLogic;
     @Inject private IProviderLogic providerLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
@@ -131,5 +133,19 @@ public class ProviderService {
         return provider;
     }
     
+//    @GET
+//    @Path("/vehiclebrands/")
+//    public List<String> getVehicleBrands() {
+//        List<String> brands = new ArrayList<String>();
+//        try {
+//            brands = vehicleLogic.getVehicleBrands();
+//            for (Object p : brands) {
+//                System.out.println("service "+p);
+//              }
+//        } catch (Exception e) {
+//            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+//        }
+//        return brands;
+//    }   
     
 }
