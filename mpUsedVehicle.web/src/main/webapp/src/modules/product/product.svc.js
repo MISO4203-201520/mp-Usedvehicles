@@ -21,5 +21,12 @@
             this.askQuestion = function(question){
                 this.saveRecord(question);
             };
+            var selectedProductId = 'ini';
+            this.getSelectedProductId = function () {
+                return selectedProductId;
+            };
+            this.setSelectedProductId = function (productId) {
+                selectedProductId=productId;
+            };
     }]);
 })(window.angular);

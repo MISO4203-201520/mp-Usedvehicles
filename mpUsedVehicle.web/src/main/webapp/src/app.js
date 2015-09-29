@@ -9,6 +9,7 @@
         'providerModule',
         'vehicleModule',
         'messageModule',
+        'commentModule',
         'checkoutModule',
         'userModule',
         'ngRoute',
@@ -56,6 +57,14 @@
                     templateUrl: 'src/modules/messages/question.tpl.html',
                     controller: 'messageCtrl',
                     controllerAs: 'ctrl'
+                }).when('/comment', {
+                    templateUrl: tplUrl,
+                    controller: 'commentCtrl',
+                    controllerAs: alias
+                }).when('/detail', {
+                        templateUrl: 'src/modules/product/detail.tpl.html',
+                        controller: 'productCtrl',
+                        controllerAs: 'ctrl'
                 })
                 .otherwise('/catalog');
         }]);

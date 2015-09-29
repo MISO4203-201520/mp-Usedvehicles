@@ -1,12 +1,15 @@
 package co.edu.uniandes.csw.mpusedvehicle.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  * @generated
@@ -33,7 +36,8 @@ public class ProductEntity implements Serializable {
     private ProviderEntity provider;
     @ManyToOne
     private VehicleEntity vehicle;
-    
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CommentEntity> comments;
     private Integer discount;   //Nuevo Atributo REQ06
     
     /**
@@ -122,12 +126,19 @@ public class ProductEntity implements Serializable {
         return discount;
     }
 
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentEntity> comments) {
+        this.comments = comments;
+    }
+
     /**
      * REQ06 Nuevo atributo
      */
     public void setDiscount(Integer discount) {
         this.discount = discount;
     }
-    
     
 }
