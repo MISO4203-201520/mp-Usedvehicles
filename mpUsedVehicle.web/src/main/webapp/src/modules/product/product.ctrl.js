@@ -10,9 +10,9 @@
     
     //User/Buyer Controller
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 
-        'cartItemService', 'messageService','commentService','$location', 'authService', 'vehicleService', 
+        'cartItemService', 'messageService','$location', 'authService', 'vehicleService', 
         'userService', 
-        function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc, commentSvc, $location, authSvc, vehicleSvc, userSvc) {
+        function (CrudCreator, $scope, svc, model, cartItemSvc, messageSvc, $location, authSvc, vehicleSvc, userSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
             //Variables
             $scope.varEnable = true;
@@ -70,16 +70,6 @@
             $scope.enableSubmit = function(){
                 $scope.varEnable = false;
             }
-            
-           this.selectProduct = function (current) {
-               svc.setSelectedProductId(current.id);
-               return svc.getSelectedProductId();
-           };
-           
-           this.getSelectedProductId = function () {
-               return svc.getSelectedProductId();
-           };
-           
             this.searchByName = function (vehicleName) {
                 var search;
                 if (vehicleName) {
@@ -181,20 +171,5 @@
                 //clean question
                 this.question='';
             };
-            
-            // REQ02
-            this.comment='';
-            this.sendComment = function(currentProduct){
-                newComment={
-                    description: this.comment,
-                    product:currentProduct,
-                    date:new Date(),
-                    client:authSvc.getCurrentUser()
-                };
-                commentSvc.sendComment(newComment);
-                //clean comment
-                this.comment='';
-            };
-            
         }]);
 })(window.angular);
