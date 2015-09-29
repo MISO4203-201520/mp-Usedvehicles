@@ -3,10 +3,6 @@
   <persistence-unit name="mpUsedVehiclePU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/jdbc/mpUsedVehicle</jta-data-source>
-    <class>co.edu.uniandes.csw.mpusedvehicle.entities.Providerentity_1</class>
-    <class>co.edu.uniandes.csw.mpusedvehicle.entities.Vehicleentity_1</class>
-    <class>co.edu.uniandes.csw.mpusedvehicle.entities.Productentity_1</class>
-    <class>co.edu.uniandes.csw.mpusedvehicle.entities.CommentEntity</class>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
