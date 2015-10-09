@@ -15,7 +15,11 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Provider.getByUserId", query = "select u from ProviderEntity u WHERE u.userId = :user_id")
+    @NamedQuery(name = "Provider.getByUserId", query = "select u from ProviderEntity u WHERE u.userId = :user_id"),
+    @NamedQuery(name = "Provider.getProviderByModel", query = "select pv from ProviderEntity pv, ProductEntity u WHERE  u.provider.id =  pv.id  AND UPPER(u.vehicle.model) like :model order by u.price"),
+    @NamedQuery(name = "Provider.getProviderByBrand", query = "select pv from ProviderEntity pv, ProductEntity u WHERE u.provider.id =  pv.id  AND UPPER(u.vehicle.brand) like :brand order by u.price"),
+    @NamedQuery(name = "Provider.getProviderByCity", query = "select pv from ProviderEntity pv WHERE UPPER(pv.city) like :city "),
+    @NamedQuery(name = "Provider.getProviderByPriceRange", query = "select pv from ProviderEntity pv, ProductEntity u WHERE u.provider.id =  pv.id  AND u.price > :lower and  u.price < :upper ")
 })
 public class ProviderEntity implements Serializable {
 
@@ -31,6 +35,18 @@ public class ProviderEntity implements Serializable {
     private List<ProductEntity> products;
     
     private String email;
+    
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+    
+    
     /**
      * @generated
      */

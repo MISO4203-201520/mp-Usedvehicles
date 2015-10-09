@@ -14,6 +14,15 @@ public class ProviderDTO {
     private String userId;
     private List<ProductDTO> products;
     private String email;
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
     /**
      * @generated
      */

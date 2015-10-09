@@ -6,7 +6,7 @@
             
             
             
-                var current = productSvc.getCurrentProduct();
+               // var current = productSvc.getCurrentProduct();
             
             
             

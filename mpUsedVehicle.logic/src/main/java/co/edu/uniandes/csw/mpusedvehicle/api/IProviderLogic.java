@@ -12,4 +12,8 @@ public interface IProviderLogic {
     public void deleteProvider(Long id);
     public List<ProviderDTO> findByName(String name);
     public ProviderDTO getProviderByUserId(String userId);
+    public ProviderDTO getProviderByModel (String model);
+    public ProviderDTO getProviderByBrand (String brand);
+    public ProviderDTO getProviderByCity (String city);
+    public ProviderDTO getProviderByPriceRange (Integer lower, Integer upper);
 }

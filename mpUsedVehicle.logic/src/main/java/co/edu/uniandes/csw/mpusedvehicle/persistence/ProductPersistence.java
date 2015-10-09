@@ -61,7 +61,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
         try {
             
             int startPrice = 0;
-            int endPrice = 49;
+            int endPrice = 9999999;
             
             // Constructing the sql query
             String sql = " SELECT p "
@@ -80,12 +80,12 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
                 sql += "            AND p.price between :startPrice AND :endPrice ";
                 switch (price) {
                     case 2:
-                        startPrice = 50;
-                        endPrice = 100;
+                        startPrice = 10000000;
+                        endPrice = 99000000;
                         break;
                     case 3:
-                        startPrice = 100;
-                        endPrice = 99999999;
+                        startPrice = 99000000;
+                        endPrice = 999999999;
                         break;
                 }
             }

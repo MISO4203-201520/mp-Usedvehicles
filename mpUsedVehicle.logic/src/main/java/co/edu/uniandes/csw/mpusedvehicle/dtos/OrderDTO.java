@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.dtos;
 
-import co.edu.uniandes.csw.mpusedvehicle.entities.CartItemEntity;
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
-import co.edu.uniandes.csw.mpusedvehicle.enums.PaymentMethod;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;

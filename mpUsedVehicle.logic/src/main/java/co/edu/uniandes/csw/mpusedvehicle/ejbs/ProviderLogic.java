@@ -72,4 +72,20 @@ public class ProviderLogic implements IProviderLogic {
      public ProviderDTO getProviderByUserId(String userId){
         return ProviderConverter.fullEntity2DTO(persistence.getProviderByUserId(userId));
     }
+
+     public ProviderDTO getProviderByModel (String model){
+         return ProviderConverter.fullEntity2DTO(persistence.getProviderByModel(model));
+     }
+          
+     public ProviderDTO getProviderByBrand (String brand){
+         return ProviderConverter.fullEntity2DTO(persistence.getProviderByBrand(brand));
+     }
+          
+     public ProviderDTO getProviderByCity (String city){
+         return ProviderConverter.fullEntity2DTO(persistence.getProviderByCity(city));
+     }
+          
+     public ProviderDTO getProviderByPriceRange (Integer lower, Integer upper){
+         return ProviderConverter.fullEntity2DTO(persistence.getProviderByPriceRange(lower, upper));
+     }   
 }
