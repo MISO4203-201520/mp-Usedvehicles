@@ -102,6 +102,9 @@ public class AdminLogicTest {
         AdminEntity entity = em.find(AdminEntity.class, result.getId());
 
         Assert.assertEquals(dto.getName(), entity.getName());
+        Assert.assertEquals(dto.getId(), entity.getId());
+        Assert.assertEquals(dto.getUserId(), entity.getUserId());
+        
     }
     
     
