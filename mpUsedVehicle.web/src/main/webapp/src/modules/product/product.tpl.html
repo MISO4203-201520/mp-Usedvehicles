@@ -102,7 +102,7 @@
                 <div class="col-sm-4 well text-center">
                     <div class="col-md-12">
                         <div class="img-thumbnail text-center" id="cover" ng-if="record.vehicle.image">
-                            <a ng-href="{{record.vehicle.image}}" target="_blank">
+                            <a ng-href="#/detail" ng-click="ctrl.selectProduct(record)">
                                 <img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
                             </a>
                         </div>
@@ -110,6 +110,8 @@
                     <div class="caption" >
                         <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
                         <p><strong>Price:</strong> {{record.price| currency}}</p>
+                        <p ng-hide="{{record.discount == null}}"><strong>Discount:</strong> {{record.discount}} %</p>
+                        <p ng-show="{{record.discount == null}}"><strong>Discount:</strong> 0 % </p>
                         <p><strong>Provider:</strong> {{record.provider.name}}</p>
                     </div>
                     <p class="text-center">
