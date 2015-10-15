@@ -34,6 +34,10 @@ public class VehicleEntity implements Serializable {
     
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewEntity> reviews;
+    
+    private Boolean plate;
+
+    private String location;
 
     /**
      * @generated
@@ -155,4 +159,22 @@ public class VehicleEntity implements Serializable {
         this.reviews = reviews;
     }
 
+    public Boolean getPlate() {
+        return plate;
+    }
+
+    public void setPlate(Boolean plate) {
+        this.plate = plate;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    
+    
 }

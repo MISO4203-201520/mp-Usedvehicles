@@ -40,6 +40,16 @@
                 type: 'String',
                 required: true
             }, {
+                name: 'plate',
+                displayName: 'Plate',
+                type: 'Boolean',
+                required: true
+            }, {
+                name: 'location',
+                displayName: 'Location',
+                type: 'String',
+                required: true
+            }, {
                 name: 'enabled',
                 displayName: 'Enabled',
                 type: 'Boolean',

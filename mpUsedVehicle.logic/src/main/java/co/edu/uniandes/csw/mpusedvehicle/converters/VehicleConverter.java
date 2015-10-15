@@ -32,6 +32,8 @@ public abstract class VehicleConverter {
             dto.setCapacity(entity.getCapacity());
             dto.setBrand(entity.getBrand());
             dto.setImage(entity.getImage());
+            dto.setPlate(entity.getPlate());
+            dto.setLocation(entity.getLocation());
 
             return dto;
         } else {
@@ -69,7 +71,9 @@ public abstract class VehicleConverter {
             dto.setCapacity(entity.getCapacity());
             dto.setBrand(entity.getBrand());
             dto.setImage(entity.getImage());
-
+            dto.setPlate(entity.getPlate());
+            dto.setLocation(entity.getLocation());
+            
             return dto;
         } else {
             return null;
@@ -90,6 +94,8 @@ public abstract class VehicleConverter {
             entity.setCapacity(dto.getCapacity());
             entity.setBrand(dto.getBrand());
             entity.setImage(dto.getImage());
+            entity.setPlate(dto.getPlate());
+            entity.setLocation(dto.getLocation());
 
             return entity;
         } else {
