@@ -27,5 +27,9 @@
             this.saveOrder = function(record){
                 return self.saveRecord(record);
             };
+            this.getOrderByProvider = function (idProvider)
+            {
+                return this.api.one("provider", idProvider).get();
+            };
     }]);
 })(window.angular);

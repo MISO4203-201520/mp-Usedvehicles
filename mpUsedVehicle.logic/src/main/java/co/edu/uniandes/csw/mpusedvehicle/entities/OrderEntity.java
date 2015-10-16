@@ -25,9 +25,9 @@ import javax.persistence.OneToMany;
 @NamedQueries(
 {
         @NamedQuery(name = "OrderEntity.getOrdersByProvider", 
-                    query = "SELECT c.order FROM CartItemEntity c LEFT JOIN fetch c.order LEFT JOIN fetch c.product WHERE c.product.provider=(:provider_id)"),
+                    query = "SELECT distinct c.order FROM CartItemEntity c LEFT JOIN fetch c.order LEFT JOIN fetch c.product WHERE c.product.provider.id =(:provider_id) and c.order.id is not null"),
         @NamedQuery(name = "OrderEntity.getOrdersByClient", 
-                    query = "SELECT c.order FROM CartItemEntity c LEFT JOIN fetch c.order WHERE c.client.id=(:client_id)")  
+                    query = "SELECT c.order FROM CartItemEntity c LEFT JOIN fetch c.order WHERE c.client.id =(:client_id)")  
 })
 //@NamedQueries(
 //{

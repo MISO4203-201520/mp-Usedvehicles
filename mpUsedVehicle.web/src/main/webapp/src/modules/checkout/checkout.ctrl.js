@@ -67,6 +67,16 @@
             $scope.togglePaymentMethod = function(){
                 $scope.credit = !$scope.credit;
             };
+            if(authSvc.getCurrentUser()=== undefined || authSvc.getCurrentUser()=== null)
+                {
+                    $location.path('/login');
+                }else{
+                svc.getOrderByProvider(authSvc.getCurrentUser().id).then(function (result) {
+                    $scope.orders = [];
+                    $scope.orders = result;
+                });
+            }
+           
             
             $scope.toggleConfirmation = function(){
                 $scope.confirm = !$scope.confirm;

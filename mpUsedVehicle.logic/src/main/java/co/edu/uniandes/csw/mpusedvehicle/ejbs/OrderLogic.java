@@ -53,7 +53,9 @@ public class OrderLogic implements IOrderLogic {
      * @return Lista de las ordenes.
      */
     public List<OrderDTO> getOrdersByProvider(Long idProvider){
-        return OrderConverter.listEntity2DTO(persistence.getOrdersByProvider(idProvider));
+        List<OrderDTO> list = OrderConverter.listEntity2DTO(persistence.getOrdersByProvider(idProvider));
+        System.out.println("DTO se obtuvo : "+ list.size());
+        return list;
     }
     /**
      * Metodo que retorna las ordenes activas que tiene un cliente

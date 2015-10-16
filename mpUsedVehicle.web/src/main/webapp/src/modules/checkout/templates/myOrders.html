@@ -1,0 +1,19 @@
+<div>
+    <div class="container">
+        <h2>My Orders</h2>
+        <!--Display Alerts -->
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+        <div>
+            <div class="panel panel-info">
+                <ul class="list-group" ng-repeat="order in orders">
+                    <a href="" class="list-group-item" ng-model="clickedOne" data-ng-click="selectOrder($index, order.id)" >Ammount: {{order.amount}}</a>
+                    <div ng-show="clickedOne">
+                        Status: {{order.orderStatus}}
+                    </div>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+
+</div>

@@ -65,11 +65,13 @@ public class OrderPersistence extends CrudPersistence<OrderEntity>{
             params.put("provider_id", idProvider);
             List<OrderEntity> list = new ArrayList<OrderEntity>();
             list = executeListNamedQuery("OrderEntity.getOrdersByProvider", params);
-            result = list.subList(0, 1);
+            result = list;
         }catch (NoResultException e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
             return null;
         }
+        System.out.println("Se obtuvo: "+result.size());
+//        System.out.println("Order: "+result.get(1).getId());
         return result;
     }
     /**
@@ -84,7 +86,7 @@ public class OrderPersistence extends CrudPersistence<OrderEntity>{
             params.put("client_id", idClient);
             List<OrderEntity> list = new ArrayList<OrderEntity>();
             list = executeListNamedQuery("OrderEntity.getOrdersByClient", params);
-            result = list.subList(0, 1);
+            result = list;
         }catch (NoResultException e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
             return null;
