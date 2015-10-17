@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('checkoutModule');
 
-    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout) {
+    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', 'stBlurredDialog', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout, stBlurredDialog) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'My Shopping Cart');
             var self = this;
 
@@ -63,9 +63,56 @@
                 }
             };//Realiza la validacion de la nueva cantidad asignada.
             
+            
+            
+            $scope.selectingMethod = true;
+            
+            $scope.paymentMethods = [{
+                "type": "CREDIT_CARD",
+                "agreements": [{
+                    "name": "VISA",
+                    "description": "Visa",
+                    "template": "src/modules/checkout/templates/credit.html",
+                    "logo": "images/visa_logo_6.gif"
+                },
+                {
+                    "name": "MASTER_CARD",
+                    "description": "Master Card",
+                    "template": "src/modules/checkout/templates/credit.html",
+                    "logo": "images/MasterCard_logo.png"
+                }]
+            },
+            {
+                "type": "OTHERS",
+                "agreements": [{
+                    "name": "PSE",
+                    "description": "PSE",
+                    "template": "src/modules/checkout/templates/pse.html",
+                    "logo": "images/PSE-logo.png"
+                },
+                {
+                    "name": "PAYPAL",
+                    "description": "PayPal",
+                    "template": "src/modules/checkout/templates/paypal.html",
+                    "logo": "images/Paypal_logo-5.png"
+                },{
+                
+                    "name": "DEBIT",
+                    "description": "Debit",
+                    "template": "src/modules/checkout/templates/debit.html",
+                    "logo": "images/Maestro_logo.png"
+                }]
+            }];
+            
             //cambia el metodo de pago
-            $scope.togglePaymentMethod = function(){
-                $scope.credit = !$scope.credit;
+            $scope.selectPaymentMethodAgreement = function(method){
+                $scope.selectedAgreement = method;
+                $scope.selectingMethod = false;
+                $scope.templateUrl = $scope.selectedAgreement.template ;
+            };
+            
+            $scope.modifySelection = function(){
+                $scope.selectingMethod = !$scope.selectingMethod;
             };
             
             $scope.toggleConfirmation = function(){
@@ -78,17 +125,33 @@
                 $scope.records[0].taxAmount = $scope.taxes;
                 $scope.records[0].amountWithTaxes = $scope.total;
                 $scope.records[0].orderStatus = 'AUTHORIZED';
-                $scope.records[0].paymentMethod = ($scope.credit)?'CREDIT_CARD':'DEBIT_CARD';
+                $scope.records[0].paymentMethod = $scope.selectedAgreement;
                 $scope.confirm = !$scope.confirm;
                 $('#confirmationModal').modal('hide');
                 svc.saveOrder($scope.records[0]);
-                $timeout(function(){
-                     $location.path('/');
-                }, 1000);
-               
+                
+                stBlurredDialog.open('src/modules/checkout/templates/processing.html', {msg: 'Thank you for buying at Hotwheels, you will be redirected!'});
                 
             };
             
+            
         }]);
 
+
+    // Create a controller for your modal dialog
+    mod.controller('DialogCtrl', ['$scope', 'stBlurredDialog', '$timeout', '$location', function($scope, stBlurredDialog, $timeout, $location){
+        // Get the data passed from the controller
+        $scope.dialogData = stBlurredDialog.getDialogData();
+        
+        $scope.processing = true;
+        $timeout(function(){
+            $scope.processing = false;
+        }, 3000);
+        
+        $scope.finishOperation = function(){
+            stBlurredDialog.close();
+            $location.path('/');
+        }
+        
+    }]);
 })(window.angular);
