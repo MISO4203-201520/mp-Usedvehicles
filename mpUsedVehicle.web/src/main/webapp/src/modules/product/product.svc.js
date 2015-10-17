@@ -11,7 +11,9 @@
                                                                 'capacity': capacity, 
                                                                 'price': price});;
             };
-            
+            this.getVehiclesName = function(){
+                return this.api.all('listVehiclesName').getList({});
+            };
             this.findCheaperbyProvider = function(idProvider){
                 return this.api.one('cheapest', idProvider).get();
             };

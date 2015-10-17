@@ -18,6 +18,7 @@
             $scope.varEnable = true;
             $scope.providerName = ''; 
             $scope.records=[];
+            $scope.vehicleNames=[];
             $scope.text2Search=""; 
             
             // Vars for advanced search
@@ -29,17 +30,29 @@
             //Funciones
             $scope.getProductsByAdvancedSearch = function () {
                 console.log("Getting by advanced search...");
-                
-                svc.getProductsByAdvancedSearch(
-                        $scope.brand, $scope.model,
-                        $scope.capacity, $scope.price).then(function (products) {
-                            
-                    $scope.records = [];
+                console.log("$scope.vehicleNames" + $scope.vehicleNames.length);
+                 svc.getVehiclesName().then(function (products) {
+                    console.log("$scope.vehicleNames -" + $scope.vehicleNames.length);
+                    $scope.vehicleNames = [];
                     for (var i = 0; i < products.length; i++) {
-                        $scope.records.push(products[i]);
+                        console.log("Prodiuct"+products[i].name);
+                        console.log("Getting by advanced search..."+products[i]);
+                        $scope.vehicleNames.push(products[i]);
                         
                     }
+                    console.log("$scope.vehicleNames --" + $scope.vehicleNames.length);
                 });
+                
+//                svc.getProductsByAdvancedSearch(
+//                        $scope.brand, $scope.model,
+//                        $scope.capacity, $scope.price).then(function (products) {
+//                            
+//                    $scope.records = [];
+//                    for (var i = 0; i < products.length; i++) {
+//                        $scope.records.push(products[i]);
+//                        
+//                    }
+//                });
             };
             
             $scope.findItem = function () {

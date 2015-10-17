@@ -55,7 +55,70 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return null;
         }
     }
-
+    public List<String> getVehiclesName() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesName");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesBrand() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesBrand");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesCapacity() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesCapacity");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesColor() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesColor");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesModel() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesModel");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesPlate() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesPlate");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesLocation() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesLocation");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    
     public List<ProductEntity> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price) {
         
         try {

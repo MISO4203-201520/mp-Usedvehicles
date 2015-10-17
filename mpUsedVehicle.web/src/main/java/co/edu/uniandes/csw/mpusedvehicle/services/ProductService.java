@@ -125,7 +125,52 @@ public class ProductService {
         }
         return product;
     }
+    @GET
+    @Path("listVehiclesName")
+    public List<ProductDTO> getVehiclesNames()
+    {
+        return productLogic.getVehiclesName();
+    }
+    @GET
+    @Path("listVehiclesBrand")
+    public List<ProductDTO> getVehiclesBrand()
+    {
+        return productLogic.getVehiclesBrand();
+    }
+    @GET
+    @Path("listVehiclesCapacity")
+    public List<ProductDTO> getVehiclesCapacity()
+    {
+        return productLogic.getVehiclesCapacity();
+    }
+    @GET
+    @Path("listVehiclesColor")
+    public List<ProductDTO> getVehiclesColor()
+    {
+        return productLogic.getVehiclesColor();
+    }
+    @GET
+    @Path("listVehiclesModel")
+    public List<ProductDTO> getVehiclesModel()
+    {
+        return productLogic.getVehiclesModel();
+    }
     
+    @GET
+    @Path("listVehiclesPlate")
+    public List<ProductDTO> getVehiclesPlate()
+    {
+        return productLogic.getVehiclesName();
+    }
+    
+    @GET
+    @Path("listVehiclesLocation")
+    public List<ProductDTO> getVehiclesLocation()
+    {
+        return productLogic.getVehiclesLocation();
+    }    
+            
+            
     @GET
     @Path("advancedsearch")
     public List<ProductDTO> getProductsByAdvancedSearch(

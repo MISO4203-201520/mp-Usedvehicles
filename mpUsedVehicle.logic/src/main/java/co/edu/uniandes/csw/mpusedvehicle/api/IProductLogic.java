@@ -14,5 +14,12 @@ public interface IProductLogic {
     public List<ProductDTO> getByVehicleName(String name);
     public ProductDTO getCheaperProductByProvider (String nameProvider);
     public ProductDTO getCheaperProductByVehicle (String nameVehicle);
+    public List<ProductDTO> getVehiclesName();
+    public List<ProductDTO> getVehiclesBrand();
+    public List<ProductDTO> getVehiclesCapacity();
+    public List<ProductDTO> getVehiclesColor();
+    public List<ProductDTO> getVehiclesModel();
+    public List<ProductDTO> getVehiclesPlate();
+    public List<ProductDTO> getVehiclesLocation();
     public List<ProductDTO> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price);
 }

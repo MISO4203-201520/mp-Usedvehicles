@@ -7,6 +7,9 @@
                     <h3 class="panel-title">Advanced search</h3>
                 </div>
                 <div class="panel-body">
+                    <select class="form-control" name="repeatSelect" id="repeatSelect" ng-model="repeatSelect">
+                        <option ng-repeat="vName in vehicleNames" value="{{vName.name}}">{{vName.name}}</option>
+                    </select>                 
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item"><input type="text" class="form-control" placeholder="Brand" ng-model="brand"></li>

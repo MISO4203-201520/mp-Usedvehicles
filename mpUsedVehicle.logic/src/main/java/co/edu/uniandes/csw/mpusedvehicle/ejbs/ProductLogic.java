@@ -84,4 +84,36 @@ public class ProductLogic implements IProductLogic {
     public List<ProductDTO> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price) {
         return ProductConverter.listEntity2DTO(persistence.getProductsByAdvancedSearch(brand, model, capacity, price));
     }
+    
+    public List<ProductDTO> getVehiclesName() {
+        return ProductConverter.listString2DTO(persistence.getVehiclesName());
+    }
+    
+    public List<ProductDTO> getVehiclesBrand() {
+        return ProductConverter.listString2DTO(persistence.getVehiclesBrand());
+    }
+    
+    public List<ProductDTO> getVehiclesCapacity() {
+        return ProductConverter.listString2DTO(persistence.getVehiclesCapacity());
+    }
+        
+    public List<ProductDTO> getVehiclesColor() {
+        return ProductConverter.listString2DTO(persistence.getVehiclesColor());
+    }
+        
+    public List<ProductDTO> getVehiclesModel() {
+        return ProductConverter.listString2DTO(persistence.getVehiclesModel());
+    }
+        
+    public List<ProductDTO> getVehiclesPlate() {
+        return ProductConverter.listString2DTO(persistence.getVehiclesPlate());
+    }
+        
+    public List<ProductDTO> getVehiclesLocation() {
+        return ProductConverter.listString2DTO(persistence.getVehiclesLocation());
+    }    
+     
+      
+        
+      
 }
