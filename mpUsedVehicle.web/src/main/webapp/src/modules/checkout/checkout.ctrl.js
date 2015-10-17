@@ -63,10 +63,7 @@
                 }
             };//Realiza la validacion de la nueva cantidad asignada.
             
-            //cambia el metodo de pago
-            $scope.togglePaymentMethod = function(){
-                $scope.credit = !$scope.credit;
-            };
+            
             
             $scope.toggleConfirmation = function(){
                 $scope.confirm = !$scope.confirm;
@@ -89,6 +86,44 @@
                 
             };
             
+            
+            
+            
+            
+            $scope.paymentMethods = [{
+                "type": "CREDIT_CARD",
+                "agreements": [{
+                    "name": "VISA",
+                    "description": "Visa",
+                    "logo": "url visa"
+                },
+                {
+                    "name": "MASTER_CARD",
+                    "description": "Master Card",
+                    "logo": "url visa"
+                }]
+            },
+            {
+                "type": "PSE",
+                "agreements": [{
+                    "name": "PSE",
+                    "description": "PSE",
+                    "logo": "url PSE"
+                }]
+            },
+            {
+                "type": "DEBIT_CARD",
+                "agreements": [{
+                    "name": "DEBIT",
+                    "description": "Debit",
+                    "logo": "url Debit"
+                }]
+            }];
+            
+            //cambia el metodo de pago
+            $scope.togglePaymentMethodSelection = function(){
+                $scope.credit = !$scope.credit;
+            };
         }]);
 
 })(window.angular);
