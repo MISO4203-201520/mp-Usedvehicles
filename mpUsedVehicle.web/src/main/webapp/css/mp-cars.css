@@ -66,8 +66,7 @@ and open the template in the editor.
     position : fixed;
     z-index: 100;
     background-image : url('http://loadinggif.com/images/image-selection/3.gif');
-    background-color:#666;
-    opacity : 0.9;
+    background-color: rgba(0, 0, 0, 0.8);
     background-repeat : no-repeat;
     background-position : center;
     left : 0;
