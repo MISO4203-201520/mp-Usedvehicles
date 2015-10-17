@@ -18,6 +18,9 @@ public class VehicleDTO {
     private String brand;
     private String image;
     private List<ReviewDTO> reviews;
+    private Boolean plate;
+    private String location; 
+            
     /**
      * @generated
      */
@@ -137,5 +140,23 @@ public class VehicleDTO {
     public void setReviews(List<ReviewDTO> reviews) {
         this.reviews = reviews;
     }
+
+    public Boolean getPlate() {
+        return plate;
+    }
+
+    public void setPlate(Boolean plate) {
+        this.plate = plate;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    
+    
 
 }

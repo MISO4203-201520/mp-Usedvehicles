@@ -13,6 +13,9 @@
                     <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
                     <p><strong>Brand:</strong> {{record.vehicle.brand}}</p>
                     <p><strong>Model:</strong> {{record.vehicle.model}}</p>
+                    <p ng-hide="{{record.vehicle.plate == False}}"><strong>Plate:</strong> Par </p>
+                    <p ng-show="{{record.vehicle.plate == True}}"><strong>Plate:</strong> Impar </p>
+                    <p><strong>Location:</strong> {{record.vehicle.location}}</p>
                     <p><strong>Desciption:</strong> {{record.vehicle.description}}</p>
                     <p><strong>Price:</strong> {{record.price| currency}}</p>
                     <p ng-hide="{{record.discount == null}}"><strong>Discount:</strong> {{record.discount}} %</p>
