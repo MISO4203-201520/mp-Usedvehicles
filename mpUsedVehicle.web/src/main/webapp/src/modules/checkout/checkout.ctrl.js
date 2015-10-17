@@ -125,7 +125,7 @@
                 $scope.records[0].taxAmount = $scope.taxes;
                 $scope.records[0].amountWithTaxes = $scope.total;
                 $scope.records[0].orderStatus = 'AUTHORIZED';
-                $scope.records[0].paymentMethod = $scope.selectedAgreement;
+                $scope.records[0].paymentMethod = $scope.selectedAgreement.name;
                 $scope.confirm = !$scope.confirm;
                 $('#confirmationModal').modal('hide');
                 svc.saveOrder($scope.records[0]);
