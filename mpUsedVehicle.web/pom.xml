@@ -26,12 +26,7 @@
             <groupId>org.glassfish.main.extras</groupId>
             <artifactId>glassfish-embedded-all</artifactId>
             <version>4.0</version>
-<<<<<<< HEAD
-            <scope>test</scope>
-            <type>jar</type>
-=======
             <scope>provided</scope>
->>>>>>> refs/remotes/origin/master
         </dependency>
         <dependency>
             <groupId>co.edu.uniandes.csw.mpusedvehicle</groupId>
