@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('checkoutModule');
 
-    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout) {
+    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', 'userService' , '$timeout', function (CrudCreator, $scope, svc, model, $location, authSvc, svcUser,$timeout) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'My Shopping Cart');
             var self = this;
 
@@ -71,11 +71,60 @@
                 {
                     $location.path('/login');
                 }else{
-                svc.getOrderByProvider(authSvc.getCurrentUser().id).then(function (result) {
-                    $scope.orders = [];
-                    $scope.orders = result;
-                });
+                    svcUser.api.one('currentUser').get().then(function(user) {
+                        console.log(user.role);
+                        $scope.role=user.role;
+                        if($scope.role==="provider"){
+                            console.log('getOrderByProvider');
+                           svc.getOrderByProvider(authSvc.getCurrentUser().id).then(function (result) {
+                                $scope.providerOrders = [];
+                                $scope.providerOrders = result;
+                            });
+                        }else{
+                            console.log('getOrderByClient');
+                            svc.getOrderByClient(authSvc.getCurrentUser().id).then(function (result) {
+                                $scope.orders = [];
+                                $scope.orders = result;
+                            });
+                        }
+                    });
+                
             }
+            $scope.modalEdit = function(option){
+                $scope.orderEdited = $scope.providerOrders[option];
+                $('#editOrder').modal('show');
+                return false;
+            };
+            
+            $scope.saveStatus = function(){
+                svc.saveStatus($scope.orderEdited);
+                $('#editOrder').modal('hide');
+                return false;
+            };
+            
+            $scope.options = [
+                {
+                  name: 'Merchant Confirmed',
+                  value: 'Merchant Confirmed'
+                }, 
+                {
+                  name: 'Shipped',
+                  value: 'Shipped'
+                }, 
+                {
+                  name: 'Completed',
+                  value: 'Completed'
+                }, 
+                {
+                  name: 'Canceled',
+                  value: 'Canceled'
+                },
+                {
+                  name: 'AUTHORIZED',
+                  value: 'AUTHORIZED'
+                }
+                
+            ];
            
             
             $scope.toggleConfirmation = function(){
