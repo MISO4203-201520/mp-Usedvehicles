@@ -2,6 +2,7 @@ package co.edu.uniandes.csw.mpusedvehicle.dtos;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * @generated
@@ -14,6 +15,7 @@ public class ProductDTO {
     private Integer price;
     private Boolean availability;
     private ProviderDTO provider;
+    @PodamExclude
     private VehicleDTO vehicle;
     private List<CommentDTO> comments;
     private Integer discount;   //Nuevo Atributo REQ06
