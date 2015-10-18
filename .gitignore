@@ -23,3 +23,9 @@ nbactions.xml
 #Tests
 /mpUsedVehicle.logic/derby.log
 
+#Intellij
+/.idea
+/mpUsedVehicle.iml
+/mpUsedVehicle.web/mpUsedVehicle.web.iml
+/mpUsedVehicle.logic/mpUsedVehicle.logic.iml
+/mpUsedVehicle.web/src/main/webapp/WEB-INF/glassfish-resources.xml
