@@ -8,13 +8,10 @@ package co.edu.uniandes.csw.mpusedvehicle.tests;
 import co.edu.uniandes.csw.mpusedvehicle.api.IOrderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.ejbs.OrderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.converters.OrderConverter;
-import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
-import co.edu.uniandes.csw.mpusedvehicle.entities.CartItemEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.OrderEntity;
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import co.edu.uniandes.csw.mpusedvehicle.enums.PaymentMethod;
-import co.edu.uniandes.csw.mpusedvehicle.persistence.CartItemPersistence;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.OrderPersistence;
 import static co.edu.uniandes.csw.mpusedvehicle.tests._TestUtil.generateRandom;
 import java.math.BigDecimal;
@@ -35,7 +32,7 @@ import org.junit.runner.RunWith;
 
 /**
  *
- * @author estudiante
+ * @author Diego Agudelo
  */
 @RunWith(Arquillian.class)
 public class OrderLogicTest {
