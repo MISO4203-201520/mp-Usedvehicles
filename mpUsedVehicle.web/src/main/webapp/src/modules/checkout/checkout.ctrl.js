@@ -128,11 +128,17 @@
                                 $scope.providerOrders = result;
                             });
                         }else{
-                            console.log('getOrderByClient');
-                            svc.getOrderByClient(authSvc.getCurrentUser().id).then(function (result) {
-                                $scope.orders = [];
-                                $scope.orders = result;
-                            });
+                            if($location.path() === '/listorders')
+                            {
+                                $location.path('/myorders');
+                            }else{
+                                console.log('getOrderByClient');
+                                svc.getOrderByClient(authSvc.getCurrentUser().id).then(function (result) {
+                                    $scope.orders = [];
+                                    $scope.orders = result;
+                                });
+                            }
+                            
                         }
                     });
                 
