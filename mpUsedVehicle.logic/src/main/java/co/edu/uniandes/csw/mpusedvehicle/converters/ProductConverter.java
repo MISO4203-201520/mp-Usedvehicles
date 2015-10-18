@@ -166,4 +166,15 @@ public abstract class ProductConverter {
         }
         return entities;
     }
+    public static List<ProductDTO> listString2DTO(List<String> listParams) {
+        List<ProductDTO> dtos = new ArrayList<ProductDTO>();
+        if (listParams != null) {
+            for (String name : listParams) {
+                ProductDTO dto = new ProductDTO();
+                dto.setName(name);
+                dtos.add(dto);
+            }
+        }
+        return dtos;
+    }
 }

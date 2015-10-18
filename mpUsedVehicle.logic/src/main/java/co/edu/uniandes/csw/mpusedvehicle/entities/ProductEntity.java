@@ -17,6 +17,13 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Product.getByVehicleName", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :name"),
+    @NamedQuery(name = "Product.getVehiclesName", query = "select distinct u.vehicle.name from ProductEntity u"),
+    @NamedQuery(name = "Product.getVehiclesBrand", query = "select distinct u.vehicle.brand from ProductEntity u"),
+    @NamedQuery(name = "Product.getVehiclesCapacity", query = "select distinct u.vehicle.capacity from ProductEntity u"),
+    @NamedQuery(name = "Product.getVehiclesColor", query = "select distinct u.vehicle.color from ProductEntity u"),
+    @NamedQuery(name = "Product.getVehiclesModel", query = "select distinct u.vehicle.model from ProductEntity u"),
+    @NamedQuery(name = "Product.getVehiclesPlate", query = "select distinct u.vehicle.plate from ProductEntity u"),
+    @NamedQuery(name = "Product.getVehiclesLocation", query = "select distinct u.vehicle.location from ProductEntity u"),
     @NamedQuery(name = "Product.getCheaperProductByProvider", query = "select u from ProductEntity u WHERE UPPER(u.provider.name) like :nameProvider order by u.price"),
     @NamedQuery(name = "Product.getCheaperProductByVehicle", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :nameVehicle order by u.price")
 })
