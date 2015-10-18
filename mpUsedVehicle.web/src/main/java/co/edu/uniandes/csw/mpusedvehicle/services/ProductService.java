@@ -125,26 +125,77 @@ public class ProductService {
         }
         return product;
     }
+    @GET
+    @Path("listVehiclesName")
+    public List<ProductDTO> getVehiclesNames()
+    {
+        return productLogic.getVehiclesName();
+    }
+    @GET
+    @Path("listVehiclesBrand")
+    public List<ProductDTO> getVehiclesBrand()
+    {
+        return productLogic.getVehiclesBrand();
+    }
+    @GET
+    @Path("listVehiclesCapacity")
+    public List<ProductDTO> getVehiclesCapacity()
+    {
+        return productLogic.getVehiclesCapacity();
+    }
+    @GET
+    @Path("listVehiclesColor")
+    public List<ProductDTO> getVehiclesColor()
+    {
+        return productLogic.getVehiclesColor();
+    }
+    @GET
+    @Path("listVehiclesModel")
+    public List<ProductDTO> getVehiclesModel()
+    {
+        return productLogic.getVehiclesModel();
+    }
     
+    @GET
+    @Path("listVehiclesPlate")
+    public List<ProductDTO> getVehiclesPlate()
+    {
+        return productLogic.getVehiclesPlate();
+    }
+    
+    @GET
+    @Path("listVehiclesLocation")
+    public List<ProductDTO> getVehiclesLocation()
+    {
+        return productLogic.getVehiclesLocation();
+    }    
+            
+            
     @GET
     @Path("advancedsearch")
     public List<ProductDTO> getProductsByAdvancedSearch(
-            @QueryParam("brand") String brand, 
-            @QueryParam("model") String model, 
-            @QueryParam("capacity") String capacity, 
-            @QueryParam("price") String price) {
+            @QueryParam("brandFilter") String brandFilter, 
+            @QueryParam("modelFilter") String modelFilter, 
+            @QueryParam("capacityFilter") String capacityFilter, 
+            @QueryParam("priceFilter") String priceFilter,
+            @QueryParam("plateFilter") String plateFilter,
+            @QueryParam("locationFilter") String locationFilter,
+            @QueryParam("colorFilter") String colorFilter) {
         
         List<ProductDTO> products = new ArrayList<ProductDTO>();
         
         System.out.println("Entro a busqueda avanzada...");
-        System.out.println(brand);
-        System.out.println(model);
-        System.out.println(capacity);
-        System.out.println(price);
+        System.out.println("brandFilter: "+brandFilter);
+        System.out.println("modelFilter :"+modelFilter);
+        System.out.println("capacityFilter: "+capacityFilter);
+        System.out.println("priceFilter: "+priceFilter);
+        System.out.println("colorFilter: "+colorFilter);
+        System.out.println("locationFilter: "+locationFilter);
+        System.out.println("plateFilter: "+plateFilter);
         
         Integer iCapacity = null;
         try {
-            iCapacity = Integer.valueOf(capacity);
+            iCapacity = Integer.valueOf(capacityFilter);
         } catch (NumberFormatException nfe) {
             Logger.getGlobal().log(Level.WARNING, 
                     "Capacity cannot be parsed to an Integer value. It will be used null as a value", nfe);
@@ -152,7 +203,7 @@ public class ProductService {
         
         Integer iPrice = null;
         try {
-            iPrice = Integer.valueOf(price);
+            iPrice = Integer.valueOf(priceFilter);
         } catch (NumberFormatException nfe) {
             Logger.getGlobal().log(Level.WARNING, 
                     "Price cannot be parsed to an Integer value. It will be used null as a value", nfe);
@@ -160,13 +211,18 @@ public class ProductService {
         
         try {
             
-            if ((brand == null || "".equalsIgnoreCase(brand)) && 
-                    (model == null || "".equalsIgnoreCase(model)) && 
-                    (capacity == null || "".equalsIgnoreCase(capacity)) && 
-                    (price == null || "".equalsIgnoreCase(price))) {
+            if ((brandFilter == null || "".equalsIgnoreCase(brandFilter)) && 
+                    (modelFilter == null || "".equalsIgnoreCase(modelFilter)) && 
+                    (capacityFilter == null || "".equalsIgnoreCase(capacityFilter)) && 
+                    (priceFilter == null || "".equalsIgnoreCase(priceFilter)) && 
+                    (colorFilter == null || "".equalsIgnoreCase(colorFilter)) && 
+                    (plateFilter == null || "".equalsIgnoreCase(plateFilter)) && 
+                    (locationFilter == null || "".equalsIgnoreCase(locationFilter))
+                    
+                    ) {
                 products = getProducts();
             } else {
-                products = productLogic.getProductsByAdvancedSearch(brand, model, iCapacity, iPrice);
+                products = productLogic.getProductsByAdvancedSearch(brandFilter, modelFilter, iCapacity, iPrice, colorFilter, plateFilter, locationFilter);
             }
             
         } catch (Exception e) {

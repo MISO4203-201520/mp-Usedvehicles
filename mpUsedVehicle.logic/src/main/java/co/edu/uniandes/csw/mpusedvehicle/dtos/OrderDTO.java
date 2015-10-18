@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -31,6 +32,7 @@ public class OrderDTO {
     
     private String orderStatus;
     
+    @PodamExclude
     private List<CartItemDTO> cartItems;
 
     public OrderDTO() {

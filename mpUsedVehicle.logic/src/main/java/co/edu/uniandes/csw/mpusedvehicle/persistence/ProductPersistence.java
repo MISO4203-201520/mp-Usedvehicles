@@ -55,14 +55,82 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return null;
         }
     }
-
-    public List<ProductEntity> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price) {
+    public List<String> getVehiclesName() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesName");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesBrand() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesBrand");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesCapacity() {
+        try{      
+            List<Integer> listInteger = new ArrayList<Integer>();
+            List<String> list = new ArrayList<String>();
+            listInteger = executeListNamedQuery("Product.getVehiclesCapacity");
+            for(Integer temp : listInteger){
+                list.add(temp.toString());
+            }
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesColor() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesColor");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesModel() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesModel");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    public List<String> getVehiclesPlate() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list.add("Even");
+            list.add("Odd");
+            return list;
+             } catch(NoResultException e){
+                 return null;               
+             }
+    }
+    public List<String> getVehiclesLocation() {
+        try{      
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesLocation");           
+            return list;
+            } catch(NoResultException e){
+                return null;               
+            }
+    }
+    
+    public List<ProductEntity> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price, String color, String plate, String location) {
         
         try {
             
             int startPrice = 0;
             int endPrice = 9999999;
-            
+            System.out.println("getProductsByAdvancedSearch ");
             // Constructing the sql query
             String sql = " SELECT p "
                         + "FROM ProductEntity p "
@@ -73,9 +141,21 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             if (model != null && !"".equalsIgnoreCase(model)) {
                 sql += "            AND p.vehicle.model = :model ";
             }
+            if (color != null && !"".equalsIgnoreCase(color)) {
+                sql += "            AND p.vehicle.color = :color ";
+            }
+            if (plate != null && !"".equalsIgnoreCase(plate)) {
+                if (plate.equals("Even"))
+                    sql += "            AND p.vehicle.plate = TRUE ";
+                else
+                    sql += "            AND p.vehicle.plate = FALSE ";
+            }            
             if (capacity != null && capacity > 0) {
                 sql += "            AND p.vehicle.capacity = :capacity ";
             }
+            if (location != null && !"".equalsIgnoreCase(location)) {
+                sql += "            AND p.vehicle.location = :location ";
+            }            
             if (price != null && price > 0) {
                 sql += "            AND p.price between :startPrice AND :endPrice ";
                 switch (price) {
@@ -99,6 +179,12 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             if (model != null && !"".equalsIgnoreCase(model)) {
                 query.setParameter("model", model);
             }
+            if (color != null && !"".equalsIgnoreCase(color)) {
+                query.setParameter("color", color);
+            }       
+            if (location != null && !"".equalsIgnoreCase(location)) {
+                query.setParameter("location", location);
+            }   
             if (capacity != null && capacity > 0) {
                 query.setParameter("capacity", capacity);
             }

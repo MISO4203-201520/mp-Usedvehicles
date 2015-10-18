@@ -47,5 +47,23 @@ public class OrderLogic implements IOrderLogic {
     public List<OrderDTO> getOrdersByStatus(OrderStatus status) {
         return persistence.getOrdersByStatus(null, null, status);
     }
+    /**
+     * Metodo que retorna las ordenes activas que tiene un proveedor
+     * @param idProvider. Identificador del provvedor.
+     * @return Lista de las ordenes.
+     */
+    public List<OrderDTO> getOrdersByProvider(Long idProvider){
+        List<OrderDTO> list = OrderConverter.listEntity2DTO(persistence.getOrdersByProvider(idProvider));
+        System.out.println("DTO se obtuvo : "+ list.size());
+        return list;
+    }
+    /**
+     * Metodo que retorna las ordenes activas que tiene un cliente
+     * @param idClient. Identificador del cliente.
+     * @return Lista de las ordenes.
+     */
+    public List<OrderDTO> getOrdersByClient(Long idClient){
+        return OrderConverter.listEntity2DTO(persistence.getOrdersByClient(idClient));
+    }
 
 }
