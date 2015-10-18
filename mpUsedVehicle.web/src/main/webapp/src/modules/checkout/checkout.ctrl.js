@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('checkoutModule');
 
-    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', 'stBlurredDialog', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout, stBlurredDialog) {
+    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', 'stBlurredDialog', 'userService', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout, stBlurredDialog, svcUser) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'My Shopping Cart');
             var self = this;
 
