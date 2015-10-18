@@ -15,7 +15,8 @@
         'ngRoute',
         'ngCrud',
         'xeditable',
-        'restangular'
+        'restangular',
+        'stBlurredDialog'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {

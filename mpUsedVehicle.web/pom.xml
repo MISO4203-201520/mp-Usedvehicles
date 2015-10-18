@@ -26,8 +26,12 @@
             <groupId>org.glassfish.main.extras</groupId>
             <artifactId>glassfish-embedded-all</artifactId>
             <version>4.0</version>
+<<<<<<< HEAD
             <scope>test</scope>
             <type>jar</type>
+=======
+            <scope>provided</scope>
+>>>>>>> refs/remotes/origin/master
         </dependency>
         <dependency>
             <groupId>co.edu.uniandes.csw.mpusedvehicle</groupId>
@@ -129,6 +133,21 @@
             <version>1.0.RC2</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>3.0.2.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>3.0.10.Final</version>
+        </dependency><!--
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.14</version>
+        </dependency>-->
     </dependencies>
     <build>
         <pluginManagement>
