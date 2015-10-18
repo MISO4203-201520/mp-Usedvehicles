@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('checkoutModule');
 
-    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', 'stBlurredDialog', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout, stBlurredDialog) {
+    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', 'stBlurredDialog', 'userService', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout, stBlurredDialog, svcUser) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'My Shopping Cart');
             var self = this;
 
@@ -114,6 +114,71 @@
             $scope.modifySelection = function(){
                 $scope.selectingMethod = !$scope.selectingMethod;
             };
+            if(authSvc.getCurrentUser()=== undefined || authSvc.getCurrentUser()=== null)
+                {
+                    $location.path('/login');
+                }else{
+                    svcUser.api.one('currentUser').get().then(function(user) {
+                        console.log(user.role);
+                        $scope.role=user.role;
+                        if($scope.role==="provider"){
+                            console.log('getOrderByProvider');
+                           svc.getOrderByProvider(authSvc.getCurrentUser().id).then(function (result) {
+                                $scope.providerOrders = [];
+                                $scope.providerOrders = result;
+                            });
+                        }else{
+                            if($location.path() === '/listorders')
+                            {
+                                $location.path('/myorders');
+                            }else{
+                                console.log('getOrderByClient');
+                                svc.getOrderByClient(authSvc.getCurrentUser().id).then(function (result) {
+                                    $scope.orders = [];
+                                    $scope.orders = result;
+                                });
+                            }
+                            
+                        }
+                    });
+                
+            }
+            $scope.modalEdit = function(option){
+                $scope.orderEdited = $scope.providerOrders[option];
+                $('#editOrder').modal('show');
+                return false;
+            };
+            
+            $scope.saveStatus = function(){
+                svc.saveStatus($scope.orderEdited);
+                $('#editOrder').modal('hide');
+                return false;
+            };
+            
+            $scope.options = [
+                {
+                  name: 'Merchant Confirmed',
+                  value: 'Merchant Confirmed'
+                }, 
+                {
+                  name: 'Shipped',
+                  value: 'Shipped'
+                }, 
+                {
+                  name: 'Completed',
+                  value: 'Completed'
+                }, 
+                {
+                  name: 'Canceled',
+                  value: 'Canceled'
+                },
+                {
+                  name: 'AUTHORIZED',
+                  value: 'AUTHORIZED'
+                }
+                
+            ];
+           
             
             $scope.toggleConfirmation = function(){
                 $scope.confirm = !$scope.confirm;

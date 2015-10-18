@@ -70,6 +70,14 @@
                         templateUrl: 'src/modules/product/detail.tpl.html',
                         controller: 'productCtrl',
                         controllerAs: 'ctrl'
+                }).when('/myorders', {
+                        templateUrl: 'src/modules/order/templates/myOrders.html',
+                        controller: 'checkoutCtrl',
+                        controllerAs: 'ctrl'
+                }).when('/listorders', {
+                        templateUrl: 'src/modules/order/templates/listOrders.html',
+                        controller: 'checkoutCtrl',
+                        controllerAs: 'ctrl'
                 })
                 .otherwise('/catalog');
         }]);

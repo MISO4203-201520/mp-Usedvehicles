@@ -1,0 +1,10 @@
+<div>
+    <div class="container">
+        <h2>Order List</h2>
+        <!--Display Alerts -->
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+        
+        
+    </div>
+
+</div>

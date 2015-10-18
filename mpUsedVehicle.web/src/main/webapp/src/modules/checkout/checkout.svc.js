@@ -27,5 +27,16 @@
             this.saveOrder = function(record){
                 return self.saveRecord(record);
             };
+            this.saveStatus = function(record){
+                return this.api.one(record['id']+"/").customPUT(record);
+            };
+            this.getOrderByProvider = function (idProvider)
+            {
+                return this.api.one("provider", idProvider).get();
+            };
+            this.getOrderByClient = function (idClient)
+            {
+                return this.api.one("client", idClient).get();
+            };
     }]);
 })(window.angular);
