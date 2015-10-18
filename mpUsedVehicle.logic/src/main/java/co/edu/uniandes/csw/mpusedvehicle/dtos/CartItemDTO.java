@@ -2,6 +2,7 @@ package co.edu.uniandes.csw.mpusedvehicle.dtos;
 
 import co.edu.uniandes.csw.mpusedvehicle.entities.OrderEntity;
 import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * @generated
@@ -13,8 +14,11 @@ public class CartItemDTO {
     private String name;
     private Integer quantity;
     private Integer installments;
+    @PodamExclude
     private ClientDTO client;
+    @PodamExclude
     private ProductDTO product;
+    @PodamExclude
     private OrderDTO order;
     /**
      * @generated
