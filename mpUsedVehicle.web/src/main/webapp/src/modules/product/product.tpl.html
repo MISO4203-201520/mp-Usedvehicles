@@ -6,29 +6,102 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Advanced search</h3>
                 </div>
-                <div class="panel-body">
-                    <select class="form-control" name="repeatSelect" id="repeatSelect" ng-model="repeatSelect">
-                        <option ng-repeat="vName in vehicleNames" value="{{vName.name}}">{{vName.name}}</option>
-                    </select>                 
+                <div class="panel-body" data-ng-init="getFilters()">
+                    <table>
+<!--                        <tr>
+                            <td>
+                                <label>Name</label> 
+                            </td>
+                            <td>
+                                <select class="form-control"  ng-model="nameFilter">
+                                    <option value="">Search Name</option>
+                                    <option ng-repeat="vName in vehicleNames" value="{{vName.name}}">{{vName.name}}</option>
+                                </select>                                  
+                            </td>                            
+                        </tr>-->
+                        <tr>
+                            <td>
+                                <label>Brand</label>                                                    
+                            </td>
+                            <td>      
+                                <select class="form-control" placeholder="Brand" ng-model="brandFilter">
+                                    <option value="">Search Brand</option>
+                                    <option ng-repeat="vBrand in vehicleBrands" value="{{vBrand.name}}">{{vBrand.name}}</option>
+                                </select>                                                      
+                            </td>                            
+                        </tr>                                
+                        <tr>
+                            <td>
+                                <label>Capacity</label>                                
+                            </td>
+                            <td>      
+                                <select class="form-control" ng-model="capacityFilter">
+                                    <option value="">Search Capacity</option>
+                                    <option ng-repeat="vCapacity in vehicleCapacities" value="{{vCapacity.name}}">{{vCapacity.name}}</option>
+                                </select>                                  
+                            </td>                            
+                        </tr>     
+                        <tr>
+                            <td>
+                                <label>Color</label>                              
+                            </td>
+                            <td>
+                                <select class="form-control" ng-model="colorFilter">
+                                    <option value="">Search Color</option>
+                                    <option ng-repeat="vColor in vehicleColors" value="{{vColor.name}}">{{vColor.name}}</option>
+                                </select>                                   
+                            </td>                            
+                        </tr>     
+                        <tr>
+                            <td>
+                            <label>Model</label>
+                                
+                            </td>
+                            <td>      
+                                <select class="form-control" ng-model="modelFilter">
+                                     <option value="">Search Model</option>
+                                    <option ng-repeat="vModel in vehicleModels" value="{{vModel.name}}">{{vModel.name}}</option>
+                                </select>  
+                            </td>                            
+                        </tr>     
+                        <tr>
+                            <td>
+                                <label>Plate</label>                                                    
+                            </td>
+                            <td>  
+                                <select class="form-control" ng-model="plateFilter">
+                                    <option value="">Search Plate</option>
+                                    <option ng-repeat="vPlate in vehiclePlates" value="{{vPlate.name}}">{{vPlate.name}}</option>
+                                </select>                                  
+                            </td>                            
+                        </tr>   
+                        <tr>
+                            <td>
+                                <label>Location</label>                                                    
+                            </td>
+                            <td>  
+                                <select class="form-control" ng-model="locationFilter">
+                                    <option value="">Search Location</option>
+                                    <option ng-repeat="vLocation in vehicleLocations" value="{{vLocation.name}}">{{vLocation.name}}</option>
+                                </select>                                  
+                            </td>                            
+                        </tr>                          
+                        <tr>
+                            <td>
+                                <label>Price</label>                                                    
+                            </td>
+                            <td>  
+                                <select class="form-control" ng-model="priceFilter">
+                                    <option value="">Search Price</option>
+                                    <option value="1">Less than $10.000.000</option>
+                                    <option value="2">Between $10.000.000 and $99.000.000</option>
+                                    <option value="3">Greater than $99.000.000</option>
+                                </select>                                  
+                            </td>                            
+                        </tr>                           
+                    </table>                                          
                 </div>
                 <ul class="list-group">
-                    <li class="list-group-item"><input type="text" class="form-control" placeholder="Brand" ng-model="brand"></li>
-                    <li class="list-group-item"><input type="text" class="form-control" placeholder="Model" ng-model="model"></li>
-                    <li class="list-group-item"><input type="text" class="form-control" placeholder="Capacity" ng-model="capacity"></li>
-                    <li class="list-group-item">
-                        <div class="radio">
-                            <label><input type="radio" ng-model="price" value="1">Less than $10.000.000</label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" ng-model="price" value="2">Between $10.000.000 and $99.000.000</label>
-                        </div>
-                        <div class="radio disabled">
-                            <label><input type="radio" ng-model="price" value="3">Greater than $99.000.000</label>
-                        </div>
-                        <div class="radio disabled">
-                            <label><input type="radio" ng-model="price" value="">It doesn't matter.</label>
-                        </div>
-                    </li>
                     <li class="list-group-item">
                         <button class="btn btn-primary" ng-click="getProductsByAdvancedSearch()">Go to find!</button>
                     </li>

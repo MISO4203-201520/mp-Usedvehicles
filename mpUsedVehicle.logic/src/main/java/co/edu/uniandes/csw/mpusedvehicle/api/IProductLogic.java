@@ -21,5 +21,5 @@ public interface IProductLogic {
     public List<ProductDTO> getVehiclesModel();
     public List<ProductDTO> getVehiclesPlate();
     public List<ProductDTO> getVehiclesLocation();
-    public List<ProductDTO> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price);
+    public List<ProductDTO> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price, String color, String plate, String location);
 }
