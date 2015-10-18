@@ -1,7 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.persistence;
 
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
