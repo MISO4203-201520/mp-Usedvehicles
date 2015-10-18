@@ -18,21 +18,77 @@
             $scope.varEnable = true;
             $scope.providerName = ''; 
             $scope.records=[];
+            $scope.vehiclesRecords=[];
+            $scope.vehicleNames=[];
+            $scope.vehicleBrands=[];
+            $scope.vehicleCapacities=[];
+            $scope.vehicleColors=[];
+            $scope.vehicleModels=[];
+            $scope.vehiclePlates=[];
+            $scope.vehicleBrands=[];
             $scope.text2Search=""; 
             
             // Vars for advanced search
-            $scope.brand = "";
-            $scope.model = "";
-            $scope.capacity = "";
-            $scope.price = "";
+            $scope.brandFilter = "";
+            $scope.modelFilter = "";
+            $scope.capacityFilter = "";
+            $scope.priceFilter = "";
+            $scope.colorFilter = "";
+            $scope.plateFilter = "";
+            $scope.locationFilter = "";
             
             //Funciones
+            $scope.getFilters = function(){
+                svc.getVehiclesName().then(function (products) {
+                    $scope.vehicleNames = [];
+                    for (var i = 0; i < products.length; i++) {
+                           $scope.vehicleNames.push(products[i]);                   
+                    }
+                });
+                 svc.getVehiclesBrand().then(function (products) {
+                    $scope.vehicleBrands = [];
+                    for (var i = 0; i < products.length; i++) {
+                           $scope.vehicleBrands.push(products[i]);                   
+                    }
+                });
+                 svc.getVehiclesCapacity().then(function (products) {
+                    $scope.vehicleCapacities = [];
+                    for (var i = 0; i < products.length; i++) {
+                           $scope.vehicleCapacities.push(products[i]);                   
+                    }
+                });
+                 svc.getVehiclesColor().then(function (products) {
+                    $scope.vehicleColors = [];
+                    for (var i = 0; i < products.length; i++) {
+                           $scope.vehicleColors.push(products[i]);                   
+                    }
+                });      
+                 svc.getVehiclesModel().then(function (products) {
+                    $scope.vehicleModels = [];
+                    for (var i = 0; i < products.length; i++) {
+                           $scope.vehicleModels.push(products[i]);                   
+                    }
+                });   
+                svc.getVehiclesPlate().then(function (products) {
+                    $scope.vehiclePlates = [];
+                    for (var i = 0; i < products.length; i++) {
+                           $scope.vehiclePlates.push(products[i]);                   
+                    }
+                });   
+                 svc.getVehiclesLocation().then(function (products) {
+                    $scope.vehicleLocations = [];
+                    for (var i = 0; i < products.length; i++) {
+                           $scope.vehicleLocations.push(products[i]);                   
+                    }
+                });                  
+            }
             $scope.getProductsByAdvancedSearch = function () {
-                console.log("Getting by advanced search...");
-                
+                 
                 svc.getProductsByAdvancedSearch(
-                        $scope.brand, $scope.model,
-                        $scope.capacity, $scope.price).then(function (products) {
+                        $scope.brandFilter, $scope.modelFilter,
+                        $scope.capacityFilter, $scope.priceFilter,
+                        $scope.plateFilter,$scope.locationFilter,
+                        $scope.colorFilter).then(function (products) {
                             
                     $scope.records = [];
                     for (var i = 0; i < products.length; i++) {
