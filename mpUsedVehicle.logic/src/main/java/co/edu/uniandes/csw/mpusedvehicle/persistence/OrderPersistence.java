@@ -5,14 +5,11 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.persistence;
 
-import co.edu.uniandes.csw.mpusedvehicle.converters.CartItemConverter;
 import co.edu.uniandes.csw.mpusedvehicle.converters.OrderConverter;
-import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
-import co.edu.uniandes.csw.mpusedvehicle.entities.CartItemEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.OrderEntity;
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +18,6 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Root;
 
 /**
  *
@@ -59,19 +54,15 @@ public class OrderPersistence extends CrudPersistence<OrderEntity>{
      * @return Lista de las ordenes.
      */
     public List<OrderEntity> getOrdersByProvider(Long idProvider) {
-        List<OrderEntity> result = new ArrayList<OrderEntity>();
+        List<OrderEntity> result;
         try{
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("provider_id", idProvider);
-            List<OrderEntity> list = new ArrayList<OrderEntity>();
-            list = executeListNamedQuery("OrderEntity.getOrdersByProvider", params);
-            result = list;
+            result = executeListNamedQuery("OrderEntity.getOrdersByProvider", params);
         }catch (NoResultException e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-            return null;
+            return Collections.emptyList();
         }
-        System.out.println("Se obtuvo: "+result.size());
-//        System.out.println("Order: "+result.get(1).getId());
         return result;
     }
     /**
@@ -80,16 +71,14 @@ public class OrderPersistence extends CrudPersistence<OrderEntity>{
      * @return Lista de las ordenes.
      */
     public List<OrderEntity> getOrdersByClient(Long idClient) {
-        List<OrderEntity> result = new ArrayList<OrderEntity>();
+        List<OrderEntity> result;
         try{
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("client_id", idClient);
-            List<OrderEntity> list = new ArrayList<OrderEntity>();
-            list = executeListNamedQuery("OrderEntity.getOrdersByClient", params);
-            result = list;
+            result = executeListNamedQuery("OrderEntity.getOrdersByClient", params);
         }catch (NoResultException e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-            return null;
+            return Collections.emptyList();
         }
         return result;
     }
