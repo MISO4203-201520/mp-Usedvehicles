@@ -27,11 +27,15 @@ public abstract class MessageConverter {
             dto.setId(entity.getId());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
+            dto.setClientreceiver(entity.getClientreceiver());
+            dto.setProviderreceiver(entity.getProviderreceiver());
             dto.setIdTypeMessage(entity.getIdTypeMessage());
             dto.setDate(entity.getDate());
             dto.setQuestion(entity.getQuestion());
             dto.setAnswer(entity.getAnswer());
             dto.setProduct(ProductConverter.fullEntity2DTO(entity.getProduct()));
+            dto.setSubject(entity.getSubject());
+            dto.setReceivertype(entity.getReceivertype());
             
             return dto;
         } else {
@@ -64,11 +68,15 @@ public abstract class MessageConverter {
             dto.setId(entity.getId());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
+            dto.setClientreceiver(entity.getClientreceiver());
+            dto.setProviderreceiver(entity.getProviderreceiver());
             dto.setIdTypeMessage(entity.getIdTypeMessage());
             dto.setDate(entity.getDate());
             dto.setQuestion(entity.getQuestion());
             dto.setAnswer(entity.getAnswer());
             dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
+            dto.setSubject(entity.getSubject());
+            dto.setReceivertype(entity.getReceivertype());
 
             return dto;
         } else {
@@ -85,11 +93,15 @@ public abstract class MessageConverter {
             entity.setId(dto.getId());
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
+            entity.setClientreceiver(dto.getClientreceiver());
+            entity.setProviderreceiver(dto.getProviderreceiver());
             entity.setIdTypeMessage(dto.getIdTypeMessage());
             entity.setDate(dto.getDate());
             entity.setQuestion(dto.getQuestion());
             entity.setAnswer(dto.getAnswer());
             entity.setProduct(ProductConverter.fullDTO2Entity(dto.getProduct()));
+            entity.setSubject(dto.getSubject());
+            entity.setReceivertype(dto.getReceivertype());
 
             return entity;
         } else {

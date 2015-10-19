@@ -15,5 +15,38 @@
             this.answerQuestion = function(question){
                 restangular.all('messages/'+question.id).customPUT(question);
             };
+            
+            this.getMessagesByProvider = function(idProvider){
+                return this.api.one('getmessagesbyprovider', idProvider).get();
+            };
+            this.getMessagesByClient = function(idClient){
+                return this.api.one('getmessagesbyuser', idClient).get();
+            };
+            
+            this.getClients = function(){
+                return this.api.one('getclients').get();
+            };
+            
+            this.getProviders = function(){
+                return this.api.one('getproviders').get();
+            };
+            
+            this.sendMessage = function(data){
+                return this.api.one("newmessage/").customPOST(data).then(function() 
+                {
+                    console.log("Success");
+                });
+            };
+            
+            this.getClientbyid = function(id){
+                return this.api.one('getclientbyid', id).get();
+            };
+            
+            this.getProviderbyid = function(id){
+                return this.api.one('getproviderbyid', id).get();
+            };
+            
+            
+            
      }]);
 })(window.angular);
