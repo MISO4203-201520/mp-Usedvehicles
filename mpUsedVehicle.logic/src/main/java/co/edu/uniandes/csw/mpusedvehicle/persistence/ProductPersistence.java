@@ -130,7 +130,6 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             
             int startPrice = 0;
             int endPrice = 9999999;
-            System.out.println("getProductsByAdvancedSearch ");
             // Constructing the sql query
             String sql = " SELECT p "
                         + "FROM ProductEntity p "
