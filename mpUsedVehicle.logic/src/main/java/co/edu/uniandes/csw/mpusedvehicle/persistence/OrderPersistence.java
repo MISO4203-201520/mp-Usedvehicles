@@ -50,7 +50,7 @@ public class OrderPersistence extends CrudPersistence<OrderEntity>{
     }
     
     public int updateOrderInfo(Long id, OrderEntity entity) {
-        Query q = em.createNativeQuery("update orderentity set orderStatus = '" + entity.getOrderStatus()+ "', amount = '" + entity.getAmount() +"', amountwithtaxes = '" + entity.getAmountWithTaxes() + "', paymentmethod = '" + entity.getPaymentMethod() + "', taxamount = '" + entity.getTaxAmount() + "'  where id = " + id);        
+        Query q = em.createNativeQuery("update orderentity set orderStatus = '" + entity.getOrderStatus()+ "', amount = " + entity.getAmount() +", amountwithtaxes = " + entity.getAmountWithTaxes() + ", paymentmethod = '" + entity.getPaymentMethod() + "', taxamount = " + entity.getTaxAmount() + "  where id = " + id);        
         return q.executeUpdate();
     }
     /**
