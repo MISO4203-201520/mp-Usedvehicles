@@ -23,27 +23,53 @@ import javax.inject.Inject;
 public class OrderLogic implements IOrderLogic {
     
     @Inject private OrderPersistence persistence;
-
+    
+    /**
+     * Metodo que cuenta la cantidad de ordenes
+     * @return  entero.
+     */
+    @Override
     public int countOrders() {
         return persistence.count();
     }
-
+    
+    /**
+     * Metodo que retorna todas las ordenes actuales.
+     * @return Lista de OrderDTO
+     */
+    @Override
     public List<OrderDTO> getOrders() {
         return OrderConverter.listEntity2DTO(persistence.findAll(null,null));
     }
-
+    /**
+     * Metodo que crea y almacena la orden
+     * @param order. Nueva orden
+     * @return Orden guardada.
+     */
+    @Override
     public OrderDTO submitOrder(OrderDTO order) {
         OrderEntity entity = OrderConverter.refDTO2Entity(order);        
         persistence.create(entity);
         return OrderConverter.refEntity2DTO(entity);
     }
-
+    /**
+     * Metodo que actualiza una orden.
+     * @param id. Identificador de la orden que desea ser modificado.
+     * @param order. Orden con los nuevos datos.
+     * @return La orden almacenada.
+     */
+    @Override
     public OrderDTO updateOrder(Long id, OrderDTO order) {
         OrderEntity entity = OrderConverter.refDTO2Entity(order);        
         persistence.updateOrderInfo(id, entity);
         return OrderConverter.refEntity2DTO(entity);
     }
-
+    /**
+     * Metodo que obtiene las odenes dado un estado
+     * @param status. Estado a ser consultado.
+     * @return Lista de las ordenes 
+     */
+    @Override
     public List<OrderDTO> getOrdersByStatus(OrderStatus status) {
         return persistence.getOrdersByStatus(null, null, status);
     }
@@ -52,9 +78,9 @@ public class OrderLogic implements IOrderLogic {
      * @param idProvider. Identificador del provvedor.
      * @return Lista de las ordenes.
      */
+    @Override
     public List<OrderDTO> getOrdersByProvider(Long idProvider){
         List<OrderDTO> list = OrderConverter.listEntity2DTO(persistence.getOrdersByProvider(idProvider));
-        System.out.println("DTO se obtuvo : "+ list.size());
         return list;
     }
     /**
@@ -62,6 +88,7 @@ public class OrderLogic implements IOrderLogic {
      * @param idClient. Identificador del cliente.
      * @return Lista de las ordenes.
      */
+    @Override
     public List<OrderDTO> getOrdersByClient(Long idClient){
         return OrderConverter.listEntity2DTO(persistence.getOrdersByClient(idClient));
     }

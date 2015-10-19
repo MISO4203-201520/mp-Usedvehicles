@@ -2,7 +2,7 @@
     var mod = ng.module('orderModule', ['ngCrud']);
 
     mod.constant('orderContext', 'orders');
-    
+
     mod.constant('orderModel',{
         fields:[{
                 name:'amount',

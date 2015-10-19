@@ -29,13 +29,6 @@ import javax.persistence.OneToMany;
         @NamedQuery(name = "OrderEntity.getOrdersByClient", 
                     query = "SELECT c.order FROM CartItemEntity c LEFT JOIN fetch c.order WHERE c.client.id =(:client_id)")  
 })
-//@NamedQueries(
-//{
-//        @NamedQuery(name = "OrderEntity.getOrdersByProvider", 
-//                    query = "SELECT o FROM OrderEntity o INNER JOIN ( SELECT c.product.id, c.order.id, p.provider.id FROM ProductEntity p INNER JOIN CartItemEntity c ON p.id=c.product.id) a ON o.id=a.order.id WHERE a.provider.id=(:id)"),
-//        @NamedQuery(name = "OrderEntity.getOrdersByClient", 
-//                    query = "SELECT o FROM OrderEntity o INNER JOIN CartItemEntity c ON o.id=c.order.id WHERE c.client.id=(:id)")  
-//})
 public class OrderEntity implements Serializable {
     
     @Id
