@@ -2,7 +2,6 @@
     var mod = ng.module('checkoutModule', ['ngCrud']);
 
     mod.constant('checkoutContext', 'orders');
-    
     mod.constant('orderItem',{
         fields:[{
                 name:'amount',
