@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('checkoutModule');
 
-    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout) {
+    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'checkoutService', 'cartItemModel', '$location', 'authService', '$timeout', 'stBlurredDialog', 'userService', function (CrudCreator, $scope, svc, model, $location, authSvc, $timeout, stBlurredDialog, svcUser) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'My Shopping Cart');
             var self = this;
 
@@ -65,6 +65,88 @@
             
             
             
+            $scope.selectingMethod = true;
+            
+            svc.getPaymentMethods().then(function (result) {
+                $scope.paymentMethods = result;
+            });
+            
+            //cambia el metodo de pago
+            $scope.selectPaymentMethodAgreement = function(method){
+                $scope.selectedAgreement = method;
+                $scope.selectingMethod = false;
+                $scope.templateUrl = $scope.selectedAgreement.template ;
+            };
+            
+            $scope.modifySelection = function(){
+                $scope.selectingMethod = !$scope.selectingMethod;
+            };
+            if(authSvc.getCurrentUser()=== undefined || authSvc.getCurrentUser()=== null)
+                {
+                    $location.path('/login');
+                }else{
+                    svcUser.api.one('currentUser').get().then(function(user) {
+                        console.log(user.role);
+                        $scope.role=user.role;
+                        if($scope.role==="provider"){
+                            console.log('getOrderByProvider');
+                           svc.getOrderByProvider(authSvc.getCurrentUser().id).then(function (result) {
+                                $scope.providerOrders = [];
+                                $scope.providerOrders = result;
+                            });
+                        }else{
+                            if($location.path() === '/listorders')
+                            {
+                                $location.path('/myorders');
+                            }else{
+                                console.log('getOrderByClient');
+                                svc.getOrderByClient(authSvc.getCurrentUser().id).then(function (result) {
+                                    $scope.orders = [];
+                                    $scope.orders = result;
+                                });
+                            }
+                            
+                        }
+                    });
+                
+            }
+            $scope.modalEdit = function(option){
+                $scope.orderEdited = $scope.providerOrders[option];
+                $('#editOrder').modal('show');
+                return false;
+            };
+            
+            $scope.saveStatus = function(){
+                svc.saveStatus($scope.orderEdited);
+                $('#editOrder').modal('hide');
+                return false;
+            };
+            
+            $scope.options = [
+                {
+                  name: 'Merchant Confirmed',
+                  value: 'Merchant Confirmed'
+                }, 
+                {
+                  name: 'Shipped',
+                  value: 'Shipped'
+                }, 
+                {
+                  name: 'Completed',
+                  value: 'Completed'
+                }, 
+                {
+                  name: 'Canceled',
+                  value: 'Canceled'
+                },
+                {
+                  name: 'AUTHORIZED',
+                  value: 'AUTHORIZED'
+                }
+                
+            ];
+           
+            
             $scope.toggleConfirmation = function(){
                 $scope.confirm = !$scope.confirm;
                 $('#confirmationModal').modal('show');
@@ -75,55 +157,33 @@
                 $scope.records[0].taxAmount = $scope.taxes;
                 $scope.records[0].amountWithTaxes = $scope.total;
                 $scope.records[0].orderStatus = 'AUTHORIZED';
-                $scope.records[0].paymentMethod = ($scope.credit)?'CREDIT_CARD':'DEBIT_CARD';
+                $scope.records[0].paymentMethod = $scope.selectedAgreement.name;
                 $scope.confirm = !$scope.confirm;
                 $('#confirmationModal').modal('hide');
                 svc.saveOrder($scope.records[0]);
-                $timeout(function(){
-                     $location.path('/');
-                }, 1000);
-               
+                
+                stBlurredDialog.open('src/modules/checkout/templates/processing.html', {msg: 'Thank you for buying at Hotwheels, you will be redirected!'});
                 
             };
             
             
-            
-            
-            
-            $scope.paymentMethods = [{
-                "type": "CREDIT_CARD",
-                "agreements": [{
-                    "name": "VISA",
-                    "description": "Visa",
-                    "logo": "url visa"
-                },
-                {
-                    "name": "MASTER_CARD",
-                    "description": "Master Card",
-                    "logo": "url visa"
-                }]
-            },
-            {
-                "type": "PSE",
-                "agreements": [{
-                    "name": "PSE",
-                    "description": "PSE",
-                    "logo": "url PSE"
-                }]
-            },
-            {
-                "type": "DEBIT_CARD",
-                "agreements": [{
-                    "name": "DEBIT",
-                    "description": "Debit",
-                    "logo": "url Debit"
-                }]
-            }];
-            
-            //cambia el metodo de pago
-            $scope.togglePaymentMethodSelection = function(){
-                $scope.credit = !$scope.credit;
-            };
         }]);
 
+
+    // Create a controller for your modal dialog
+    mod.controller('DialogCtrl', ['$scope', 'stBlurredDialog', '$timeout', '$location', function($scope, stBlurredDialog, $timeout, $location){
+        // Get the data passed from the controller
+        $scope.dialogData = stBlurredDialog.getDialogData();
+        
+        $scope.processing = true;
+        $timeout(function(){
+            $scope.processing = false;
+        }, 3000);
+        
+        $scope.finishOperation = function(){
+            stBlurredDialog.close();
+            $location.path('/');
+        }
+        
+    }]);
 })(window.angular);

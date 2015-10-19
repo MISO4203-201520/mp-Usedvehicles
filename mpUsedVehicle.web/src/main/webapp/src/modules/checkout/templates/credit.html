@@ -1,7 +1,13 @@
-<div class="container" ng-show="credit">
+<div class="container">
     <form class="form-horizontal" role="form">
         <fieldset>
-            <legend>Tarjeta de Cr&eacute;dito</legend>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="card-holder-name">Selected Agreement</label>
+                <div class="col-sm-6">
+                    <img src="{{selectedAgreement.logo}}" width="80" />
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="card-holder-name">Name on Card</label>
                 <div class="col-sm-6">

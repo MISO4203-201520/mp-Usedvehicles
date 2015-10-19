@@ -8,7 +8,7 @@
                 <thead>
                     <tr>                   
                         <th>Product</th>
-                        <th>Monto</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,19 +26,27 @@
                     </tr>
                 </tbody>
             </table>
-            <br>
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default" ng-click="togglePaymentMethod()">Elegir Metodo de pago</button>                             
-                <br>
-            </div>
-            <br>
             
             <div id="paymentMethods" >
-                <div ng-repeat="method in paymentMethods">
-                    {{method.type}}
-                    <div ng-repeat="agreement in method.agreements">
-                        {{agreement.name}}                  
+                <div id="step1" ng-show="selectingMethod">
+                    <h2>1) Please select your desired Payment Method</h2>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="process" ng-repeat="method in paymentMethods">
+                        <div class="process-row">
+                            <div class="process-step" ng-repeat="agreement in method.agreements">
+                                <button id="{{agreement.name}}" type="button" class="btn btn-default btn-circle" ng-click="selectPaymentMethodAgreement(agreement)"><img src="{{agreement.logo}}" width="80" /></button>
+                                <p>{{agreement.name}}</p>
+                            </div>                    
+                        </div>
                     </div>
+                </div>
+                <div id="step2" ng-hide="selectingMethod">
+                    <h2>2) Please fill in the form  <button class="btn btn-link" role="link" type="button" name="op" value="Link 2" ng-click="modifySelection()">Change Payment Method</button></h2>
+                    <br/>
+                    <br/>
+                    <div ng-include src="templateUrl" ></div>                    
                 </div>
             </div>
         </div>
@@ -68,3 +76,4 @@
     </div>
 
 </div>
+<st-blurred-dialog-overlay></st-blurred-dialog-overlay>

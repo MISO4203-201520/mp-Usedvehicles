@@ -1,0 +1,29 @@
+<div class="container" ng-show="credit">
+    <form class="form-horizontal" role="form">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="card-holder-name">Selected Agreement</label>
+                <div class="col-sm-6">
+                    <img src="{{selectedAgreement.logo}}" width="80" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="paypal-id">Paypal id</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="paypal-id" id="paypal-id" placeholder="paypal id">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="number-id">Password</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" name="number-id" id="number-id" placeholder="Password">
+                </div>
+            </div>                 
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <button type="button" class="btn btn-success" ng-click="toggleConfirmation()"> Pay Now</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

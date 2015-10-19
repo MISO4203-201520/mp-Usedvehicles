@@ -1,7 +1,7 @@
 (function(ng){
     var mod = ng.module('checkoutModule');
     
-    mod.service('checkoutService', ['CrudCreator','checkoutContext', function(CrudCreator, context){
+    mod.service('checkoutService', ['CrudCreator','checkoutContext', 'Restangular', function(CrudCreator, context, restangular){
             CrudCreator.extendService(this, context);
             var self = this;
             this.addItem = function (record) {
@@ -26,6 +26,21 @@
             };
             this.saveOrder = function(record){
                 return self.saveRecord(record);
+            };
+            this.saveStatus = function(record){
+                return this.api.one(record['id']+"/").customPUT(record);
+            };
+            this.getOrderByProvider = function (idProvider)
+            {
+                return this.api.one("provider", idProvider).get();
+            };
+            this.getOrderByClient = function (idClient)
+            {
+                return this.api.one("client", idClient).get();
+            };
+            this.getPaymentMethods = function ()
+            {
+                return this.api.one("../paymentMethods").get();
             };
     }]);
 })(window.angular);

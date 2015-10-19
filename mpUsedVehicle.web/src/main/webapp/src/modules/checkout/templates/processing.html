@@ -1,0 +1,18 @@
+<div ng-controller="DialogCtrl">
+    <div ng-show="processing">
+        <div id="divLoading"> 
+        </div>
+    </div>
+    <div ng-show="!processing">
+        
+        <div id="processed" class="col-sm-offset-2 col-sm-6">
+            <h2>Order Processed Correctly!</h2>
+            <br/>
+            <div>
+                {{dialogData.msg}}
+                <button type="button" class="btn btn-success" ng-click="finishOperation()"> Got it! </button>
+            </div>
+        </div>
+        
+    </div>
+</div>

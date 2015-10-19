@@ -1,0 +1,42 @@
+<div>
+    <div class="container">
+        <h2>My Orders</h2>
+        <!--Display Alerts -->
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+        <div>
+            <div class="panel panel-info">
+                <ul class="list-group" ng-repeat="order in orders track by $index">
+                    <a href="" class="list-group-item" ng-click="showDetails = ! showDetails" >No.{{$index+1}} Ammount: {{order.amount}}</a>
+                    <div ng-show="showDetails">
+                        <table>
+                            <tr>
+                              <th>Amount:</th>
+                              <th>{{order.amount}}</th>
+                            </tr>
+                            <tr>
+                              <td>Tax:</td>
+                              <td>{{order.amountWithTaxes - order.amount}}</td>
+                            </tr>
+                            <tr>
+                              <td>Order Total:</td>
+                              <td>{{order.amountWithTaxes}}</td>
+                            </tr>
+                            <tr>
+                              <td>Status:</td>
+                              <td><p ng-style="{color:'green'}"><strong >{{order.orderStatus}}</strong> </p>
+                                </td>
+                            </tr>
+                            <tr>
+                              <td>Comments:</td>
+                              <td></td>
+                            </tr>
+                          </table>
+                         
+                    </div>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+
+</div>

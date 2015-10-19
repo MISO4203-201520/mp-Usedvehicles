@@ -5,10 +5,13 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.dtos;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Jonatan
  */
+@XmlRootElement
 public class UserDTO {
 
     private String name;
