@@ -9,7 +9,7 @@ import co.edu.uniandes.csw.mpusedvehicle.api.IOrderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.converters.CartItemConverter;
 import co.edu.uniandes.csw.mpusedvehicle.converters.ClientConverter;
 import co.edu.uniandes.csw.mpusedvehicle.ejbs.OrderLogic;
-import co.edu.uniandes.csw.mpusedvehicle.converters.OrderConverter;
+import co.edu.uniandes.csw.mpusedvehicle.converters.AgreementConverter;
 import co.edu.uniandes.csw.mpusedvehicle.converters.ProductConverter;
 import co.edu.uniandes.csw.mpusedvehicle.converters.ProviderConverter;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
@@ -58,7 +58,7 @@ public class OrderLogicTest {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
                 .addPackage(OrderEntity.class.getPackage())
                 .addPackage(OrderDTO.class.getPackage())
-                .addPackage(OrderConverter.class.getPackage())
+                .addPackage(AgreementConverter.class.getPackage())
                 .addPackage(OrderLogic.class.getPackage())
                 .addPackage(IOrderLogic.class.getPackage())
                 .addPackage(OrderPersistence.class.getPackage())

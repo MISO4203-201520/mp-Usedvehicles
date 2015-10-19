@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mpusedvehicle.serviceTest.checkout;
 import co.edu.uniandes.csw.mpusedvehicle.api.IAdminLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IClientLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.UserDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.EJBExceptionMapper;
@@ -86,7 +87,7 @@ public class CheckoutTest {
                  // El archivo shiro.ini. 
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/glassfish-resources.xml"))
                  // El archivo shiro.ini. 
-                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/shiro.ini"))
+                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/shiro-test.ini"))
                 // El archivo web.xml es necesario para el despliegue de los servlets
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"));
 
@@ -113,6 +114,7 @@ public class CheckoutTest {
         user.setUserName("USER2");
         user.setPassword("Pepitoperez123");
         Response login = cliente.target(URLBASE + PATH_LOGIN).request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
+        ClientDTO client = (ClientDTO) login.getEntity();
         cliente.close();
         cliente = ClientBuilder.newClient();
         Response response = cliente.target(URLBASE + PATH_CART_ITEMS)
