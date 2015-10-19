@@ -67,42 +67,46 @@
             
             $scope.selectingMethod = true;
             
-            $scope.paymentMethods = [{
-                "type": "CREDIT_CARD",
-                "agreements": [{
-                    "name": "VISA",
-                    "description": "Visa",
-                    "template": "src/modules/checkout/templates/credit.html",
-                    "logo": "images/visa_logo_6.gif"
-                },
-                {
-                    "name": "MASTER_CARD",
-                    "description": "Master Card",
-                    "template": "src/modules/checkout/templates/credit.html",
-                    "logo": "images/MasterCard_logo.png"
-                }]
-            },
-            {
-                "type": "OTHERS",
-                "agreements": [{
-                    "name": "PSE",
-                    "description": "PSE",
-                    "template": "src/modules/checkout/templates/pse.html",
-                    "logo": "images/PSE-logo.png"
-                },
-                {
-                    "name": "PAYPAL",
-                    "description": "PayPal",
-                    "template": "src/modules/checkout/templates/paypal.html",
-                    "logo": "images/Paypal_logo-5.png"
-                },{
-                
-                    "name": "DEBIT",
-                    "description": "Debit",
-                    "template": "src/modules/checkout/templates/debit.html",
-                    "logo": "images/Maestro_logo.png"
-                }]
-            }];
+            svc.getPaymentMethods().then(function (result) {
+                $scope.paymentMethods = result;
+            });       
+                    
+//                    [{
+//                "type": "CREDIT_CARD",
+//                "agreements": [{
+//                    "name": "VISA",
+//                    "description": "Visa",
+//                    "template": "src/modules/checkout/templates/credit.html",
+//                    "logo": "images/visa_logo_6.gif"
+//                },
+//                {
+//                    "name": "MASTER_CARD",
+//                    "description": "Master Card",
+//                    "template": "src/modules/checkout/templates/credit.html",
+//                    "logo": "images/MasterCard_logo.png"
+//                }]
+//            },
+//            {
+//                "type": "OTHERS",
+//                "agreements": [{
+//                    "name": "PSE",
+//                    "description": "PSE",
+//                    "template": "src/modules/checkout/templates/pse.html",
+//                    "logo": "images/PSE-logo.png"
+//                },
+//                {
+//                    "name": "PAYPAL",
+//                    "description": "PayPal",
+//                    "template": "src/modules/checkout/templates/paypal.html",
+//                    "logo": "images/Paypal_logo-5.png"
+//                },{
+//                
+//                    "name": "DEBIT",
+//                    "description": "Debit",
+//                    "template": "src/modules/checkout/templates/debit.html",
+//                    "logo": "images/Maestro_logo.png"
+//                }]
+//            }];
             
             //cambia el metodo de pago
             $scope.selectPaymentMethodAgreement = function(method){
