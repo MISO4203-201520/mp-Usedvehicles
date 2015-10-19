@@ -183,7 +183,7 @@ public class ProductService {
             @QueryParam("colorFilter") String colorFilter) {
         
         List<ProductDTO> products = new ArrayList<ProductDTO>();
-               
+                
         Integer iCapacity = null;
         try {
             iCapacity = Integer.valueOf(capacityFilter);
