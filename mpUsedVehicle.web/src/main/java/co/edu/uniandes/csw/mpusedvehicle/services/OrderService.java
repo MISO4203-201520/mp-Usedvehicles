@@ -6,6 +6,7 @@ import co.edu.uniandes.csw.mpusedvehicle.api.IOrderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
 import java.util.List;
@@ -36,7 +37,14 @@ public class OrderService {
     @Inject private IClientLogic clientLogic;
     @Inject private IOrderLogic orderLogic;
     
+    /**
+     * Cliente que ha iniciado sesion
+     */
     private ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
+    /**
+     * Provedor que ha iniciado sesion
+     */
+    private ProviderDTO provider = (ProviderDTO)SecurityUtils.getSubject().getSession().getAttribute("Provider");
     /**
      * @generated
      */
@@ -79,5 +87,35 @@ public class OrderService {
     @Path("{id: \\d+}")
     public void deleteCartItem(@PathParam("id") Long id) {
         cartItemLogic.deleteCartItemByClient(client.getId(), id);
+    }
+    
+    /**
+     * Sercicio REST encargado de obtener la lista de ordenes de un provedor.
+     * @param id. Devuelve el id del provedor.
+     * @return List. Lista de ordenes.
+     */
+    @GET
+    @Path("/provider/{id:\\d+}")
+    public List<OrderDTO> getOrdersByProvider(@PathParam("id") Long id) {
+        if(provider!= null)
+        {
+            return orderLogic.getOrdersByProvider(id);
+        }
+        return null;
+    }
+    
+    /**
+     * Sercicio REST encargado de obtener la lista de ordenes de un cliente.
+     * @param id. Devuelve el id del cliente.
+     * @return List. Lista de ordenes.
+     */
+    @GET
+    @Path("/client/{id:\\d+}")
+    public List<OrderDTO> getOrdersByClient(@PathParam("id") Long id) {
+        if(client!= null)
+        {
+            return orderLogic.getOrdersByClient(id);
+        }
+        return null;
     }
 }

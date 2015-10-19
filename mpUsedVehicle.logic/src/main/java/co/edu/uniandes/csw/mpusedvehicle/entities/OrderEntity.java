@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.entities;
 
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
-import co.edu.uniandes.csw.mpusedvehicle.enums.PaymentMethod;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,14 +13,29 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
- *
+ * Entidad de orden de compra
  * @author estudiante
  */
 @Entity
+@NamedQueries(
+{
+        @NamedQuery(name = "OrderEntity.getOrdersByProvider", 
+                    query = "SELECT distinct c.order FROM CartItemEntity c LEFT JOIN fetch c.order LEFT JOIN fetch c.product WHERE c.product.provider.id =(:provider_id) and c.order.id is not null"),
+        @NamedQuery(name = "OrderEntity.getOrdersByClient", 
+                    query = "SELECT c.order FROM CartItemEntity c LEFT JOIN fetch c.order WHERE c.client.id =(:client_id)")  
+})
+//@NamedQueries(
+//{
+//        @NamedQuery(name = "OrderEntity.getOrdersByProvider", 
+//                    query = "SELECT o FROM OrderEntity o INNER JOIN ( SELECT c.product.id, c.order.id, p.provider.id FROM ProductEntity p INNER JOIN CartItemEntity c ON p.id=c.product.id) a ON o.id=a.order.id WHERE a.provider.id=(:id)"),
+//        @NamedQuery(name = "OrderEntity.getOrdersByClient", 
+//                    query = "SELECT o FROM OrderEntity o INNER JOIN CartItemEntity c ON o.id=c.order.id WHERE c.client.id=(:id)")  
+//})
 public class OrderEntity implements Serializable {
     
     @Id
