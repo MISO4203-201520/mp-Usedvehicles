@@ -135,20 +135,6 @@ public class ProviderService {
         }
         return provider;
     }
-    
-//    @GET
-//    @Path("/vehiclebrands/")
-//    public List<String> getVehicleBrands() {
-//        List<String> brands = new ArrayList<String>();
-//        try {
-//            brands = vehicleLogic.getVehicleBrands();
-//            for (Object p : brands) {
-//                System.out.println("service "+p);
-//              }
-//        } catch (Exception e) {
-//            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-//        }
-//        return brands;
-//    }   
+ 
     
 }
