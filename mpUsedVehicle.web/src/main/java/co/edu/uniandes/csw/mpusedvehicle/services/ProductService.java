@@ -183,16 +183,7 @@ public class ProductService {
             @QueryParam("colorFilter") String colorFilter) {
         
         List<ProductDTO> products = new ArrayList<ProductDTO>();
-        
-        System.out.println("Entro a busqueda avanzada...");
-        System.out.println("brandFilter: "+brandFilter);
-        System.out.println("modelFilter :"+modelFilter);
-        System.out.println("capacityFilter: "+capacityFilter);
-        System.out.println("priceFilter: "+priceFilter);
-        System.out.println("colorFilter: "+colorFilter);
-        System.out.println("locationFilter: "+locationFilter);
-        System.out.println("plateFilter: "+plateFilter);
-        
+               
         Integer iCapacity = null;
         try {
             iCapacity = Integer.valueOf(capacityFilter);
