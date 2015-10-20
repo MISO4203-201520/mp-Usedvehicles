@@ -5,9 +5,17 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.functionalTest;
 
+import co.edu.uniandes.csw.mpusedvehicle.configuration.ApiKeyEnvVariables;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.UserDTO;
 import co.edu.uniandes.csw.mpusedvehicle.services.OrderService;
 import java.io.File;
 import java.net.URL;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -65,11 +73,14 @@ public class CheckoutFunctionalIT {
                         .resolveAsFiles()) 
                 // Se agregan los compilados de los paquetes que se van a probar 
                 .addPackage(OrderService.class.getPackage()) 
+                .addPackage(ApiKeyEnvVariables.class.getPackage())
                 // Se agrega contenido estatico: html y modulos de javascript.  
                 .addAsWebResource(new File(URLRESOURCES, "index.html")) 
                 .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class).importDirectory(URLRESOURCES + "/src/").as(GenericArchive.class), "/src/", Filters.includeAll())
                 // El archivo que contiene la configuracion a la base de datos.  
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml") 
+                // El archivo shiro.ini. 
+                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/shiro.ini"))
                 // El archivo beans.xml es necesario para injeccion de dependencias.  
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml")) 
                 // El archivo web.xml es necesario para el despliegue de los servlets 
@@ -96,6 +107,22 @@ public class CheckoutFunctionalIT {
     public static void tearDown() throws Exception {
         //Se ejecuta al terminar todos los metodos de prueba indicados con @Test Cierra el browser
         driver.quit();
+    }
+    
+    public static Cookie login(String username, String password) {
+        Client cliente = ClientBuilder.newClient();
+        UserDTO user = new UserDTO();
+        user.setUserName(username);
+        user.setPassword(password);
+        Response response = cliente.target(URLBASE).path("/users/login").request().
+                post(Entity.entity(user, MediaType.APPLICATION_JSON));       
+        UserDTO foundUser = (UserDTO) response.readEntity(UserDTO.class);
+        
+        if (foundUser != null && response.getStatus() == Ok) {
+            return response.getCookies().get("JSESSIONID");
+        } else {
+            return null;
+        }
     }
 
     @Test
