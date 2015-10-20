@@ -87,5 +87,12 @@ public class ProviderLogic implements IProviderLogic {
           
      public ProviderDTO getProviderByPriceRange (Integer lower, Integer upper){
          return ProviderConverter.fullEntity2DTO(persistence.getProviderByPriceRange(lower, upper));
-     }   
+     } 
+     
+     public List<ProviderDTO> getProviders() {
+        return ProviderConverter.listEntity2DTO(persistence.getProviders());
+    }
+     public ProviderDTO getProviderById(Long Id) {
+        return ProviderConverter.refEntity2DTO(persistence. getProviderById(Id));
+    }
 }

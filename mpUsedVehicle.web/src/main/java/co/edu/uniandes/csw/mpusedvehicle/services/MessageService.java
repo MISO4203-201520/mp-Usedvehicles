@@ -2,6 +2,10 @@ package co.edu.uniandes.csw.mpusedvehicle.services;
 
 import co.edu.uniandes.csw.mpusedvehicle.api.IMessageLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.MessageDTO;
+import co.edu.uniandes.csw.mpusedvehicle.api.IClientLogic;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
+import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
 import java.sql.Date;
 import java.util.List;
@@ -28,9 +32,12 @@ import javax.ws.rs.core.MediaType;
 public class MessageService {
 
     @Inject private IMessageLogic messageLogic;
+    @Inject private IClientLogic clientLogic;
+    @Inject private IProviderLogic providerLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
+    
 
     /**
      * @generated
@@ -40,9 +47,21 @@ public class MessageService {
     public MessageDTO createMessage(MessageDTO dto) {
         dto.setDate(new java.util.Date());
         dto.setIdTypeMessage(1);
+        dto.setSubject("Question");
         return messageLogic.createMessage(dto);
     }
-
+    
+    
+    @POST
+    @Path("/newmessage/")
+    @StatusCreated
+    public MessageDTO createNewMessage(MessageDTO dto) {
+        dto.setDate(new java.util.Date());
+        dto.setIdTypeMessage(2);
+        return messageLogic.createNewMessage(dto);
+    }
+    
+    
     /**
      * @generated
      */
@@ -57,16 +76,16 @@ public class MessageService {
     
     @GET
     @Path("/questionsbyprovider/{idProvider}")
-    public List<MessageDTO> getMessagesByProvider(@PathParam("idProvider") Long idProvider) {
-        System.out.println("getMessagesByProvider");
-        return messageLogic.getMessagesByProvider(idProvider);
+    public List<MessageDTO> getQuestionsByProvider(@PathParam("idProvider") Long idProvider) {
+        
+        return messageLogic.getQuestionsByProvider(idProvider);
     }
     
       @GET
     @Path("/questionsbyuser/{idUser}")
-    public List<MessageDTO> getMessagesByUser(@PathParam("idUser") Long idUser) {
-        System.out.println("getMessagesByUser");
-        return messageLogic.getMessagesByUser(idUser);
+    public List<MessageDTO> getQuestionsByUser(@PathParam("idUser") Long idUser) {
+        
+        return messageLogic.getQuestionsByUser(idUser);
     }
    
 
@@ -98,4 +117,49 @@ public class MessageService {
     public void deleteMessage(@PathParam("id") Long id) {
         messageLogic.deleteMessage(id);
     }
+    
+    @GET
+    @Path("/getmessagesbyprovider/{idProvider}")
+    public List<MessageDTO> getMessagesByProvider(@PathParam("idProvider") Integer idProvider) {
+        
+        return messageLogic.getmessagesByProvider(idProvider);
+    }
+    
+      @GET
+    @Path("/getmessagesbyuser/{idClient}")
+    public List<MessageDTO> getMessagesByUser(@PathParam("idClient") Integer idClient) {
+        
+        return messageLogic.getmessagesByClient(idClient);
+    }
+    
+    
+    @GET
+    @Path("/getclients/")
+    public List<ClientDTO> getClients() {
+        
+        return clientLogic.getIdANDUsername();
+    }
+    
+    @GET
+    @Path("/getproviders/")
+    public List<ProviderDTO> getProviders() {
+       
+        return providerLogic.getProviders();
+    }
+    
+    
+     @GET
+    @Path("/getproviderbyid/{id}")
+    public ProviderDTO getProviderById(@PathParam("id") Long id) {
+       
+        return providerLogic.getProviderById(id); 
+    }
+    
+    @GET
+    @Path("/getclientbyid/{id}")
+    public ClientDTO getClientById(@PathParam("id") Long id) {
+       
+        return clientLogic.getClientById(id);
+    }
+    
 }
