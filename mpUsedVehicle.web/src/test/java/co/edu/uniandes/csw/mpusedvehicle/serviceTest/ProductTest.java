@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.serviceTest;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.UserDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.EJBExceptionMapper;
 import co.edu.uniandes.csw.mpusedvehicle.services.CartItemService;
 import co.edu.uniandes.csw.mpusedvehicle.services.OrderService;
@@ -20,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Cookie;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -101,19 +103,45 @@ public class ProductTest {
             oraculo.add(product);            
         }       
     }
-   /* 
+
+        private Cookie login(String username, String password) {
+        Client cliente = ClientBuilder.newClient();
+
+        UserDTO user = new UserDTO();
+        user.setUserName(username);
+        user.setPassword(password);
+
+        Response response = cliente.target(URLBASE).path("/users/login").request().
+                post(Entity.entity(user, MediaType.APPLICATION_JSON));
+
+        UserDTO foundUser = (UserDTO) response.readEntity(UserDTO.class);
+
+        if (foundUser != null && response.getStatus() == Ok) {
+            return response.getCookies().get("JSESSIONID");
+        } else {
+            return null;
+        }
+    }
     @Test
     @RunAsClient
     public void t1CreateProductService() throws IOException {
-        ProductDTO product = oraculo.get(0);
-        Client cliente = ClientBuilder.newClient();
-        Response response = cliente.target(URLBASE + PATHPRODUCT)
-                .request()
-                .post(Entity.entity(product, MediaType.APPLICATION_JSON));
-        ProductDTO productTest = (ProductDTO) response.readEntity(ProductDTO.class);        
-        Assert.assertEquals(product.getName(), productTest.getName());
-        Assert.assertEquals(product.getPrice(), productTest.getPrice());
-        Assert.assertEquals(Created, response.getStatus());
+        Cookie cookieSessionId = login(
+                System.getenv("USERNAME_USER"), 
+                System.getenv("PASSWORD_USER"));
+
+        if (cookieSessionId != null) {        
+            ProductDTO product = oraculo.get(0);
+            Client cliente = ClientBuilder.newClient();
+            Response response = cliente.target(URLBASE + PATHPRODUCT)
+                    .request()
+                    .post(Entity.entity(product, MediaType.APPLICATION_JSON));
+            ProductDTO productTest = (ProductDTO) response.readEntity(ProductDTO.class);        
+            Assert.assertEquals(product.getName(), productTest.getName());
+            Assert.assertEquals(product.getPrice(), productTest.getPrice());
+            Assert.assertEquals(Created, response.getStatus());
+        }else{
+            Assert.fail("Access denied or Invalid credentials!");
+        }        
     }    
     
     @Test
@@ -192,5 +220,5 @@ public class ProductTest {
         List<ProductDTO> listProductTest = new ObjectMapper().readValue(listProducts, List.class);
         Assert.assertEquals(Ok, response.getStatus());
         Assert.assertNotNull(listProductTest);        
-    } */     
+    }      
 }
