@@ -14,6 +14,7 @@ import co.edu.uniandes.csw.mpusedvehicle.entities.CartItemEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.OrderEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
 import co.edu.uniandes.csw.mpusedvehicle.providers.EJBExceptionMapper;
+import co.edu.uniandes.csw.mpusedvehicle.samples.Samples;
 import co.edu.uniandes.csw.mpusedvehicle.services.CartItemService;
 import co.edu.uniandes.csw.mpusedvehicle.services.OrderService;
 import co.edu.uniandes.csw.mpusedvehicle.services.UserService;
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -62,13 +64,15 @@ public class OrderTest {
     public static final String URLRESOURCES = "src/main/webapp";
     public static final String URLBASE = "http://localhost:8181/mpUsedVehicle.web/webresources";
     public static final String PATHORDERS = "/orders";
-    private static final String PATH_LOGIN = "/users/login";
+    private static final String PATHCLIENT = "/client";
     public static final String PATHPROVIDER = "/provider";
     public static final int Ok = 200;
     public static final int Created = 201;
     public static final int OkWithoutContent = 204;
     public static List<OrderDTO> oraculo = new ArrayList<>();
     public static ProviderDTO providerOne;
+    private static Cookie cookieSessionId;
+    
     
     /**
      * Metodo que contiene la construccion del empaquetado que arquillian
@@ -91,8 +95,6 @@ public class OrderTest {
                 .addPackage(EJBExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos. 
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
-                // El archivo shiro.ini. 
-                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/shiro.ini"))
                 // El archivo beans.xml es necesario para injeccion de dependencias. 
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"))
                  // El archivo shiro.ini. 
@@ -108,6 +110,8 @@ public class OrderTest {
     
     @BeforeClass
     public static void setUp() {
+        Samples.createSampleClient();
+        cookieSessionId = Samples.login("test", "Pepitoperez123");
         
         for (int i = 0; i < 5; i++) { 
             PodamFactory factory = new PodamFactoryImpl(); 
@@ -128,7 +132,7 @@ public class OrderTest {
     @RunAsClient
     public void t1GetOrderByProvider() {
         Client cliente = ClientBuilder.newClient();
-        List<OrderDTO> orderTest = cliente.target(URLBASE + PATHORDERS + PATHPROVIDER).path("/" + 301)
+        List<OrderDTO> orderTest = cliente.target(URLBASE + PATHORDERS + PATHPROVIDER).path("/" + 333)
                 .request().get(List.class);
         if(orderTest != null){
             Assert.assertNotNull(orderTest);
@@ -137,33 +141,21 @@ public class OrderTest {
             Assert.assertNull(orderTest);
     }
     /**
-     * Prueba orden de los proveedores
+     * Prueba orden de los cliente
      */
     @Test
     @RunAsClient
-    public void t2GetOrderByProvider() {
+    public void t2GetOrderByClient() {
+        cookieSessionId = Samples.login("test", "Pepitoperez123");
         Client cliente = ClientBuilder.newClient();
-        UserDTO user = new UserDTO();
-        user.setRole("user");
-        user.setUserName("USER1");
-        user.setPassword("Pepitoperez123");
-        Response login = cliente.target(URLBASE + PATH_LOGIN).request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
-        cliente.close();
-        cliente = ClientBuilder.newClient();
-        Response response = cliente.target(URLBASE + PATHORDERS + PATHPROVIDER +"/301")
-               .request().get();
-        Assert.assertNotNull(response);
-       String listProducts = response.readEntity(String.class);
-       Assert.assertNotNull(listProducts);
-//        System.out.println("response: "+listProducts);
-//        try {
-//            List<OrderDTO> orderTest = new ObjectMapper().readValue(listProducts, List.class);
-//            Assert.assertEquals(Ok, response.getStatus());
-//        } catch (IOException ex) {
-//            Logger.getLogger(OrderTest.class.getName()).log(Level.SEVERE, null, ex);
-//            Assert.fail();
-//        }
-       
-        
+        List<OrderDTO> orderTest = cliente.target(URLBASE + PATHORDERS + PATHPROVIDER).path("/" + 333)
+                .request()
+                .cookie(cookieSessionId)
+                .get(List.class);
+        if(orderTest != null){
+            Assert.assertNotNull(orderTest);
+            Assert.assertEquals(0, orderTest.size());
+        }else
+            Assert.assertNull(orderTest);
     }
 }

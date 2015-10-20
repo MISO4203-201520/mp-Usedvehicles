@@ -68,8 +68,6 @@ public class CheckoutTest {
     private static ClientEntity client;
     private static Cookie cookieSessionId;
 
-//    http://localhost:8080/mpUsedVehicle.web/webresources/users/login
-//    {"role":"user","userName":"USER2","password":"Pepitoperez123"}
     /**
      *
      * @return
