@@ -14,9 +14,11 @@ public class ProductDTO {
     private String name;
     private Integer price;
     private Boolean availability;
+    @PodamExclude
     private ProviderDTO provider;
     @PodamExclude
     private VehicleDTO vehicle;
+    @PodamExclude
     private List<CommentDTO> comments;
     private Integer discount;   //Nuevo Atributo REQ06
     /**

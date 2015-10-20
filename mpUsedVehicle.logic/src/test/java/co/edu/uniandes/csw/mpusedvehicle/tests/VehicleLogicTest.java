@@ -109,6 +109,8 @@ public class VehicleLogicTest {
         	entity.setCapacity(generateRandom(Integer.class));
         	entity.setBrand(generateRandom(String.class));
         	entity.setImage(generateRandom(String.class));
+                entity.setPlate(generateRandom(Boolean.class));
+        	entity.setLocation(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -127,6 +129,8 @@ public class VehicleLogicTest {
         dto.setCapacity(generateRandom(Integer.class));
         dto.setBrand(generateRandom(String.class));
         dto.setImage(generateRandom(String.class));
+        dto.setPlate(generateRandom(Boolean.class));
+        dto.setLocation(generateRandom(String.class));
 
         VehicleDTO result = vehicleLogic.createVehicle(dto);
 
@@ -141,6 +145,8 @@ public class VehicleLogicTest {
         Assert.assertEquals(dto.getCapacity(), entity.getCapacity());
         Assert.assertEquals(dto.getBrand(), entity.getBrand());
         Assert.assertEquals(dto.getImage(), entity.getImage());
+        Assert.assertEquals(dto.getPlate(), entity.getPlate());
+        Assert.assertEquals(dto.getLocation(), entity.getLocation());
     }
 
     /**
@@ -176,6 +182,8 @@ public class VehicleLogicTest {
         Assert.assertEquals(entity.getCapacity(), dto.getCapacity());
         Assert.assertEquals(entity.getBrand(), dto.getBrand());
         Assert.assertEquals(entity.getImage(), dto.getImage());
+        Assert.assertEquals(entity.getPlate(), dto.getPlate());
+        Assert.assertEquals(entity.getLocation(), dto.getLocation());
     }
 
     /**
@@ -206,6 +214,8 @@ public class VehicleLogicTest {
         dto.setCapacity(generateRandom(Integer.class));
         dto.setBrand(generateRandom(String.class));
         dto.setImage(generateRandom(String.class));
+        dto.setPlate(generateRandom(Boolean.class));
+        dto.setLocation(generateRandom(String.class));
 
         vehicleLogic.updateVehicle(dto);
 
@@ -218,6 +228,8 @@ public class VehicleLogicTest {
         Assert.assertEquals(dto.getCapacity(), resp.getCapacity());
         Assert.assertEquals(dto.getBrand(), resp.getBrand());
         Assert.assertEquals(dto.getImage(), resp.getImage());
+        Assert.assertEquals(dto.getPlate(), resp.getPlate());
+        Assert.assertEquals(dto.getLocation(), resp.getLocation());
     }
 
     /**

@@ -11,15 +11,35 @@ public class MessageDTO {
 
     private Long id;
     private ClientDTO client;
+    private Integer clientreceiver;
     private ProviderDTO provider;
+    private Integer providerreceiver;
     private Integer idTypeMessage;
     private Date date;
     private ProductDTO product;
-    private String question;
+    public String receivertype;
+    public String question;
     private String answer;
+    public String subject;
+
+    public String getReceivertype() {
+        return receivertype;
+    }
+
+    public void setReceivertype(String receivertype) {
+        this.receivertype = receivertype;
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public void setId(Long id) {
@@ -41,7 +61,7 @@ public class MessageDTO {
     public void setProvider(ProviderDTO provider) {
         this.provider = provider;
     }
-
+    
     public Integer getIdTypeMessage() {
         return idTypeMessage;
     }
@@ -72,6 +92,22 @@ public class MessageDTO {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public Integer getClientreceiver() {
+        return clientreceiver;
+    }
+
+    public void setClientreceiver(Integer clientreceiver) {
+        this.clientreceiver = clientreceiver;
+    }
+
+    public Integer getProviderreceiver() {
+        return providerreceiver;
+    }
+
+    public void setProviderreceiver(Integer providerreceiver) {
+        this.providerreceiver = providerreceiver;
     }
 
     public String getAnswer() {

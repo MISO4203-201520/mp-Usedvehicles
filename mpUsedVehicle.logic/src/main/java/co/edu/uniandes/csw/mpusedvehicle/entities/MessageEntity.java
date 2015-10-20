@@ -23,8 +23,10 @@ import javax.persistence.TemporalType;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Message.findAll", query = "SELECT m FROM MessageEntity m"),
-    @NamedQuery(name = "Message.messagesByProvider", query = "SELECT m FROM MessageEntity m where m.provider.id= :idProvider"),
-    @NamedQuery(name = "Message.messagesByClient", query = "SELECT m FROM MessageEntity m where m.client.id= :idClient")})
+    @NamedQuery(name = "Message.messagesByProvider", query = "SELECT m FROM MessageEntity m where m.provider.id= :idProvider AND m.idTypeMessage= 1 ORDER by m.date DESC"),
+    @NamedQuery(name = "Message.messagesByClient", query = "SELECT m FROM MessageEntity m where m.client.id= :idClient AND m.idTypeMessage= 1 ORDER by m.date DESC"),
+    @NamedQuery(name = "Message.getmessagesByProvider", query = "SELECT m FROM MessageEntity m where m.providerreceiver = :idProvider ORDER by m.date DESC"),
+    @NamedQuery(name = "Message.getmessagesByClient", query = "SELECT m FROM MessageEntity m where m.clientreceiver = :idClient ORDER by m.date DESC")})
     
 public class MessageEntity implements Serializable {
     
@@ -37,10 +39,43 @@ public class MessageEntity implements Serializable {
     @ManyToOne
     private ClientEntity client;
     
+    
+    
     @ManyToOne
     private ProviderEntity provider;
+    
 
-    //1 - user question to provider
+
+    public String getReceivertype() {
+        return receivertype;
+    }
+
+    public Integer getClientreceiver() {
+        return clientreceiver;
+    }
+
+    public void setClientreceiver(Integer clientreceiver) {
+        this.clientreceiver = clientreceiver;
+    }
+
+    public Integer getProviderreceiver() {
+        return providerreceiver;
+    }
+
+    public void setProviderreceiver(Integer providerreceiver) {
+        this.providerreceiver = providerreceiver;
+    }
+
+    public void setReceivertype(String receivertype) {
+        this.receivertype = receivertype;
+    }
+    
+    private Integer clientreceiver;
+    
+    private Integer providerreceiver;
+
+    //1 - user question to provider 
+    //2 - message between users
     private Integer idTypeMessage;
     
     @Temporal(TemporalType.TIMESTAMP)
@@ -52,8 +87,20 @@ public class MessageEntity implements Serializable {
     private String question;
     
     private String answer;
+    
+    private String subject;
+    
+    private String receivertype;
 
     public MessageEntity() {
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public MessageEntity(Long id) {

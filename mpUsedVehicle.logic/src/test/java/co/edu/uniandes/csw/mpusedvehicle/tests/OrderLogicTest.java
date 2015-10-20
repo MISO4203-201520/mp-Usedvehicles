@@ -26,6 +26,7 @@ import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import co.edu.uniandes.csw.mpusedvehicle.enums.PaymentMethod;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.OrderPersistence;
 import static co.edu.uniandes.csw.mpusedvehicle.tests._TestUtil.generateRandom;
+import com.sun.enterprise.admin.cli.CLIUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
@@ -141,7 +144,7 @@ public class OrderLogicTest {
      * @generated
      */
     @Test
-    public void createCartItemTest() {
+    public void submitOrderTest() {
         OrderDTO dto = new OrderDTO();
         dto.setAmount(generateRandom(BigDecimal.class));
         dto.setAmountWithTaxes(generateRandom(BigDecimal.class));
@@ -175,58 +178,52 @@ public class OrderLogicTest {
      * Inserta Ordenes sobre clientes y provedores conocidos
      */
     private void createScenario1() {
-        //PodamFactory factory = new PodamFactoryImpl(); 
+        PodamFactory factory = new PodamFactoryImpl(); 
             
-        providerEntityOne = new ProviderEntity();
-        providerEntityOne.setName("Povider1");
-        providerEntityOne.setUserId(generateRandom(String.class));
-        providerEntityOne.setId(new Long(1));
+        ProviderDTO providerDTO = factory.manufacturePojo(ProviderDTO.class);
+        //providerDTO.setId(new Long(1));
+        providerEntityOne = ProviderConverter.fullDTO2Entity(providerDTO);
         em.persist(providerEntityOne);
         
-        providerEntityTwo = new ProviderEntity();
-        providerEntityTwo.setName("Povider2");
-        providerEntityTwo.setUserId(generateRandom(String.class));
-        providerEntityTwo.setId(new Long(2));
+        providerDTO = factory.manufacturePojo(ProviderDTO.class);
+        //providerDTO.setId(new Long(2));
+        providerEntityTwo = ProviderConverter.fullDTO2Entity(providerDTO);
         em.persist(providerEntityTwo);
         
-        ProductEntity productEntity = new ProductEntity();
+        ProductDTO productDTO= new ProductDTO();
+        ProductEntity productEntity = ProductConverter.fullDTO2Entity(productDTO);
         productEntity.setProvider(providerEntityOne);
         productEntity.setName(generateRandom(String.class));
         productEntity.setPrice(generateRandom(Integer.class));
-        productEntity.setId(new Long(3));
+//        productEntity.setId(new Long(3));
         ArrayList<ProductEntity> products = new ArrayList<ProductEntity>();
         products.add(productEntity);
         providerEntityOne.setProducts(products);
         em.persist(productEntity);
         
-        clientEntityTwo = new ClientEntity();
-        clientEntityTwo.setName("Client1");
-        clientEntityTwo.setUserId(generateRandom(String.class));
-        clientEntityTwo.setId(new Long(4));
+        ClientDTO clientDTOOne = factory.manufacturePojo(ClientDTO.class);
+        clientEntityTwo = ClientConverter.fullDTO2Entity(clientDTOOne);
+//        clientEntityTwo.setId(new Long(4));
         em.persist(clientEntityTwo);
         
         List<CartItemEntity> list = new ArrayList<CartItemEntity>();        
         for (int i = 0; i < 1; i++) { 
-            CartItemEntity cartItemEntity = new CartItemEntity();
-            cartItemEntity.setName(generateRandom(String.class));
-            cartItemEntity.setProduct(productEntity);
-            cartItemEntity.setId(new Long(1+i));
-            cartItemEntity.setClient(clientEntityTwo);
+            CartItemDTO cartItemDTO = factory.manufacturePojo(CartItemDTO.class);
+            CartItemEntity cartItemEntity = CartItemConverter.fullDTO2Entity(cartItemDTO);
+//            cartItemEntity.setProduct(productEntity);
+//            cartItemEntity.setId(new Long(1+i));
+//            cartItemEntity.setClient(clientEntityTwo);
             em.persist(cartItemEntity);
-            list.add(cartItemEntity);
+//            list.add(cartItemEntity);
         }
-        clientEntityTwo.setShoppingCart(list);
-        em.persist(clientEntityTwo);
+//        clientEntityTwo.setShoppingCart(list);
+//        em.persist(clientEntityTwo);
         
         for (int i = 0; i < 5; i++) { 
-            OrderEntity orderEntity = new OrderEntity();
-            orderEntity.setAmount(generateRandom(BigDecimal.class));
-            orderEntity.setAmountWithTaxes(generateRandom(BigDecimal.class));
-            orderEntity.setOrderStatus(OrderStatus.NEW.name());
-            orderEntity.setPaymentMethod(PaymentMethod.CREDIT_CARD.name());
-            orderEntity.setTransactionId(generateRandom(String.class));
-            orderEntity.setCartItems(list);
-            orderEntity.setId(new Long(1+i));
+            OrderDTO orderDTO = factory.manufacturePojo(OrderDTO.class);
+            orderDTO.setCartItems(CartItemConverter.listEntity2DTO(list));
+//            orderDTO.setId(new Long(1+i));
+            OrderEntity orderEntity = OrderConverter.refDTO2Entity(orderDTO);
             em.persist(orderEntity); 
             data.add(orderEntity); 
         }
@@ -237,13 +234,13 @@ public class OrderLogicTest {
     @Test
     public void getOrdersByProviderTest() {
         
-        ProductEntity provider = em.find(ProductEntity.class, providerEntityOne.getId());
+        ProviderEntity provider = em.find(ProviderEntity.class, providerEntityOne.getId());
         System.err.println("provider " + provider + " id "+providerEntityOne.getId());
         List<OrderDTO> result = orderLogic.getOrdersByProvider(providerEntityOne.getId());
         Assert.assertNotNull(result);
         
         Assert.assertEquals(0, result.size());
-      
+        
         List<OrderDTO> result0 = orderLogic.getOrdersByProvider(providerEntityTwo.getId());
         Assert.assertNotNull(result0);
         Assert.assertEquals(0, result.size());
@@ -260,13 +257,78 @@ public class OrderLogicTest {
         Assert.assertNotNull(result);
         System.out.println("data size "+data.size());
         
-        Assert.assertEquals(0, result.size());
+        Assert.assertEquals(5, result.size());
       
-//        List<OrderDTO> result0 = orderLogic.getOrdersByClient(providerEntityTwo.getId());
-//        Assert.assertNotNull(result0);
-//        Assert.assertEquals(0, result.size());
+        List<OrderDTO> result0 = orderLogic.getOrdersByClient(providerEntityTwo.getId());
+        Assert.assertNotNull(result0);
+        Assert.assertEquals(0, result0.size());
         
     }
+    /**
+     * Metodo que prueba la obtencion de todas las ordenes
+     */
+    @Test
+    public void getOrdersTest() {
+        List<OrderDTO> list = orderLogic.getOrders();
+        Assert.assertEquals(data.size(), list.size());
+        for (OrderDTO dto : list) {
+            boolean found = false;
+            for (OrderEntity entity : data) {
+                if (dto.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    /**
+     * Metodo que prueba la cantidad de ordenes 
+     */
+    @Test
+    public void countOrdersTest() {
+        
+        Assert.assertEquals(data.size(), orderLogic.countOrders());
+       
+    }
+    /**
+     * Prueba sobre la actualizacion de una orden.
+     * En especial el estado de esta.
+     */
+    @Test
+    public void updateOrderTest() {
+        OrderEntity entity = data.get(0);
+        
+        PodamFactory factory = new PodamFactoryImpl();
+        OrderDTO dto = factory.manufacturePojo(OrderDTO.class);
+ 
+        orderLogic.updateOrder(entity.getId(), dto);
+
+        OrderEntity resp = em.find(OrderEntity.class, entity.getId());
+
+        Assert.assertEquals(dto.getOrderStatus(), resp.getOrderStatus());
+    }
     
-    
+    /**
+     * Prueba para obtener las ordenes segun un estado..
+     */
+    @Test
+    public void getOrdersByStatusTest() {
+        OrderEntity entity = data.get(0);
+        
+        PodamFactory factory = new PodamFactoryImpl();
+        OrderDTO dto = factory.manufacturePojo(OrderDTO.class);
+        dto.setOrderStatus(OrderStatus.NEW.name());
+ 
+        orderLogic.updateOrder(entity.getId(), dto);
+
+        OrderEntity resp = em.find(OrderEntity.class, entity.getId());
+        
+        List<OrderDTO> list = orderLogic.getOrdersByStatus(OrderStatus.NEW);
+        Assert.assertNotNull(list);
+        for(OrderDTO order:list)
+        {
+            Assert.assertEquals(order.getOrderStatus(), resp.getOrderStatus());
+        }
+        
+    }
 }
