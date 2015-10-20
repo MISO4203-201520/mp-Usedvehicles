@@ -108,32 +108,11 @@ public class ProductTest {
         }       
     }
 
-        private Cookie login(String username, String password) {
-        Client cliente = ClientBuilder.newClient();
-
-        UserDTO user = new UserDTO();
-        user.setUserName(username);
-        user.setPassword(password);
-
-        Response response = cliente.target(URLBASE).path("/users/login").request().
-                post(Entity.entity(user, MediaType.APPLICATION_JSON));
-
-        UserDTO foundUser = (UserDTO) response.readEntity(UserDTO.class);
-
-        if (foundUser != null && response.getStatus() == Ok) {
-            return response.getCookies().get("JSESSIONID");
-        } else {
-            return null;
-        }
-    }
+      
     @Test
     @RunAsClient
     public void t1CreateProductService() throws IOException {
-        Cookie cookieSessionId = login(
-                System.getenv("USERNAME_USER"), 
-                System.getenv("PASSWORD_USER"));
-
-        if (cookieSessionId != null) {        
+            
             ProductDTO product = oraculo.get(0);
             Client cliente = ClientBuilder.newClient();
             Response response = cliente.target(URLBASE + PATHPRODUCT)
@@ -143,9 +122,7 @@ public class ProductTest {
             Assert.assertEquals(product.getName(), productTest.getName());
             Assert.assertEquals(product.getPrice(), productTest.getPrice());
             Assert.assertEquals(Created, response.getStatus());
-        }else{
-            Assert.fail("Access denied or Invalid credentials!");
-        }        
+    
     }    
     
     @Test
@@ -216,7 +193,7 @@ public class ProductTest {
     }          
     @Test
     @RunAsClient
-    public void t26GetProductByAdvanceSearch()  throws IOException {
+    public void t27GetProductByAdvanceSearch()  throws IOException {
         Client cliente = ClientBuilder.newClient();
         Response response = cliente.target(URLBASE + PATHPRODUCT + PATH_ADVANCE_SEARCH+"?"+"brandFilter=Jaguar")//.path("?"+"brandFilter=Jaguar")//+oraculo.get(0).getVehicle().getBrand())
                 .request().get();
