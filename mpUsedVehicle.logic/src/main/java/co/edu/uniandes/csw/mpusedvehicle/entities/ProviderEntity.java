@@ -19,7 +19,9 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "Provider.getProviderByModel", query = "select pv from ProviderEntity pv, ProductEntity u WHERE  u.provider.id =  pv.id  AND UPPER(u.vehicle.model) like :model order by u.price"),
     @NamedQuery(name = "Provider.getProviderByBrand", query = "select pv from ProviderEntity pv, ProductEntity u WHERE u.provider.id =  pv.id  AND UPPER(u.vehicle.brand) like :brand order by u.price"),
     @NamedQuery(name = "Provider.getProviderByCity", query = "select pv from ProviderEntity pv WHERE UPPER(pv.city) like :city "),
-    @NamedQuery(name = "Provider.getProviderByPriceRange", query = "select pv from ProviderEntity pv, ProductEntity u WHERE u.provider.id =  pv.id  AND u.price > :lower and  u.price < :upper ")
+    @NamedQuery(name = "Provider.getProviderByPriceRange", query = "select pv from ProviderEntity pv, ProductEntity u WHERE u.provider.id =  pv.id  AND u.price > :lower and  u.price < :upper "),
+    @NamedQuery(name = "Provider.getProviders", query = "select u from ProviderEntity u"),
+    @NamedQuery(name = "Provider.getById", query = "select u from ProviderEntity u WHERE u.id = :id")
 })
 public class ProviderEntity implements Serializable {
 

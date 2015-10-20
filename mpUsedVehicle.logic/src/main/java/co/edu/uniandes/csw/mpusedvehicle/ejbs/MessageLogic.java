@@ -35,14 +35,14 @@ public class MessageLogic implements IMessageLogic {
         return MessageConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
     
-    public List<MessageDTO> getMessagesByProvider(Long idProvider) {
+    public List<MessageDTO> getQuestionsByProvider(Long idProvider) {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("idProvider", idProvider);
         List<MessageEntity> list = persistence.executeListNamedQuery("Message.messagesByProvider", map);
         return MessageConverter.listEntity2DTO(list);
     }
     
-    public List<MessageDTO> getMessagesByUser(Long idUser) {
+    public List<MessageDTO> getQuestionsByUser(Long idUser) {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("idClient", idUser);
         List<MessageEntity> list = persistence.executeListNamedQuery("Message.messagesByClient", map);
@@ -71,6 +71,18 @@ public class MessageLogic implements IMessageLogic {
         MailManager.generateAndSendEmail(emailBody, dto.getProvider().getEmail(), "You have a new question");
         return MessageConverter.fullEntity2DTO(entity);
     }
+    
+    
+    /**
+     * @param dto
+     * @return 
+     */
+    public MessageDTO createNewMessage(MessageDTO dto) {
+        MessageEntity entity = MessageConverter.fullDTO2Entity(dto);
+        persistence.create(entity);
+        
+        return MessageConverter.fullEntity2DTO(entity);
+    }
 
     /**
      * @generated
@@ -92,5 +104,13 @@ public class MessageLogic implements IMessageLogic {
      */
     public List<MessageDTO> findByName(String name) {
         return MessageConverter.listEntity2DTO(persistence.findByName(name));
+    }
+    
+    public List<MessageDTO> getmessagesByProvider(Integer idProvider){
+        return MessageConverter.listEntity2DTO(persistence.getmessagesByProvider(idProvider));
+    }
+    
+    public List<MessageDTO> getmessagesByClient(Integer idClient){
+        return MessageConverter.listEntity2DTO(persistence.getmessagesByClient(idClient));
     }
 }

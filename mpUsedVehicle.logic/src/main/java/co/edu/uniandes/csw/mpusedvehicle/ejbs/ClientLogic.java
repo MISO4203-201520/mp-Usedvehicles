@@ -54,7 +54,7 @@ public class ClientLogic implements IClientLogic {
         ClientEntity entity = persistence.update(ClientConverter.fullDTO2Entity(dto));
         return ClientConverter.fullEntity2DTO(entity);
     }
-
+    
     /**
      * @generated
      */
@@ -72,4 +72,13 @@ public class ClientLogic implements IClientLogic {
     public ClientDTO getClientByUserId(String userId) {
         return ClientConverter.refEntity2DTO(persistence.getClientByUserId(userId));
     }
+    
+    public ClientDTO getClientById(Long Id) {
+        return ClientConverter.refEntity2DTO(persistence.getClientById(Id));
+    }
+    
+    
+     public List<ClientDTO> getIdANDUsername() {
+        return ClientConverter.listEntity2DTO(persistence.getIdANDUserName());
+     }
 }
