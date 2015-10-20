@@ -75,7 +75,7 @@
                 });
                 
                 svcUser.api.one('currentUser').get().then(function(user){
-                    console.log(user.role);
+                    
                     if (user.role === 'provider'){
                         $scope.getMessagesByProvider;
                    svc.getMessagesByProvider(authSvc.getCurrentUser().id).then(function (Messages){
@@ -90,7 +90,7 @@
                     svc.getMessagesByClient(authSvc.getCurrentUser().id).then(function (Messages){
                    
                     mes = Messages;
-                    console.log(mes);
+                    
                     
                     
                 });
