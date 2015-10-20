@@ -22,6 +22,7 @@ nbactions.xml
 
 #Tests
 /mpUsedVehicle.logic/derby.log
+/mpUsedVehicle.web/derby.log
 
 #Intellij
 /.idea

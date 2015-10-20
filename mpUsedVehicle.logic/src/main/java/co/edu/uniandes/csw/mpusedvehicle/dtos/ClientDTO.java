@@ -9,9 +9,9 @@ import java.util.List;
 @XmlRootElement 
 public class ClientDTO {
 
-    private Long id;
-    private String name;
-    private String userId;
+    public Long id;
+    public String name;
+    public String userId;
     private List<CartItemDTO> shoppingCart;
     /**
      * @generated

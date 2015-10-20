@@ -101,6 +101,8 @@ public class VehiclePersistenceTest {
             entity.setCapacity(generateRandom(Integer.class));
             entity.setBrand(generateRandom(String.class));
             entity.setImage(generateRandom(String.class));
+            entity.setPlate(generateRandom(Boolean.class));
+            entity.setLocation(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -119,7 +121,9 @@ public class VehiclePersistenceTest {
         newEntity.setCapacity(generateRandom(Integer.class));
         newEntity.setBrand(generateRandom(String.class));
         newEntity.setImage(generateRandom(String.class));
-
+        newEntity.setPlate(generateRandom(Boolean.class));
+        newEntity.setLocation(generateRandom(String.class));
+            
         VehicleEntity result = vehiclePersistence.create(newEntity);
 
         Assert.assertNotNull(result);
@@ -133,6 +137,8 @@ public class VehiclePersistenceTest {
         Assert.assertEquals(newEntity.getCapacity(), entity.getCapacity());
         Assert.assertEquals(newEntity.getBrand(), entity.getBrand());
         Assert.assertEquals(newEntity.getImage(), entity.getImage());
+        Assert.assertEquals(newEntity.getPlate(), entity.getPlate());
+        Assert.assertEquals(newEntity.getLocation(), entity.getLocation());
     }
 
     /**
@@ -168,6 +174,8 @@ public class VehiclePersistenceTest {
         Assert.assertEquals(entity.getCapacity(), newEntity.getCapacity());
         Assert.assertEquals(entity.getBrand(), newEntity.getBrand());
         Assert.assertEquals(entity.getImage(), newEntity.getImage());
+        Assert.assertEquals(entity.getPlate(), newEntity.getPlate());
+        Assert.assertEquals(entity.getLocation(), newEntity.getLocation());
     }
 
     /**
@@ -198,6 +206,8 @@ public class VehiclePersistenceTest {
         newEntity.setCapacity(generateRandom(Integer.class));
         newEntity.setBrand(generateRandom(String.class));
         newEntity.setImage(generateRandom(String.class));
+        newEntity.setPlate(generateRandom(Boolean.class));
+        newEntity.setLocation(generateRandom(String.class));
 
         vehiclePersistence.update(newEntity);
 
@@ -210,6 +220,8 @@ public class VehiclePersistenceTest {
         Assert.assertEquals(newEntity.getCapacity(), resp.getCapacity());
         Assert.assertEquals(newEntity.getBrand(), resp.getBrand());
         Assert.assertEquals(newEntity.getImage(), resp.getImage());
+        Assert.assertEquals(newEntity.getPlate(), resp.getPlate());
+        Assert.assertEquals(newEntity.getLocation(), resp.getLocation());
     }
 
     /**

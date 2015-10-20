@@ -5,13 +5,7 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.serviceTest;
 
-import co.edu.uniandes.csw.mpusedvehicle.converters.CartItemConverter;
-import co.edu.uniandes.csw.mpusedvehicle.converters.ClientConverter;
-import co.edu.uniandes.csw.mpusedvehicle.converters.OrderConverter;
-import co.edu.uniandes.csw.mpusedvehicle.converters.ProductConverter;
-import co.edu.uniandes.csw.mpusedvehicle.converters.ProviderConverter;
-import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
-import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
+import co.edu.uniandes.csw.mpusedvehicle.configuration.ApiKeyEnvVariables;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
@@ -93,9 +87,12 @@ public class OrderTest {
                 .addPackage(UserService.class.getPackage())
                 .addPackage(CartItemService.class.getPackage())
                 .addPackage(OrderService.class.getPackage())
+                .addPackage(ApiKeyEnvVariables.class.getPackage())
                 .addPackage(EJBExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos. 
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                // El archivo shiro.ini. 
+                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/shiro.ini"))
                 // El archivo beans.xml es necesario para injeccion de dependencias. 
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"))
                  // El archivo shiro.ini. 

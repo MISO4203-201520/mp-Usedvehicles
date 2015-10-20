@@ -82,5 +82,24 @@ public class ProviderPersistence extends CrudPersistence<ProviderEntity> {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
             return null;
         }
-    }    
+    }  
+    
+    public List<ProviderEntity> getProviders(){
+        try{
+            return executeListNamedQuery("Provider.getProviders");
+        } catch(NoResultException e){
+                return null;
+            }
+    }
+    
+    public ProviderEntity getProviderById(Long Id){
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("id", Id);
+            return this.executeSingleNamedQuery("Provider.getById", params);
+        } catch (NoResultException e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            return null;
+        }
+    }
 }
