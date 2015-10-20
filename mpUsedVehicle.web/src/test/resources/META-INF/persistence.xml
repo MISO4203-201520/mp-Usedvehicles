@@ -4,6 +4,14 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>co.edu.uniandes.csw.mpusedvehicle.entities.AdminEntity</class>
         <class>co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity</class>          
+        <class>co.edu.uniandes.csw.mpusedvehicle.entities.ProviderEntity</class>
+        <class>co.edu.uniandes.csw.mpusedvehicle.entities.CartItemEntity</class>
+        <class>co.edu.uniandes.csw.mpusedvehicle.entities.ClientEntity</class>
+        <class>co.edu.uniandes.csw.mpusedvehicle.entities.CommentEntity</class>
+        <class>co.edu.uniandes.csw.mpusedvehicle.entities.MessageEntity</class>
+        <class>co.edu.uniandes.csw.mpusedvehicle.entities.OrderEntity</class>
+        <class>co.edu.uniandes.csw.mpusedvehicle.entities.ReviewEntity</class>
+        <class>co.edu.uniandes.csw.mpusedvehicle.entities.VehicleEntity</class>        
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <shared-cache-mode>NONE</shared-cache-mode>
         <properties>
