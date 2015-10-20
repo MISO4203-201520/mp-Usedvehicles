@@ -17,7 +17,7 @@
         <script src="https://code.angularjs.org/1.4.3/angular-cookies.min.js"></script>
         <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
         <script src="restangular.min.js" type="text/javascript"></script>  
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.min.js"></script>
         <script src="https://rawgit.com/recursosCSWuniandes/ng-crud/master/dist/ngcrud.min.js"></script>
         <script src="https://rawgit.com/recursosCSWuniandes/ng-crud/master/dist/ngcrud-mocks.min.js"></script>
         <script src="https://rawgit.com/recursosCSWuniandes/ng-crud-auth/master/dist/ngcrud-auth.min.js"></script>
@@ -245,12 +245,39 @@
                     </a>
                 </div>
                 <div class="message">
-                    <a class="list-group-item" ng-controller="messageCtrl as ctrl" ng-click = "ctrl.messagesRead(4)">
+                    <a class="list-group-item" ng-controller="messageCtrl as ctrl" ng-click = "ctrl.messagesRead(5)">
 
                         <span class="name" id = "Usuario5"></span> 
                         <span class="title" id ="Asunto5"></span> 
                         <span class="text-muted text" id="Preview5"></span> 
                         <span class="badge" id="Date5"></span> <span class="pull-right"></span>
+                    </a>
+                </div>
+                <div class="message">
+                    <a class="list-group-item" ng-controller="messageCtrl as ctrl" ng-click = "ctrl.messagesRead(6)">
+
+                        <span class="name" id = "Usuario6"></span> 
+                        <span class="title" id ="Asunto6"></span> 
+                        <span class="text-muted text" id="Preview6"></span> 
+                        <span class="badge" id="Date6"></span> <span class="pull-right"></span>
+                    </a>
+                </div>
+                <div class="message">
+                    <a class="list-group-item" ng-controller="messageCtrl as ctrl" ng-click = "ctrl.messagesRead(7)">
+
+                        <span class="name" id = "Usuario7"></span> 
+                        <span class="title" id ="Asunto7"></span> 
+                        <span class="text-muted text" id="Preview7"></span> 
+                        <span class="badge" id="Date7"></span> <span class="pull-right"></span>
+                    </a>
+                </div>
+                <div class="message">
+                    <a class="list-group-item" ng-controller="messageCtrl as ctrl" ng-click = "ctrl.messagesRead(8)">
+
+                        <span class="name" id = "Usuario8"></span> 
+                        <span class="title" id ="Asunto8"></span> 
+                        <span class="text-muted text" id="Preview8"></span> 
+                        <span class="badge" id="Date8"></span> <span class="pull-right"></span>
                     </a>
                 </div>
 
@@ -332,6 +359,7 @@
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <form role="form">
             <!-- Modal Header -->
             <div class="modal-header">
 
@@ -350,25 +378,24 @@
 
             <!-- Modal Body -->
             <div class="modal-body">
-
-
                 <div class="form-group">
                     <label class="col-sm-2 control-label"
                            for="inputPassword3" >Subject</label>
-                    <h6 id="ReplaySubject"></h6>
+                    <h6 id="ReplySubject"></h6>
 
-                    <textarea type="text" class="form-control" rows="4" id="question"/></textarea>
+                    <textarea type="text" class="form-control" rows="4" id="reply" style = "width: 90%; margin: 0 auto;"/></textarea>
                 </div>
             </div>  
             <!-- Modal Footer -->
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-primary" ng-click = "" ng-controller="messageCtrl as ctrl"> Reply</button>
+                <button type="button" class="btn btn-primary" ng-click = "ctrl.sendReply()" ng-controller="messageCtrl as ctrl"> Reply</button>
 
                 <button type="button" class="btn btn-default"
                         data-dismiss="modal">Close
                 </button>   
             </div>
+            </form>
 
         </div>
     </div>

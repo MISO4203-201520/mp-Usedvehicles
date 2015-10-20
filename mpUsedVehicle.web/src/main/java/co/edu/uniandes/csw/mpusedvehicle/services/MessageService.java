@@ -77,14 +77,14 @@ public class MessageService {
     @GET
     @Path("/questionsbyprovider/{idProvider}")
     public List<MessageDTO> getQuestionsByProvider(@PathParam("idProvider") Long idProvider) {
-        System.out.println("getQuestionsByProvider");
+        
         return messageLogic.getQuestionsByProvider(idProvider);
     }
     
       @GET
     @Path("/questionsbyuser/{idUser}")
     public List<MessageDTO> getQuestionsByUser(@PathParam("idUser") Long idUser) {
-        System.out.println("getQuestionsByUser");
+        
         return messageLogic.getQuestionsByUser(idUser);
     }
    
@@ -121,14 +121,14 @@ public class MessageService {
     @GET
     @Path("/getmessagesbyprovider/{idProvider}")
     public List<MessageDTO> getMessagesByProvider(@PathParam("idProvider") Integer idProvider) {
-        System.out.println("getMessagesByProvider");
+        
         return messageLogic.getmessagesByProvider(idProvider);
     }
     
       @GET
     @Path("/getmessagesbyuser/{idClient}")
     public List<MessageDTO> getMessagesByUser(@PathParam("idClient") Integer idClient) {
-        System.out.println("getMessagesByUser");
+        
         return messageLogic.getmessagesByClient(idClient);
     }
     
@@ -136,14 +136,14 @@ public class MessageService {
     @GET
     @Path("/getclients/")
     public List<ClientDTO> getClients() {
-        System.out.println("getClients");
+        
         return clientLogic.getIdANDUsername();
     }
     
     @GET
     @Path("/getproviders/")
     public List<ProviderDTO> getProviders() {
-        System.out.println("getProviders");
+       
         return providerLogic.getProviders();
     }
     
@@ -151,15 +151,14 @@ public class MessageService {
      @GET
     @Path("/getproviderbyid/{id}")
     public ProviderDTO getProviderById(@PathParam("id") Long id) {
-        System.out.println("getProviders");
+       
         return providerLogic.getProviderById(id); 
     }
     
     @GET
     @Path("/getclientbyid/{id}")
     public ClientDTO getClientById(@PathParam("id") Long id) {
-        System.out.println("getProviders");
-        
+       
         return clientLogic.getClientById(id);
     }
     

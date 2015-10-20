@@ -6,9 +6,11 @@
         
         this.answer='';
         this.user='';
-        this.data = [];
+        this.data1 = [];
         this.userlist = []
         var usersarr = [];
+        this.mes = [];
+        this.ReplyUserName = '';
         
         $scope.getQuestionsByProvider = function () {
             svc.getQuestionsByProvider(authSvc.getCurrentUser().id).then(function (Questions) {
@@ -18,14 +20,30 @@
         };
         $scope.getQuestionsByUser = function () {
             svc.getQuestionsByUser(authSvc.getCurrentUser().id).then(function (Questions) {
-                    $scope.records = Questions;
+                  $scope.records = Questions;
+                    
             });
         };
         
-        $scope.getUsers = function() {
+        $scope.getMessagesByProvider =  function () {
+            svc.getMessagesByClient(authSvc.getCurrentUser().id).then(function (Messages){
+                   
+                    $scope.getmessagesbyprovider = Messages;
+                    //$scope.records = Messages;
+                    
+                    
+                });
+            };
+            
         
-                
-        };
+            
+        $scope.getMessagesByClient =  function () {
+            svc.getMessagesByProvider(authSvc.getCurrentUser().id).then(function (Messages){
+                   
+                  $scope.getmessagesbyuser = Messages;
+                    //$scope.records = Messages;
+                });
+            };
         
         this.messagesLoad = function (){
                 userlist = [];
@@ -57,23 +75,29 @@
                 });
                 
                 svcUser.api.one('currentUser').get().then(function(user){
+                    console.log(user.role);
                     if (user.role === 'provider'){
-                        svc.getMessagesByProvider(authSvc.getCurrentUser().id).then(function (Questions){
+                        $scope.getMessagesByProvider;
+                   svc.getMessagesByProvider(authSvc.getCurrentUser().id).then(function (Messages){
                    
-                    data = Questions;
+                    mes = Messages;
                     
                 });
-                        
+                       
                         
                     }else{
-                        svc.getMessagesByProvider(authSvc.getCurrentUser().id).then(function (Questions){
+                        $scope.getMessagesByClient
+                    svc.getMessagesByClient(authSvc.getCurrentUser().id).then(function (Messages){
                    
-                    data = Questions;
+                    mes = Messages;
+                    console.log(mes);
+                    
                     
                 });
-                        
+                   
                     }
                 });
+                
                 
                 
             };
@@ -86,6 +110,16 @@
            svc.answerQuestion(record);
             //clean question
             this.answer='';      
+        };
+        
+        this.getName = function(idreceiver, type){
+            for (var i = 0; i <userlist.length; i++)
+                    {
+                        if ((userlist[i].id === idreceiver) && (userlist[i].type === type)){
+                        var name = userlist[i].name;
+                    }
+                    }
+                    return name;
         };
 
         this.messagesSearch = function (){
@@ -102,25 +136,36 @@
                         local: names,
                     });
                 }); 
-                    for (var i = 0; i < data.length; i++)
+                    
+                    
+                        
+                    for (var i = 0; i < mes.length; i++)
                            {
+                             check = (typeof mes[i].client).toString();
+                                if (check === 'undefined'){
+                                    user = mes[i].provider;
+                                }else
+                                {
+                                    user = mes[i].client;
+                                }
                              var n = (i+1).toString();
                              var $Usuario = $("#Usuario"+n);
                              $Usuario.find('label').remove();
-                             $Usuario.append("<label>"+data[i].client.name+": "+"</label>");
+                             $Usuario.append("<label>"+user.name+": "+"</label>");
+                             
 
                              var $Asunto = $("#Asunto"+n);
                              $Asunto.find('label').remove();
-                             $Asunto.append("<label>"+data[i].subject+" - " +"</label>");
+                             $Asunto.append("<label>"+mes[i].subject+" - " +"</label>");
                              
                              var $Preview = $("#Preview"+n);
                              $Preview.find('label').remove();
-                             $Preview.append(" "+"<label>"+data[i].question.substr(0,20)+"</label>");
+                             $Preview.append(" "+"<label>"+mes[i].question.substr(0,20)+"</label>");
 
                              var $Fecha = $("#Date"+n);
                              $Fecha.find('label').remove();
-                             $Fecha.append("<label >"+data[i].date+"</label>");
-                           } 
+                             $Fecha.append("<label >"+mes[i].date+"</label>");
+                           }
                 
                 
                 
@@ -135,49 +180,60 @@
         this.messagesRead = function (i){
                 $('#ReadMessage').modal('show');
                 
+                check = (typeof mes[i].client).toString();
+                                if (check === 'undefined'){
+                                    user = mes[i].provider;
+                                }else
+                                {
+                                    user = mes[i].client;
+                                }
+                
                 var $Title = $("#MessageTitle");
                 $Title.find('label').remove();
-                $Title.append("<label>"+data[i].subject+"</label>");
+                $Title.append("<label>"+mes[i].subject+"</label>");
                 
                 var $From = $("#MessageFrom");
                 $From.find('label').remove();
-                $From.append("<label class='col-sm-11'>"+data[i].client.name+"</label>");
+                $From.append("<label class='col-sm-11' >"+ user.name +"</label>");
+                console.log(user.name);
+                ReplyUserName = user.name;
                 
                 var $Message = $("#MessageRead");
                 $Message.find('label').remove();
-                $Message.append("<label>"+data[i].question+"</label>");
+                $Message.append("<label>"+mes[i].question+"</label>");
                 
                 var $Date = $("#MessageDate");
                 $Date.find('label').remove();
-                $Date.append("<label>Received "+data[i].date+"</label>");
+                $Date.append("<label>Received "+mes[i].date+"</label>");
                 
-                var $Subject = $("#ReplaySubject");
+                var $Subject = $("#ReplySubject");
                 $Subject.find('input').remove();
-                $Subject.append("<input type='text' class='col-sm-9' value='RE: "+data[i].subject+"'>");
+                $Subject.append("<input type='text' id='newSubject' class='col-sm-9' value='RE: "+mes[i].subject+"'>");
                 
             };
+            
+        
 
         
         
         svcUser.api.one('currentUser').get().then(function(user) {
-            console.log(user.role);
+            
             $scope.role=user.role;
             if($scope.role==="provider"){
-                console.log('getQuestionsByProvider');
+               $scope.getMessagesByProvider()
                $scope.getQuestionsByProvider();
                 this.user="provider";
             }else{
-                console.log('getQuestionsByUser');
+                $scope.getMessagesByClient()
                 $scope.getQuestionsByUser();
                 this.user="client";
             }
-            $scope.getUsers();
+            
         });
         
         
         this.message='';
         this.sendMessage = function(){
-                console.log("Sendmessage");
                 
                 newMessage={
                     question: this.message,
@@ -195,9 +251,7 @@
         
         this.sendNewMessage =  function (){
                         svcUser.api.one('currentUser').get().then(function(user){
-                            console.log(user.role);
                             
-                            console.log("Sendmessage");
                             var UserId, UserType, message, subject, receivertype, providerreceiver, clientreceiver, provider, client;
                             message= $("#message").val();
                             subject= $("#Subject").val();
@@ -217,7 +271,7 @@
                           
                             if (user.role === 'provider'){
                                 if (UserType.toString() === 'provider'){
-                                    console.log("send pro recv pro");
+                                   
                                     newMessage = {
                                     question: message,
                                     subject: subject,
@@ -228,7 +282,7 @@
                                     };
                                 }
                                 else{
-                                    console.log("send pro recv cli");
+                                    
                                     newMessage = {
                                     question: message,
                                     subject: subject,
@@ -243,7 +297,7 @@
                              else
                              {
                                 if (UserType.toString() === 'provider'){
-                                    console.log("send cli recv pro");
+                                    
                                     newMessage = {
                                     question: message,
                                     subject: subject,
@@ -259,7 +313,7 @@
                                 
                                 else
                                 {   
-                                    console.log("send cli recv cli");
+                                    
                                     newMessage = {
                                     question: message,
                                     subject: subject,
@@ -270,7 +324,7 @@
                             
                                 }
                              }   
-                            console.log(newMessage);
+                            
                             svc.sendMessage(newMessage);
                             //Hide modal
                             $('#WriteMessage').modal('hide');
@@ -279,6 +333,95 @@
                     });
                     };
                 
+                
+    
+
+    this.sendReply =  function (){
+                        svcUser.api.one('currentUser').get().then(function(user){
+                            
+                            var UserId, UserType, message, subject, receivertype, providerreceiver, clientreceiver, provider, client;
+                            message= $("#reply").val();
+                            subject= $("#newSubject").val();
+                            var UserName = ReplyUserName;
+                            
+                            
+                            for (var i = 0; i <userlist.length; i++)
+                            {
+                                if (userlist[i].name === UserName){
+                                   UserId = userlist[i].id;
+                                   UserType = userlist[i].type;
+                                   
+                                   break;
+                                }
+                            }
+                            
+                            
+                          
+                            if (user.role === 'provider'){
+                                if (UserType.toString() === 'provider'){
+                                    
+                                    newMessage = {
+                                    question: message,
+                                    subject: subject,
+                                    receivertype: UserType.toString(),
+                                    providerreceiver: UserId,
+                                    provider: authSvc.getCurrentUser(),
+                                         
+                                    };
+                                }
+                                else{
+                                    
+                                    newMessage = {
+                                    question: message,
+                                    subject: subject,
+                                    receivertype: UserType.toString(),
+                                    clientreceiver: UserId,
+                                    provider: authSvc.getCurrentUser(),
+                                          
+                            };
+                                    }
+                                
+                            }
+                             else
+                             {
+                                if (UserType.toString() === 'provider'){
+                                    
+                                    newMessage = {
+                                    question: message,
+                                    subject: subject,
+                                    receivertype:  UserType.toString(),
+                                    providerreceiver: UserId,
+                                    client: authSvc.getCurrentUser(),       
+                            };
+                                     providerreceiver= UserId;
+                                        clientreceiver= '';
+                                        provider='';   
+                                        client=authSvc.getCurrentUser();
+                                    }
+                                
+                                else
+                                {   
+                                    
+                                    newMessage = {
+                                    question: message,
+                                    subject: subject,
+                                    receivertype:  UserType.toString(),
+                                    clientreceiver: UserId,
+                                    client: authSvc.getCurrentUser(),       
+                                    };
+                            
+                                }
+                             }   
+                            
+                            svc.sendMessage(newMessage);
+                            //Hide modal
+                            $('#ReadMessage').modal('hide');
+                            
+                        
+                    });
+                    };
+                    
+                    
                 
     }]);
 

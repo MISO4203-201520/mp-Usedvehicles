@@ -1,8 +1,10 @@
 (function(ng){
     var mod = ng.module('messageModule');
     
-    mod.service('messageService', ['CrudCreator','messageContext', 'Restangular',function(CrudCreator, context, restangular){
+    mod.service('messageService', ['CrudCreator','messageContext',function(CrudCreator, context){
             CrudCreator.extendService(this, context);
+            
+            //'Restangular' restangular
             this.askQuestion = function(question){
                 this.saveRecord(question);
             };
@@ -32,10 +34,7 @@
             };
             
             this.sendMessage = function(data){
-                return this.api.one("newmessage/").customPOST(data).then(function() 
-                {
-                    console.log("Success");
-                });
+                return this.api.one("newmessage/").customPOST(data);
             };
             
             this.getClientbyid = function(id){
@@ -45,7 +44,6 @@
             this.getProviderbyid = function(id){
                 return this.api.one('getproviderbyid', id).get();
             };
-            
             
             
      }]);
