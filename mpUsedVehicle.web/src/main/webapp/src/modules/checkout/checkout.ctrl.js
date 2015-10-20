@@ -122,7 +122,6 @@
                         console.log(user.role);
                         $scope.role=user.role;
                         if($scope.role==="provider"){
-                            console.log('getOrderByProvider');
                            svc.getOrderByProvider(authSvc.getCurrentUser().id).then(function (result) {
                                 $scope.providerOrders = [];
                                 $scope.providerOrders = result;
@@ -132,16 +131,13 @@
                             {
                                 $location.path('/myorders');
                             }else{
-                                console.log('getOrderByClient');
                                 svc.getOrderByClient(authSvc.getCurrentUser().id).then(function (result) {
                                     $scope.orders = [];
                                     $scope.orders = result;
                                 });
                             }
-                            
                         }
                     });
-                
             }
             $scope.modalEdit = function(option){
                 $scope.orderEdited = $scope.providerOrders[option];

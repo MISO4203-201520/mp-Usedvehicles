@@ -2,6 +2,7 @@ package co.edu.uniandes.csw.mpusedvehicle.dtos;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * @generated
@@ -12,6 +13,7 @@ public class ProviderDTO {
     private Long id;
     private String name;
     private String userId;
+    @PodamExclude
     private List<ProductDTO> products;
     private String email;
     private String city;

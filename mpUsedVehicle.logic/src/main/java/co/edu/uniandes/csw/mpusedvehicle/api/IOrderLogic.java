@@ -1,7 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.api;
 
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
-import co.edu.uniandes.csw.mpusedvehicle.entities.OrderEntity;
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import java.util.List;
 
