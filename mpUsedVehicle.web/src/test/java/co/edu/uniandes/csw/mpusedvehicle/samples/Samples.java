@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.samples;
 
+import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.UserDTO;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ClientEntity;
 import javax.ws.rs.client.Client;
@@ -29,15 +30,11 @@ public class Samples {
     public static final int Ok = 200;
     public static final int Created = 201;
     public static final int OkWithoutContent = 204;
-    
-    
-    public static Integer register() {
-        Client cliente = ClientBuilder.newClient();
-        UserDTO user = Samples.createSampleUser();
-        Response response = cliente.target(URLBASE).path(PATH_REGISTER).request().
-                post(Entity.entity(user, MediaType.APPLICATION_JSON));       
         
-        return response.getStatus();
+    public static void createSampleClient() {
+        Client cliente = ClientBuilder.newClient();
+        Response response = cliente.target(URLBASE).path("/users/create").request().
+                post(Entity.entity(Samples.createSampleClientDTO(), MediaType.APPLICATION_JSON));       
     }
     
     /**
@@ -53,7 +50,7 @@ public class Samples {
         user.setPassword(password);
         Response response = cliente.target(URLBASE).path("/users/login").request().
                 post(Entity.entity(user, MediaType.APPLICATION_JSON));       
-        UserDTO foundUser = (UserDTO) response.readEntity(UserDTO.class);
+        ClientDTO foundUser = (ClientDTO) response.readEntity(ClientDTO.class);
         
         if (foundUser != null && response.getStatus() == Ok) {
             return response.getCookies().get("JSESSIONID");
@@ -62,6 +59,10 @@ public class Samples {
         }
     }
     
+    /**
+     * Sample DTO User
+     * @return 
+     */
     public static UserDTO createSampleUser(){
         UserDTO client = new UserDTO();
         client.setName("test");
@@ -70,7 +71,17 @@ public class Samples {
         client.setEmail("die-agud@uniandes.edu.co");
         client.setRole("user");
         client.setUserName("test");
-//        client.setLastName("https://api.stormpath.com/v1/accounts/24twbgpeBCjuufjZEDPlNr");
+        return client;
+    }
+    
+    /**
+     * Sample Client Entity
+     * @return 
+     */
+    public static ClientDTO createSampleClientDTO(){
+        ClientDTO client = new ClientDTO();
+        client.setName("test");
+        client.setUserId("https://api.stormpath.com/v1/accounts/24twbgpeBCjuufjZEDPlNr");
         return client;
     }
     

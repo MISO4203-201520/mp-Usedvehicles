@@ -30,6 +30,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.transaction.UserTransaction;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -44,6 +45,8 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -59,13 +62,12 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
 public class CheckoutTest {
-    
-    
+
     private static List<CartItemDTO> cartItems = new ArrayList<>();
     private static OrderDTO order;
     private static ClientEntity client;
     private static Cookie cookieSessionId;
-    
+
 //    http://localhost:8080/mpUsedVehicle.web/webresources/users/login
 //    {"role":"user","userName":"USER2","password":"Pepitoperez123"}
     /**
@@ -75,8 +77,8 @@ public class CheckoutTest {
     @Deployment
     public static Archive<?> createDeployment() {
 
-         MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
-         WebArchive war = ShrinkWrap
+        MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
+        WebArchive war = ShrinkWrap
                 // Nombre del Proyecto "mpUsedVehicle.web" seguido de ".war". Debe ser el mismo nombre del proyecto web que contiene los javascript y los  servicios Rest
                 .create(WebArchive.class, "mpUsedVehicle.web.war")
                 // Se agrega la dependencia a la logica con el nombre groupid:artefactid:version (GAV)
@@ -92,7 +94,7 @@ public class CheckoutTest {
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 // El archivo beans.xml es necesario para injeccion de dependencias. 
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"))
-                 // El archivo shiro.ini. 
+                // El archivo shiro.ini. 
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/shiro.ini"))
                 // El archivo web.xml es necesario para el despliegue de los servlets
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"));
@@ -100,28 +102,32 @@ public class CheckoutTest {
         return war;
     }
     
-    @BeforeClass 
-    public static void setUp() { 
-        
+    @BeforeClass
+    public static void setUp() {
+
         insertData();
-        
+
     }
-    
-    public static void insertData() {
-        Samples.register();
+
+    private static void insertData() {
+        Samples.createSampleClient();
         cookieSessionId = Samples.login("test", "Pepitoperez123");
-        for (int i = 0; i < 5; i++) { 
+        for (int i = 0; i < 5; i++) {
             PodamFactory factory = new PodamFactoryImpl();
-            cartItems.add(factory.manufacturePojo(CartItemDTO.class)); 
-            cartItems.add(factory.manufacturePojo(CartItemDTO.class)); 
-            order = factory.manufacturePojo(OrderDTO.class);            
-        } 
+            cartItems.add(factory.manufacturePojo(CartItemDTO.class));
+            cartItems.add(factory.manufacturePojo(CartItemDTO.class));
+            order = factory.manufacturePojo(OrderDTO.class);
+        }
     }
-    
-    @Test  
+
+    /**
+     * El carrito debe empezar vacío
+     * @throws IOException 
+     */
+    @Test
     @RunAsClient
     public void t1AddItemsToCartService() throws IOException {
-        
+        cookieSessionId = Samples.login("test", "Pepitoperez123");
         CartItemDTO cartItem = cartItems.get(0);
         Client cliente = ClientBuilder.newClient();
         Response response = cliente.target(Samples.URLBASE + Samples.PATH_CART_ITEMS)
@@ -129,10 +135,7 @@ public class CheckoutTest {
                 .cookie(cookieSessionId)
                 .post(Entity.entity(cartItem, MediaType.APPLICATION_JSON));
         CartItemDTO cartItemTest = (CartItemDTO) response.getEntity();
-//        Assert.assertEquals(book.getName(), bookTest.getName());
-//        Assert.assertEquals(book.getIsbn(), bookTest.getIsbn());
-//        Assert.assertEquals(book.getId(), bookTest.getId());
-//        Assert.assertEquals(Created, response.getStatus());
+        Assert.assertNull(cartItemTest);
     }
-    
+
 }

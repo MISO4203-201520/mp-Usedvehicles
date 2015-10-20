@@ -32,6 +32,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -125,6 +126,7 @@ public class CheckoutFunctionalIT {
         }
     }
 
+    @Ignore
     @Test
     @RunAsClient
     public void t1createBook() throws InterruptedException {
