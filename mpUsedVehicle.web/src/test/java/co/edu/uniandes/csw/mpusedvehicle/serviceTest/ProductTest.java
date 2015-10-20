@@ -101,7 +101,7 @@ public class ProductTest {
             oraculo.add(product);            
         }       
     }
-   /* 
+   
     @Test
     @RunAsClient
     public void t1CreateProductService() throws IOException {
@@ -192,5 +192,5 @@ public class ProductTest {
         List<ProductDTO> listProductTest = new ObjectMapper().readValue(listProducts, List.class);
         Assert.assertEquals(Ok, response.getStatus());
         Assert.assertNotNull(listProductTest);        
-    } */     
+    }      
 }
