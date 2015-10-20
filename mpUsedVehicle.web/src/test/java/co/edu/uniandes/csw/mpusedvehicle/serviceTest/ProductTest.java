@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mpusedvehicle.serviceTest;
+import co.edu.uniandes.csw.mpusedvehicle.configuration.ApiKeyEnvVariables;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.UserDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.EJBExceptionMapper;
@@ -84,6 +85,7 @@ public class ProductTest {
                 .addPackage(CartItemService.class.getPackage())
                 .addPackage(OrderService.class.getPackage())                
                 .addPackage(EJBExceptionMapper.class.getPackage())
+                .addPackage(ApiKeyEnvVariables.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos. 
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 // El archivo beans.xml es necesario para injeccion de dependencias. 
