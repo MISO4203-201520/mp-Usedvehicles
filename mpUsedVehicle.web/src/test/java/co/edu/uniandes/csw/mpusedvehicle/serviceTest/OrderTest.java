@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpusedvehicle.serviceTest;
 
+import co.edu.uniandes.csw.mpusedvehicle.configuration.ApiKeyEnvVariables;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.EJBExceptionMapper;
 import co.edu.uniandes.csw.mpusedvehicle.services.OrderService;
@@ -63,6 +64,7 @@ public class OrderTest {
                         .resolveAsFiles())
                 // Se agregan los compilados de los paquetes de servicios
                 .addPackage(OrderService.class.getPackage())
+                .addPackage(ApiKeyEnvVariables.class.getPackage())
                 .addPackage(EJBExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos. 
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")

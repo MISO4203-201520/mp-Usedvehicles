@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.mpusedvehicle.converters.CartItemConverter;
 import co.edu.uniandes.csw.mpusedvehicle.converters.ClientConverter;
 import co.edu.uniandes.csw.mpusedvehicle.ejbs.OrderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.converters.AgreementConverter;
+import co.edu.uniandes.csw.mpusedvehicle.converters.OrderConverter;
 import co.edu.uniandes.csw.mpusedvehicle.converters.ProductConverter;
 import co.edu.uniandes.csw.mpusedvehicle.converters.ProviderConverter;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
