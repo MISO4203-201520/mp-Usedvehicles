@@ -205,6 +205,22 @@ public class UserService {
         }
     }
     
+    @Path("/create")
+    @POST
+    public Response createUser(ClientDTO client) {
+
+        try {
+            clientLogic.createClient(client);
+            return Response.ok().build();
+        } catch (ResourceException e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            return Response.status(e.getStatus())
+                    .entity(e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        }
+    }
+    
     private Account createUser(UserDTO user) {
         ApplicationRealm realm = ((ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms().iterator().next());
         Client client = realm.getClient();
