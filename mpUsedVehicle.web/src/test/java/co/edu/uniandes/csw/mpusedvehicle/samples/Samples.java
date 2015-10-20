@@ -30,7 +30,8 @@ public class Samples {
     public static final int Ok = 200;
     public static final int Created = 201;
     public static final int OkWithoutContent = 204;
-        
+    private static String URLIMAGE = "http://www.seleniumhq.org/images/big-logo.png";
+    
     public static void createSampleClient() {
         Client cliente = ClientBuilder.newClient();
         Response response = cliente.target(URLBASE).path("/users/create").request().
