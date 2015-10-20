@@ -1,7 +1,7 @@
 (function(ng){
     var mod = ng.module('checkoutModule');
     
-    mod.service('checkoutService', ['CrudCreator','checkoutContext', function(CrudCreator, context){
+    mod.service('checkoutService', ['CrudCreator','checkoutContext', 'Restangular', function(CrudCreator, context, restangular){
             CrudCreator.extendService(this, context);
             var self = this;
             this.addItem = function (record) {
@@ -37,6 +37,10 @@
             this.getOrderByClient = function (idClient)
             {
                 return this.api.one("client", idClient).get();
+            };
+            this.getPaymentMethods = function ()
+            {
+                return this.api.one("../paymentMethods").get();
             };
     }]);
 })(window.angular);
