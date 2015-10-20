@@ -8,19 +8,15 @@ package co.edu.uniandes.csw.mpusedvehicle.functionalTest;
 import co.edu.uniandes.csw.mpusedvehicle.configuration.ApiKeyEnvVariables;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
-import co.edu.uniandes.csw.mpusedvehicle.dtos.UserDTO;
 import co.edu.uniandes.csw.mpusedvehicle.samples.Samples;
 import co.edu.uniandes.csw.mpusedvehicle.services.OrderService;
+import co.edu.uniandes.csw.mpusedvehicle.services.ProductService;
+import co.edu.uniandes.csw.mpusedvehicle.services.UserService;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Cookie;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -37,7 +33,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -75,11 +70,13 @@ public class CheckoutFunctionalIT {
                 .addAsLibraries(resolver.artifact("co.edu.uniandes.csw.mpusedvehicle:mpUsedVehicle.logic:1.0") 
                         .resolveAsFiles()) 
                 // Se agregan los compilados de los paquetes que se van a probar 
-                .addPackage(OrderService.class.getPackage()) 
+                .addPackage(ProductService.class.getPackage())
+                .addPackage(UserService.class.getPackage())
+                .addPackage(OrderService.class.getPackage())
                 .addPackage(ApiKeyEnvVariables.class.getPackage())
                 // Se agrega contenido estatico: html y modulos de javascript.  
                 .addAsWebResource(new File(Samples.URLRESOURCES, "index.html")) 
-                .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class).importDirectory(Samples.URLRESOURCES + "/src/").as(GenericArchive.class), "/src/", Filters.includeAll())
+                .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class).importDirectory(Samples.URLRESOURCES).as(GenericArchive.class), "/", Filters.includeAll())
                 // El archivo que contiene la configuracion a la base de datos.  
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml") 
                 // El archivo shiro.ini. 
@@ -128,10 +125,17 @@ public class CheckoutFunctionalIT {
     @RunAsClient
     public void t1addItemToCart() throws InterruptedException {
         boolean success = false;
+        
+        
+        driver.findElement(By.id("catalog")).click();
+        
+        Thread.sleep(50500);
+        driver.findElement(By.id("0-addToCart-btn")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("dropdownMenu1")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("shoppingCart")).click();
         Thread.sleep(20500);
-//        TODO Se deja toda la prueba documentada ya que con el cambio de miguel los id´s se movieron
-//        driver.findElement(By.id("0-addToCart-btn")).click();
-//        Thread.sleep(3000);
 //        driver.findElement(By.id("name")).clear();
 //        driver.findElement(By.id("name")).sendKeys("Cien anos de Soledad");
 //        driver.findElement(By.id("description")).clear();
