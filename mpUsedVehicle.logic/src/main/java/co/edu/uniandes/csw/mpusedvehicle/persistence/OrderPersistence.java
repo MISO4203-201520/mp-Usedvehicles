@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -26,6 +27,8 @@ import javax.persistence.Query;
 @Stateless
 public class OrderPersistence extends CrudPersistence<OrderEntity>{
     
+    private static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AdminPersistence.class);
+     
     public OrderPersistence() {
         this.entityClass = OrderEntity.class;
     }
@@ -60,7 +63,7 @@ public class OrderPersistence extends CrudPersistence<OrderEntity>{
             params.put("provider_id", idProvider);
             result = executeListNamedQuery("OrderEntity.getOrdersByProvider", params);
         }catch (NoResultException e) {
-            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            LOGGER.error(e.getMessage(),e);
             return Collections.emptyList();
         }
         return result;
@@ -77,7 +80,7 @@ public class OrderPersistence extends CrudPersistence<OrderEntity>{
             params.put("client_id", idClient);
             result = executeListNamedQuery("OrderEntity.getOrdersByClient", params);
         }catch (NoResultException e) {
-            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            LOGGER.error(e.getMessage(),e);
             return Collections.emptyList();
         }
         return result;

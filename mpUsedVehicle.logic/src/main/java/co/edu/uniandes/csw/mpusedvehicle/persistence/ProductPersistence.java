@@ -5,17 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @generated
  */
 @Stateless
 public class ProductPersistence extends CrudPersistence<ProductEntity> {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(AdminPersistence.class);
 
     /**
      * @generated
@@ -38,7 +40,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             list = executeListNamedQuery("Product.getCheaperProductByProvider", params);
             return list.get(0);
         } catch (NoResultException e) {
-            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
             return null;
         }
     }
@@ -46,94 +48,108 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
     public ProductEntity getCheaperProductByVehicle(String nameVehicle) {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
-            params.put("nameVehicle","%" + nameVehicle.toUpperCase() + "%");
+            params.put("nameVehicle", "%" + nameVehicle.toUpperCase() + "%");
             List<ProductEntity> list = new ArrayList<ProductEntity>();
             list = executeListNamedQuery("Product.getCheaperProductByVehicle", params);
             return list.get(0);
         } catch (NoResultException e) {
-            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
             return null;
         }
     }
+
     public List<String> getVehiclesName() {
-        try{      
+        try {
             List<String> list = new ArrayList<String>();
-            list = executeListNamedQuery("Product.getVehiclesName");           
+            list = executeListNamedQuery("Product.getVehiclesName");
             return list;
-            } catch(NoResultException e){
-                return null;               
-            }
+        } catch (NoResultException e) {
+            LOGGER.error(e.getMessage(), e);
+            return null;
+        }
     }
+
     public List<String> getVehiclesBrand() {
-        try{      
+        try {
             List<String> list = new ArrayList<String>();
-            list = executeListNamedQuery("Product.getVehiclesBrand");           
+            list = executeListNamedQuery("Product.getVehiclesBrand");
             return list;
-            } catch(NoResultException e){
-                return null;               
-            }
+        } catch (NoResultException e) {
+            LOGGER.error(e.getMessage(), e);
+            return null;
+        }
     }
+
     public List<String> getVehiclesCapacity() {
-        try{      
+        try {
             List<Integer> listInteger = new ArrayList<Integer>();
             List<String> list = new ArrayList<String>();
             listInteger = executeListNamedQuery("Product.getVehiclesCapacity");
-            for(Integer temp : listInteger){
+            for (Integer temp : listInteger) {
                 list.add(temp.toString());
             }
             return list;
-            } catch(NoResultException e){
-                return null;               
-            }
+        } catch (NoResultException e) {
+            LOGGER.error(e.getMessage(), e);
+            return null;
+        }
     }
+
     public List<String> getVehiclesColor() {
-        try{      
+        try {
             List<String> list = new ArrayList<String>();
-            list = executeListNamedQuery("Product.getVehiclesColor");           
+            list = executeListNamedQuery("Product.getVehiclesColor");
             return list;
-            } catch(NoResultException e){
-                return null;               
-            }
+        } catch (NoResultException e) {
+            LOGGER.error(e.getMessage(), e);
+            return null;
+        }
     }
+
     public List<String> getVehiclesModel() {
-        try{      
+        try {
             List<String> list = new ArrayList<String>();
-            list = executeListNamedQuery("Product.getVehiclesModel");           
+            list = executeListNamedQuery("Product.getVehiclesModel");
             return list;
-            } catch(NoResultException e){
-                return null;               
-            }
+        } catch (NoResultException e) {
+            LOGGER.error(e.getMessage(), e);
+            return null;
+        }
     }
+
     public List<String> getVehiclesPlate() {
-        try{      
+        try {
             List<String> list = new ArrayList<String>();
             list.add("Even");
             list.add("Odd");
             return list;
-             } catch(NoResultException e){
-                 return null;               
-             }
+        } catch (NoResultException e) {
+            LOGGER.error(e.getMessage(), e);
+            return null;
+        }
     }
+
     public List<String> getVehiclesLocation() {
-        try{      
-            List<String> list = new ArrayList<String>();
-            list = executeListNamedQuery("Product.getVehiclesLocation");           
-            return list;
-            } catch(NoResultException e){
-                return null;               
-            }
-    }
-    
-    public List<ProductEntity> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price, String color, String plate, String location) {
-        
         try {
-            
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getVehiclesLocation");
+            return list;
+        } catch (NoResultException e) {
+            LOGGER.error(e.getMessage(), e);
+            return null;
+        }
+    }
+
+    public List<ProductEntity> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price, String color, String plate, String location) {
+
+        try {
+
             int startPrice = 0;
             int endPrice = 9999999;
             // Constructing the sql query
             String sql = " SELECT p "
-                        + "FROM ProductEntity p "
-                        + "WHERE    1 = 1 ";
+                    + "FROM ProductEntity p "
+                    + "WHERE    1 = 1 ";
             if (brand != null && !"".equalsIgnoreCase(brand)) {
                 sql += "            AND UPPER(p.vehicle.brand) like UPPER(:brand) ";
             }
@@ -144,17 +160,18 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
                 sql += "            AND p.vehicle.color = :color ";
             }
             if (plate != null && !"".equalsIgnoreCase(plate)) {
-                if (plate.equals("Even"))
+                if (plate.equals("Even")) {
                     sql += "            AND p.vehicle.plate = TRUE ";
-                else
+                } else {
                     sql += "            AND p.vehicle.plate = FALSE ";
-            }            
+                }
+            }
             if (capacity != null && capacity > 0) {
                 sql += "            AND p.vehicle.capacity = :capacity ";
             }
             if (location != null && !"".equalsIgnoreCase(location)) {
                 sql += "            AND p.vehicle.location = :location ";
-            }            
+            }
             if (price != null && price > 0) {
                 sql += "            AND p.price between :startPrice AND :endPrice ";
                 switch (price) {
@@ -180,10 +197,10 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             }
             if (color != null && !"".equalsIgnoreCase(color)) {
                 query.setParameter("color", color);
-            }       
+            }
             if (location != null && !"".equalsIgnoreCase(location)) {
                 query.setParameter("location", location);
-            }   
+            }
             if (capacity != null && capacity > 0) {
                 query.setParameter("capacity", capacity);
             }
@@ -195,11 +212,11 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             // Executing the query to get products
             List<ProductEntity> products = new ArrayList<ProductEntity>();
             products = query.getResultList();
-            
+
             return products;
-            
+
         } catch (NoResultException e) {
-            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
             return null;
         }
     }

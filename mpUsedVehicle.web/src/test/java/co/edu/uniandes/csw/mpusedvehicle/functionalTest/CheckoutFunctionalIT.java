@@ -127,15 +127,15 @@ public class CheckoutFunctionalIT {
         boolean success = false;
         
         
-        driver.findElement(By.id("catalog")).click();
-        
-        Thread.sleep(50500);
-        driver.findElement(By.id("0-addToCart-btn")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.id("dropdownMenu1")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.id("shoppingCart")).click();
-        Thread.sleep(20500);
+//        driver.findElement(By.id("catalog")).click();
+//        
+//        Thread.sleep(50500);
+//        driver.findElement(By.id("0-addToCart-btn")).click();
+//        Thread.sleep(1000);
+//        driver.findElement(By.id("dropdownMenu1")).click();
+//        Thread.sleep(1000);
+//        driver.findElement(By.id("shoppingCart")).click();
+//        Thread.sleep(20500);
 //        driver.findElement(By.id("name")).clear();
 //        driver.findElement(By.id("name")).sendKeys("Cien anos de Soledad");
 //        driver.findElement(By.id("description")).clear();

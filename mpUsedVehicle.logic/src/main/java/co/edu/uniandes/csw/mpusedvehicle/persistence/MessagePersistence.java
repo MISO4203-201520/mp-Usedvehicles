@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @generated
@@ -13,6 +15,7 @@ import javax.persistence.NoResultException;
 @Stateless
 public class MessagePersistence extends CrudPersistence<MessageEntity> {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(MessagePersistence.class);
     /**
      * @generated
      */
@@ -28,6 +31,7 @@ public class MessagePersistence extends CrudPersistence<MessageEntity> {
             params.put("idProvider",idProvider);
             return  executeListNamedQuery("Message.getmessagesByProvider", params);
             } catch(NoResultException e){
+                LOGGER.error(e.getMessage(),e);
                 return null;
             }
         }
@@ -41,6 +45,7 @@ public class MessagePersistence extends CrudPersistence<MessageEntity> {
             params.put("idClient",idClient);
             return  executeListNamedQuery("Message.getmessagesByClient", params);
             } catch(NoResultException e){
+                LOGGER.error(e.getMessage(),e);
                 return null;
             }
         }
