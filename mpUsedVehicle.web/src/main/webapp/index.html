@@ -139,8 +139,8 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="main-bar">
                             <ul class="nav navbar-nav">
-                                <li><a href="#/catalog">Catalog</a></li>
-                                <li><a href="#/product" >Product</a></li>
+                                <li><a id="catalog" href="#/catalog">Catalog</a></li>
+                                <li><a id="product" href="#/product" >Product</a></li>
                             </ul>
                             <ul class="nav navbar-nav">
                                 <li><a href="#/catalogProvider">Catalog Provider</a></li>
@@ -161,7 +161,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                         <li id="users"><a href="#/users">Registered users<span class="glyphicon glyphicon-user" ></span>  </a></li>
                                         <li><a href="#/listorders">My Orders <span class="glyphicon glyphicon-list-alt" ></span></a></li>
-                                        <li><a href="#/shoppingCart">My Shopping Cart <span class="glyphicon glyphicon-shopping-cart" ></span></a></li>
+                                        <li><a id="shoppingCart" href="#/shoppingCart">My Shopping Cart <span class="glyphicon glyphicon-shopping-cart" ></span></a></li>
                                         <li><a ng-click = "ctrl.messagesSearch()" ng-controller="messageCtrl as ctrl">My Messages <span class="glyphicon glyphicon-envelope" ></span></a></li>
                                         <li><a href="#/questions">My Questions <span class="glyphicon glyphicon-question-sign" ></span></a></li>
                                     </ul>

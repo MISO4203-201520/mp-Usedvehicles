@@ -4,10 +4,10 @@ import co.edu.uniandes.csw.mpusedvehicle.entities.ClientEntity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @generated
@@ -15,6 +15,7 @@ import javax.persistence.NoResultException;
 @Stateless
 public class ClientPersistence extends CrudPersistence<ClientEntity> {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(ClientPersistence.class);
     /**
      * @generated
      */
@@ -28,7 +29,7 @@ public class ClientPersistence extends CrudPersistence<ClientEntity> {
             params.put("user_id", userId);
             return this.executeSingleNamedQuery("Client.getByUserId", params);
         } catch (NoResultException e) {
-            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            LOGGER.error(e.getMessage(),e);
             return null;
         }
     }
@@ -47,7 +48,7 @@ public class ClientPersistence extends CrudPersistence<ClientEntity> {
             params.put("id", Id);
             return this.executeSingleNamedQuery("Client.getById", params);
         } catch (NoResultException e) {
-            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            LOGGER.error(e.getMessage(),e);
             return null;
         }
     }

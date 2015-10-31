@@ -75,7 +75,7 @@
                 });
                 
                 svcUser.api.one('currentUser').get().then(function(user){
-                    console.log(user.role);
+                    
                     if (user.role === 'provider'){
                         $scope.getMessagesByProvider;
                    svc.getMessagesByProvider(authSvc.getCurrentUser().id).then(function (Messages){
@@ -90,7 +90,7 @@
                     svc.getMessagesByClient(authSvc.getCurrentUser().id).then(function (Messages){
                    
                     mes = Messages;
-                    console.log(mes);
+                    
                     
                     
                 });
@@ -133,7 +133,7 @@
                 $(document).ready(function () {
                     $('input.typeahead').typeahead({
                         name: 'accounts',
-                        local: names,
+                        local: names
                     });
                 }); 
                     
@@ -277,7 +277,7 @@
                                     subject: subject,
                                     receivertype: UserType.toString(),
                                     providerreceiver: UserId,
-                                    provider: authSvc.getCurrentUser(),
+                                    provider: authSvc.getCurrentUser()
                                          
                                     };
                                 }
@@ -288,7 +288,7 @@
                                     subject: subject,
                                     receivertype: UserType.toString(),
                                     clientreceiver: UserId,
-                                    provider: authSvc.getCurrentUser(),
+                                    provider: authSvc.getCurrentUser()
                                           
                             };
                                     }
@@ -303,7 +303,7 @@
                                     subject: subject,
                                     receivertype:  UserType.toString(),
                                     providerreceiver: UserId,
-                                    client: authSvc.getCurrentUser(),       
+                                    client: authSvc.getCurrentUser()       
                             };
                                      providerreceiver= UserId;
                                         clientreceiver= '';
@@ -319,7 +319,7 @@
                                     subject: subject,
                                     receivertype:  UserType.toString(),
                                     clientreceiver: UserId,
-                                    client: authSvc.getCurrentUser(),       
+                                    client: authSvc.getCurrentUser()      
                                     };
                             
                                 }
@@ -365,7 +365,7 @@
                                     subject: subject,
                                     receivertype: UserType.toString(),
                                     providerreceiver: UserId,
-                                    provider: authSvc.getCurrentUser(),
+                                    provider: authSvc.getCurrentUser()
                                          
                                     };
                                 }
@@ -376,7 +376,7 @@
                                     subject: subject,
                                     receivertype: UserType.toString(),
                                     clientreceiver: UserId,
-                                    provider: authSvc.getCurrentUser(),
+                                    provider: authSvc.getCurrentUser()
                                           
                             };
                                     }
@@ -391,7 +391,7 @@
                                     subject: subject,
                                     receivertype:  UserType.toString(),
                                     providerreceiver: UserId,
-                                    client: authSvc.getCurrentUser(),       
+                                    client: authSvc.getCurrentUser()       
                             };
                                      providerreceiver= UserId;
                                         clientreceiver= '';
@@ -407,7 +407,7 @@
                                     subject: subject,
                                     receivertype:  UserType.toString(),
                                     clientreceiver: UserId,
-                                    client: authSvc.getCurrentUser(),       
+                                    client: authSvc.getCurrentUser()       
                                     };
                             
                                 }

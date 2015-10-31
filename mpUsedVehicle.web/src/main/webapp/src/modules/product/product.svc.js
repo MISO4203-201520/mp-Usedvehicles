@@ -12,7 +12,7 @@
                                                                 'priceFilter': priceFilter,
                                                                 'plateFilter': plateFilter,
                                                                 'locationFilter': locationFilter,
-                                                                'colorFilter': colorFilter,
+                                                                'colorFilter': colorFilter
                                                             });;
             };
             this.getVehiclesName = function(){
