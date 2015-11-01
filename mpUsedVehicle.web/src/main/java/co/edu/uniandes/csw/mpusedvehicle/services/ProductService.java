@@ -223,4 +223,16 @@ public class ProductService {
         
         return products;
     }
+    
+    /**
+     * Servicio que actualiza la calificacion de un producto dado una nueva calificacion.
+     * @param id. Identificador del producto.
+     * @param rating. Nueva calificacion a incluir en el promedio.
+     * @return Producto con calificacion promedio actuaizada.
+     */
+    @PUT
+    @Path("/rate/{id: \\d+}")
+    public ProductDTO updateRating(@PathParam("id") Long id, Float rating) {
+        return productLogic.updateRating(id, rating);
+    }
 }

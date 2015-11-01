@@ -251,6 +251,83 @@
                 //clean comment
                 this.comment='';
             };
+            // REQ 14 y 21
+            $scope.rateProduct = function(){
+                $('#rateProduct').modal('show');
+                this.rating1 = 5;
+                $scope.rating = 5;
+                return false;
+            };
             
+            
+            $scope.saveRating = function(){
+                //svc.saveStatus($scope.orderEdited);
+                $('#rateProduct').modal('hide');
+                return false;
+            };
+            
+            $scope.rateFunction = function( rating )
+            {
+                   var _url = 'your service url';
+
+             var data = {
+               rating: rating
+             };
+
+             $http.post( _url, angular.toJson(data), {cache: false} )
+              .success( function( data )
+              {
+               success(data);
+              })
+              .error(function(data){
+                error(data);
+              });
+
+            };
+           
+           
         }]);
+    mod.directive('starRating',
+        function() {
+            return {
+            restrict : 'A',
+            template : '<ul class="rating">'
+               + ' <li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">'
+               + '  <i class="fa fa-star-o"></i>'
+               + ' </li>'
+               + '</ul>',
+            scope : {
+             ratingValue : '=',
+             max : '=',
+             onRatingSelected : '&'
+            },
+            link : function(scope, elem, attrs) {
+             var updateStars = function() {
+              scope.stars = [];
+              for ( var i = 0; i < scope.max; i++) {
+               scope.stars.push({
+                filled : i < scope.ratingValue
+               });
+              }
+             };
+
+             scope.toggle = function(index) {
+              scope.ratingValue = index + 1;
+              scope.onRatingSelected({
+               rating : index + 1
+              });
+             };
+
+             scope.$watch('ratingValue',
+              function(oldVal, newVal) {
+               if (newVal) {
+                updateStars();
+               }
+              }
+             );
+            }
+            };
+        }
+);
+        
 })(window.angular);
