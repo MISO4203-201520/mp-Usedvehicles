@@ -31,7 +31,9 @@ public abstract class ProductConverter {
             dto.setVehicle(VehicleConverter.refEntity2DTO(entity.getVehicle()));
             dto.setComments(CommentConverter.listEntity2DTO(entity.getComments()));
             dto.setDiscount(entity.getDiscount());   //Nuevo Atributo REQ06
-
+            dto.setRating(entity.getRating()); // Calificacion del producto
+            dto.setAmmountVotes(entity.getAmmountVotes());
+            
             return dto;
         } else {
             return null;
@@ -68,6 +70,9 @@ public abstract class ProductConverter {
             dto.setVehicle(VehicleConverter.refEntity2DTO(entity.getVehicle()));
             dto.setComments(CommentConverter.listEntity2DTO(entity.getComments()));
             dto.setDiscount(entity.getDiscount());   //Nuevo Atributo REQ06
+            dto.setRating(entity.getRating()); // Calificacion del producto
+            dto.setAmmountVotes(entity.getAmmountVotes());
+            
             return dto;
         } else {
             return null;
@@ -87,6 +92,8 @@ public abstract class ProductConverter {
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
             entity.setVehicle(VehicleConverter.refDTO2Entity(dto.getVehicle()));
             entity.setDiscount(dto.getDiscount());   //Nuevo Atributo REQ06
+            entity.setRating(dto.getRating());
+            entity.setAmmountVotes(dto.getAmmountVotes());
 
             return entity;
         } else {

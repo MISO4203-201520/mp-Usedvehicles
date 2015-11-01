@@ -22,4 +22,11 @@ public interface IProductLogic {
     public List<ProductDTO> getVehiclesPlate();
     public List<ProductDTO> getVehiclesLocation();
     public List<ProductDTO> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price, String color, String plate, String location);
+    /**
+     * Metodo que actualiza la calificacion de un producto
+     * @param id. Identificador del producto calificado.
+     * @param rating. Nueva calificacion a agregar al promedio.
+     * @return reporna el producto con la nueva calificacion promedio.
+     */
+    public ProductDTO updateRating(Long id, Float rating);
 }

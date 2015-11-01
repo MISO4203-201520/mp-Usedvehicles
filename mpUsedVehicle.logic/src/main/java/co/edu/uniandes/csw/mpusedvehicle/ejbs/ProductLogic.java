@@ -113,7 +113,19 @@ public class ProductLogic implements IProductLogic {
         return ProductConverter.listString2DTO(persistence.getVehiclesLocation());
     }    
      
-      
-        
-      
+    /**
+     * Metodo que actualiza la calificacion de un producto
+     * @param id. Identificador del producto calificado.
+     * @param rating. Nueva calificacion a agregar al promedio.
+     * @return reporna el producto con la nueva calificacion promedio.
+     */
+    public ProductDTO updateRating(Long id, Float rating){
+        ProductEntity product = persistence.find(id);
+        Float newRating = product.getRating() * product.getAmmountVotes() + rating;
+        newRating = newRating/(product.getAmmountVotes()+1);
+        product.setRating(newRating);
+        product.setAmmountVotes(product.getAmmountVotes()+1);
+        return ProductConverter.fullEntity2DTO(persistence.update(product));
+    }  
+       
 }

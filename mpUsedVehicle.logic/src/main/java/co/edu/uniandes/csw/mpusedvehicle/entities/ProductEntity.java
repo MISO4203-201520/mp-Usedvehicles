@@ -38,6 +38,15 @@ public class ProductEntity implements Serializable {
     private Integer price;
     
     private Boolean availability;
+    
+    /**
+     * Cantidad de votos realizados sobre un producto
+     */
+    private Integer ammountVotes;
+    /**
+     * Calificacion promedio del producto
+     */
+    private Float rating;
 
     @ManyToOne
     private ProviderEntity provider;
@@ -147,5 +156,34 @@ public class ProductEntity implements Serializable {
     public void setDiscount(Integer discount) {
         this.discount = discount;
     }
+    /**
+     * Metodo que obtiene la cantidad de votos de la calificacion.
+     * @return cantidad de votos
+     */
+    public Integer getAmmountVotes() {
+        return ammountVotes;
+    }
+    /**
+     * Metodo que actualiza la cantida de votos.
+     * @param ammountVotes. Nueva cantidad de votos.
+     */
+    public void setAmmountVotes(Integer ammountVotes) {
+        this.ammountVotes = ammountVotes;
+    }
+    /**
+     * Metodod que obtiene el valor de la calificacion del producto.
+     * @return float con la calificacion del producto.
+     */
+    public Float getRating() {
+        return rating;
+    }
+    /**
+     * Metodo que actualiza la calificacion del producto.
+     * @param rating. Calificacion del nuevo producto.
+     */
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+    
     
 }
