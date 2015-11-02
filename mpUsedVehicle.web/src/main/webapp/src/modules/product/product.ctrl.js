@@ -36,6 +36,13 @@
             $scope.colorFilter = "";
             $scope.plateFilter = "";
             $scope.locationFilter = "";
+            $scope.providerdetailName = "";
+            
+            $scope.username = 'World';
+            
+            $scope.sayHello = function() {
+            $scope.greeting = 'Hello ' + $scope.providerdetailName + '!';
+            };
             
             //Funciones
             $scope.getFilters = function(){
@@ -98,6 +105,7 @@
                 });
             };
             
+           
             $scope.findItem = function () {
                 console.log("$scope.records" + $scope.records.length);
                 console.log("Ingresa text2Search" + $scope.text2Search);
@@ -134,6 +142,12 @@
            
            this.getSelectedProductId = function () {
                return svc.getSelectedProductId();
+           };
+           
+           this.selectProvider = function (current) {
+               $scope.providerdetailName = current.provider.name;
+               
+               console.log ("works");
            };
            
             this.searchByName = function (vehicleName) {

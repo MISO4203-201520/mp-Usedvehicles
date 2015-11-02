@@ -52,5 +52,12 @@
             this.setSelectedProductId = function (productId) {
                 selectedProductId=productId;
             };
+            
+            this.getSelectedProviderId = function () {
+                return selectedProviderId;
+            };
+            this.setSelectedProviderId = function (productId) {
+                selectedProviderId=providerId;
+            };
     }]);
 })(window.angular);

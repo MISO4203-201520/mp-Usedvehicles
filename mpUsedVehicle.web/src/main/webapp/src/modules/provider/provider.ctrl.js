@@ -48,6 +48,9 @@
             };
             this.fetchRecords();
         }]);
-
     
+    mod.controller('providersCtrl', ['CrudCreator', '$scope', 'providerService', 'providerModel', function (CrudCreator, $scope, svc, model) {
+            CrudCreator.extendController(this, svc, $scope, model, 'provider', 'Providers');
+
+    }]);
 })(window.angular);
