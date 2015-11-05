@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.persistence;
 
+import co.edu.uniandes.csw.mpusedvehicle.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +26,8 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
     public ProductPersistence() {
         this.entityClass = ProductEntity.class;
     }
-
+    
+    @MPLoCAnn(tier="Backend", reqId="R15")
     public List<ProductEntity> getByVehicleName(String name) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("name", "%" + name.toUpperCase() + "%");
