@@ -28,5 +28,5 @@ public interface IProductLogic {
      * @param rating. Nueva calificacion a agregar al promedio.
      * @return reporna el producto con la nueva calificacion promedio.
      */
-    public ProductDTO updateRating(Long id, Float rating);
+    public ProductDTO updateRating(Long id, Integer rating);
 }

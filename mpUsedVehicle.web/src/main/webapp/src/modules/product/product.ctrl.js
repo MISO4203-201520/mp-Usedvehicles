@@ -255,7 +255,8 @@
             $scope.rateProduct = function(){
                 $('#rateProduct').modal('show');
                 this.rating1 = 5;
-                $scope.rating = 5;
+                $scope.rating = 0;
+                $scope.recordId = svc.getSelectedProductId();
                 return false;
             };
             
@@ -263,9 +264,8 @@
             $scope.saveRating = function(){
                 //svc.saveStatus($scope.orderEdited);
                 $('#rateProduct').modal('hide');
+                svc.updateRating($scope.recordId ,$scope.rating);
                 return false;
             };
-            
-            
         }]);
 })(window.angular);

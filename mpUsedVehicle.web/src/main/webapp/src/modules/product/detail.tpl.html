@@ -83,16 +83,14 @@
                 <h4 class="modal-title" id = "titleModal">Rate this product</h4>
             </div>
             <!-- Definicion del formulario de la orden -->
-            
-            <div align="center">
-                <rating ng-model="rating"></rating>
-                <span></span>
-            </div>
-
             <form id="experienceForm" method="post" class="form-horizontal" ng-submit="rateProduct()">
                 <!-- Forma del Formulario para la pregunta -->
                 <div class="modal-body">
                     <div class="form-group">
+                        <div class="form-group col-md-12" align="center">
+                            <h2><rating ng-model="rating"></rating></h2>
+                            <span></span>
+                        </div>
                         <div class="form-group col-md-12">
                             <label  class="col-md-6 control-label">Your rating: </label>
                             <label  class="col-md-6 control-label" ng-model="rating">{{rating}} </label>

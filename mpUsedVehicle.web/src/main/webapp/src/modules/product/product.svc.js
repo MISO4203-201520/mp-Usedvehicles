@@ -52,5 +52,8 @@
             this.setSelectedProductId = function (productId) {
                 selectedProductId=productId;
             };
+            this.updateRating = function (id,newRate) {
+                return this.api.one('rate/'+id+"/").customPUT(newRate);
+            };
     }]);
 })(window.angular);

@@ -119,12 +119,20 @@ public class ProductLogic implements IProductLogic {
      * @param rating. Nueva calificacion a agregar al promedio.
      * @return reporna el producto con la nueva calificacion promedio.
      */
-    public ProductDTO updateRating(Long id, Float rating){
+    public ProductDTO updateRating(Long id, Integer rating){
         ProductEntity product = persistence.find(id);
-        Float newRating = product.getRating() * product.getAmmountVotes() + rating;
-        newRating = newRating/(product.getAmmountVotes()+1);
+        Float newRating;
+        if(product.getAmmountVotes()!= null || product.getRating()!= null)
+        {
+            newRating= product.getRating() * product.getAmmountVotes() + rating;
+            newRating = newRating/(product.getAmmountVotes()+1);
+            product.setAmmountVotes(product.getAmmountVotes()+1);
+        }
+        else{
+            newRating = rating.floatValue();
+            product.setAmmountVotes(1);
+        }
         product.setRating(newRating);
-        product.setAmmountVotes(product.getAmmountVotes()+1);
         return ProductConverter.fullEntity2DTO(persistence.update(product));
     }  
        

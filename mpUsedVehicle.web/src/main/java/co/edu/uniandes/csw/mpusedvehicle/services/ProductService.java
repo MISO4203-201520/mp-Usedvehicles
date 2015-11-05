@@ -232,7 +232,7 @@ public class ProductService {
      */
     @PUT
     @Path("/rate/{id: \\d+}")
-    public ProductDTO updateRating(@PathParam("id") Long id, Float rating) {
+    public ProductDTO updateRating(@PathParam("id") Long id, Integer rating) {
         return productLogic.updateRating(id, rating);
     }
 }
