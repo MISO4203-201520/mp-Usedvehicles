@@ -18,12 +18,18 @@ import javax.inject.Inject;
  * @author dham
  */
 @Stateless
-public class PaymentMethodLogic implements IPaymentMethodLogic{
+public class PaymentMethodLogic implements IPaymentMethodLogic {
 
-    @Inject private PaymentMethodPersistence persistence;
-    
+    @Inject
+    private PaymentMethodPersistence persistence;
+
+    /**
+     *
+     * @return
+     */
+    @Override
     public List<PaymentMethodDTO> finAll() {
         return PaymentMethodConverter.listEntity2DTO(persistence.findAll(null, null));
     }
-    
+
 }
