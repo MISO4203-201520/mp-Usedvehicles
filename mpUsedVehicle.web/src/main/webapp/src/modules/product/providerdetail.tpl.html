@@ -1,10 +1,9 @@
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
-<div> 
-<span class="name" id="Provider">texto</span> 
-  <input type="text" ng-model="username">
-    <button ng-click='sayHello()'>greet</button>
+<div ng-init = 'ctrl.getSelectedProviderId()'> 
+    <h1>{{providerdetailName}}</h1>
+
   <hr>
-  {{greeting}}
+  
 </div>
 <div ng-hide="ctrl.editMode">
   
@@ -28,8 +27,7 @@
                         <p><strong>Price:</strong> {{record.price| currency}}</p>
                         <p ng-hide="{{record.discount == null}}"><strong>Discount:</strong> {{record.discount}} %</p>
                         <p ng-show="{{record.discount == null}}"><strong>Discount:</strong> 0 % </p>
-                        Your name:
-     
+                        <p><strong>Provider:</strong> {{record.provider.name}}</p>
                     </div>
                     <p class="text-center">
                         <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 

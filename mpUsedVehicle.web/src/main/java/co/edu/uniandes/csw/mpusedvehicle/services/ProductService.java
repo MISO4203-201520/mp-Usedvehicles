@@ -73,6 +73,19 @@ public class ProductService {
             }
         }
     }
+    
+    
+    @GET
+    @Path("/getbyprovidername/{name}")
+    public List<ProductDTO> getProductsbyprovidername(@PathParam("name") String nameProvider) {
+         List<ProductDTO> products = new ArrayList<ProductDTO>();
+        try {
+            products = productLogic.getProductByProvider(nameProvider);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return products;
+    }
 
     /**
      * @generated

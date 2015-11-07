@@ -44,6 +44,19 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return null;
         }
     }
+    
+    public List<ProductEntity> getProductByProvider(String nameProvider) {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("nameProvider", "%" + nameProvider.toUpperCase() + "%");
+            List<ProductEntity> list = new ArrayList<ProductEntity>();
+            list = executeListNamedQuery("Product.getProductByProvider", params);
+            return list;
+        } catch (NoResultException e) {
+            LOGGER.error(e.getMessage(), e);
+            return null;
+        }
+    }
 
     public ProductEntity getCheaperProductByVehicle(String nameVehicle) {
         try {

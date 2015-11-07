@@ -38,13 +38,7 @@
             $scope.locationFilter = "";
             $scope.providerdetailName = "";
             
-            $scope.username = 'World';
-            
-            $scope.sayHello = function() {
-            $scope.greeting = 'Hello ' + $scope.providerdetailName + '!';
-            };
-            
-            //Funciones
+        //Funciones
             $scope.getFilters = function(){
                 svc.getVehiclesName().then(function (products) {
                     $scope.vehicleNames = [];
@@ -145,9 +139,20 @@
            };
            
            this.selectProvider = function (current) {
-               $scope.providerdetailName = current.provider.name;
+               svc.setSelectedProviderId(current);
+               return svc.getSelectedProviderId();
+           };
+           
+           this.getSelectedProviderId = function () {
+               current = svc.getSelectedProviderId();
                
-               console.log ("works");
+               $scope.providerdetailName = current.provider.name;
+               svc.getbyProvider(current.provider.name).then(function (products) {
+                    $scope.records = [];
+                    $scope.records.push(products);
+                    console.log(products);
+                });
+               
            };
            
             this.searchByName = function (vehicleName) {

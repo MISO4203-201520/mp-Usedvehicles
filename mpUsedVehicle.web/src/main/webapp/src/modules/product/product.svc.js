@@ -52,12 +52,15 @@
             this.setSelectedProductId = function (productId) {
                 selectedProductId=productId;
             };
-            
+            var selectedProviderId = 'ini';
             this.getSelectedProviderId = function () {
                 return selectedProviderId;
             };
-            this.setSelectedProviderId = function (productId) {
+            this.setSelectedProviderId = function (providerId) {
                 selectedProviderId=providerId;
+            };
+            this.getbyProvider = function(ProviderName){
+                return this.api.one('getbyprovidername', ProviderName).get();
             };
     }]);
 })(window.angular);
