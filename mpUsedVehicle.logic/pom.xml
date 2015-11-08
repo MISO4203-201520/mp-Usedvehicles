@@ -115,6 +115,7 @@
                             <propertyName>surefireArgLine</propertyName>
                             <excludes>
                                 <exclude>**/*IT.java</exclude>
+                                <exclude>**/*Count.java</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -144,6 +145,7 @@
                     <!-- Excludes integration tests when unit tests are run. -->
                     <excludes>
                         <exclude>**/*IT.java</exclude>
+                        <exclude>**/*Count.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
