@@ -275,7 +275,7 @@
             
             this.gallery = function(currentProduct){
                 
-                var $Galery = $("#Images");
+                var $Galery = $("#PrincipalImage");
                 $Galery.find('img').remove();
               //$('#image-gallery-image').attr('src', $sel.data('image')); 
                 console.log(currentProduct.vehicle.image);

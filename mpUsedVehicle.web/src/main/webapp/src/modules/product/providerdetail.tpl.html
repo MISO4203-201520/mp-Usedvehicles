@@ -14,6 +14,7 @@
                 Products not found according to your request! Try another criteria in advanced search.
             </div>
             <div ng-repeat="record in records">
+                <div ng-if="record.provider.name == providerdetailName">
                 <div class="col-sm-4 well text-center">
                     <div class="col-md-12">
                         <div class="img-thumbnail text-center" id="cover" ng-if="record.vehicle.image">
@@ -27,7 +28,6 @@
                         <p><strong>Price:</strong> {{record.price| currency}}</p>
                         <p ng-hide="{{record.discount == null}}"><strong>Discount:</strong> {{record.discount}} %</p>
                         <p ng-show="{{record.discount == null}}"><strong>Discount:</strong> 0 % </p>
-                        <p><strong>Provider:</strong> {{record.provider.name}}</p>
                     </div>
                     <p class="text-center">
                         <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 
@@ -39,6 +39,7 @@
                     </p>
                 </div>
             </div>
+            </div>    
         </div>
     </div>
     <div class="text-center">
@@ -51,9 +52,6 @@
 
 <div class="container text-center">
 
-<h1> Click Me </h1>
-<!-- Large modal -->
-<button class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
 
 <div class="modal fade bs-example-modal-lg" id="Gallery" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
