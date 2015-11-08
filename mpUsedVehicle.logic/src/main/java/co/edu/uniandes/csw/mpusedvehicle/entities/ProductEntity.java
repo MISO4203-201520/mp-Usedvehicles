@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -54,7 +55,7 @@ public class ProductEntity implements Serializable {
     /**
      * Lista de clientes que han comprado el producto
      */
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name="purchaseditems",
             joinColumns={@JoinColumn(name="productid", referencedColumnName="ID")},
