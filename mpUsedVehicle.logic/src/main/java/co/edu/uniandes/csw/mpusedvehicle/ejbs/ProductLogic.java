@@ -86,21 +86,18 @@ public class ProductLogic implements IProductLogic {
     public List<ProductDTO> getByVehicleName(String name) {
         return ProductConverter.listEntity2DTO(persistence.getByVehicleName(name));
     }
-<<<<<<< HEAD
-     
-     public ProductDTO getCheaperProductByProvider (String nameProvider){
-         return ProductConverter.fullEntity2DTO(persistence.getCheaperProductByProvider(nameProvider));
-     }
-     
+
+     /**
+     *
+     * @param nameProvider
+     * @return
+     */
+    @Override
      public List<ProductDTO> getProductByProvider (String nameProvider){
          return ProductConverter.listEntity2DTO(persistence.getProductByProvider(nameProvider));
      }
      
-     public ProductDTO getCheaperProductByVehicle (String nameVehicle){
-         return ProductConverter.fullEntity2DTO(persistence.getCheaperProductByVehicle(nameVehicle));
-     }
-=======
->>>>>>> master
+
 
     /**
      *

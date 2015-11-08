@@ -19,15 +19,15 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "OrderEntity.getImages", query = "SELECT m FROM MultimediaEntity m WHERE m.vehicle.name= :name")})
+    @NamedQuery(name = "MultimediaEntity.getImages", query = "SELECT m FROM MultimediaEntity m WHERE m.vehiclename= :name")})
 public class MultimediaEntity implements Serializable {
     
     @Id
     @GeneratedValue(generator = "MultimediaEntity")
     private Long id;
     
-    @ManyToOne
-    private VehicleEntity vehicle;
+    
+    private String vehiclename;
     
     private String image;
 
@@ -39,13 +39,15 @@ public class MultimediaEntity implements Serializable {
         this.id = id;
     }
 
-    public VehicleEntity getVehicle() {
-        return vehicle;
+    public String getVehiclename() {
+        return vehiclename;
     }
 
-    public void setVehicle(VehicleEntity vehicle) {
-        this.vehicle = vehicle;
+    public void setVehiclename(String vehiclename) {
+        this.vehiclename = vehiclename;
     }
+
+    
 
     public String getImage() {
         return image;
