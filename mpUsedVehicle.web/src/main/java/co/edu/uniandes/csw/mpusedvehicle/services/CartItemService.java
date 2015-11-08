@@ -5,9 +5,8 @@ import co.edu.uniandes.csw.mpusedvehicle.api.IClientLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IOrderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.CartItemDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
-import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
-import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
@@ -81,4 +81,19 @@ public class CartItemService {
     public void deleteCartItem(@PathParam("id") Long id) {
         cartItemLogic.deleteCartItemByClient(client.getId(), id);
     }
+    
+    /**
+     * Sercicio REST encargado de obtener la lista de ordenes de un cliente.
+     * @param id. Devuelve el id del cliente.
+     * @return List. Lista de ordenes.
+     */
+    @GET
+    @Path("client")
+    public List<CartItemDTO> getHistoryByClient(@QueryParam("idClient") Long idClient) {
+        if(idClient!= null)
+        {
+            return cartItemLogic.getHistoryByClient(null,null,idClient);
+        }
+        return Collections.emptyList();
+    }    
 }

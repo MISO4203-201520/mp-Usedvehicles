@@ -63,11 +63,19 @@
                         svc.editItem($scope.records[i]);
                     }
                     $location.path('/checkout');
-                });
-                
-                
-                
+                });                                              
             };
+            $scope.history = function () {
+                $('#historyTransactions').modal('show');
+                svc.getHistoryByClient(authSvc.getCurrentUser().id).then(function (result) {
+                    $scope.historyRecords = [];
+                    for (var i = 0; i < result.length; i++) {
+                           $scope.historyRecords.push(result[i]);                   
+                    }
+                    console.log("$scope.result" +$scope.historyRecords.length);
+                });                
+                
+            };            
             $scope.taxes = function (record) {
                 return record.product.price * 0.16;
             };

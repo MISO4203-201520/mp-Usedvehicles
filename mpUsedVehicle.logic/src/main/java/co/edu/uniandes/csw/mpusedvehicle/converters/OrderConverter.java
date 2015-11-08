@@ -43,6 +43,26 @@ public abstract class OrderConverter {
             return null;
         }
     }
+/**
+     * DTO
+     * @param entity
+     * @return 
+     */
+    public static OrderDTO refEntity2DTOnotCartItem(OrderEntity entity){
+        if (entity != null) {
+            OrderDTO dto = new OrderDTO();
+            dto.setId(entity.getId());
+            dto.setTransactionId(entity.getTransactionId());
+            dto.setAmount(entity.getAmount());
+            dto.setTaxAmount(entity.getTaxAmount());
+            dto.setAmountWithTaxes(entity.getAmountWithTaxes());
+            dto.setPaymentMethod(entity.getPaymentMethod());
+            dto.setOrderStatus(entity.getOrderStatus());
+            return dto;
+        } else {
+            return null;
+        }
+    }    
     
     /**
      * Entidad 
@@ -68,7 +88,7 @@ public abstract class OrderConverter {
     }
     
     /**
-     * Lista de DTO´s
+     * Lista de DTOï¿½s
      * @param entities
      * @return 
      */
