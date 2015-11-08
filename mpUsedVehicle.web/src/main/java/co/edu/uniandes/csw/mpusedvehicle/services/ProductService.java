@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.services;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProductLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
@@ -186,6 +187,7 @@ public class ProductService {
             
     @GET
     @Path("advancedsearch")
+    @MPLoCAnn(tier="Services", reqId="R15")
     public List<ProductDTO> getProductsByAdvancedSearch(
             @QueryParam("brandFilter") String brandFilter, 
             @QueryParam("modelFilter") String modelFilter, 

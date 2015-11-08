@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.persistence;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -152,7 +153,8 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return null;
         }
     }
-
+    
+    @MPLoCAnn(tier="Backend", reqId="R15")
     public List<ProductEntity> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price, String color, String plate, String location) {
 
         try {
