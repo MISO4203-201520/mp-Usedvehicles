@@ -86,7 +86,6 @@
                     $location.path('/login');
                 }else{
                     svcUser.api.one('currentUser').get().then(function(user) {
-                        console.log(user.role);
                         $scope.role=user.role;
                         if($scope.role==="provider"){
                            svc.getOrderByProvider(authSvc.getCurrentUser().id).then(function (result) {

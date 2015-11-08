@@ -72,7 +72,6 @@
                     for (var i = 0; i < result.length; i++) {
                            $scope.historyRecords.push(result[i]);                   
                     }
-                    console.log("$scope.result" +$scope.historyRecords.length);
                 });                
                 
             };            

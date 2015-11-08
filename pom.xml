@@ -24,7 +24,7 @@
                 <sonar.exclusions>
                     /src/main/webapp/underscore-min.js,
                     /mpUsedVehicle.web/src/main/webapp/underscore-min.js,
-                    /mpUsedVehicle.web/src/main/webapp/restangular-min.js                    
+                    /mpUsedVehicle.web/src/main/webapp/restangular.min.js                    
                 </sonar.exclusions>
             </properties>
         </profile>
