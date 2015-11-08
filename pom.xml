@@ -22,6 +22,7 @@
                 <sonar.jdbc.password>${sonar_jdbc_password}</sonar.jdbc.password>
                 <sonar.host.url>${sonar_host_url}</sonar.host.url>
                 <sonar.exclusions>
+                    /src/main/webapp/underscore-min.js,
                     /mpUsedVehicle.web/src/main/webapp/underscore-min.js,
                     /mpUsedVehicle.web/src/main/webapp/restangular-min.js                    
                 </sonar.exclusions>

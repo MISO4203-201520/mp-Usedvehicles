@@ -17,10 +17,10 @@ public class MessageDTO {
     private Integer idTypeMessage;
     private Date date;
     private ProductDTO product;
-    public String receivertype;
-    public String question;
+    private String receivertype;
+    private String question;
     private String answer;
-    public String subject;
+    private String subject;
 
     public String getReceivertype() {
         return receivertype;

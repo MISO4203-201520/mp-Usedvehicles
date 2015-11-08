@@ -10,7 +10,7 @@ import spoon.SpoonAPI;
  *
  * @author Wilmar Fuquen
  */
-public class MPLoCAnnTest {
+public class MPLoCAnnTestCount {
 
     @Test
     public void testBoundProcessor() throws Exception {

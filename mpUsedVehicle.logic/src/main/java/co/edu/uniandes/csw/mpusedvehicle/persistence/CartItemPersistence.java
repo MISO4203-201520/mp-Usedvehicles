@@ -57,4 +57,13 @@ public class CartItemPersistence extends CrudPersistence<CartItemEntity> {
         return regCount;
     }
     
+    public List<CartItemDTO> historyByClient(Integer page, Integer maxRecords, Long idClient){
+        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.client.id = :idC and u.order IS NOT NULL");
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        return CartItemConverter.listEntity2DTO(q.setParameter("idC", idClient).getResultList());
+    }
+    
 }

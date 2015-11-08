@@ -60,7 +60,7 @@ public abstract class CartItemConverter {
             dto.setName(entity.getName());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
-            
+            dto.setOrder(OrderConverter.refEntity2DTOnotCartItem(entity.getOrder()));
             return dto;
         } else {
             return null;
