@@ -16,7 +16,7 @@
         <sonar.jacoco.outItReportPath>target/jacoco-it</sonar.jacoco.outItReportPath>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     </properties>
-    <dependencies>
+    <dependencies>       
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
