@@ -48,10 +48,12 @@
                 $scope.total = $scope.subtotal + $scope.taxes;
             };
 
+            //guarda la cantidad anterior
             $scope.verify = function (quantity) {
                 $scope.lastQuantity = quantity;
-            };//guarda la cantidad anterior
+            };
 
+            //Realiza la validacion de la nueva cantidad asignada.
             $scope.postVerify = function (record) {
                 var patron = /^\d*$/; //^[0-9]{3}$
                 if (patron.test(record.quantity) && record.quantity > 0) {
@@ -61,7 +63,7 @@
                     record.quantity = $scope.lastQuantity;
                     $scope.currentRecord = record;
                 }
-            };//Realiza la validacion de la nueva cantidad asignada.
+            };
             
             
             
@@ -178,7 +180,7 @@
         $scope.finishOperation = function(){
             stBlurredDialog.close();
             $location.path('/');
-        }
+        };
         
     }]);
 })(window.angular);

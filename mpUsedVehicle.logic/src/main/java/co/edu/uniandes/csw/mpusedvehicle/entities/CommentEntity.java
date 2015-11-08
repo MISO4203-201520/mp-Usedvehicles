@@ -2,19 +2,15 @@ package co.edu.uniandes.csw.mpusedvehicle.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,28 +28,18 @@ public class CommentEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-//    @Basic(optional = false)
-//    @NotNull
-//    @Column(name = "id")
     @GeneratedValue(generator = "Comment")
     private Long id;
     
-//    @NotNull
-//    @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     
     @Size(max = 255)
-//    @Column(name = "description")
     private String description;
     
-//    @JoinColumn(name = "client_id", referencedColumnName = "id")
-//    @ManyToOne(optional = false)
     @ManyToOne
     private ClientEntity client;
     
-//    @JoinColumn(name = "product_id", referencedColumnName = "id")
-//    @ManyToOne(optional = false)
     @ManyToOne
     private ProductEntity product;
 
@@ -118,15 +104,11 @@ public class CommentEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof CommentEntity)) {
             return false;
         }
         CommentEntity other = (CommentEntity) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

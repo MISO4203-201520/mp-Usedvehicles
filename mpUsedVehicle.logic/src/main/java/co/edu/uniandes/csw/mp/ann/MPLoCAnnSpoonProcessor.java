@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import spoon.processing.AbstractAnnotationProcessor;
@@ -31,7 +30,6 @@ public class MPLoCAnnSpoonProcessor extends AbstractAnnotationProcessor<MPLoCAnn
         // Genera .csv con la información
         try {
             Calendar cal = Calendar.getInstance();
-            // TODO modificar ruta si es necesario
             String ruta = "./data/LoC_Report_"
                     + (cal.get(Calendar.MONTH) + 1) + cal.get(Calendar.DAY_OF_MONTH) + "_" + cal.get(Calendar.HOUR_OF_DAY) + cal.get(Calendar.MINUTE) + ".csv";
             boolean existe = false;
