@@ -16,7 +16,7 @@ public enum OrderStatus {
     NEW("Nueva"),
     /** 
      * Estado para cuando se presenta el formulario en donde 
-     * se captura la informaci�n de los pagos.  
+     * se captura la informaci�n de los pagos.  
      */
     CAPTURING("Capturando datos"),
     /**
@@ -25,7 +25,17 @@ public enum OrderStatus {
      **/
     ERROR("Error"),
     /** Estado final utilizado cuando el pago fue exitoso **/
-    AUTHORIZED("Autorizada");
+    AUTHORIZED("Autorizada"),
+    
+    /** Estado que confirma que el proveedor accepta la compra **/
+    MERCHANT_CONFIRMED("Merchant Confirmed"),
+    /** Estado que indica que el producto ha sido enviado **/
+    SHIPPED("Shipped"),
+    /** Estado finalizado de la transacción: Cancelada **/
+    CANCELED("Canceled"),
+    /** Estado finalizado de la transacción: Exitosa **/
+    COMPLETED("Completed");
+    
     
     /**
      * Nombre legible del estado de la orden

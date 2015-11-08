@@ -220,4 +220,17 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return null;
         }
     }
+    
+    public Boolean findProductPrurchasedByClient(Long idProduct, Long idClient){
+       try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("client_id", idClient);
+            params.put("product_id", idProduct);
+            List<ProductEntity> list = executeListNamedQuery("Product.findProductPrurchasedByClient", params);
+            return list.size()>0;
+        } catch (NoResultException e) {
+            LOGGER.error(e.getMessage(), e);
+            return null;
+        }
+    }
 }

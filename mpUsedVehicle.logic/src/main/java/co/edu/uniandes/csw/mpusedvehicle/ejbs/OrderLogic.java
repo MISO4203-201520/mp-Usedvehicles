@@ -8,9 +8,13 @@ package co.edu.uniandes.csw.mpusedvehicle.ejbs;
 import co.edu.uniandes.csw.mpusedvehicle.api.IOrderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.converters.OrderConverter;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
+import co.edu.uniandes.csw.mpusedvehicle.entities.CartItemEntity;
+import co.edu.uniandes.csw.mpusedvehicle.entities.ClientEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.OrderEntity;
+import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.OrderPersistence;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -60,7 +64,17 @@ public class OrderLogic implements IOrderLogic {
      */
     @Override
     public OrderDTO updateOrder(Long id, OrderDTO order) {
+        OrderEntity oldOrderDTO = persistence.find(id);
         OrderEntity entity = OrderConverter.refDTO2Entity(order);        
+        if(oldOrderDTO.getOrderStatus().equals(order.getOrderStatus()) && order.getOrderStatus().equalsIgnoreCase(OrderStatus.COMPLETED.getName())){
+            List<CartItemEntity> list = entity.getCartItems();
+            for(CartItemEntity cartItem : list) {
+                ProductEntity product = cartItem.getProduct();
+                List<ClientEntity> purchased = product.getPurchasedBy();
+                purchased.add(cartItem.getClient());
+                product.setPurchasedBy(purchased);
+            }
+        }
         persistence.updateOrderInfo(id, entity);
         return OrderConverter.refEntity2DTO(entity);
     }

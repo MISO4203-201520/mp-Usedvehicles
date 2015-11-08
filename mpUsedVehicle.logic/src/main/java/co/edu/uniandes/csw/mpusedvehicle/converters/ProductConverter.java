@@ -33,6 +33,7 @@ public abstract class ProductConverter {
             dto.setDiscount(entity.getDiscount());   //Nuevo Atributo REQ06
             dto.setRating(entity.getRating()); // Calificacion del producto
             dto.setAmmountVotes(entity.getAmmountVotes());
+            dto.setPurchasedBy(ClientConverter.listEntity2DTO(entity.getPurchasedBy()));
             
             return dto;
         } else {
@@ -72,6 +73,7 @@ public abstract class ProductConverter {
             dto.setDiscount(entity.getDiscount());   //Nuevo Atributo REQ06
             dto.setRating(entity.getRating()); // Calificacion del producto
             dto.setAmmountVotes(entity.getAmmountVotes());
+            dto.setPurchasedBy(ClientConverter.listEntity2DTO(entity.getPurchasedBy()));
             
             return dto;
         } else {
@@ -94,6 +96,7 @@ public abstract class ProductConverter {
             entity.setDiscount(dto.getDiscount());   //Nuevo Atributo REQ06
             entity.setRating(dto.getRating());
             entity.setAmmountVotes(dto.getAmmountVotes());
+            entity.setPurchasedBy(ClientConverter.listDTO2Entity(dto.getPurchasedBy()));
 
             return entity;
         } else {

@@ -134,6 +134,16 @@ public class ProductLogic implements IProductLogic {
         }
         product.setRating(newRating);
         return ProductConverter.fullEntity2DTO(persistence.update(product));
-    }  
+    } 
+    /**
+     * Metodo que verifica si un cliente determinado puede calificar un producto. Un cliente solo puede calificar si ha comprado el producto.
+     * @param idProduct. Identificador del producto que se desea calificar.
+     * @param idClient. Identificador del cliente que desea calificar el producto.
+     * @return booleano. retorna true si el cliente puede calificar el producto y falso en caso contrario.
+     */
+    public Boolean canRateProduct(Long idProduct, Long idClient){
+        return persistence.findProductPrurchasedByClient(idProduct,idClient);
+        
+    }
        
 }

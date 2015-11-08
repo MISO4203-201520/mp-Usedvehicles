@@ -6,6 +6,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -16,6 +19,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries({
+    @NamedQuery(name = "Product.findProductPrurchasedByClient", query = "select u from ProductEntity u WHERE :client_id MEMBER OF u.purchasedBy and u.id = :product_id"),
     @NamedQuery(name = "Product.getByVehicleName", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :name"),
     @NamedQuery(name = "Product.getVehiclesName", query = "select distinct u.vehicle.name from ProductEntity u"),
     @NamedQuery(name = "Product.getVehiclesBrand", query = "select distinct u.vehicle.brand from ProductEntity u"),
@@ -47,6 +51,17 @@ public class ProductEntity implements Serializable {
      * Calificacion promedio del producto
      */
     private Float rating;
+    /**
+     * Lista de clientes que han comprado el producto
+     */
+    @ManyToMany
+    @JoinTable(
+            name="purchaseditems",
+            joinColumns={@JoinColumn(name="productid", referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="clientid", referencedColumnName="ID")}
+    )
+    private List<ClientEntity> purchasedBy;
+
 
     @ManyToOne
     private ProviderEntity provider;
@@ -184,6 +199,19 @@ public class ProductEntity implements Serializable {
     public void setRating(Float rating) {
         this.rating = rating;
     }
-    
+    /**
+     * Metodo que obtiene la lista de clientes que han comprado el producto
+     * @return Lista de cleintes
+     */
+    public List<ClientEntity> getPurchasedBy() {
+        return purchasedBy;
+    }
+    /**
+     * Metodo que actualiza la lista de clientes que han comprado el producto
+     * @param purchasedBy Lista. Nueva lista de clientes.
+     */
+    public void setPurchasedBy(List<ClientEntity> purchasedBy) {
+        this.purchasedBy = purchasedBy;
+    }
     
 }

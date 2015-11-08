@@ -29,6 +29,11 @@ public class ProductDTO {
      * Calificacion promedio del producto
      */
     private Float rating;
+    /**
+     * Lista de clientes que han comprado el producto
+     */
+    private List<ClientDTO> purchasedBy;
+
     
     /**
      * @generated
@@ -157,5 +162,18 @@ public class ProductDTO {
     public void setRating(Float rating) {
         this.rating = rating;
     }
-
+    /**
+     * Metodo que obtiene la lista de clientes que han comprado el producto
+     * @return Lista de cleintes
+     */
+    public List<ClientDTO> getPurchasedBy() {
+        return purchasedBy;
+    }
+    /**
+     * Metodo que actualiza la lista de clientes que han comprado el producto
+     * @param purchasedBy Lista. Nueva lista de clientes.
+     */
+    public void setPurchasedBy(List<ClientDTO> purchasedBy) {
+        this.purchasedBy = purchasedBy;
+    }
 }
