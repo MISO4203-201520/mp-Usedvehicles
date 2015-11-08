@@ -20,5 +20,9 @@
             this.editItem = function(record){
                 self.saveRecord(record);
             };
+            this.getHistoryByClient = function (idClient)
+            {
+                return this.api.all('client').getList({'idClient': idClient});                
+            };            
     }]);
 })(window.angular);
