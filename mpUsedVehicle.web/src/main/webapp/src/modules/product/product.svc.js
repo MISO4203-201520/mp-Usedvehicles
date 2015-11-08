@@ -59,8 +59,14 @@
             this.setSelectedProviderId = function (providerId) {
                 selectedProviderId=providerId;
             };
-            this.getbyProvider = function(ProviderName){
-                return this.api.one('getbyprovidername', ProviderName).get();
+            
+            var selectedProviderProductsId = 'ini';
+            this.setbyProvider = function(ProviderName){
+                selectedProviderProductsId = this.api.one('getbyprovidername', ProviderName).get();
             };
+            
+            this.getbyProvider = function(ProviderName){
+                return selectedProviderProductsId
+            }
     }]);
 })(window.angular);

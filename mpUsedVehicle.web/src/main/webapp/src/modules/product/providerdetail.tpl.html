@@ -17,7 +17,7 @@
                 <div class="col-sm-4 well text-center">
                     <div class="col-md-12">
                         <div class="img-thumbnail text-center" id="cover" ng-if="record.vehicle.image">
-                            <a ng-href="#/detail" ng-click="ctrl.selectProduct(record)">
+                            <a ng-click="ctrl.gallery(record)">
                                 <img class="img-responsive" style="height: 14vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
                             </a>
                         </div>
@@ -46,4 +46,38 @@
                     ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
                     max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
     </div>
+</div>
+
+
+<div class="container text-center">
+
+<h1> Click Me </h1>
+<!-- Large modal -->
+<button class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+<div class="modal fade bs-example-modal-lg" id="Gallery" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+  
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    
+    <div class="item active" id="PrincipalImage"></div>
+    <div class="item" id="Images"></div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+    </div>
+  </div>
+</div>
 </div>

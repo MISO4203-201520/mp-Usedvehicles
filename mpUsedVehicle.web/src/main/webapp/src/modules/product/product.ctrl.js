@@ -141,13 +141,14 @@
            this.selectProvider = function (current) {
                svc.setSelectedProviderId(current);
                return svc.getSelectedProviderId();
+               svc.getbyProvider(current.provider.name)
            };
            
            this.getSelectedProviderId = function () {
                current = svc.getSelectedProviderId();
                
                $scope.providerdetailName = current.provider.name;
-               svc.getbyProvider(current.provider.name).then(function (products) {
+               svc.setbyProvider().then(function (products) {
                     $scope.records = [];
                     $scope.records.push(products);
                     console.log(products);
@@ -269,6 +270,19 @@
                 commentSvc.sendComment(newComment);
                 //clean comment
                 this.comment='';
+            };
+            
+            
+            this.gallery = function(currentProduct){
+                
+                var $Galery = $("#Images");
+                $Galery.find('img').remove();
+              //$('#image-gallery-image').attr('src', $sel.data('image')); 
+                console.log(currentProduct.vehicle.image);
+              $Galery.append("<img class='img-responsive' src='"+currentProduct.vehicle.image+"'>");
+                
+                $('#Gallery').modal('show');
+                
             };
             
         }]);
