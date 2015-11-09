@@ -110,21 +110,13 @@
                     svc.findCheaperbyProvider($scope.text2Search).then(function (Cheaperprovider) {
                         $scope.records = [];
                         $scope.records.push(Cheaperprovider);
-<<<<<<< HEAD
-                        
-=======
->>>>>>> master
                     });
                 } else
                 {
                     svc.findCheaperbyVehicle($scope.text2Search).then(function (CheaperVehicle) {
                         $scope.records = [];
                         $scope.records.push(CheaperVehicle);
-<<<<<<< HEAD
-                        
-=======
->>>>>>> master
-                    });
+            });
                 }
             };
 
@@ -238,10 +230,6 @@
                         vehicleSvc.api.get(record.vehicle.id).then(function (data) {
                             self.detailsMode = true;
                             $scope.vehicleRecord = data;
-<<<<<<< HEAD
-                            
-=======
->>>>>>> master
                         });
                     },
                     show: function () {
