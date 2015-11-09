@@ -84,7 +84,7 @@ public class OrderLogic implements IOrderLogic {
                         "will you please take a minute to share your experience? "+
                         "Help us evaluate your purchased items. Rate your products in http://localhost:8080/mpUsedVehicle.web/#/catalog";
                 
-                MailManager.generateAndSendEmail(emailBody, client.getName(), "Rate your pruducts purchased");
+                MailManager.generateAndSendEmail(emailBody, client.getEmail(), "Rate your pruducts purchased");
             }
          
             }
