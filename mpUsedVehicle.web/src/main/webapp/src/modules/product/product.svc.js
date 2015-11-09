@@ -55,5 +55,8 @@
             this.updateRating = function (id,newRate) {
                 return this.api.one('rate/'+id+"/").customPUT(newRate);
             };
+            this.canRateProduct = function (id,idClient) {
+                return this.api.one('rate/'+id+"/").customGET(idClient);
+            };
     }]);
 })(window.angular);

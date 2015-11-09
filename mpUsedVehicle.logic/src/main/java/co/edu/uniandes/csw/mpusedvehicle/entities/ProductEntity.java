@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Product.findProductPrurchasedByClient", query = "select u from ProductEntity u WHERE :client_id MEMBER OF u.purchasedBy and u.id = :product_id"),
+    @NamedQuery(name = "Product.findProductPrurchasedByClient", query = "select u from ProductEntity u inner join fetch u.purchasedBy p WHERE p.id = :client_id and u.id = :product_id"),
     @NamedQuery(name = "Product.getByVehicleName", query = "select u from ProductEntity u WHERE UPPER(u.vehicle.name) like :name"),
     @NamedQuery(name = "Product.getVehiclesName", query = "select distinct u.vehicle.name from ProductEntity u"),
     @NamedQuery(name = "Product.getVehiclesBrand", query = "select distinct u.vehicle.brand from ProductEntity u"),

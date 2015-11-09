@@ -235,4 +235,15 @@ public class ProductService {
     public ProductDTO updateRating(@PathParam("id") Long id, Integer rating) {
         return productLogic.updateRating(id, rating);
     }
+    /**
+     * Servicio que verifica si un cliente determinado puede calificar un producto. Un cliente solo puede calificar si ha comprado el producto.
+     * @param idProduct. Identificador del producto que se desea calificar.
+     * @param idClient. Identificador del cliente que desea calificar el producto.
+     * @return booleano. retorna true si el cliente puede calificar el producto y falso en caso contrario.
+     */
+    @GET
+    @Path("/rate/{id: \\d+}/{client: \\d+}")
+    public Boolean canRateProduct(@PathParam("id")Long idProduct,@PathParam("client") Long idClient){
+        return productLogic.canRateProduct(idProduct, idClient);
+    }
 }

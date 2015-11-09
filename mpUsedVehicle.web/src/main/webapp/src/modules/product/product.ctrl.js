@@ -267,5 +267,15 @@
                 svc.updateRating($scope.recordId ,$scope.rating);
                 return false;
             };
+            if(authSvc.getCurrentUser()){
+                $scope.recordId = svc.getSelectedProductId();
+                svc.canRateProduct($scope.recordId ,authSvc.getCurrentUser().id).then(function (result) {
+                         $scope.canRate = result;
+                     });
+            }else{
+                $scope.canRate = false; 
+            };
+            
+            
         }]);
 })(window.angular);

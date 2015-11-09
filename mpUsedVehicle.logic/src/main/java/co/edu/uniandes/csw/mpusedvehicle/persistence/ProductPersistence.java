@@ -233,4 +233,13 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return null;
         }
     }
+    
+    public int updatePurchasedByClient(Long idProduct, Long idClient) {
+        Query q = em.createNativeQuery("INSERT INTO purchaseditems (productid, clientid) VALUES ("+idProduct+","+ idClient+")");        
+        return q.executeUpdate();
+    }
+    public int deletePurchasedByClient(Long idProduct, Long idClient) {
+        Query q = em.createNativeQuery("DELETE FROM purchaseditems WHERE productid ="+idProduct+" and clientid="+ idClient);        
+        return q.executeUpdate();
+    }
 }
