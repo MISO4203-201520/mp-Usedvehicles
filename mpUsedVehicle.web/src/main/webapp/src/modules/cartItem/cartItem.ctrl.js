@@ -39,12 +39,15 @@
                 }
             };
 
+            //guarda la cantidad anterior
             $scope.verify = function (quantity) {
                 $scope.lastQuantity = quantity;
-            };//guarda la cantidad anterior
-
+            };
+            
+            //Realiza la validacion de la nueva cantidad asignada.
             $scope.postVerify = function (record) {
-                var patron = /^\d*$/; //^[0-9]{3}$
+                //^[0-9]{3}$
+                var patron = /^\d*$/; 
                 if (patron.test(record.quantity) && record.quantity > 0) {
                     self.calcTotal();
                 } else {
@@ -52,7 +55,7 @@
                     record.quantity = $scope.lastQuantity;
                     $scope.currentRecord = record;
                 }
-            };//Realiza la validacion de la nueva cantidad asignada.
+            };
             $scope.checkout = function () {
                 var order = {};
                 
@@ -72,7 +75,6 @@
                     for (var i = 0; i < result.length; i++) {
                            $scope.historyRecords.push(result[i]);                   
                     }
-                    console.log("$scope.result" +$scope.historyRecords.length);
                 });                
                 
             };            

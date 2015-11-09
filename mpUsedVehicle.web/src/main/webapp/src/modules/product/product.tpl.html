@@ -8,22 +8,11 @@
                 </div>
                 <div class="panel-body" data-ng-init="getFilters()">
                     <table>
-<!--                        <tr>
-                            <td>
-                                <label>Name</label> 
-                            </td>
-                            <td>
-                                <select class="form-control"  ng-model="nameFilter">
-                                    <option value="">Search Name</option>
-                                    <option ng-repeat="vName in vehicleNames" value="{{vName.name}}">{{vName.name}}</option>
-                                </select>                                  
-                            </td>                            
-                        </tr>-->
                         <tr>
                             <td>
                                 <label>Brand</label>                                                    
                             </td>
-                            <td>      
+                            <td style="padding: 10px">      
                                 <select class="form-control" placeholder="Brand" ng-model="brandFilter">
                                     <option value="">Search Brand</option>
                                     <option ng-repeat="vBrand in vehicleBrands" value="{{vBrand.name}}">{{vBrand.name}}</option>
@@ -34,7 +23,7 @@
                             <td>
                                 <label>Capacity</label>                                
                             </td>
-                            <td>      
+                            <td style="padding: 10px">      
                                 <select class="form-control" ng-model="capacityFilter">
                                     <option value="">Search Capacity</option>
                                     <option ng-repeat="vCapacity in vehicleCapacities" value="{{vCapacity.name}}">{{vCapacity.name}}</option>
@@ -45,7 +34,7 @@
                             <td>
                                 <label>Color</label>                              
                             </td>
-                            <td>
+                            <td style="padding: 10px">
                                 <select class="form-control" ng-model="colorFilter">
                                     <option value="">Search Color</option>
                                     <option ng-repeat="vColor in vehicleColors" value="{{vColor.name}}">{{vColor.name}}</option>
@@ -54,12 +43,12 @@
                         </tr>     
                         <tr>
                             <td>
-                            <label>Model</label>
-                                
+                                <label>Model</label>
+
                             </td>
-                            <td>      
+                            <td style="padding: 10px">      
                                 <select class="form-control" ng-model="modelFilter">
-                                     <option value="">Search Model</option>
+                                    <option value="">Search Model</option>
                                     <option ng-repeat="vModel in vehicleModels" value="{{vModel.name}}">{{vModel.name}}</option>
                                 </select>  
                             </td>                            
@@ -68,7 +57,7 @@
                             <td>
                                 <label>Plate</label>                                                    
                             </td>
-                            <td>  
+                            <td style="padding: 10px">  
                                 <select class="form-control" ng-model="plateFilter">
                                     <option value="">Search Plate</option>
                                     <option ng-repeat="vPlate in vehiclePlates" value="{{vPlate.name}}">{{vPlate.name}}</option>
@@ -79,7 +68,7 @@
                             <td>
                                 <label>Location</label>                                                    
                             </td>
-                            <td>  
+                            <td style="padding: 10px">  
                                 <select class="form-control" ng-model="locationFilter">
                                     <option value="">Search Location</option>
                                     <option ng-repeat="vLocation in vehicleLocations" value="{{vLocation.name}}">{{vLocation.name}}</option>
@@ -90,7 +79,7 @@
                             <td>
                                 <label>Price</label>                                                    
                             </td>
-                            <td>  
+                            <td style="padding: 10px">  
                                 <select class="form-control" ng-model="priceFilter">
                                     <option value="">Search Price</option>
                                     <option value="1">Less than $10.000.000</option>
@@ -108,37 +97,37 @@
                 </ul>
             </div>
             <div class="panel panel-primary">
-            <form novalidate class="navbar-form navbar-left" role="search">
-                <table >
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="to search" ng-model="text2Search" required>
-                            </div>
-                            <button class="btn btn-default" ng-model="buttonSub" ng-click="listItems()" ng-show="true" ng-disabled="varEnable">Submit</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>
-                                <label>
-                                    <input type="radio" name="searhcriteria" ng-model="searchCriteria" value="byProvider" ng-change="enableSubmit()">
-                                    Search cheaper product by provider 
-                                </label>
+                <form novalidate class="navbar-form navbar-left" role="search">
+                    <table >
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="to search" ng-model="text2Search" required>
+                                </div>
+                                <button class="btn btn-default" ng-model="buttonSub" ng-click="listItems()" ng-show="true" ng-disabled="varEnable">Submit</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label>
+                                        <input type="radio" name="searhcriteria" ng-model="searchCriteria" value="byProvider" ng-change="enableSubmit()">
+                                        Search cheaper product by provider 
+                                    </label>
 
-                            </div>            
-                        </td>
-                    </tr> 
-                    <tr>
-                        <td>        
-                            <label>
-                                <input type="radio" name="searhcriteria" ng-model="searchCriteria" value="byVehicle" ng-change="enableSubmit()">
-                                Search cheaper provider by vehicle 
-                            </label></td>
-                    </tr>
-                </table>
-            </form>                    
-        </div>
+                                </div>            
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td>        
+                                <label>
+                                    <input type="radio" name="searhcriteria" ng-model="searchCriteria" value="byVehicle" ng-change="enableSubmit()">
+                                    Search cheaper provider by vehicle 
+                                </label></td>
+                        </tr>
+                    </table>
+                </form>                    
+            </div>
         </div>
         <div class="col-md-9">
             <div ng-show="!records.length" class="alert alert-warning" role="alert">
@@ -241,9 +230,8 @@
                     max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
     </div>
 </div>
-                            <a  href="#/detail" ng-click="ctrl.selectProduct(record)">
-                                <img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
-                            </a>
-                        </div>
-                        <div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
-                </div>
+<a  href="#/detail" ng-click="ctrl.selectProduct(record)">
+    <img class="img-responsive" style="height: 20vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
+</a>
+<div class="img-thumbnail" id="cover" ng-if="record.vehicle.image">
+</div>

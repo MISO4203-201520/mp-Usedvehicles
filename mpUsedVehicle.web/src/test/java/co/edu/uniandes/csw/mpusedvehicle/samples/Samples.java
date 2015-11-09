@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.mpusedvehicle.samples;
 
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.UserDTO;
-import co.edu.uniandes.csw.mpusedvehicle.entities.ClientEntity;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -84,7 +83,6 @@ public class Samples {
         client.setName("test");
         client.setUserId("https://api.stormpath.com/v1/accounts/24twbgpeBCjuufjZEDPlNr");
         return client;
-    }
-    
+    }   
     
 }

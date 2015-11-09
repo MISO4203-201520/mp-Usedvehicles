@@ -195,7 +195,6 @@
                 var $From = $("#MessageFrom");
                 $From.find('label').remove();
                 $From.append("<label class='col-sm-11' >"+ user.name +"</label>");
-                console.log(user.name);
                 ReplyUserName = user.name;
                 
                 var $Message = $("#MessageRead");

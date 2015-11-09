@@ -86,7 +86,7 @@
                            $scope.vehicleLocations.push(products[i]);                   
                     }
                 });                  
-            }
+            };
             $scope.getProductsByAdvancedSearch = function () {
                  
                 svc.getProductsByAdvancedSearch(
@@ -105,23 +105,25 @@
             
            
             $scope.findItem = function () {
-                console.log("$scope.records" + $scope.records.length);
-                console.log("Ingresa text2Search" + $scope.text2Search);
-                if ($scope.searchCriteria == "byProvider")
+                if ($scope.searchCriteria === "byProvider")
                 {
-                    console.log("searchCriteria byProvider" + $scope.searchCriteria);
                     svc.findCheaperbyProvider($scope.text2Search).then(function (Cheaperprovider) {
                         $scope.records = [];
                         $scope.records.push(Cheaperprovider);
+<<<<<<< HEAD
                         
+=======
+>>>>>>> master
                     });
                 } else
                 {
-                    console.log("searchCriteria byVehicle" + $scope.searchCriteria);
                     svc.findCheaperbyVehicle($scope.text2Search).then(function (CheaperVehicle) {
                         $scope.records = [];
                         $scope.records.push(CheaperVehicle);
+<<<<<<< HEAD
                         
+=======
+>>>>>>> master
                     });
                 }
             };
@@ -131,7 +133,7 @@
             };
             $scope.enableSubmit = function(){
                 $scope.varEnable = false;
-            }
+            };
                         
            this.selectProduct = function (current) {
                svc.setSelectedProductId(current.id);
@@ -236,7 +238,10 @@
                         vehicleSvc.api.get(record.vehicle.id).then(function (data) {
                             self.detailsMode = true;
                             $scope.vehicleRecord = data;
+<<<<<<< HEAD
                             
+=======
+>>>>>>> master
                         });
                     },
                     show: function () {
@@ -248,9 +253,8 @@
             this.fetchRecords();
             
             this.sendQuestion = function(){
-                console.log("askAQuestion");
                 //Tmp question
-                newQuestion={
+                var newQuestion={
                     question: this.question,
                     product:$scope.tmpRecord,
                     provider:$scope.tmpRecord.provider,
@@ -266,7 +270,7 @@
             // REQ02
             this.comment='';
             this.sendComment = function(currentProduct){
-                newComment={
+                var newComment={
                     description: this.comment,
                     product:currentProduct,
                     date:new Date(),

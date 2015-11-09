@@ -6,7 +6,6 @@
             var self = this;
             this.addItem = function (record) {
                 this.fetchRecords().then(function (data) {
-                    console.log(data);
                     for (var i = 0; i < data.length; i++) {
                         if (record.product.name === data[i].product.name && record.product.id === data[i].product.id) {
                             record = data[i];

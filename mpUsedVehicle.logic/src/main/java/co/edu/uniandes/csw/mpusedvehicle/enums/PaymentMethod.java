@@ -6,18 +6,18 @@
 package co.edu.uniandes.csw.mpusedvehicle.enums;
 
 /**
- * Enumeración que representa un método de pago
+ * EnumeraciÃ³n que representa un mÃ©todo de pago
  * 
  * @author die-agud@uniandes.edu.co
  */
 public enum PaymentMethod {
     
-    /** Método de pago para tarjeta Débito**/
-    DEBIT_CARD("Tarjeta Débito"),
-    /** Método de pago de tipo tarjeta de Crédito**/
-    CREDIT_CARD("Tarjeta de Crédito");
+    /** MÃ©todo de pago para tarjeta DÃ©bito**/
+    DEBIT_CARD("Tarjeta DÃ©bito"),
+    /** MÃ©todo de pago de tipo tarjeta de CrÃ©dito**/
+    CREDIT_CARD("Tarjeta de CrÃ©dito");
     
-    /** Nombre legible del método de pago**/
+    /** Nombre legible del mÃ©todo de pago**/
     private final String name;
     
     /**

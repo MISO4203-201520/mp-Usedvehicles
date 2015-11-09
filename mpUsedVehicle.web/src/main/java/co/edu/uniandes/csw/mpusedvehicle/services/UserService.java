@@ -49,6 +49,11 @@ import org.apache.shiro.subject.Subject;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserService {
 
+    private static final String NADA = "nada";
+    private static final String ADMINISTRATOR = "administrator";
+    private static final String PROVIDER = "provider";
+    private static final String USER = "user";
+    
     @Inject
     private IClientLogic clientLogic;
 
@@ -60,25 +65,20 @@ public class UserService {
     
     @GET
     public List<UserDTO> getUsers() {
-        System.out.println("calling users");
         List<UserDTO> allUsers = new ArrayList<UserDTO>();
         
-        System.out.println("before clients");
         for (ClientDTO client : clientLogic.getClients(null, null)) {
             UserDTO clientDTO = new UserDTO();
             clientDTO.setName(client.getName());
             clientDTO.setRememberMe(false);
             allUsers.add(clientDTO);
-            System.out.println(client.getName());
         }
         
-        System.out.println("before providers");
         for (ProviderDTO provider : providerLogic.getProviders(null, null)) {
             UserDTO providerDTO = new UserDTO();
             providerDTO.setName(provider.getName());
             providerDTO.setRememberMe(true);
             allUsers.add(providerDTO);
-            System.out.println(provider.getName());
         }
         
         return allUsers;
@@ -153,14 +153,14 @@ public class UserService {
             user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
-            if(currentUser.hasRole("user")){
-                user.setRole("user");
-            }else if (currentUser.hasRole("provider")) {
-                user.setRole("provider");
-            }else if(currentUser.hasRole("administrator")){
-                user.setRole("administrator");
+            if(currentUser.hasRole(USER)){
+                user.setRole(USER);
+            }else if (currentUser.hasRole(PROVIDER)) {
+                user.setRole(PROVIDER);
+            }else if(currentUser.hasRole(ADMINISTRATOR)){
+                user.setRole(ADMINISTRATOR);
             }else{
-                user.setRole("nada");
+                user.setRole(NADA);
             }
             
             return Response.ok(user).build();
@@ -172,14 +172,14 @@ public class UserService {
                     .build();
         }
     }
-
+    
     @Path("/register")
     @POST
     public Response setUser(UserDTO user) {
 
         try {
             switch (user.getRole()) {
-                case "user":
+                case USER:
                     Account acctClient = createUser(user);
                     ClientDTO newClient = new ClientDTO();
                     newClient.setName(user.getUserName());
@@ -187,7 +187,7 @@ public class UserService {
                     newClient = clientLogic.createClient(newClient);
                     break;
 
-                case "provider":
+                case PROVIDER:
                     Account acctProvider = createUser(user);
                     ProviderDTO newProvider = new ProviderDTO();
                     newProvider.setName(user.getUserName());

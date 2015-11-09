@@ -8,7 +8,6 @@
                     $scope.orders = result;
             });
             svcUser.api.one('currentUser').get().then(function(user) {
-            console.log(user.role);
             $scope.role=user.role;
             if($scope.role==="provider"){
                $scope.getOrderByProvider(); 
