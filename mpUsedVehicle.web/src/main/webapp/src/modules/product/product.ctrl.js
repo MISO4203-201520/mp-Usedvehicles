@@ -26,7 +26,9 @@
             $scope.vehicleModels=[];
             $scope.vehiclePlates=[];
             $scope.vehicleBrands=[];
-            $scope.text2Search=""; 
+            $scope.text2Search="";
+            $scope.ImagesNames = "";
+            $scope.providerdetailName = "";
             
             // Vars for advanced search
             $scope.brandFilter = "";
@@ -36,7 +38,9 @@
             $scope.colorFilter = "";
             $scope.plateFilter = "";
             $scope.locationFilter = "";
-            $scope.providerdetailName = "";
+            
+            this.IMG = [];
+            
             
         //Funciones
             $scope.getFilters = function(){
@@ -109,7 +113,7 @@
                     svc.findCheaperbyProvider($scope.text2Search).then(function (Cheaperprovider) {
                         $scope.records = [];
                         $scope.records.push(Cheaperprovider);
-                        console.log("Ingresa Cheaperprovider" + Cheaperprovider.id);
+                        
                     });
                 } else
                 {
@@ -117,7 +121,7 @@
                     svc.findCheaperbyVehicle($scope.text2Search).then(function (CheaperVehicle) {
                         $scope.records = [];
                         $scope.records.push(CheaperVehicle);
-                        console.log("Ingresa Cheaperprovider" + CheaperVehicle.id);
+                        
                     });
                 }
             };
@@ -142,6 +146,7 @@
                svc.setSelectedProviderId(current);
                return svc.getSelectedProviderId();
                svc.getbyProvider(current.provider.name)
+               
            };
            
            this.getSelectedProviderId = function () {
@@ -151,7 +156,7 @@
                svc.setbyProvider().then(function (products) {
                     $scope.records = [];
                     $scope.records.push(products);
-                    console.log(products);
+                   
                 });
                
            };
@@ -231,7 +236,7 @@
                         vehicleSvc.api.get(record.vehicle.id).then(function (data) {
                             self.detailsMode = true;
                             $scope.vehicleRecord = data;
-                            console.log($scope.vehicleRecord.reviews);
+                            
                         });
                     },
                     show: function () {
@@ -272,14 +277,40 @@
                 this.comment='';
             };
             
+            $scope.getbyVehiclename =  function (current) {
+            svc.getbyVehiclename(current).then(function (Images){
+                   
+                    $scope.getImages = Images;
+                    
+                });
+            };
             
             this.gallery = function(currentProduct){
+                $scope.getbyVehiclename (currentProduct.vehicle.name);
+                svc.getbyVehiclename(currentProduct.vehicle.name).then(function (Images){
+
+                    IMG = Images;
+  
+                });
+                var text = '<div class = "item active"><img class="img-responsive" src="';
+                var check = IMG.length -1;
+                for (i = 0; i < IMG.length; i++) {
+                    if (i == 0){
+                        text = text + IMG[i].image + '"></div>   ';
+                    }
+                    else if (i == check){
+                        text = text + '<div class="item"><img class="img-responsive" src="'+IMG[i].image + '"></div>  ';
+                        
+                    }
+                    else
+                    {
+                      text = text + '<div class="item"><img class="img-responsive" src="'+IMG[i].image + '"></div>   ';
+                    }
+                }
                 
-                var $Galery = $("#PrincipalImage");
-                $Galery.find('img').remove();
-              //$('#image-gallery-image').attr('src', $sel.data('image')); 
-                console.log(currentProduct.vehicle.image);
-              $Galery.append("<img class='img-responsive' src='"+currentProduct.vehicle.image+"'>");
+                var $ImagesGalery = $("#Images");
+                $ImagesGalery.find('img').remove();
+                $ImagesGalery.append(text);
                 
                 $('#Gallery').modal('show');
                 
