@@ -37,6 +37,12 @@ public class Samples {
                 post(Entity.entity(Samples.createSampleClientDTO(), MediaType.APPLICATION_JSON));       
     }
     
+    public static void createSampleProvider() {
+        Client cliente = ClientBuilder.newClient();
+        Response response = cliente.target(URLBASE).path("/providers").request().
+                post(Entity.entity(Samples.createSampleProviderDTO(), MediaType.APPLICATION_JSON));       
+    }
+    
     /**
      * Login Cookie
      * @param username
@@ -63,16 +69,27 @@ public class Samples {
      * Sample DTO User
      * @return 
      */
-    public static UserDTO createSampleUser(){
-        UserDTO client = new UserDTO();
-        client.setName("test");
-        client.setLastName("test");
-        client.setPassword("Pepitoperez123");
-        client.setEmail("die-agud@uniandes.edu.co");
-        client.setRole("user");
-        client.setUserName("test");
-        return client;
-    }
+//    public static UserDTO createSampleUser(){
+//        UserDTO client = new UserDTO();
+//        client.setName("test");
+//        client.setLastName("test");
+//        client.setPassword("Pepitoperez123");
+//        client.setEmail("die-agud@uniandes.edu.co");
+//        client.setRole("user");
+//        client.setUserName("test");
+//        return client;
+//    }
+    
+//     public static UserDTO createSampleProvider(){
+//        UserDTO client = new UserDTO();
+//        client.setName("USER3");
+//        client.setLastName("USER3");
+//        client.setPassword("Pepitoperez123");
+//        client.setEmail("die-agud@uniandes.edu.co");
+//        client.setRole("provider");
+//        client.setUserName("USER3");
+//        return client;
+//    }
     
     /**
      * Sample Client Entity
@@ -83,6 +100,13 @@ public class Samples {
         client.setName("test");
         client.setUserId("https://api.stormpath.com/v1/accounts/24twbgpeBCjuufjZEDPlNr");
         return client;
-    }   
+    }
+    
+    public static ProviderDTO createSampleClientDTO(){
+        ProviderDTO provider = new ProviderDTO();
+        provider.setName("USER3");
+        provider.setUserId("https://api.stormpath.com/v1/accounts/5BgwXD8L1Vdbw3r3aiiywt");
+        return client;
+    }
     
 }
