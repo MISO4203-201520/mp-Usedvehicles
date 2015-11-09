@@ -71,7 +71,6 @@ public class OrderLogic implements IOrderLogic {
         OrderEntity entity = OrderConverter.refDTO2Entity(order);        
         if(!oldOrderDTO.getOrderStatus().equals(order.getOrderStatus()) && order.getOrderStatus().equalsIgnoreCase(OrderStatus.COMPLETED.getName())){
             List<CartItemEntity> list = entity.getCartItems();
-            String emailBody = "";
             ClientEntity client =null;
             for(CartItemEntity cartItem : list) {
                 productPersistence.updatePurchasedByClient(cartItem.getProduct().getId(), cartItem.getClient().getId());
@@ -81,7 +80,7 @@ public class OrderLogic implements IOrderLogic {
             // Send email         
             if(client != null)
             {
-                emailBody ="<h2>Hello "+client.getName() +",</h2><br>"+
+                String emailBody ="<h2>Hello "+client.getName() +",</h2><br>"+
                         "will you please take a minute to share your experience? "+
                         "Help us evaluate your purchased items. Rate your products in http://localhost:8080/mpUsedVehicle.web/#/catalog";
                 
