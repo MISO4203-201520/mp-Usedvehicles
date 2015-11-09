@@ -30,6 +30,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -37,7 +38,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -98,6 +101,7 @@ public class CheckoutFunctionalIT {
     }
     
     private static void insertData() {
+        
         Samples.createSampleClient();
         cookieSessionId = Samples.login("test", "Pepitoperez123");
         for (int i = 0; i < 5; i++) {
@@ -121,41 +125,18 @@ public class CheckoutFunctionalIT {
         driver.quit();
     }
     
-    @Test
+    /**
+     * No Items to add to cart
+     * @throws InterruptedException 
+     */
+    @Test(expected = NoSuchElementException.class)
     @RunAsClient
     public void t1addItemToCart() throws InterruptedException {
-        boolean success = false;
         
+        Thread.sleep(2000);
+        driver.findElement(By.id("0-addToCart-btn"));
         
-//        driver.findElement(By.id("catalog")).click();
-//        
-//        Thread.sleep(50500);
-//        driver.findElement(By.id("0-addToCart-btn")).click();
-//        Thread.sleep(1000);
-//        driver.findElement(By.id("dropdownMenu1")).click();
-//        Thread.sleep(1000);
-//        driver.findElement(By.id("shoppingCart")).click();
-//        Thread.sleep(20500);
-//        driver.findElement(By.id("name")).clear();
-//        driver.findElement(By.id("name")).sendKeys("Cien anos de Soledad");
-//        driver.findElement(By.id("description")).clear();
-//        driver.findElement(By.id("description")).sendKeys("Realismo magico");
-//        driver.findElement(By.id("isbn")).clear();
-//        driver.findElement(By.id("isbn")).sendKeys("1025789845-13");
-//        driver.findElement(By.id("imageurl")).clear();
-//        driver.findElement(By.id("imageurl")).sendKeys("http://image.casadellibro.com/a/l/t0/08/9788497592208.jpg");
-//        driver.findElement(By.id("save-book")).click();
-//        Thread.sleep(2000);
-//        List<WebElement> books = driver.findElements(By.xpath("//div[contains(@ng-repeat,'record in records')]"));
-//        for (WebElement book : books) {
-//            List<WebElement> captions = book.findElements(By.xpath("div[contains(@class, 'col-md-4')]/div[contains(@class, 'caption')]/p"));
-//            if (captions.get(0).getText().contains("Cien anos de Soledad") && captions.get(1).getText().contains("Realismo magico")
-//                    && captions.get(2).getText().contains("1025789845-13")) {
-//                success = true;
-//            }
-//        }
-//        assertTrue(success);
-//        Thread.sleep(1000);
+        Thread.sleep(1000);
     }
     
 }

@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.persistence;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import org.slf4j.LoggerFactory;
 @Stateless
 public class ProductPersistence extends CrudPersistence<ProductEntity> {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(AdminPersistence.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminPersistence.class);
 
     /**
      * @generated
@@ -59,87 +60,80 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
     }
 
     public List<String> getVehiclesName() {
+        List<String> list = new ArrayList<String>();
         try {
-            List<String> list = new ArrayList<String>();
             list = executeListNamedQuery("Product.getVehiclesName");
             return list;
         } catch (NoResultException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
+            return list;
         }
     }
 
     public List<String> getVehiclesBrand() {
+        List<String> list = new ArrayList<String>();
         try {
-            List<String> list = new ArrayList<String>();
             list = executeListNamedQuery("Product.getVehiclesBrand");
             return list;
         } catch (NoResultException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
+            return list;
         }
     }
 
     public List<String> getVehiclesCapacity() {
+        List<String> list = new ArrayList<String>();
         try {
             List<Integer> listInteger = new ArrayList<Integer>();
-            List<String> list = new ArrayList<String>();
             listInteger = executeListNamedQuery("Product.getVehiclesCapacity");
             for (Integer temp : listInteger) {
                 list.add(temp.toString());
             }
-            return list;
         } catch (NoResultException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
         }
+        return list;
     }
 
     public List<String> getVehiclesColor() {
+        List<String> list = new ArrayList<String>();
         try {
-            List<String> list = new ArrayList<String>();
             list = executeListNamedQuery("Product.getVehiclesColor");
-            return list;
         } catch (NoResultException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
         }
+        return list;
     }
 
     public List<String> getVehiclesModel() {
+        List<String> list = new ArrayList<String>();
         try {
-            List<String> list = new ArrayList<String>();
             list = executeListNamedQuery("Product.getVehiclesModel");
-            return list;
         } catch (NoResultException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
         }
+        return list;
     }
 
     public List<String> getVehiclesPlate() {
-        try {
             List<String> list = new ArrayList<String>();
             list.add("Even");
             list.add("Odd");
             return list;
-        } catch (NoResultException e) {
-            LOGGER.error(e.getMessage(), e);
-            return null;
-        }
     }
 
     public List<String> getVehiclesLocation() {
+         List<String> list = new ArrayList<String>();
         try {
-            List<String> list = new ArrayList<String>();
             list = executeListNamedQuery("Product.getVehiclesLocation");
             return list;
         } catch (NoResultException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
+            return list;
         }
     }
-
+    
+    @MPLoCAnn(tier="Backend", reqId="R15")
     public List<ProductEntity> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price, String color, String plate, String location) {
 
         try {
@@ -183,6 +177,8 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
                         startPrice = 99000000;
                         endPrice = 999999999;
                         break;
+                    default:
+                        break;
                 }
             }
             sql += "ORDER BY p.price";
@@ -217,7 +213,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
 
         } catch (NoResultException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
+            return new ArrayList<ProductEntity>();
         }
     }
     

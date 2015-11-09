@@ -143,5 +143,11 @@ public class CartItemLogic implements ICartItemLogic {
     public int countCartItemsByClient(Long idClient) {
         return persistence.countByClient(idClient);
     }
+    
+    
+    @Override
+    public List<CartItemDTO> getHistoryByClient(Integer page, Integer maxRecords, Long idClient){
+        return persistence.historyByClient(page, maxRecords,idClient);
+    }
 
 }
