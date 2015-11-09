@@ -193,7 +193,6 @@ public class ProductLogic implements IProductLogic {
      * @param rating. Nueva calificacion a agregar al promedio.
      * @return retorna el producto con la nueva calificacion promedio.
      */
-    @Override
     public ProductDTO updateRating(Long id, Integer rating){
         ProductEntity product = persistence.find(id);
         Float newRating;
@@ -217,7 +216,6 @@ public class ProductLogic implements IProductLogic {
      * @param idClient. Identificador del cliente que desea calificar el producto.
      * @return booleano. retorna true si el cliente puede calificar el producto y falso en caso contrario.
      */
-    @Override
     public Boolean canRateProduct(Long idProduct, Long idClient){
         return persistence.findProductPrurchasedByClient(idProduct,idClient); 
     }
