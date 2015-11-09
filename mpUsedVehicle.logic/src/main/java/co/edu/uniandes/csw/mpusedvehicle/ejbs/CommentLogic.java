@@ -15,32 +15,37 @@ import javax.inject.Inject;
 @Stateless
 public class CommentLogic implements ICommentLogic {
 
-    @Inject private CommentPersistence persistence;
+    @Inject
+    private CommentPersistence persistence;
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public int countComments() {
         return persistence.count();
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public List<CommentDTO> getComments(Integer page, Integer maxRecords) {
         return CommentConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public CommentDTO getComment(Long id) {
         return CommentConverter.fullEntity2DTO(persistence.find(id));
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public CommentDTO createComment(CommentDTO dto) {
         CommentEntity entity = CommentConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -48,22 +53,29 @@ public class CommentLogic implements ICommentLogic {
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public CommentDTO updateComment(CommentDTO dto) {
         CommentEntity entity = persistence.update(CommentConverter.fullDTO2Entity(dto));
         return CommentConverter.fullEntity2DTO(entity);
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public void deleteComment(Long id) {
         persistence.delete(id);
     }
 
-    
-     public List<CommentDTO> getByProduct(Long productId){
+    /**
+     *
+     * @param productId
+     * @return
+     */
+    @Override
+    public List<CommentDTO> getByProduct(Long productId) {
         return CommentConverter.listEntity2DTO(persistence.getByProduct(productId));
     }
 }

@@ -15,32 +15,37 @@ import javax.inject.Inject;
 @Stateless
 public class ClientLogic implements IClientLogic {
 
-    @Inject private ClientPersistence persistence;
+    @Inject
+    private ClientPersistence persistence;
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public int countClients() {
         return persistence.count();
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public List<ClientDTO> getClients(Integer page, Integer maxRecords) {
         return ClientConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public ClientDTO getClient(Long id) {
         return ClientConverter.fullEntity2DTO(persistence.find(id));
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public ClientDTO createClient(ClientDTO dto) {
         ClientEntity entity = ClientConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -48,13 +53,14 @@ public class ClientLogic implements IClientLogic {
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public ClientDTO updateClient(ClientDTO dto) {
         ClientEntity entity = persistence.update(ClientConverter.fullDTO2Entity(dto));
         return ClientConverter.fullEntity2DTO(entity);
     }
-    
+
     /**
      * @generated
      */
@@ -63,22 +69,39 @@ public class ClientLogic implements IClientLogic {
     }
 
     /**
-     * @generated
+     * @generated @return
      */
+    @Override
     public List<ClientDTO> findByName(String name) {
         return ClientConverter.listEntity2DTO(persistence.findByName(name));
     }
-    
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    @Override
     public ClientDTO getClientByUserId(String userId) {
         return ClientConverter.refEntity2DTO(persistence.getClientByUserId(userId));
     }
-    
+
+    /**
+     *
+     * @param Id
+     * @return
+     */
+    @Override
     public ClientDTO getClientById(Long Id) {
         return ClientConverter.refEntity2DTO(persistence.getClientById(Id));
     }
-    
-    
-     public List<ClientDTO> getIdANDUsername() {
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public List<ClientDTO> getIdANDUsername() {
         return ClientConverter.listEntity2DTO(persistence.getIdANDUserName());
-     }
+    }
 }
