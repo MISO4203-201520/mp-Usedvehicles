@@ -81,7 +81,7 @@ public class CheckoutFunctionalIT {
                 .addAsWebResource(new File(Samples.URLRESOURCES, "index.html")) 
                 .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class).importDirectory(Samples.URLRESOURCES).as(GenericArchive.class), "/", Filters.includeAll())
                 // El archivo que contiene la configuracion a la base de datos.  
-                .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml") 
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml") 
                 // El archivo shiro.ini. 
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/shiro.ini"))
                 // El archivo beans.xml es necesario para injeccion de dependencias.  
