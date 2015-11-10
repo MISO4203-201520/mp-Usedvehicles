@@ -147,7 +147,9 @@
                         <p><strong>Price:</strong> {{record.price| currency}}</p>
                         <p ng-hide="{{record.discount == null}}"><strong>Discount:</strong> {{record.discount}} %</p>
                         <p ng-show="{{record.discount == null}}"><strong>Discount:</strong> 0 % </p>
+                        <a ng-href="#/providerdetail" ng-click="ctrl.selectProvider(record)">
                         <p><strong>Provider:</strong> {{record.provider.name}}</p>
+                        </a>
                     </div>
                     <p class="text-center">
                         <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 

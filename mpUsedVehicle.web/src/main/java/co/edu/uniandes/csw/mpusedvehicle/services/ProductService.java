@@ -3,8 +3,10 @@ package co.edu.uniandes.csw.mpusedvehicle.services;
 import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProductLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
+import co.edu.uniandes.csw.mpusedvehicle.api.IMultimediaLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
+import co.edu.uniandes.csw.mpusedvehicle.dtos.MultimediaDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,8 @@ public class ProductService {
     private IProductLogic productLogic;
     @Inject
     private IProviderLogic providerLogic;
+    @Inject
+    private IMultimediaLogic multimediaLogic;
     @Context
     private HttpServletResponse response;
     @QueryParam("page")
@@ -73,6 +77,19 @@ public class ProductService {
                 return productLogic.getProducts(page, maxRecords);
             }
         }
+    }
+    
+    
+    @GET
+    @Path("/getbyprovidername/{name}")
+    public List<ProductDTO> getProductsbyprovidername(@PathParam("name") String nameProvider) {
+         List<ProductDTO> products = new ArrayList<ProductDTO>();
+        try {
+            products = productLogic.getProductByProvider(nameProvider);
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+        }
+        return products;
     }
 
     /**
@@ -170,7 +187,14 @@ public class ProductService {
     {
         return productLogic.getVehiclesLocation();
     }    
-            
+    
+    
+    @GET
+    @Path("/getimagesbyvehiclename/{name}")
+    public List<MultimediaDTO> getImagesbyvehiclename(@PathParam("name") String name) {
+        return multimediaLogic.getImagesByVehicle(name);
+        
+    }
             
     @GET
     @Path("advancedsearch")

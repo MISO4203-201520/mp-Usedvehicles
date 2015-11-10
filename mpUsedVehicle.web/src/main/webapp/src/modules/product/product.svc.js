@@ -52,11 +52,43 @@
             this.setSelectedProductId = function (productId) {
                 selectedProductId=productId;
             };
+
             this.updateRating = function (id,newRate) {
                 return this.api.one('rate/'+id+"/").customPUT(newRate);
             };
             this.canRateProduct = function (id,idClient) {
                 return this.api.one('rate/'+id+"/").customGET(idClient);
+            };
+            var selectedProviderId = 'ini';
+            this.getSelectedProviderId = function () {
+                return selectedProviderId;
+            };
+            this.setSelectedProviderId = function (providerId) {
+                selectedProviderId=providerId;
+            };
+            
+            var selectedProviderProductsId = 'ini';
+            this.setbyProvider = function(ProviderName){
+                selectedProviderProductsId = this.api.one('getbyprovidername', ProviderName).get();
+            };
+            
+            this.getbyProvider = function(ProviderName){
+                return selectedProviderProductsId;
+            };
+            var selectedImages = 'ini';
+            this.setbyVehiclename = function(Name){
+                selectedImages = this.api.all('getimagesbyvehiclename', Name);      
+                selectedImages.getList().then(function (customers) {
+                    var tmp = [];
+                    customers.forEach(function (element) {
+                        tmp.push(element);
+                    });
+
+                    $scope.myData = tmp;
+                });
+            };
+            this.getbyVehiclename = function(Name){
+                return this.api.one('getimagesbyvehiclename', Name).get();
             };
     }]);
 })(window.angular);

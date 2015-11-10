@@ -92,6 +92,15 @@ public class ProductLogic implements IProductLogic {
      * @param nameProvider
      * @return
      */
+    public List<ProductDTO> getProductByProvider(String nameProvider) {
+        return ProductConverter.listEntity2DTO(persistence.getProductByProvider(nameProvider));
+    }
+
+    /**
+     *
+     * @param nameProvider
+     * @return
+     */
     @Override
     public ProductDTO getCheaperProductByProvider(String nameProvider) {
         return ProductConverter.fullEntity2DTO(persistence.getCheaperProductByProvider(nameProvider));
