@@ -236,7 +236,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             params.put("client_id", idClient);
             params.put("product_id", idProduct);
             List<ProductEntity> list = executeListNamedQuery("Product.findProductPrurchasedByClient", params);
-            return list.size()>0;
+            return !list.isEmpty();
         } catch (NoResultException e) {
             LOGGER.error(e.getMessage(), e);
             return false;

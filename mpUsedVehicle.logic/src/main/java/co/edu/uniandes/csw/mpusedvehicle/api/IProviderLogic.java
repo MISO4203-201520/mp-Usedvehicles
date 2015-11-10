@@ -17,5 +17,5 @@ public interface IProviderLogic {
     public ProviderDTO getProviderByCity (String city);
     public ProviderDTO getProviderByPriceRange (Integer lower, Integer upper);
     public List<ProviderDTO> getProviders();
-    public ProviderDTO getProviderById(Long Id);
+    public ProviderDTO getProviderById(Long id);
 }

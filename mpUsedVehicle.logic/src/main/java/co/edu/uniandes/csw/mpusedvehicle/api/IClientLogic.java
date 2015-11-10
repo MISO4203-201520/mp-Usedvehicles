@@ -12,6 +12,6 @@ public interface IClientLogic {
     public void deleteClient(Long id);
     public List<ClientDTO> findByName(String name);
     public ClientDTO getClientByUserId(String userId);
-    public ClientDTO getClientById(Long Id);
+    public ClientDTO getClientById(Long id);
     public List<ClientDTO> getIdANDUsername ();
 }

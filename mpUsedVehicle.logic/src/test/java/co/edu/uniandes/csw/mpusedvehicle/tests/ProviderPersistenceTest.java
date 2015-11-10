@@ -1,10 +1,13 @@
 package co.edu.uniandes.csw.mpusedvehicle.tests;
 
+import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProviderEntity;
+import co.edu.uniandes.csw.mpusedvehicle.entities.VehicleEntity;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.ProviderPersistence;
 import static co.edu.uniandes.csw.mpusedvehicle.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJBException;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -87,18 +90,33 @@ public class ProviderPersistenceTest {
      * @generated
      */
     private List<ProviderEntity> data = new ArrayList<ProviderEntity>();
+    /**
+     * Entidad de vehiculo de prueba
+     */
+    private VehicleEntity vehicleEntity;
 
     /**
      * @generated
      */
     private void insertData() {
+        vehicleEntity = new VehicleEntity();
+            vehicleEntity.setName(generateRandom(String.class));
+            vehicleEntity.setBrand(generateRandom(String.class));
+            vehicleEntity.setModel(generateRandom(String.class));
+            vehicleEntity.setColor(generateRandom(String.class));
+        ProductEntity productEntity = new ProductEntity();
+            productEntity.setVehicle(vehicleEntity);
+            productEntity.setName(generateRandom(String.class));
+        List<ProductEntity> list = new ArrayList<ProductEntity>();
         for (int i = 0; i < 3; i++) {
             ProviderEntity entity = new ProviderEntity();
             entity.setName(generateRandom(String.class));
             entity.setUserId(generateRandom(String.class));
+            entity.setProducts(list);
             em.persist(entity);
             data.add(entity);
         }
+        em.persist(vehicleEntity);
     }
 
     /**
@@ -245,4 +263,84 @@ public class ProviderPersistenceTest {
             }
         }
     }
+    /**
+     * Pruebas sobre getProviderByUserId
+     */
+    @Test
+    public void getProviderByUserIdTest() {
+        ProviderEntity entity = data.get(0);
+        ProviderEntity newEntity = providerPersistence.getProviderByUserId(entity.getUserId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+        Assert.assertEquals(entity.getUserId(), newEntity.getUserId());
+        
+        // Segunda parte Null
+        newEntity = providerPersistence.getProviderByUserId(generateRandom(String.class));
+        Assert.assertNull(newEntity);
+    }
+    /**
+     * Pruebas sobre getProviderByIdTest
+     */
+    @Test
+    public void getProviderByIdTest() {
+        ProviderEntity entity = data.get(0);
+        ProviderEntity newEntity = providerPersistence.getProviderById(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+        Assert.assertEquals(entity.getUserId(), newEntity.getUserId());
+        
+        // Segunda parte Null
+        newEntity = providerPersistence.getProviderById(generateRandom(Long.class));
+        Assert.assertNull(newEntity);
+    }
+    /**
+     * Pruebas sobre getProviderByModel
+     */
+    @Test
+    public void getProviderByModelTest() {
+        try{
+            ProviderEntity newEntity = providerPersistence.getProviderByModel(vehicleEntity.getModel());
+            Assert.assertNotNull(newEntity);
+        }catch(EJBException e){
+            Assert.assertNotNull(e);
+        }
+        
+    }
+     /**
+     * Pruebas sobre getProviderByModel
+     */
+    @Test
+    public void getProviderByBrandTest() {
+        try{
+            ProviderEntity newEntity = providerPersistence.getProviderByBrand(vehicleEntity.getBrand());
+            Assert.assertNotNull(newEntity);
+        }catch(EJBException e){
+            Assert.assertNotNull(e);
+        }
+    }
+    /**
+     * Pruebas sobre getProviderByModel
+     */
+    @Test
+    public void getProviderByCityTest() {
+        try{
+            ProviderEntity newEntity = providerPersistence.getProviderByCity(generateRandom(String.class));
+            Assert.assertNull(newEntity);
+        }catch(EJBException e){
+            Assert.assertNotNull(e);
+        }
+    }
+    /**
+     * Pruebas sobre getProviderByModel
+     */
+    @Test
+    public void getProviderByPriceRangeTest() {
+        try{
+            ProviderEntity newEntity = providerPersistence.getProviderByPriceRange(generateRandom(Integer.class),generateRandom(Integer.class));
+            Assert.assertNull(newEntity);
+        }catch(EJBException e){
+            Assert.assertNotNull(e);
+        }
+    }
+    
 }
