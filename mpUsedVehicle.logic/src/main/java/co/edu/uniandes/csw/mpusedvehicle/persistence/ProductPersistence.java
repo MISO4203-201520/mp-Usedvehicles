@@ -239,7 +239,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return list.size()>0;
         } catch (NoResultException e) {
             LOGGER.error(e.getMessage(), e);
-            return null;
+            return false;
         }
     }
     
