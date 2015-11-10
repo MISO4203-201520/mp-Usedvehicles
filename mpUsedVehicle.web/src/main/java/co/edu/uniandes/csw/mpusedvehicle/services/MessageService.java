@@ -7,7 +7,6 @@ import co.edu.uniandes.csw.mpusedvehicle.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProviderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpusedvehicle.providers.StatusCreated;
-import java.sql.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -67,7 +66,6 @@ public class MessageService {
      */
     @GET
     public List<MessageDTO> getMessages() {
-        System.out.println("getMessages");
         if (page != null && maxRecords != null) {
             this.response.setIntHeader("X-Total-Count", messageLogic.countMessages());
         }
@@ -104,7 +102,6 @@ public class MessageService {
     @PUT
     @Path("{id: \\d+}")
     public MessageDTO updateMessage(@PathParam("id") Long id, MessageDTO dto) {
-        System.out.println("data"+id+dto.getAnswer());
         dto.setId(id);
         return messageLogic.updateMessage(dto);
     }
