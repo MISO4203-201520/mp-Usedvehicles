@@ -38,6 +38,16 @@
                 displayName: 'Availability',
                 type: 'Boolean',
                 required: true
+            }, {
+                name: 'rating',
+                displayName: 'Rating',
+                type: 'Float',
+                required: false
+            }, {
+                name: 'ammountVotes',
+                displayName: 'Ammount',
+                type: 'Integer',
+                required: false
             }], 
         childs: [{
                 name: 'comments',

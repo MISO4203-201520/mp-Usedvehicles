@@ -13,6 +13,8 @@ public class ClientDTO {
     private String name;
     private String userId;
     private List<CartItemDTO> shoppingCart;
+    private String email;
+    
     /**
      * @generated
      */
@@ -68,5 +70,18 @@ public class ClientDTO {
     public void setShoppingCart(List<CartItemDTO> shoppingcart) {
         this.shoppingCart = shoppingcart;
     }
-
+    /**
+     * Obtener email
+     * @return email del cliente
+     */
+    public String getEmail() {
+        return email;
+    }
+    /**
+     * Modificar email
+     * @param email . Nuevo email del cliente.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

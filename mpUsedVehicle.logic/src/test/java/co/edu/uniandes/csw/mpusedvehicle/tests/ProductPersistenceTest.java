@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.mpusedvehicle.tests;
 
+import co.edu.uniandes.csw.mpusedvehicle.entities.ClientEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.ProductPersistence;
 import static co.edu.uniandes.csw.mpusedvehicle.tests._TestUtil.*;
@@ -87,7 +88,10 @@ public class ProductPersistenceTest {
      * @generated
      */
     private List<ProductEntity> data = new ArrayList<ProductEntity>();
-
+     /**
+     * Cliente prueba
+     */
+    private ClientEntity clientEntity;
     /**
      * @generated
      */
@@ -99,6 +103,12 @@ public class ProductPersistenceTest {
             em.persist(entity);
             data.add(entity);
         }
+        
+        //Cliente de prueba
+        clientEntity = new ClientEntity();
+        clientEntity.setName(generateRandom(String.class));
+        clientEntity.setUserId(generateRandom(String.class));
+        em.persist(clientEntity);
     }
 
     /**
@@ -173,6 +183,8 @@ public class ProductPersistenceTest {
         newEntity.setId(entity.getId());
         newEntity.setName(generateRandom(String.class));
         newEntity.setPrice(generateRandom(Integer.class));
+        newEntity.setAmmountVotes(generateRandom(Integer.class));
+        newEntity.setRating(generateRandom(Float.class));
 
         productPersistence.update(newEntity);
 
@@ -245,4 +257,27 @@ public class ProductPersistenceTest {
             }
         }
     }
+    
+    /**
+     * Prueba de updatePurchasedByClient y deletePurchasedByClient
+     */
+    @Test
+    public void updatePurchasedByClientTest(){
+        ProductEntity entity = data.get(0);
+        
+        productPersistence.updatePurchasedByClient(entity.getId(), clientEntity.getId());
+        ProductEntity resp = em.find(ProductEntity.class, entity.getId());
+        
+        Assert.assertNotNull(resp);
+        Assert.assertNotNull(resp.getPurchasedBy().get(0));
+        Assert.assertEquals(clientEntity.getId(), resp.getPurchasedBy().get(0).getId());
+        
+        // Segunda parte
+        productPersistence.deletePurchasedByClient(entity.getId(), clientEntity.getId());
+        resp = em.find(ProductEntity.class, entity.getId());
+        Assert.assertNotNull(resp);
+        Assert.assertEquals(0,resp.getPurchasedBy().size());
+    } 
+    
+    
 }

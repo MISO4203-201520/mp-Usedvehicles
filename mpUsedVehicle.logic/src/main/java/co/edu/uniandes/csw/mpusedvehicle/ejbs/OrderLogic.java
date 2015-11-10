@@ -8,9 +8,15 @@ package co.edu.uniandes.csw.mpusedvehicle.ejbs;
 import co.edu.uniandes.csw.mpusedvehicle.api.IOrderLogic;
 import co.edu.uniandes.csw.mpusedvehicle.converters.OrderConverter;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.OrderDTO;
+import co.edu.uniandes.csw.mpusedvehicle.entities.CartItemEntity;
+import co.edu.uniandes.csw.mpusedvehicle.entities.ClientEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.OrderEntity;
+import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.OrderPersistence;
+import co.edu.uniandes.csw.mpusedvehicle.persistence.ProductPersistence;
+import co.edu.uniandes.csw.mpusedvehicle.util.MailManager;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -23,6 +29,7 @@ import javax.inject.Inject;
 public class OrderLogic implements IOrderLogic {
     
     @Inject private OrderPersistence persistence;
+    @Inject private ProductPersistence productPersistence;
     
     /**
      * Metodo que cuenta la cantidad de ordenes
@@ -60,9 +67,29 @@ public class OrderLogic implements IOrderLogic {
      */
     @Override
     public OrderDTO updateOrder(Long id, OrderDTO order) {
+        OrderEntity oldOrderDTO = persistence.find(id);
         OrderEntity entity = OrderConverter.refDTO2Entity(order);        
-        persistence.updateOrderInfo(id, entity);
-        return OrderConverter.refEntity2DTO(entity);
+        if(!oldOrderDTO.getOrderStatus().equals(order.getOrderStatus()) && order.getOrderStatus().equalsIgnoreCase(OrderStatus.COMPLETED.getName())){
+            List<CartItemEntity> list = entity.getCartItems();
+            ClientEntity client =null;
+            for(CartItemEntity cartItem : list) {
+                productPersistence.updatePurchasedByClient(cartItem.getProduct().getId(), cartItem.getClient().getId());
+                client = cartItem.getClient();
+            }
+                        
+            // Send email         
+            if(client != null)
+            {
+                String emailBody ="<h2>Hello "+client.getName() +",</h2><br>"+
+                        "will you please take a minute to share your experience? "+
+                        "Help us evaluate your purchased items. Rate your products in http://localhost:8080/mpUsedVehicle.web/#/catalog";
+                
+                MailManager.generateAndSendEmail(emailBody, client.getEmail(), "Rate your pruducts purchased");
+            }
+         
+            }
+            persistence.updateOrderInfo(id, entity);
+            return OrderConverter.refEntity2DTO(entity);
     }
     /**
      * Metodo que obtiene las odenes dado un estado

@@ -4,6 +4,7 @@ import co.edu.uniandes.csw.mpusedvehicle.ejbs.ProductLogic;
 import co.edu.uniandes.csw.mpusedvehicle.api.IProductLogic;
 import co.edu.uniandes.csw.mpusedvehicle.converters.ProductConverter;
 import co.edu.uniandes.csw.mpusedvehicle.dtos.ProductDTO;
+import co.edu.uniandes.csw.mpusedvehicle.entities.ClientEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.ProductPersistence;
 import static co.edu.uniandes.csw.mpusedvehicle.tests._TestUtil.*;
@@ -95,6 +96,11 @@ public class ProductLogicTest {
      * @generated
      */
     private List<ProductEntity> data = new ArrayList<ProductEntity>();
+    
+    /**
+     * Cliente prueba
+     */
+    private ClientEntity clientEntity;
 
     /**
      * @generated
@@ -107,6 +113,21 @@ public class ProductLogicTest {
             em.persist(entity);
             data.add(entity);
         }
+        //Cliente
+        ProductEntity entity = new ProductEntity();
+        	entity.setName(generateRandom(String.class));
+        	entity.setPrice(generateRandom(Integer.class));
+            
+            
+        clientEntity = new ClientEntity();
+        clientEntity.setName(generateRandom(String.class));
+        clientEntity.setUserId(generateRandom(String.class));
+        em.persist(clientEntity);
+        List<ClientEntity> list = new ArrayList<ClientEntity>();
+        list.add(clientEntity);
+        entity.setPurchasedBy(list);
+        em.persist(entity);
+            data.add(entity);
     }
 
     /**
@@ -202,7 +223,7 @@ public class ProductLogicTest {
         //Page 2
         List<ProductDTO> dto2 = productLogic.getProducts(2, 2);
         Assert.assertNotNull(dto2);
-        Assert.assertEquals(1, dto2.size());
+        Assert.assertEquals(2, dto2.size());
 
         for (ProductDTO dto : dto1) {
             boolean found = false;
@@ -252,5 +273,53 @@ public class ProductLogicTest {
                 Assert.fail();
             }
         }
+    }
+    /**
+     * Prueba metodo lógica updateRating
+     */
+    @Test
+    public void updateRatingTest(){
+        ProductEntity entity = data.get(0);
+        Integer rating = generateRandom(Integer.class)/10000000;
+        Integer amount = 1;
+        productLogic.updateRating(entity.getId(),rating);
+
+        ProductEntity resp = em.find(ProductEntity.class, entity.getId());
+        Float rate = rating.floatValue();
+        Assert.assertEquals(rate, resp.getRating());
+        Assert.assertEquals(amount, resp.getAmmountVotes());
+        
+        //Segunda etapa
+        Integer rating2 = generateRandom(Integer.class)/10000000;
+        amount = 2;
+        Float oraculo = (rating + rating2)/(amount.floatValue());
+        
+        productLogic.updateRating(entity.getId(),rating2);
+
+        resp = em.find(ProductEntity.class, entity.getId());
+        System.out.println(rating +" and "+rating2);
+        Assert.assertEquals(oraculo, resp.getRating());
+        Assert.assertEquals(amount, resp.getAmmountVotes());
+    }
+    
+    /**
+     * Prueba metodo lógica canRateProduct
+     */
+    @Test
+    public void canRateProductTest(){
+        ProductEntity entity = data.get(3);
+        Boolean resp = productLogic.canRateProduct(entity.getId(), clientEntity.getId());
+        
+        Assert.assertNotNull(resp);
+        Assert.assertTrue(resp);
+        
+        //Segunda prueba
+        entity = data.get(0);
+        resp = productLogic.canRateProduct(entity.getId(), clientEntity.getId());
+        
+        Assert.assertNotNull(resp);
+        Assert.assertTrue(!resp);
+        
+        
     }
 }

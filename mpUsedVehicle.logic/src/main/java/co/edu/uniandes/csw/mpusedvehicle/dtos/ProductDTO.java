@@ -22,6 +22,20 @@ public class ProductDTO {
     private List<CommentDTO> comments;
     private Integer discount;   //Nuevo Atributo REQ06
     /**
+     * Cantidad de votos realizados sobre un producto
+     */
+    private Integer ammountVotes;
+    /**
+     * Calificacion promedio del producto
+     */
+    private Float rating;
+    /**
+     * Lista de clientes que han comprado el producto
+     */
+    private List<ClientDTO> purchasedBy;
+
+    
+    /**
      * @generated
      */
     public Long getId() {
@@ -120,5 +134,46 @@ public class ProductDTO {
     public void setDiscount(Integer discount) {
         this.discount = discount;
     }
-
+    /**
+     * Metodo que obtiene la cantidad de votos de la calificacion.
+     * @return cantidad de votos
+     */
+    public Integer getAmmountVotes() {
+        return ammountVotes;
+    }
+    /**
+     * Metodo que actualiza la cantida de votos.
+     * @param ammountVotes. Nueva cantidad de votos.
+     */
+    public void setAmmountVotes(Integer ammountVotes) {
+        this.ammountVotes = ammountVotes;
+    }
+    /**
+     * Metodod que obtiene el valor de la calificacion del producto.
+     * @return float con la calificacion del producto.
+     */
+    public Float getRating() {
+        return rating;
+    }
+    /**
+     * Metodo que actualiza la calificacion del producto.
+     * @param rating. Calificacion del nuevo producto.
+     */
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+    /**
+     * Metodo que obtiene la lista de clientes que han comprado el producto
+     * @return Lista de cleintes
+     */
+    public List<ClientDTO> getPurchasedBy() {
+        return purchasedBy;
+    }
+    /**
+     * Metodo que actualiza la lista de clientes que han comprado el producto
+     * @param purchasedBy Lista. Nueva lista de clientes.
+     */
+    public void setPurchasedBy(List<ClientDTO> purchasedBy) {
+        this.purchasedBy = purchasedBy;
+    }
 }

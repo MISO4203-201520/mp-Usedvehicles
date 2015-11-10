@@ -28,6 +28,8 @@ public class ClientEntity implements Serializable {
     private String name;
 
     private String userId;
+    
+    private String email;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemEntity> shoppingCart;
@@ -86,5 +88,20 @@ public class ClientEntity implements Serializable {
     public void setShoppingCart(List<CartItemEntity> shoppingcart) {
         this.shoppingCart = shoppingcart;
     }
+    /**
+     * Obtener email
+     * @return email del cliente
+     */
+    public String getEmail() {
+        return email;
+    }
+    /**
+     * Modificar email
+     * @param email . Nuevo email del cliente.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
 }

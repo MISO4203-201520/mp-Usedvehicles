@@ -42,4 +42,19 @@ public interface IProductLogic {
     public List<ProductDTO> getVehiclesLocation();
 
     public List<ProductDTO> getProductsByAdvancedSearch(String brand, String model, Integer capacity, Integer price, String color, String plate, String location);
+    /**
+     * Metodo que actualiza la calificacion de un producto
+     * @param id. Identificador del producto calificado.
+     * @param rating. Nueva calificacion a agregar al promedio.
+     * @return reporna el producto con la nueva calificacion promedio.
+     */
+    public ProductDTO updateRating(Long id, Integer rating);
+    
+    /**
+     * Metodo que verifica si un cliente determinado puede calificar un producto. Un cliente solo puede calificar si ha comprado el producto.
+     * @param idProduct. Identificador del producto que se desea calificar.
+     * @param idClient. Identificador del cliente que desea calificar el producto.
+     * @return booleano. retorna true si el cliente puede calificar el producto y falso en caso contrario.
+     */
+    public Boolean canRateProduct(Long idProduct, Long idClient);
 }
