@@ -37,6 +37,7 @@ public abstract class OrderConverter {
             dto.setPaymentMethod(entity.getPaymentMethod());
             dto.setOrderStatus(entity.getOrderStatus());
             dto.setCartItems(CartItemConverter.listEntity2DTO(entity.getCartItems()));
+            dto.setDate(entity.getDate());
 
             return dto;
         } else {
@@ -58,6 +59,7 @@ public abstract class OrderConverter {
             dto.setAmountWithTaxes(entity.getAmountWithTaxes());
             dto.setPaymentMethod(entity.getPaymentMethod());
             dto.setOrderStatus(entity.getOrderStatus());
+            dto.setDate(entity.getDate());
             return dto;
         } else {
             return null;
@@ -80,6 +82,7 @@ public abstract class OrderConverter {
             entity.setPaymentMethod(dto.getPaymentMethod());
             entity.setOrderStatus(dto.getOrderStatus());
             entity.setCartItems(CartItemConverter.listDTO2Entity(dto.getCartItems()));
+            entity.setDate(dto.getDate());
             
             return entity;
         } else {
