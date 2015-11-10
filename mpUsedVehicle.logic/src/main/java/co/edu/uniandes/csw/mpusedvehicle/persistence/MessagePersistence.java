@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.mpusedvehicle.persistence;
 
 import co.edu.uniandes.csw.mpusedvehicle.entities.MessageEntity;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
 @Stateless
 public class MessagePersistence extends CrudPersistence<MessageEntity> {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(MessagePersistence.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessagePersistence.class);
     /**
      * @generated
      */
@@ -32,7 +33,7 @@ public class MessagePersistence extends CrudPersistence<MessageEntity> {
             return  executeListNamedQuery("Message.getmessagesByProvider", params);
             } catch(NoResultException e){
                 LOGGER.error(e.getMessage(),e);
-                return null;
+                return new ArrayList<MessageEntity>();
             }
         }
     }
@@ -46,7 +47,7 @@ public class MessagePersistence extends CrudPersistence<MessageEntity> {
             return  executeListNamedQuery("Message.getmessagesByClient", params);
             } catch(NoResultException e){
                 LOGGER.error(e.getMessage(),e);
-                return null;
+                return new ArrayList<MessageEntity>();
             }
         }
     }

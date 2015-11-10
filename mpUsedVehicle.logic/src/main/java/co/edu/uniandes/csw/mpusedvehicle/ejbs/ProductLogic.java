@@ -87,17 +87,14 @@ public class ProductLogic implements IProductLogic {
         return ProductConverter.listEntity2DTO(persistence.getByVehicleName(name));
     }
 
-     /**
+    /**
      *
      * @param nameProvider
      * @return
      */
-    @Override
-     public List<ProductDTO> getProductByProvider (String nameProvider){
-         return ProductConverter.listEntity2DTO(persistence.getProductByProvider(nameProvider));
-     }
-     
-
+    public List<ProductDTO> getProductByProvider(String nameProvider) {
+        return ProductConverter.listEntity2DTO(persistence.getProductByProvider(nameProvider));
+    }
 
     /**
      *
