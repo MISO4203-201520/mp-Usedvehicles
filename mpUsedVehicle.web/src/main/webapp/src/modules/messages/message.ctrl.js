@@ -28,10 +28,7 @@
             $scope.getMessagesByProvider = function () {
                 svc.getMessagesByClient(authSvc.getCurrentUser().id).then(function (Messages) {
 
-                    $scope.getmessagesbyprovider = Messages;
-                    //$scope.records = Messages;
-
-
+                    $scope.getmessagesbyprovider = Messages; 
                 });
             };
 
@@ -89,14 +86,10 @@
 
                             mes = Messages;
 
-
-
                         });
 
                     }
                 });
-
-
 
             };
 
@@ -208,11 +201,7 @@
                 $Subject.append("<input type='text' id='newSubject' class='col-sm-9' value='RE: " + mes[i].subject + "'>");
 
             };
-
-
-
-
-
+            
             svcUser.api.one('currentUser').get().then(function (user) {
 
                 $scope.role = user.role;
@@ -269,7 +258,7 @@
                     if (user.role === 'provider') {
                         if (UserType.toString() === 'provider') {
 
-                            newMessage = {
+                            var newMessage = {
                                 question: message,
                                 subject: subject,
                                 receivertype: UserType.toString(),
@@ -357,7 +346,7 @@
                     if (user.role === 'provider') {
                         if (UserType.toString() === 'provider') {
 
-                            newMessage = {
+                            var newMessage = {
                                 question: message,
                                 subject: subject,
                                 receivertype: UserType.toString(),

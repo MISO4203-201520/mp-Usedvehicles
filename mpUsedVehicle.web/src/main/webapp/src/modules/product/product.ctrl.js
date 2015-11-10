@@ -303,7 +303,6 @@
                 var $ImagesGalery = $("#Images");
                 $ImagesGalery.find('img').remove();
                 $ImagesGalery.append(text);
-                
                 $('#Gallery').modal('show');
                 
             };
