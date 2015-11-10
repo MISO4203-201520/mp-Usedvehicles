@@ -133,7 +133,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#" ng-init = "ctrl.messagesLoad()" ng-controller="messageCtrl as ctrl">mpUsedVehicle</a>
+                            <a class="navbar-brand" href="#/catalog" ng-init = "ctrl.messagesLoad()" ng-controller="messageCtrl as ctrl">mpUsedVehicle</a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -141,10 +141,7 @@
                             <ul class="nav navbar-nav">
                                 <li><a id="catalog" href="#/catalog">Catalog</a></li>
                                 <li><a id="product" href="#/product" >Product</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav">
-                                <li><a href="#/catalogProvider">Catalog Provider</a></li>
-                            </ul>    
+                            </ul>   
                             <form novalidate class="navbar-form navbar-left" role="search" ng-submit="ctrl.searchByName(vehicle)" ng-controller="productCtrl as ctrl">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Search vehicles" ng-model="vehicleName" required>
@@ -153,15 +150,18 @@
                             </form>
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
+                                    <a id="shoppingCart" href="#/shoppingCart">My Shopping Cart <span class="glyphicon glyphicon-shopping-cart" ></span></a>
+                                </li>
+                                <li>
                                     <a  class="dropdown-toggle" id="dropdownMenu1" 
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 
                                         <span class="glyphicon glyphicon-home" ></span>
+                                        <span class="caret" ></span>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                         <li id="users"><a href="#/users">Registered users<span class="glyphicon glyphicon-user" ></span>  </a></li>
                                         <li><a href="#/listorders">My Orders <span class="glyphicon glyphicon-list-alt" ></span></a></li>
-                                        <li><a id="shoppingCart" href="#/shoppingCart">My Shopping Cart <span class="glyphicon glyphicon-shopping-cart" ></span></a></li>
                                         <li><a ng-click = "ctrl.messagesSearch()" ng-controller="messageCtrl as ctrl">My Messages <span class="glyphicon glyphicon-envelope" ></span></a></li>
                                         <li><a href="#/questions">My Questions <span class="glyphicon glyphicon-question-sign" ></span></a></li>
                                     </ul>

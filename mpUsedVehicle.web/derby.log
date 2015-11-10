@@ -1,22 +1,10 @@
 ----------------------------------------------------------------
-<<<<<<< HEAD
-Sun Nov 01 17:53:58 COT 2015:
- Arrancando Derby versión The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instancia a816c00e-0150-c541-d74f-0000056281d0 
-en el directorio de base de datos /private/var/folders/7s/k3dnbpld5plg92zsx50vq91m0000gn/T/gfembed5330387231802381537tmp/lib/databases/embedded_default  con el cargador de clases sun.misc.Launcher$AppClassLoader@14dad5dc
-
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_60-b27
-user.dir=/Users/miguelolivares/wiki vehiculos/mp-usedVehicles/mpUsedVehicle.web
-derby.system.home=null
-Cargador de clases de base de datos iniciado - derby.database.classpath=''
-=======
-Sun Nov 08 13:25:51 COT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0150-e858-e615-000023f3b5e8 
-on database directory /private/var/folders/3s/dnkswg8x09v83s46ngtxh8nr0000gn/T/gfembed3994452446823173193tmp/lib/databases/embedded_default  with class loader sun.misc.Launcher$AppClassLoader@58644d46 
+Mon Nov 09 22:37:48 COT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0150-ef78-9525-00001d599750 
+on database directory /private/var/folders/3s/dnkswg8x09v83s46ngtxh8nr0000gn/T/gfembed8466871833330838494tmp/lib/databases/embedded_default  with class loader sun.misc.Launcher$AppClassLoader@58644d46 
 Loaded from file:/Users/dham/.m2/repository/org/glassfish/main/extras/glassfish-embedded-all/4.0/glassfish-embedded-all-4.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_20-b26
 user.dir=/Users/dham/Documents/git-projects/MISO4203/mp-usedVehicles/mpUsedVehicle.web
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
->>>>>>> master
