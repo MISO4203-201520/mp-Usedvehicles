@@ -2,10 +2,13 @@ package co.edu.uniandes.csw.mpusedvehicle.tests;
 
 import co.edu.uniandes.csw.mpusedvehicle.entities.ClientEntity;
 import co.edu.uniandes.csw.mpusedvehicle.entities.ProductEntity;
+import co.edu.uniandes.csw.mpusedvehicle.entities.ProviderEntity;
+import co.edu.uniandes.csw.mpusedvehicle.entities.VehicleEntity;
 import co.edu.uniandes.csw.mpusedvehicle.persistence.ProductPersistence;
 import static co.edu.uniandes.csw.mpusedvehicle.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJBException;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -93,22 +96,42 @@ public class ProductPersistenceTest {
      */
     private ClientEntity clientEntity;
     /**
+     * vehculo prueba
+     */
+    private VehicleEntity vehicleEntity;
+    /**
+     * vehculo prueba
+     */
+    private ProviderEntity providerEntity;
+    /**
      * @generated
      */
     private void insertData() {
+        vehicleEntity = new VehicleEntity();
+            vehicleEntity.setName(generateRandom(String.class));
+            vehicleEntity.setBrand(generateRandom(String.class));
+            vehicleEntity.setModel(generateRandom(String.class));
+            vehicleEntity.setColor(generateRandom(String.class));
+            vehicleEntity.setCapacity(generateRandom(Integer.class));
+        providerEntity = new ProviderEntity();
+            providerEntity.setName(generateRandom(String.class));
+            providerEntity.setUserId(generateRandom(String.class));    
         for (int i = 0; i < 3; i++) {
             ProductEntity entity = new ProductEntity();
             entity.setName(generateRandom(String.class));
             entity.setPrice(generateRandom(Integer.class));
+            entity.setVehicle(vehicleEntity);
             em.persist(entity);
             data.add(entity);
         }
-        
+        providerEntity.setProducts(data);
         //Cliente de prueba
         clientEntity = new ClientEntity();
         clientEntity.setName(generateRandom(String.class));
         clientEntity.setUserId(generateRandom(String.class));
         em.persist(clientEntity);
+        em.persist(vehicleEntity);
+        em.persist(providerEntity);
     }
 
     /**
@@ -278,6 +301,109 @@ public class ProductPersistenceTest {
         Assert.assertNotNull(resp);
         Assert.assertEquals(0,resp.getPurchasedBy().size());
     } 
-    
+    /**
+     * Pruebas sobre getByVehicleName
+     */
+    @Test
+    public void getByVehicleNameTest() {
+        List<ProductEntity> newEntity = productPersistence.getByVehicleName(vehicleEntity.getName());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(3,newEntity.size());
+        
+    }
+    /**
+     * Pruebas sobre getCheaperProductByProvider
+     */
+    @Test
+    public void getCheaperProductByProviderTest() {
+        try{
+            ProductEntity newEntity = productPersistence.getCheaperProductByProvider(providerEntity.getName());
+        Assert.assertNotNull(newEntity);
+        }catch(EJBException e){
+            Assert.assertNotNull(e);
+        } 
+    }
+    /**
+     * Pruebas sobre getCheaperProductByVehicle
+     */
+    @Test
+    public void getCheaperProductByVehicleTest() {
+        try{
+            ProductEntity newEntity = productPersistence.getCheaperProductByVehicle(providerEntity.getName());
+        Assert.assertNotNull(newEntity);
+        }catch(EJBException e){
+            Assert.assertNotNull(e);
+        } 
+    }
+    /**
+     * Pruebas sobre getVehiclesName
+     */
+    @Test
+    public void getVehiclesNameTest() {
+        List<String> newEntity = productPersistence.getVehiclesName();
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(1,newEntity.size()); 
+    }
+    /**
+     * Pruebas sobre getVehiclesBrand
+     */
+    @Test
+    public void getVehiclesBrandTest() {
+        List<String> newEntity = productPersistence.getVehiclesBrand();
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(1,newEntity.size()); 
+    }
+    /**
+     * Pruebas sobre getVehiclesCapacity
+     */
+    @Test
+    public void getVehiclesCapacityTest() {
+        List<String> newEntity = productPersistence.getVehiclesCapacity();
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(1,newEntity.size()); 
+    }
+    /**
+     * Pruebas sobre getVehiclesColor
+     */
+    @Test
+    public void getVehiclesColorTest() {
+        List<String> newEntity = productPersistence.getVehiclesColor();
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(1,newEntity.size()); 
+    }
+    /**
+     * Pruebas sobre getVehiclesColor
+     */
+    @Test
+    public void getVehiclesModelTest() {
+        List<String> newEntity = productPersistence.getVehiclesModel();
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(1,newEntity.size()); 
+    }
+    /**
+     * Pruebas sobre getVehiclesColor
+     */
+    @Test
+    public void getVehiclesPlateTest() {
+        List<String> newEntity = productPersistence.getVehiclesPlate();
+        Assert.assertNotNull(newEntity);
+    }
+    /**
+     * Pruebas sobre getVehiclesColor
+     */
+    @Test
+    public void getVehiclesLocationTest() {
+        List<String> newEntity = productPersistence.getVehiclesLocation();
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(1,newEntity.size()); 
+    }
+    /**
+     * Pruebas sobre getProductsByAdvancedSearch
+     */
+    @Test
+    public void getProductsByAdvancedSearchTest() {
+        List<ProductEntity> newEntity = productPersistence.getProductsByAdvancedSearch(vehicleEntity.getBrand(), vehicleEntity.getModel(), vehicleEntity.getCapacity(), 0 ,vehicleEntity.getColor(), null, vehicleEntity.getLocation());
+        Assert.assertNotNull(newEntity);
+    }
     
 }
