@@ -26,7 +26,9 @@
             $scope.vehicleModels=[];
             $scope.vehiclePlates=[];
             $scope.vehicleBrands=[];
-            $scope.text2Search=""; 
+            $scope.text2Search="";
+            $scope.ImagesNames = "";
+            $scope.providerdetailName = "";
             
             // Vars for advanced search
             $scope.brandFilter = "";
@@ -37,7 +39,10 @@
             $scope.plateFilter = "";
             $scope.locationFilter = "";
             
-            //Funciones
+            this.IMG = [];
+            
+            
+        //Funciones
             $scope.getFilters = function(){
                 svc.getVehiclesName().then(function (products) {
                     $scope.vehicleNames = [];
@@ -98,6 +103,7 @@
                 });
             };
             
+           
             $scope.findItem = function () {
                 if ($scope.searchCriteria === "byProvider")
                 {
@@ -110,7 +116,7 @@
                     svc.findCheaperbyVehicle($scope.text2Search).then(function (CheaperVehicle) {
                         $scope.records = [];
                         $scope.records.push(CheaperVehicle);
-                    });
+            });
                 }
             };
 
@@ -128,6 +134,25 @@
            
            this.getSelectedProductId = function () {
                return svc.getSelectedProductId();
+           };
+           
+           this.selectProvider = function (current) {
+               svc.setSelectedProviderId(current);
+               return svc.getSelectedProviderId();
+               svc.getbyProvider(current.provider.name)
+               
+           };
+           
+           this.getSelectedProviderId = function () {
+               current = svc.getSelectedProviderId();
+               
+               $scope.providerdetailName = current.provider.name;
+               svc.setbyProvider().then(function (products) {
+                    $scope.records = [];
+                    $scope.records.push(products);
+                   
+                });
+               
            };
            
             this.searchByName = function (vehicleName) {
@@ -242,6 +267,45 @@
                 commentSvc.sendComment(newComment);
                 //clean comment
                 this.comment='';
+            };
+            
+            $scope.getbyVehiclename =  function (current) {
+            svc.getbyVehiclename(current).then(function (Images){
+                   
+                    $scope.getImages = Images;
+                    
+                });
+            };
+            
+            this.gallery = function(currentProduct){
+                $scope.getbyVehiclename (currentProduct.vehicle.name);
+                svc.getbyVehiclename(currentProduct.vehicle.name).then(function (Images){
+
+                    IMG = Images;
+  
+                });
+                var text = '<div class = "item active"><img class="img-responsive" src="';
+                var check = IMG.length -1;
+                for (i = 0; i < IMG.length; i++) {
+                    if (i == 0){
+                        text = text + IMG[i].image + '"></div>   ';
+                    }
+                    else if (i == check){
+                        text = text + '<div class="item"><img class="img-responsive" src="'+IMG[i].image + '"></div>  ';
+                        
+                    }
+                    else
+                    {
+                      text = text + '<div class="item"><img class="img-responsive" src="'+IMG[i].image + '"></div>   ';
+                    }
+                }
+                
+                var $ImagesGalery = $("#Images");
+                $ImagesGalery.find('img').remove();
+                $ImagesGalery.append(text);
+                
+                $('#Gallery').modal('show');
+                
             };
             
         }]);

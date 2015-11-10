@@ -1,0 +1,78 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+<div ng-init = 'ctrl.getSelectedProviderId()'> 
+    <h1>{{providerdetailName}}</h1>
+
+  <hr>
+  
+</div>
+<div ng-hide="ctrl.editMode">
+  
+    <div class="col-sm-12">
+        
+       <div class="col-md-9">
+            <div ng-show="!records.length" class="alert alert-warning" role="alert">
+                Products not found according to your request! Try another criteria in advanced search.
+            </div>
+            <div ng-repeat="record in records">
+                <div ng-if="record.provider.name == providerdetailName">
+                <div class="col-sm-4 well text-center">
+                    <div class="col-md-12">
+                        <div class="img-thumbnail text-center" id="cover" ng-if="record.vehicle.image">
+                            <a ng-click="ctrl.gallery(record)">
+                                <img class="img-responsive" style="height: 14vw;" ng-src="{{record.vehicle.image}}" alt="{{record.vehicle.image}}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="caption" >
+                        <p><strong>Vehicle:</strong> {{record.vehicle.name}}</p>
+                        <p><strong>Price:</strong> {{record.price| currency}}</p>
+                        <p ng-hide="{{record.discount == null}}"><strong>Discount:</strong> {{record.discount}} %</p>
+                        <p ng-show="{{record.discount == null}}"><strong>Discount:</strong> 0 % </p>
+                    </div>
+                    <p class="text-center">
+                        <button ng-repeat="action in ctrl.recordActions" style="margin:2px;" id="{{$parent.$index}}-{{action.name}}-btn" 
+                                class="btn btn-{{action.class|| 'default'}} btn-sm" ng-show="action.show()" data-toggle="{{action.dataToggle}}" 
+                                data-target="{{action.dataTarget}}" ng-click="action.fn(record)">
+                            <span class="glyphicon glyphicon-{{action.icon}}"></span> 
+                            {{action.displayName}}
+                        </button>
+                    </p>
+                </div>
+            </div>
+            </div>    
+        </div>
+    </div>
+    <div class="text-center">
+        <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
+                    ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
+                    max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
+    </div>
+</div>
+
+
+<div class="container text-center">
+
+
+<div class="modal fade bs-example-modal-lg" id="Gallery" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+  
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" id="Images" >
+  </div>
+  
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+    </div>
+  </div>
+</div>
+</div>

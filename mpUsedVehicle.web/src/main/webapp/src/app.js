@@ -78,6 +78,10 @@
                         templateUrl: 'src/modules/order/templates/listOrders.html',
                         controller: 'checkoutCtrl',
                         controllerAs: 'ctrl'
+                }).when('/providerdetail', {
+                        templateUrl: 'src/modules/product/providerdetail.tpl.html',
+                        controller: 'productCtrl',
+                        controllerAs: 'ctrl'
                 })
                 .otherwise('/catalog');
         }]);
