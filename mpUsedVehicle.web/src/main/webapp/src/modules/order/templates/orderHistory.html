@@ -1,0 +1,55 @@
+<div id="Order-header">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#Order-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">System Administration</a>
+            </div>
+
+        </div>
+    </nav>
+</div>
+<div>
+    <div class="span5" ng-hide="svcUser.api.one('../users/isAdmin').get()">
+        <h2>Error: Please Log-in as an Administrator to see this page.</h2>
+    </div>
+    <div class="container"  ng-if="svcUser.api.one('../users/isAdmin').get()">
+        <h2>Store Order History</h2>
+        <!--Display Alerts -->
+        <div class="row">
+            <div class="span5">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th>No. Order</th>
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Amount (with taxes)</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>   
+                <tbody ng-repeat="orderItem in records">
+                  <tr ng-if="orderItem.cartItems[0]">
+                      <td>{{orderItem.id}}</td>
+                      <td>{{orderItem.date| date}}</td>
+                      <th>{{orderItem.cartItems[0].client.name}}</th>
+                      <td>{{orderItem.amountWithTaxes}}</td>
+                      <td>
+                          <span class="label">{{orderItem.orderStatus| uppercase}}</span>
+                      </td>
+                  </tr>
+                                                     
+                </tbody>
+              </table>
+          </div>
+      </div> 
+    </div>
+</div>
+
+

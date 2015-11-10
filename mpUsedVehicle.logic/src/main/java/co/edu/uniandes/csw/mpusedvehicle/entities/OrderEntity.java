@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mpusedvehicle.entities;
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entidad de orden de compra
@@ -49,6 +52,17 @@ public class OrderEntity implements Serializable {
     
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemEntity> cartItems;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
     
     public OrderEntity() {
         this.orderStatus = OrderStatus.NEW.name();

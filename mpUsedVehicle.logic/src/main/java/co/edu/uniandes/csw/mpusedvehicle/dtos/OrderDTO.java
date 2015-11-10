@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.mpusedvehicle.dtos;
 
 import co.edu.uniandes.csw.mpusedvehicle.enums.OrderStatus;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -34,7 +35,18 @@ public class OrderDTO {
     
     @PodamExclude
     private List<CartItemDTO> cartItems;
+ 
+    private Date date;
 
+    
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
     public OrderDTO() {
         this.orderStatus = OrderStatus.NEW.name();
     }
