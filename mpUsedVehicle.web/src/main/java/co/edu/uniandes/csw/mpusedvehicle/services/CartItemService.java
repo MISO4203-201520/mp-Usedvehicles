@@ -51,8 +51,8 @@ public class CartItemService {
      */
     @GET
     public List<CartItemDTO> getCartItems() { 
-       return cartItemLogic.getCartItems(null,null);
-       //return cartItemLogic.getCartItemsByClient(null,null,client.getId());
+//       return cartItemLogic.getCartItems(null,null);
+       return cartItemLogic.getCartItemsByClient(null,null,client.getId());
     }
 
     /**

@@ -55,8 +55,8 @@ public class OrderService {
      */
     @GET
     public List<OrderDTO> getOrders() {       
-       return orderLogic.getOrders();
-       //return orderLogic.getOrdersByStatus(OrderStatus.NEW);
+//       return orderLogic.getOrders();
+       return orderLogic.getOrdersByStatus(OrderStatus.NEW);
     }
 
     /**
